@@ -13,6 +13,10 @@ export default function BookingDetail({ params }) {
   const diary = db.diaries.find((p) => p.bookingId === b.id);
   const hasReview = db.reviews.some((rv) => rv.bookingId === b.id);
   const st = BK_STATUS[b.status];
+  // 시터가 볼 때는 보호자 카드를, 보호자가 볼 때는 시터 카드를 보여줘요
+  const mySitter = db.sitters.find((x) => x.userId === db.session.userId);
+  const iAmSitter = mySitter && b.sitterId === mySitter.id;
+  const guardian = db.users.find((u) => u.id === b.guardianId);
 
   return (
     <div>
@@ -25,16 +29,29 @@ export default function BookingDetail({ params }) {
         </Banner>
       )}
 
-      <Card onClick={() => push('sitterProfile', { sitterId: sitter.id, dogId: dog.id })}>
-        <div className="row">
-          <div className="avatar">{sitter.emoji}</div>
-          <div className="grow">
-            <div className="bold">{sitter.name}님 · {sitter.neighborhood}</div>
-            <div className="muted">전체 {sitter.reviewCount}개 리뷰 · ⭐ {sitter.rating ?? '—'}</div>
+      {iAmSitter ? (
+        <Card onClick={() => push('guardianProfile', { userId: b.guardianId })}>
+          <div className="row">
+            <div className="avatar">{guardian?.photo || '🙂'}</div>
+            <div className="grow">
+              <div className="bold">{guardian?.name}님 · 보호자 · {guardian?.neighborhood}</div>
+              <div className="muted">{guardian?.intro ? guardian.intro.slice(0, 40) + (guardian.intro.length > 40 ? '…' : '') : '프로필 보기'}</div>
+            </div>
+            <span className="muted">›</span>
           </div>
-          <span className="muted">›</span>
-        </div>
-      </Card>
+        </Card>
+      ) : (
+        <Card onClick={() => push('sitterProfile', { sitterId: sitter.id, dogId: dog.id })}>
+          <div className="row">
+            <div className="avatar">{sitter.emoji}</div>
+            <div className="grow">
+              <div className="bold">{sitter.name}님 · {sitter.neighborhood}</div>
+              <div className="muted">전체 {sitter.reviewCount}개 리뷰 · ⭐ {sitter.rating ?? '—'}</div>
+            </div>
+            <span className="muted">›</span>
+          </div>
+        </Card>
+      )}
 
       <Card>
         <div className="small" style={{ lineHeight: 2 }}>
@@ -57,10 +74,13 @@ export default function BookingDetail({ params }) {
 
       <div className="btn-row">
         {b.status !== 'noshow' && (
-          <Btn onClick={() => push('chat', { bookingId: b.id })}>💬 시터님과 채팅</Btn>
+          <Btn onClick={() => push('chat', { bookingId: b.id })}>💬 {iAmSitter ? '보호자님과 채팅' : '시터님과 채팅'}</Btn>
         )}
         {b.status === 'completed' && diary && (
           <Btn variant="peach" onClick={() => push('diaryDetail', { diaryId: diary.id })}>📖 다이어리 보기</Btn>
+        )}
+        {iAmSitter && b.status === 'completed' && !diary && (
+          <Btn variant="peach" onClick={() => push('diary', { bookingId: b.id })}>✍️ 다이어리 쓰기</Btn>
         )}
       </div>
       {b.status === 'completed' && !hasReview && (

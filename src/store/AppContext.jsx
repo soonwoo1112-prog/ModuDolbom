@@ -8,16 +8,16 @@ export const useApp = () => useContext(Ctx);
 export const TABS = {
   guardian: [
     { id: 'home', label: '홈', icon: '🏠' },
-    { id: 'requests', label: '요청', icon: '📬' },
-    { id: 'dogs', label: '내 강아지', icon: '🐶' },
+    { id: 'feed', label: '동네일기', icon: '📸' },
     { id: 'bookings', label: '예약', icon: '📅' },
+    { id: 'chats', label: '채팅', icon: '💬' },
     { id: 'my', label: '마이', icon: '👤' },
   ],
   sitter: [
-    { id: 'inbox', label: '요청함', icon: '📥' },
+    { id: 'home', label: '홈', icon: '🏠' },
+    { id: 'feed', label: '동네일기', icon: '📸' },
     { id: 'schedule', label: '일정', icon: '🗓️' },
-    { id: 'diary', label: '다이어리', icon: '✍️' },
-    { id: 'learn', label: '배우기', icon: '📚' },
+    { id: 'chats', label: '채팅', icon: '💬' },
     { id: 'my', label: '마이', icon: '👤' },
   ],
 };
@@ -42,13 +42,18 @@ export function AppProvider({ children }) {
   const goTab = useCallback((tab) => setNav({ tab, stack: [] }), []);
   const setMode = useCallback((mode) => {
     setDb((s) => ({ ...s, session: { ...s.session, mode } }));
-    setNav({ tab: mode === 'sitter' ? 'inbox' : 'home', stack: [] });
+    setNav({ tab: 'home', stack: [] });
+  }, []);
+
+  // ── 로그인(목업) ──
+  const login = useCallback(() => {
+    setDb((s) => ({ ...s, session: { ...s.session, loggedIn: true } }));
   }, []);
 
   // ── 온보딩 ──
   const onboard = useCallback((region, role) => {
     setDb((s) => ({ ...s, session: { ...s.session, onboarded: true, region, role, mode: role === 'sitter' ? 'sitter' : 'guardian' } }));
-    setNav({ tab: role === 'sitter' ? 'inbox' : 'home', stack: [] });
+    setNav({ tab: 'home', stack: [] });
   }, []);
   const onboardWaitlist = useCallback((entry) => {
     setDb((s) => ({
@@ -210,7 +215,7 @@ export function AppProvider({ children }) {
 
   // ── 다이어리 / 인계 메모 ──
   const postDiary = useCallback((d) => {
-    setDb((s) => ({ ...s, diaries: [{ id: nextId('p'), createdAt: new Date().toISOString().slice(0, 10), ...d }, ...s.diaries] }));
+    setDb((s) => ({ ...s, diaries: [{ id: nextId('p'), createdAt: new Date().toISOString().slice(0, 10), likes: 0, liked: false, comments: 0, ...d }, ...s.diaries] }));
   }, []);
   const addNote = useCallback((n) => {
     setDb((s) => ({ ...s, notes: [...s.notes, { id: nextId('n'), createdAt: new Date().toISOString().slice(0, 10), ...n }] }));
@@ -241,11 +246,24 @@ export function AppProvider({ children }) {
     showToast('이수 완료! 교육 배지가 갱신됐어요 🎓');
   }, [showToast]);
 
+  // ── 동네일기 좋아요 ──
+  const toggleLike = useCallback((postId) => {
+    setDb((s) => ({
+      ...s,
+      diaries: s.diaries.map((p) => (p.id === postId ? { ...p, liked: !p.liked, likes: p.likes + (p.liked ? -1 : 1) } : p)),
+    }));
+  }, []);
+
+  // ── 내 보호자 프로필 편집 ──
+  const updateMyUser = useCallback((patch) => {
+    setDb((s) => ({ ...s, users: s.users.map((u) => (u.id === s.session.userId ? { ...u, ...patch } : u)) }));
+  }, []);
+
   const value = {
     db, nav, toast, showToast,
     nudgeDismissed, setNudgeDismissed,
     push, pop, goTab, setMode,
-    onboard, onboardWaitlist,
+    login, onboard, onboardWaitlist, toggleLike, updateMyUser,
     addDog, saveDog,
     createRequest, confirmRequest, advanceRequest, acceptRequest, declineRequest,
     toggleFavorite, addReview, ensureChat, sendMessage,

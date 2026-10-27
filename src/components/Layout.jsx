@@ -9,9 +9,9 @@ export default function Layout() {
   const tabs = TABS[session.mode] || TABS.guardian;
   const mySitterId = (db.sitters.find((s) => s.userId === session.userId) || {}).id;
 
-  // 알림 점: 시터 모드 요청함에 받은 요청이 있으면
+  // 알림 점: 시터 모드에서 받은 요청이 있으면 홈 탭에 표시
   const inboxCount = isSitter
-    ? db.requests.filter((r) => r.status === 'asking_neighbors' && mySitterId && r.requestedSitterIds.includes(mySitterId)).length
+    ? db.requests.filter((r) => (r.status === 'asking_neighbors' || r.status === 'awaiting_dedicated') && mySitterId && r.requestedSitterIds.includes(mySitterId)).length
     : 0;
 
   const modeKey = isSitter ? 'sitter' : 'guardian';
@@ -38,7 +38,7 @@ export default function Layout() {
       <nav className="bottom-nav">
         {tabs.map((t) => (
           <button key={t.id} className={`nav-item ${nav.tab === t.id && !nav.stack.length ? 'active' : ''}`} onClick={() => goTab(t.id)}>
-            <span className={`ico ${t.id === 'inbox' && inboxCount > 0 ? 'nav-dot' : ''}`}>{t.icon}</span>
+            <span className={`ico ${isSitter && t.id === 'home' && inboxCount > 0 ? 'nav-dot' : ''}`}>{t.icon}</span>
             {t.label}
           </button>
         ))}

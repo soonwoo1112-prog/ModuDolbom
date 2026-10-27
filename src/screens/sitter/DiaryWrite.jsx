@@ -81,17 +81,16 @@ function DiaryCompose({ bookingId, db, me, postDiary, addNote, pop, showToast })
   // AI(연동 전) 자동 초안: 체크 항목과 강아지 정보로 따뜻한 한 문단 생성
   const autoWrite = () => {
     const lines = [];
-    const where = b.service === 'walk' && dog.route ? `${dog.route}을` : '보호자님 댁을';
     lines.push(b.service === 'walk'
-      ? `${withLang(dog.name)} ${where} 함께 천천히 걸었어요.`
+      ? `${withLang(dog.name)} 익숙한 산책로를 함께 천천히 걸었어요.`
       : `${withLang(dog.name)} 보호자님 댁에 방문해 함께 시간을 보냈어요.`);
     if (checks.includes('잘 먹었어요')) lines.push('간식도 잘 받아먹고');
     if (checks.includes('신나게 놀았어요')) lines.push('놀이 시간엔 신이 나서 폴짝폴짝 뛰었어요.');
     if (checks.includes('배변 잘 했어요')) lines.push('배변도 깔끔하게 잘 했어요.');
     if (checks.includes('낮잠 잘 잤어요')) lines.push('지친 듯 기지개를 켜고는 제 옆에서 낮잠에 빠졌어요.');
     if (checks.includes('산책 즐겁게 했어요')) lines.push('코를 킁풍거리며 구석구석 행복하게 산책했어요.');
-    if (dog.tags.includes('겁많음') && b.service === 'walk') lines.push('처음엔 낯선 길을 머뭇거렸지만, 곧 제 곁에 바짝 붙어 편안하게 걸었어요.');
-    if (dog.tags.includes('활발함')) lines.push(`${dog.name}의 에너지가 오늘도 저를 웃게 했어요.`);
+    if (dog.tags.includes('겁 많음') && b.service === 'walk') lines.push('처음엔 낯선 길을 머뭇거렸지만, 곧 제 곁에 바짝 붙어 편안하게 걸었어요.');
+    if (dog.tags.includes('에너지 폭발')) lines.push(`${dog.name}의 에너지가 오늘도 저를 웃게 했어요.`);
     lines.push(`다음에도 ${dog.name}가 건강하고 즐겁게 지낼 수 있도록 함께해 주세요. 오늘도 좋은 시간이었어요! 🐾`);
     setBody(lines.join(' '));
     showToast('AI가 초안을 써줬어요 — 자유롭게 다듬어주세요 ✨');

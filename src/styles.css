@@ -303,3 +303,176 @@ input[type='date'], input[type='time'] { -webkit-appearance: none; appearance: n
   background: var(--ink); color: #fff; border-radius: 999px; padding: 10px 20px;
   font-size: 13.5px; z-index: 120; box-shadow: var(--shadow-lift); white-space: nowrap;
 }
+
+/* ── 로그인 화면 ── */
+.login-shell { justify-content: space-between; }
+.login-hero { text-align: center; padding: 64px 24px 12px; }
+.login-art { position: relative; height: 120px; margin-bottom: 8px; }
+.login-art span { position: absolute; display: block; }
+.login-art .la-1 { font-size: 74px; left: calc(50% - 46px); top: 18px; transform: rotate(-6deg); }
+.login-art .la-2 { font-size: 40px; left: calc(50% + 20px); top: 2px; }
+.login-art .la-3 { font-size: 30px; left: calc(50% - 84px); top: 48px; }
+.login-art .la-4 { font-size: 48px; left: calc(50% + 34px); top: 56px; transform: rotate(10deg); }
+.login-logo { font-size: 40px; }
+.login-name { font-size: 30px; font-weight: 800; margin: 6px 0 2px; }
+.login-tag { color: var(--green); font-weight: 700; font-size: 16px; margin: 0; }
+.login-sub { color: var(--muted); font-size: 13.5px; margin-top: 12px; line-height: 1.6; }
+.login-actions { padding: 8px 24px 0; }
+.social-btn {
+  width: 100%; border: none; border-radius: 14px; padding: 14px 16px;
+  font-size: 15.5px; font-weight: 700; cursor: pointer; margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: var(--shadow); transition: transform 0.1s;
+}
+.social-btn:active { transform: scale(0.98); }
+.social-btn.kakao { background: #FEE500; color: #1a1a1a; }
+.social-btn.naver { background: #03C75A; color: #fff; }
+.social-btn.apple { background: #1d1d1d; color: #fff; }
+.s-ico { font-size: 17px; font-weight: 900; width: 20px; display: inline-flex; justify-content: center; }
+.email-link {
+  display: block; width: 100%; background: none; border: none; cursor: pointer;
+  color: var(--muted); font-size: 13px; text-decoration: underline; padding: 4px 0; margin-top: 2px;
+}
+.login-foot { text-align: center; color: var(--muted); font-size: 11.5px; padding: 10px 30px 30px; margin: 0; }
+
+/* ── 홈: 산책 부탁하기 큰 카드 ── */
+.request-hero {
+  background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+  padding: 18px 16px; margin-top: 16px; box-shadow: var(--shadow-lift);
+}
+
+/* ── 홈: 내 강아지 동그란 프로필 ── */
+.my-dog-avatar { background: none; border: none; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.my-dog-avatar .circle {
+  width: 58px; height: 58px; border-radius: 50%; background: var(--peach-soft);
+  display: flex; align-items: center; justify-content: center; font-size: 30px;
+  border: 2px solid #fff; box-shadow: var(--shadow); overflow: hidden;
+}
+.my-dog-avatar .circle img { width: 100%; height: 100%; object-fit: cover; }
+.my-dog-avatar .circle.plus { background: var(--green-soft); color: var(--green-deep); font-size: 22px; font-weight: 700; }
+.my-dog-avatar .nm { font-size: 12px; font-weight: 700; color: var(--ink); }
+
+/* ── 미니 캘린더 스트립 (이번 주) ── */
+.cal-strip { display: flex; gap: 6px; }
+.cal-strip-cell {
+  flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 14px;
+  padding: 9px 0 7px; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  cursor: default;
+}
+.cal-strip-cell.today { border-color: var(--green); background: var(--green-soft); }
+.cal-strip-cell.marked { border-color: var(--green); background: var(--card); box-shadow: var(--shadow); }
+.cal-strip-cell .dow { font-size: 10.5px; color: var(--muted); font-weight: 600; }
+.cal-strip-cell .num { font-size: 13.5px; font-weight: 700; }
+.cal-strip-cell .mark { font-size: 19px; line-height: 1.2; height: 22px; }
+.cal-strip-cell .mark.dim { color: var(--border); }
+
+/* ── 월간 캘린더 ── */
+.cal-month { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 12px 12px; box-shadow: var(--shadow); margin-bottom: 14px; }
+.cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.cal-title { font-weight: 800; font-size: 15.5px; }
+.cal-nav { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); font-size: 16px; cursor: pointer; color: var(--ink); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 3px; }
+.cal-dow { text-align: center; font-size: 11px; font-weight: 700; color: var(--muted); padding: 4px 0; }
+.cal-dow.sun { color: var(--danger); }
+.cal-cell {
+  position: relative; height: 48px; background: none; border: none; cursor: pointer; padding: 0;
+  display: flex; align-items: flex-start; justify-content: center; padding-top: 6px;
+  border-radius: 0;
+}
+.cal-cell.blank { cursor: default; }
+.cal-cell:disabled { cursor: default; }
+.cal-cell .num { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.cal-cell.sun .num { color: #c0705e; }
+.cal-cell.today .num { color: var(--green); font-weight: 800; }
+.cal-cell.bar { background: var(--green-soft); }
+.cal-cell.bar-start { border-radius: 14px 0 0 14px; }
+.cal-cell.bar-end { border-radius: 0 14px 14px 0; }
+.cal-cell.bar-start.bar-end { border-radius: 14px; }
+.cal-emoji {
+  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+  width: 24px; height: 24px; border-radius: 50%; background: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+  box-shadow: var(--shadow);
+}
+
+/* ── 프로필 (강아지·시터·보호자 공통) ── */
+.profile-cover {
+  position: relative; height: 132px; margin: 0 -16px;
+  background: linear-gradient(135deg, #dcecdf 0%, #f4e9d2 100%);
+  border-radius: 0 0 26px 26px; overflow: visible;
+}
+.profile-cover.small-cover { height: 108px; }
+.cover-emoji {
+  position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+  font-size: 54px; opacity: 0.55;
+}
+.small-cover .cover-emoji { font-size: 46px; top: 16px; }
+.cover-paws { position: absolute; bottom: 10px; width: 100%; text-align: center; font-size: 15px; opacity: 0.5; letter-spacing: 10px; }
+.profile-avatar-wrap { position: absolute; left: 18px; bottom: -34px; }
+.profile-avatar {
+  width: 66px; height: 66px; border-radius: 50%; overflow: hidden;
+  background: var(--green-soft); border: 3px solid #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 34px;
+  box-shadow: var(--shadow-lift);
+}
+.profile-avatar.big { width: 86px; height: 86px; font-size: 44px; }
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.profile-avatar.upload { cursor: pointer; position: relative; }
+.upload-hint {
+  position: absolute; right: -2px; bottom: -2px; width: 26px; height: 26px;
+  background: var(--card); border-radius: 50%; box-shadow: var(--shadow);
+  display: flex; align-items: center; justify-content: center; font-size: 12px;
+}
+.profile-head { margin-top: 46px; }
+.small-cover + .profile-head, .profile-head { margin-top: 46px; }
+
+/* ── 통계 ── */
+.stat-row { display: flex; gap: 8px; margin: 14px 0 4px; }
+.stat {
+  flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 12px 6px; text-align: center; box-shadow: var(--shadow);
+}
+.stat b { display: block; font-size: 20px; color: var(--green-deep); }
+.stat span { font-size: 11px; color: var(--muted); font-weight: 600; }
+
+/* ── 사진첩 / 3열 그리드 ── */
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.gallery-cell {
+  position: relative; aspect-ratio: 1; border-radius: 12px; background: var(--green-soft);
+  display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer;
+  overflow: hidden;
+}
+.gallery-cell img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-cell .del { position: absolute; top: 4px; right: 7px; font-size: 12px; color: var(--muted); }
+.gallery-cell .cell-cap {
+  position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.85); border-radius: 999px; padding: 2px 8px; font-size: 10.5px; white-space: nowrap;
+}
+.gallery-cell.add {
+  border: 1.5px dashed var(--border); background: var(--bg); color: var(--muted);
+  font-size: 22px; flex-direction: column; gap: 2px;
+}
+
+/* ── 동네일기 피드 ── */
+.feed-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.feed-dog { display: flex; align-items: center; gap: 7px; background: none; border: none; padding: 0; cursor: pointer; }
+.feed-photos { display: flex; gap: 8px; }
+.feed-photo {
+  flex: 0 0 100%; height: 240px; border-radius: 16px; background: var(--green-soft);
+  display: flex; align-items: center; justify-content: center; font-size: 92px; overflow: hidden;
+}
+.feed-photo img { width: 100%; height: 100%; object-fit: cover; }
+.feed-photos.multi { overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px; }
+.feed-photos.multi .feed-photo { scroll-snap-align: center; flex: 0 0 88%; }
+.feed-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+.feed-sitter { display: flex; align-items: center; gap: 6px; background: none; border: none; padding: 0; cursor: pointer; }
+.feed-likes { display: flex; align-items: center; gap: 12px; }
+.like-btn { background: none; border: none; font-size: 14px; cursor: pointer; padding: 0; font-weight: 600; }
+
+/* ── 기타 ── */
+.caution-card { border-color: #eed7cc; background: #fdf6f0; }
+.settle-card { background: linear-gradient(135deg, #eaf2ec 0%, #fdf1e1 100%); }
+.check-row { display: flex; align-items: center; gap: 8px; margin: 10px 0; }
+.check-row input[type='checkbox'] { width: 17px; height: 17px; accent-color: var(--green); }
+.photo-tile.sm { width: 44px; height: 44px; font-size: 22px; border-radius: 12px; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }

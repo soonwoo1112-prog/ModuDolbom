@@ -92,3 +92,40 @@ export const withLang = (name) => (hasBatchim(name) ? `${name}이랑` : `${name}
 export const subject = (name) => (hasBatchim(name) ? `${name}이` : `${name}`);
 
 export const meetCountText = (n) => `${n}번째 만남`;
+
+// ── 강아지 성격 태그 카테고리 ──
+export const PERSONALITY_CATEGORIES = [
+  { key: 'people', label: '사람', tags: ['사람 좋아함', '낯가림', '아이 좋아함', '남자 어른 무서워함'] },
+  { key: 'dogs', label: '다른 강아지', tags: ['친구 좋아함', '소형견만 괜찮음', '다른 개 무서워함', '거리 두기 필요'] },
+  { key: 'walk', label: '산책 스타일', tags: ['당기는 편', '천천히 냄새 맡기', '에너지 폭발', '금방 지침'] },
+  { key: 'temper', label: '성향', tags: ['겁 많음', '호기심 많음', '독립적', '애교쟁이', '분리불안 있음', '식탐 많음'] },
+  { key: 'noise', label: '소리·환경', tags: ['오토바이 무서워함', '천둥 무서워함', '잘 짖음', '조용함'] },
+];
+
+// ── 강아지 나이 표시: 생년월일 기준 또는 추정 나이 ──
+export const ageText = (dog) => {
+  if (!dog.birthdayUnknown && dog.birthday) {
+    const b = new Date(`${dog.birthday}T00:00:00`);
+    const now = new Date();
+    let years = now.getFullYear() - b.getFullYear();
+    if (now.getMonth() < b.getMonth() || (now.getMonth() === b.getMonth() && now.getDate() < b.getDate())) years -= 1;
+    return `${Math.max(years, 0)}살`;
+  }
+  const y = dog.approxYears || 0;
+  const m = dog.approxMonths || 0;
+  const parts = [];
+  if (y) parts.push(`${y}살`);
+  if (m) parts.push(`${m}개월`);
+  const base = parts.join(' ') || '나이 미정';
+  return dog.birthdayUnknown ? `${base} (추정)` : base;
+};
+
+// ── 날짜 도우미 (달력용) ──
+export const isoOf = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+export const todayISO = () => isoOf(new Date());
+export const addDaysISO = (isoDate, n) => {
+  const d = new Date(`${isoDate}T00:00:00`);
+  d.setDate(d.getDate() + n);
+  return isoOf(d);
+};
+export const diffDays = (a, b) => Math.round((new Date(`${b}T00:00:00`) - new Date(`${a}T00:00:00`)) / 86400000);

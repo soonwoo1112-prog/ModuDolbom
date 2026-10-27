@@ -18,19 +18,32 @@ docker compose -f docker-compose.base44.yml up -d
 
 ## 구조
 
+- 첫 화면은 로그인(목업) — 소셜 버튼을 누르면 온보딩(동네 → 역할)으로 넘어간다.
+- 하단 탭: 보호자 = 홈/동네일기/예약/채팅/마이, 시터 = 홈/동네일기/일정/채팅/마이.
+  보호자 "요청" 탭은 예약 탭의 "요청 중" 섹션으로 합쳐졌고, "내 강아지"·시터
+  "배우기/멤버십/인증"은 마이 안으로 들어갔다.
 - `src/data/seed.js` — 엔티티 샘플 데이터 (Dog, SitterProfile, CareRequest, Booking,
-  DiaryPost, SitterNote, Review, FavoriteSitter, Chat). 날짜는 실행일 기준 상대 오프셋.
+  DiaryPost, SitterNote, Review, GuardianReview, FavoriteSitter, Chat). 날짜는 실행일 기준
+  상대 오프셋. 강아지는 생일 또는 추정 나이(birthdayUnknown/approxYears)와 카테고리별
+  성격 태그, 소개/주의사항 분리, 건강 정보를 가진다. 동네일기는 likes/comments 포함.
 - `src/store/AppContext.jsx` — 전역 상태 + 화면 내비게이션(push/pop/goTab) + 액션들.
-- `src/components/` — 공용 UI 프리미티브, 레이아웃(하단 탭), 크기 비교 SVG, 리뷰 넛지.
-- `src/screens/guardian|sitter|common/` — 역할별 화면.
+- `src/components/` — 공용 UI 프리미티브, 레이아웃(하단 탭), 주간 스트립/월간 캘린더
+  (`MonthCalendar`는 같은 강아지의 연속 예약을 막대로 잇는다), 요청 카드,
+  크기 비교 SVG, 리뷰 넛지.
+- `src/screens/guardian|sitter|common/` — 역할별 화면. 강아지 프로필(보기/편집),
+  시터·보호자 프로필, 동네일기 피드, 채팅 목록은 common에 있다.
 - 화면 전환은 react-router가 아니라 Context의 `nav` 상태(stack)로 처리한다.
 
 ## 확인 방법
 
-- 보호자 홈 피드 · 요청 플로우(5단계) · 매칭 상태 화면(데모 단계 진행 버튼) ·
-  예약 상세 · 시터 프로필 · 리뷰 넛지 모달.
-- 마이페이지/상단 칩으로 시터 모드 전환 후 요청함 수락 → 일정 · 다이어리 작성
-  (자동 초안 생성은 로컬 템플릿, LLM 연동 자리표시자) · 배우기(배지) · 멤버십.
+- 로그인 → 온보딩 → 보호자 홈(강아지 프로필 바로가기, 산책 부탁하기 큰 카드,
+  다음 돌봄, 주간 스트립, 전담 시터, 동네일기 미리보기).
+- 예약 탭: 월간 캘린더(연속 일정 막대) → 날짜 눌러 그날 목록, 요청 중/다가오는/지난 섹션.
+- 동네일기 탭: 필터 칩, 좋아요 토글, 시터/강아지 프로필 진입.
+- 채팅 탭: 확정된 예약 상대 목록 → 1:1 채팅.
+- 마이에서 시터 모드 전환 → 시터 홈(오늘 일정, 새 요청 원클릭 수락, 이번 달 정산) ·
+  일정 탭(새 요청함 + 캘린더) · 다이어리 작성(자동 초안은 로컬 템플릿, LLM 연동
+  자리표시자) · 배우기(배지) · 멤버십 · 인증.
 
 ## 1페이즈 제약 (의도된 것)
 

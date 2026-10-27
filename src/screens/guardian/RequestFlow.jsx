@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useApp } from '../../store/AppContext.jsx';
 import { Btn, Card, TopBar, Chip, Field, Banner } from '../../components/ui.jsx';
-import { SERVICE, D, fmtDate, fmtClock, won } from '../../utils.js';
+import { SERVICE, D, fmtDate, fmtClock, won, ageText } from '../../utils.js';
 
 // 요청하기 플로우: 서비스 → 강아지 → 일시 → 주의사항 → 보내기
-export default function RequestFlow() {
+// 홈 큰 카드에서 진입하면 강아지·날짜·서비스가 미리 골라져 있어요
+export default function RequestFlow({ params }) {
   const { db, createRequest, push, goTab, showToast } = useApp();
   const myDogs = db.dogs.filter((d) => d.guardianId === db.session.userId);
-  const [step, setStep] = useState(1);
-  const [service, setService] = useState(null);
-  const [dogId, setDogId] = useState(null);
-  const [date, setDate] = useState(D(1));
+  const [step, setStep] = useState(params.service && params.dogId ? 3 : params.service ? 2 : 1);
+  const [service, setService] = useState(params.service || null);
+  const [dogId, setDogId] = useState(params.dogId || null);
+  const [date, setDate] = useState(params.date || D(1));
   const [startTime, setStartTime] = useState('10:00');
   const [duration, setDuration] = useState(30);
   const [cautions, setCautions] = useState('');
@@ -26,7 +27,7 @@ export default function RequestFlow() {
   for (let h = 8; h <= 20; h++) { times.push(`${String(h).padStart(2, '0')}:00`); if (h !== 20) times.push(`${String(h).padStart(2, '0')}:30`); }
 
   const next = () => {
-    if (step === 2 && dog) { setCautions(dog.cautions || ''); setRoute(dog.route || ''); }
+    if (step === 2 && dog) setCautions(dog.cautions || '');
     setStep(step + 1);
   };
 
@@ -97,7 +98,7 @@ export default function RequestFlow() {
                   <div className="dog-face">{d.emoji}</div>
                   <div>
                     <div className="bold">{d.name} · {d.breed}</div>
-                    <div className="muted">{d.weight}kg · {d.age}살 · {d.tags.join(' · ')}</div>
+                    <div className="muted">{d.weight}kg · {ageText(d)} · {d.tags.slice(0, 3).join(' · ')}</div>
                   </div>
                 </div>
                 {dogId === d.id && <span style={{ color: '#3F7D58', fontWeight: 700 }}>✓</span>}
