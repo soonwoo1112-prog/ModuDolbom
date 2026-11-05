@@ -1,0 +1,117 @@
+/* 모두돌봄 tokens — mirrors design/system/tokens.json (the source of truth). Edit that file, then this one. */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=Jua&display=swap");
+
+:root {
+  color-scheme: light;
+  --paper: oklch(97% 0.012 95);
+  --paper-2: oklch(94.5% 0.018 95);
+  --paper-3: oklch(91% 0.022 95);
+  --card: oklch(98.8% 0.007 95);
+  --ink: oklch(20% 0.014 255);
+  --ink-2: oklch(29% 0.014 255);
+  --muted: oklch(47% 0.014 255);
+  --rule: oklch(87% 0.016 95);
+  --edge: oklch(83% 0.04 88);
+  --pear: oklch(87% 0.175 96);
+  --pear-deep: oklch(72% 0.16 92);
+  --on-fill: oklch(20% 0.014 255);
+  --blue: oklch(50% 0.17 250);
+  --coral: oklch(70% 0.2 22);
+  --mint: oklch(82% 0.15 152);
+  --mint-deep: oklch(48% 0.12 155);
+  --error: oklch(52% 0.19 27);
+  --focus: oklch(50% 0.17 250);
+  --shadow-card: 0 1px 2px rgba(20, 24, 33, 0.06), 0 12px 28px -14px rgba(20, 24, 33, 0.22);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: oklch(19% 0.014 255);
+    --paper-2: oklch(22.5% 0.016 255);
+    --paper-3: oklch(27% 0.018 255);
+    --card: oklch(24.5% 0.016 255);
+    --ink: oklch(96% 0.012 95);
+    --ink-2: oklch(88% 0.014 95);
+    --muted: oklch(74% 0.014 255);
+    --rule: oklch(34% 0.016 255);
+    --edge: oklch(13% 0.012 255);
+    --pear: oklch(87% 0.175 96);
+    --pear-deep: oklch(66% 0.15 92);
+    --on-fill: oklch(20% 0.014 255);
+    --blue: oklch(74% 0.13 250);
+    --coral: oklch(72% 0.18 22);
+    --mint: oklch(80% 0.14 152);
+    --mint-deep: oklch(80% 0.13 155);
+    --error: oklch(72% 0.16 27);
+    --focus: oklch(74% 0.13 250);
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 28px -14px rgba(0, 0, 0, 0.6);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: oklch(19% 0.014 255);
+  --paper-2: oklch(22.5% 0.016 255);
+  --paper-3: oklch(27% 0.018 255);
+  --card: oklch(24.5% 0.016 255);
+  --ink: oklch(96% 0.012 95);
+  --ink-2: oklch(88% 0.014 95);
+  --muted: oklch(74% 0.014 255);
+  --rule: oklch(34% 0.016 255);
+  --edge: oklch(13% 0.012 255);
+  --pear: oklch(87% 0.175 96);
+  --pear-deep: oklch(66% 0.15 92);
+  --on-fill: oklch(20% 0.014 255);
+  --blue: oklch(74% 0.13 250);
+  --coral: oklch(72% 0.18 22);
+  --mint: oklch(80% 0.14 152);
+  --mint-deep: oklch(80% 0.13 155);
+  --error: oklch(72% 0.16 27);
+  --focus: oklch(74% 0.13 250);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 28px -14px rgba(0, 0, 0, 0.6);
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --radius-input: 14px;
+  --radius-stock: 16px;
+  --radius-card: 24px;
+  --radius-pill: 999px;
+  --control-lg: 54px;
+  --control-md: 44px;
+  --control-sm: 36px;
+  --tabbar: 64px;
+  --font-display: "Jua", ui-rounded, "Apple SD Gothic Neo", sans-serif;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --text-caption: 13px; --text-label: 14px; --text-body: 16px; --text-body-lg: 17px;
+  --text-title-2: 18px; --text-title-1: 22px; --text-display: 28px; --text-figure: 32px;
+  --display-weight: 400; --tracking-display: -0.01em;
+  --ease-snap: cubic-bezier(0.22, 1, 0.36, 1); --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-micro: 120ms; --dur-short: 220ms;
+  --z-raised: 10; --z-sticky: 200; --z-sheet: 400; --z-toast: 500;
+  /* Hallmark role names, for its scaffold and sloplint */
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-edge: var(--edge);
+  --color-accent: var(--pear);
+  --color-accent-deep: var(--pear-deep);
+  --color-accent-ink: var(--on-fill);
+  --color-accent-2: var(--blue);
+  --color-accent-3: var(--coral);
+  --color-mint: var(--mint);
+  --color-mint-deep: var(--mint-deep);
+  --color-focus: var(--focus);
+  --color-error: var(--error);
+  --color-success: var(--mint-deep);
+}

@@ -1,0 +1,22 @@
+<!-- @dsCard group="States" height=420 subtitle="불러오는 중, 비어 있음, 오류" -->
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>ListStates preview</title></head>
+<body>
+<div style="display:grid;gap:12px;padding:16px;max-width:420px">
+  <section class="md-card" aria-busy="true" aria-label="예약 목록 불러오는 중">
+    <div style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:center"><div class="md-skel" style="height:56px"></div><div style="display:grid;gap:8px"><div class="md-skel md-skel--line" style="width:60%"></div><div class="md-skel md-skel--line" style="width:85%"></div></div></div>
+  </section>
+  <section class="md-card md-state">
+    <h3 class="md-title-2">아직 확정된 예약이 없어요</h3>
+    <p>산책을 부탁하면 확정된 날이 캘린더에 표시돼요.</p>
+    <button class="md-btn md-btn--primary" type="button">산책 부탁하기</button>
+  </section>
+  <section class="md-card md-state" role="alert">
+    <h3 class="md-title-2">예약 목록을 불러오지 못했어요</h3>
+    <p>인터넷 연결을 확인하고 다시 시도해 주세요.</p>
+    <button class="md-btn" type="button">다시 시도</button>
+  </section>
+</div>
+</body>
+</html>

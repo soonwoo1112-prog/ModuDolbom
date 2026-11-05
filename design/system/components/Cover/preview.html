@@ -1,0 +1,53 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>Cover</title>
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--paper); color: var(--ink); position: relative; width: 960px; height: 288px; overflow: hidden; }
+  svg { position: absolute; inset: 0; }
+  .pear { fill: var(--pear); } .mint { fill: var(--mint); } .blue { fill: var(--blue); } .coral { fill: var(--coral); } .ink { fill: var(--ink); }
+  .r-card { rx: var(--radius-card); } .r-stock { rx: var(--radius-stock); }
+  .step { fill: var(--paper); }
+  .name { position: absolute; left: 48px; bottom: 40px; max-width: 440px; }
+  .name h1 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 104px; line-height: .95; letter-spacing: -0.01em; color: var(--ink); }
+  .name p { margin: 16px 0 0; font-family: var(--font-body); font-size: 14px; line-height: 20px; color: var(--muted); }
+</style></head>
+<body>
+<svg width="960" height="288" viewBox="0 0 960 288" aria-hidden="true">
+  <!-- blocks: pear 264x232 (radius-card), mint 152x112 pill-ended (radius-card), ink 120x120 (radius-stock), blue disc 96, coral disc 32
+       arrangement: one tall pear slab bleeding off the top, satellites stepped down and right, all right of x=480
+       pattern: a walk drawn as a trail of discs (r=6, pitch 24 = space-5) in paper, cut out of the blocks; a walk is what the app records, so the route is the brand's own shape
+       scales: space-5 24 pitch, space-4 16 gaps, radius-card 24, radius-stock 16, discs/pills at half the short side -->
+  <rect class="pear r-card" x="520" y="-24" width="264" height="256"/>
+  <rect class="mint" x="800" y="152" width="160" height="112" rx="56"/>
+  <rect class="ink r-stock" x="800" y="16" width="120" height="120"/>
+  <circle class="blue" cx="544" cy="256" r="48"/>
+  <circle class="coral" cx="940" cy="24" r="16"/>
+  <g>
+    <circle class="step" cx="500" cy="250" r="6"/>
+    <circle class="step" cx="525" cy="246" r="6"/>
+    <circle class="step" cx="549" cy="240" r="6"/>
+    <circle class="step" cx="572" cy="230" r="6"/>
+    <circle class="step" cx="594" cy="218" r="6"/>
+    <circle class="step" cx="615" cy="204" r="6"/>
+    <circle class="step" cx="632" cy="187" r="6"/>
+    <circle class="step" cx="645" cy="166" r="6"/>
+    <circle class="step" cx="663" cy="148" r="6"/>
+    <circle class="step" cx="684" cy="135" r="6"/>
+    <circle class="step" cx="707" cy="126" r="6"/>
+    <circle class="step" cx="732" cy="125" r="6"/>
+    <circle class="step" cx="756" cy="132" r="6"/>
+    <circle class="step" cx="779" cy="139" r="6"/>
+    <circle class="step" cx="803" cy="137" r="6"/>
+    <circle class="step" cx="824" cy="124" r="6"/>
+    <circle class="step" cx="842" cy="108" r="6"/>
+    <circle class="step" cx="857" cy="89" r="6"/>
+    <circle class="step" cx="872" cy="68" r="6"/>
+    <circle class="step" cx="892" cy="53" r="6"/>
+    <circle class="step" cx="914" cy="45" r="6"/>
+  </g>
+</svg>
+<div class="name"><h1>모두돌봄</h1><p>우리 동네 이웃이 내 강아지를 산책시켜 주는 앱.</p></div>
+</body>
+</html>
