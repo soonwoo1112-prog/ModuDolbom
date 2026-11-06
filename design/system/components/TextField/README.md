@@ -1,11 +1,10 @@
 # TextField
 
-레이블이 항상 입력창 위에 보이는 입력창입니다. 자리표시자(placeholder)를 레이블 대신 쓰지 않습니다.
+SEED Field와 Text Input(Outline, Large) 구조입니다. 레이블이 항상 위에 보이고, 아래에 도움말이나 오류와 글자 수를 둡니다.
 
-- 구조: `md-field` 안에 `md-field__label`, `md-field__input`(`input` 또는 `textarea`), 필요하면 `md-field__help`나 `md-field__error`.
-- 크기: 높이 `control-md`(44px), 모서리 `radius-input`(14px), 테두리 1px `muted`.
-- 포커스: `focus` 2px 링.
-- 오류: `aria-invalid="true"`와 `aria-describedby`로 오류 문장을 연결합니다. 테두리는 2px `error`. 문장은 무엇이 잘못됐는지와 어떻게 고치는지를 함께 씁니다("만날 장소를 적어 주세요. 시터가 찾아올 곳이에요.").
-- 비활성: 왜 바꿀 수 없는지 도움말로 알려 줍니다.
-
-소비자가 줄 것: 고유한 `id`, 레이블, 값, 오류 문장.
+- **입력창**: 높이 `input-large`(52px), 모서리 `r3`, 테두리 1px `stroke-neutral-solid`, 글자 t5(16px).
+- **포커스**: 테두리가 2px `stroke-neutral-contrast`가 되고, 키보드 포커스에는 `stroke-focus-ring` 링이 함께 보입니다.
+- **오류**: `aria-invalid="true"`, 테두리 2px `stroke-critical-solid`, 문장은 `fg-critical`. 무엇이 잘못됐는지와 어떻게 하면 되는지를 함께 씁니다.
+- **선택 입력**: 레이블 뒤에 "선택"을 붙입니다. 필수 표시(*)는 쓰지 않습니다.
+- **레이블**: 명사형으로, 마침표 없이, 한 줄로 씁니다.
+- **여러 줄 입력**: `textarea`, 최소 94px.

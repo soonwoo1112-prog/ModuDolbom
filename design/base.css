@@ -1,22 +1,20 @@
-/* 모두돌봄 base — what the Hallmark floor already decided, for app screens. Load after tokens.css. */
+/* 모두돌봄 base — load after tokens.css. Component rules live in design/system/components/bundle.css. */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { overflow-x: clip; }
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  line-height: 1.5;
+  background: var(--bg-layer-default);
+  color: var(--fg-neutral);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 22px;
   font-synthesis: none;
   word-break: keep-all;
   -webkit-font-smoothing: antialiased;
 }
-::selection { background: color-mix(in oklab, var(--pear) 45%, transparent); color: var(--ink); }
-:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: var(--display-weight); letter-spacing: var(--tracking-display); line-height: 1.25; overflow-wrap: break-word; min-width: 0; text-wrap: balance; }
-h1 { font-size: var(--text-title-1); } h2 { font-size: var(--text-title-2); } h3 { font-size: var(--text-title-2); }
+:focus-visible { outline: 2px solid var(--stroke-focus-ring); outline-offset: 2px; }
+a { color: var(--fg-brand); text-underline-offset: 0.2em; }
+h1, h2, h3 { margin: 0; text-wrap: balance; overflow-wrap: break-word; min-width: 0; }
 p { margin: 0; text-wrap: pretty; }
 img, video { max-width: 100%; height: auto; display: block; }
 button, input, select, textarea { font: inherit; color: inherit; }

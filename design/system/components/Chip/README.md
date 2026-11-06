@@ -1,14 +1,8 @@
 # Chip
 
-정보를 붙이는 태그(`span`)와 값을 고르는 선택 칩(`button`) 두 가지입니다.
+값을 고르거나 걸러내는 칩입니다. SEED Chip의 Medium(`chip-medium` 36px, `full` 모서리)을 기본으로 씁니다.
 
-태그는 각 색이 한 가지 뜻만 가집니다.
-- `md-chip--apt`(`pear`): **같은 아파트**. 거주지 인증으로 같은 단지가 확인된 시터에게만.
-- `md-chip--new`(`mint`): **새로 온 시터**. 검색 결과에 항상 1~2명 포함되는 신규 시터.
-- `md-chip`(기본): 전담 시터, 성격 태그("사람을 좋아해요") 같은 중립 정보.
-- `md-chip--loud`(`coral`): **급해요**, 새 요청. 화면에 한 곳만.
-- `md-chip--done`(`mint-deep` 글자): **확정됨**. 색만으로 구분하지 않도록 항상 단어로.
-
-선택 칩은 `aria-pressed`로 상태를 표시하고, 선택되면 `ink` 채움에 `paper` 글자가 됩니다. 강아지 크기, 시간대, 필터에 씁니다. 높이 `control-sm`(36px).
-
-글자는 문장형, 자간 그대로, 대문자나 넓힌 자간을 쓰지 않습니다.
+- **Solid(`md-chip`)**: 기본 `bg-neutral-weak`, 선택되면 `bg-neutral-solid`에 `fg-on-neutral-solid`. 강아지 크기, 필터.
+- **Outline(`md-chip--outline`)**: 선택되면 2px `stroke-neutral-contrast` 테두리. 시간대처럼 한 화면에 칩 묶음이 둘 이상일 때 두 번째 묶음에.
+- 상태는 `aria-pressed`로 표시합니다. 칩 사이 간격은 `x2`.
+- 정보를 붙이는 용도라면 칩이 아니라 Badge를 씁니다.

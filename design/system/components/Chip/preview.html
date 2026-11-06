@@ -1,11 +1,11 @@
-<!-- @dsCard group="Actions" height=150 subtitle="태그와 선택 칩" -->
+<!-- @dsCard group="Actions" height=120 subtitle="선택 칩: Solid, Outline" -->
 <!doctype html>
 <html lang="ko">
 <head><meta charset="utf-8"><title>Chip preview</title></head>
 <body>
 <div class="md-stack">
-  <div class="md-tags"><span class="md-chip md-chip--apt">같은 아파트</span><span class="md-chip md-chip--new">새로 온 시터</span><span class="md-chip">전담 시터</span><span class="md-chip md-chip--loud">급해요</span><span class="md-chip md-chip--done">확정됨</span></div>
-  <div class="md-tags" role="group" aria-label="강아지 크기"><button class="md-chip" type="button" aria-pressed="false">소형</button><button class="md-chip" type="button" aria-pressed="true">중형</button><button class="md-chip" type="button" aria-pressed="false">대형</button></div>
+  <div class="md-row" role="group" aria-label="강아지 크기"><button class="md-chip md-pressable" type="button" aria-pressed="false"><span>소형</span></button><button class="md-chip md-pressable" type="button" aria-pressed="true"><span>중형</span></button><button class="md-chip md-pressable" type="button" aria-pressed="false"><span>대형</span></button></div>
+  <div class="md-row" role="group" aria-label="시간대"><button class="md-chip md-chip--outline md-pressable" type="button" aria-pressed="true"><span>점심</span></button><button class="md-chip md-chip--outline md-pressable" type="button" aria-pressed="false"><span>저녁</span></button><button class="md-chip md-chip--outline md-pressable" type="button" aria-pressed="false"><span>주말</span></button></div>
 </div>
 </body>
 </html>

@@ -3,39 +3,46 @@
 The locked system. Every Hallmark run reads this first and pages share it. Change it on purpose; the file is the rule.
 
 - Brand book and live component previews: the Claude Design System artifact <https://claude.ai/artifact/E4ZG6scBSJ4dygGEngKh3E> (private until shared).
-- Source of truth in this repo: `design/system/tokens.json`. `design/tokens.css` mirrors it; `design/system/components/bundle.css` holds the component rules.
+- Source of truth in this repo: `design/system/tokens.json`. `design/tokens.css` mirrors it; `design/system/components/bundle.css` holds the component rules; `design/system/README.md` is the brand book.
+- Structure follows 당근's SEED Design (Apache-2.0) by the owner's request: see `design/seed-reference.md`. SEED's structure is borrowed, not its identity: no carrot orange, no 매너온도, no Karrot icons.
 
 ## System
-- Genre: playful
-- Shape of the first page: app screen (mobile, bottom tab bar)
-- Theme: Hum (deal 3/3, seed gps-3ff9·b0667241·2026-11-05·r0), faces swapped for Hangul: Chillax has no Hangul and its host is unreachable from artifacts
-- Axes: light/rounded-sans/chromatic-yellow · posture: full-palette · dark theme: navy ink paper
+- Genre: modern-minimal (SEED-structured mobile app)
+- Shape of the first page: app screen (mobile, bottom navigation with 5 tabs)
+- Theme: custom (vibe: "flat white neighbourhood app, one forest green"), replaces the earlier Hum deal by the owner's request
+- Axes: light/system-sans/forest-green · posture: one accent · light and dark themes
 
 ## Tokens
-`design/tokens.css` is what a page imports. The roles:
+`design/tokens.css` is what a page imports. Names follow SEED's role grammar `bg|fg|stroke`-`role`-`strength`:
 ```css
 :root {
-  --paper: oklch(97% 0.012 95);  --paper-2: oklch(94.5% 0.018 95);  --paper-3: oklch(91% 0.022 95);  --card: oklch(98.8% 0.007 95);
-  --ink: oklch(20% 0.014 255);  --ink-2: oklch(29% 0.014 255);  --muted: oklch(47% 0.014 255);  --rule: oklch(87% 0.016 95);  --edge: oklch(83% 0.04 88);
-  --pear: oklch(87% 0.175 96);  --pear-deep: oklch(72% 0.16 92);  --on-fill: oklch(20% 0.014 255);
-  --blue: oklch(50% 0.17 250);  --coral: oklch(70% 0.2 22);  --mint: oklch(82% 0.15 152);  --mint-deep: oklch(48% 0.12 155);
-  --error: oklch(52% 0.19 27);  --focus: oklch(50% 0.17 250);
-  --font-display: "Jua", ui-rounded, "Apple SD Gothic Neo", sans-serif;
-  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --radius-input: 14px;  --radius-stock: 16px;  --radius-card: 24px;  --radius-pill: 999px;
-  --control-lg: 54px;  --control-md: 44px;  --control-sm: 36px;  --tabbar: 64px;
+  --bg-layer-default: oklch(100% 0 150);  --bg-layer-basement: oklch(96.5% 0.004 150);  --bg-neutral-weak: oklch(95.5% 0.004 150);
+  --fg-neutral: oklch(20% 0.01 150);  --fg-neutral-muted: oklch(40% 0.01 150);  --fg-neutral-subtle: oklch(52% 0.008 150);
+  --bg-brand-solid: oklch(50% 0.13 152);  --bg-brand-weak: oklch(96.5% 0.025 152);  --fg-brand: oklch(46% 0.12 152);  --fg-on-brand-solid: oklch(100% 0 150);
+  --bg-neutral-solid: oklch(25% 0.01 150);  --fg-critical: oklch(50% 0.19 27);  --fg-informative: oklch(50% 0.16 250);
+  --stroke-neutral-subtle: oklch(92% 0.004 150);  --stroke-neutral-solid: oklch(60% 0.006 150);  --stroke-focus-ring: oklch(52% 0.16 250);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --x1: 4px; --x2: 8px; --x3: 12px; --x4: 16px; --x5: 20px; --x6: 24px; --x14: 56px;
+  --r2: 8px; --r3: 12px; --r4: 16px; --full: 9999px;
+  --button-medium: 40px; --button-large: 52px; --input-large: 52px; --top-navigation: 56px; --bottom-navigation: 56px;
 }
 ```
-Each accent owns one job: `pear` the one primary action, `blue` links, route lines and focus, `coral` one loud moment per screen (new request, urgent, unread count), `mint` growth and done. Text on any fill is `on-fill`. Every text pair holds 4.5:1 in both themes. Type: Jua only for `display` 28, `title-1` 22, `title-2` 18 and `figure` 32; IBM Plex Sans KR 400/500/600 for `body` 16, `body-lg` 17, `label` 14 and `caption` 13. Spacing 4, 8, 12, 16, 24, 32, 48.
+38 colour tokens in two themes; every text pair holds 4.5:1 and every control border and focus ring 3:1 in both. Forest green marks only the one primary action per screen, the 같은 아파트 badge, the selected list row and the checked checkbox; everything else is neutral. Type is the platform sans in 400/500/700 on SEED's t1–t10 scale, used through semantic styles: `screen-title` t8 Bold, `section-title` t6 Bold, `list-title` t5 Medium, `body` t5, `label` t4 Medium, `detail` t3, `tag` t2, `figure` t9 Bold.
 
 ## Controls
-- Primary: `pear` card stock with grain · `radius-stock` · `control-lg` 54px pinned at the bottom of a screen, or `control-md` 44px inline · a 5px `pear-deep` edge below that rises to 7px on hover and presses to 1px.
-- Secondary: `card` with a 1px `rule` ring and a 5px `edge` below · same radius and height. Text button: `blue`, underlined.
-- Selected state (tab, chip, checkbox): `ink` fill with `paper` text, never colour alone.
-- Every data region draws loading (shaped skeleton), empty (one sentence, one action), error (what broke, what to do) and full.
+- Primary: `bg-brand-solid` flat fill · `r2` at Medium 40px, `r3` at Large 52px (full-width bottom CTA) · white label, Bold.
+- Secondary: Neutral Solid (`bg-neutral-solid`), Neutral Weak (`bg-neutral-weak`, the default), Neutral Outline, Ghost · same radius and heights.
+- Pressed: the pressed colour token plus a 2px shrink on basis max(height, width/4, 24); neighbours never move.
+- Selected state: `bg-neutral-solid` fill or bold `fg-neutral`, never colour alone; checkbox is the one brand-filled control.
+- Every data region draws loading (Skeleton), empty and error (Result Section) and full.
 
 ## Motion
-- Character: brisk; `--dur-micro` 120ms and `--dur-short` 220ms on `--ease-snap`, the spring on the primary button only; state, never decoration; under reduced motion everything ends at once.
+- Character: brisk; colour 150ms on `--ease-easing`, press 150ms on `--ease-enter`; screen transitions only above 200ms; under reduced motion the shrink and shimmer stop.
+
+## Departures from the Hallmark floor, by the owner's SEED request
+- System sans as the only face (Hallmark bans system-ui as a default; here it is the brief).
+- SEED Tag Group separators between meta items in lists (`md-tags`), drawn as 2px dots, not typed middle dots.
+- Lucide icons (ISC) in the bottom navigation, buttons and placeholders.
 
 ## Exports
-`design/tokens.css` and `design/base.css` in this project; `design/system/` is a copy of the Design System artifact's files (tokens.json, README.md brand book, component previews and guidelines). Tailwind, DTCG or shadcn blocks are added here on request.
+`design/tokens.css` and `design/base.css` in this project; `design/system/` is a copy of the Design System artifact's files (tokens.json, README.md brand book, 11 component previews and guidelines, cover).
