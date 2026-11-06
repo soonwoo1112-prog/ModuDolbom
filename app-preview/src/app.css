@@ -1,0 +1,124 @@
+/* App shell for the 모두돌봄 preview. Colours, sizes and radii come only from design/tokens.css. */
+html, body, #root { height: 100%; }
+body { background: var(--bg-layer-basement); }
+#root { display: flex; justify-content: center; }
+button { font-family: inherit; }
+
+.app-shell {
+  position: relative; width: 100%; max-width: 430px; height: 100%;
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--bg-layer-default); color: var(--fg-neutral);
+  box-shadow: 0 0 0 1px var(--stroke-neutral-subtle);
+}
+.app-topnav { flex: none; padding-left: max(var(--x1_5), env(safe-area-inset-left, 0px)); padding-right: max(var(--x1_5), env(safe-area-inset-right, 0px)); }
+.md-topnav--root.app-topnav { padding-left: max(var(--x4), env(safe-area-inset-left, 0px)); }
+.app-stage { position: relative; flex: 1; min-height: 0; }
+.app-screen { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg-layer-default); }
+.app-scroll { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.app-pad { padding: var(--x5) var(--x4) var(--x6); display: flex; flex-direction: column; gap: var(--x6); }
+.app-footer { flex: none; padding: var(--x3) var(--x4) calc(var(--x4) + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: var(--x2); background: var(--bg-layer-default); box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle); }
+.app-footer .md-detail { text-align: center; }
+.md-bottomnav { flex: none; }
+.md-btn--large { box-sizing: border-box; }
+
+/* Screen transitions: a macro motion (250ms, SEED enter curve); none under reduced motion. */
+.app-screen--push { animation: app-push 250ms var(--ease-enter) both; }
+.app-screen--pop { animation: app-pop 200ms var(--ease-enter) both; }
+@keyframes app-push { from { transform: translateX(24%); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes app-pop { from { transform: translateX(-12%); opacity: 0.6; } to { transform: none; opacity: 1; } }
+
+/* Field section label used above chip groups */
+.app-section { display: flex; flex-direction: column; gap: var(--x2); }
+
+/* Line tabs (SEED Tabs, Line, Fill) */
+.app-tabs { flex: none; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); height: 44px; box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle); }
+.app-tabs button { border: 0; background: transparent; font: 500 15px/20px var(--font-sans); color: var(--fg-neutral-subtle); cursor: pointer; }
+.app-tabs button[aria-selected="true"] { font-weight: 700; color: var(--fg-neutral); box-shadow: inset 0 -2px 0 var(--fg-neutral); }
+
+/* Chips that scroll sideways keep their size */
+.app-chiprow { display: flex; gap: var(--x2); padding: var(--x3) var(--x4); overflow-x: auto; scrollbar-width: none; }
+.app-chiprow .md-chip { flex: none; }
+
+/* Switch (SEED Switch, 24) */
+.app-switch { appearance: none; -webkit-appearance: none; margin: 0; flex: none; width: 44px; height: 26px; border-radius: var(--full); position: relative; cursor: pointer; background: var(--stroke-neutral-solid); transition: background-color var(--dur-color) var(--ease-easing); }
+.app-switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: var(--full); background: var(--bg-layer-default); transition: transform var(--dur-color) var(--ease-enter); }
+.app-switch:checked { background: var(--bg-brand-solid); }
+.app-switch:checked::after { transform: translateX(18px); }
+
+/* Chat */
+.app-chat { display: flex; flex-direction: column; gap: var(--x3); padding: var(--x4); }
+.app-bubble { display: flex; align-items: flex-end; gap: 6px; max-width: 300px; }
+.app-bubble p { margin: 0; padding: 10px 14px; border-radius: 16px 16px 16px 4px; background: var(--bg-neutral-weak); font-size: 15px; line-height: 21px; }
+.app-bubble .md-tagtext { flex: none; }
+.app-bubble--mine { align-self: flex-end; flex-direction: row-reverse; }
+.app-bubble--mine p { border-radius: 16px 16px 4px 16px; background: var(--bg-brand-weak); }
+.app-systemnote { align-self: center; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 16px; border-radius: var(--r3); background: var(--bg-layer-basement); text-align: center; max-width: 300px; }
+.app-composer { flex: none; display: flex; align-items: center; gap: var(--x2); padding: var(--x2) var(--x2) calc(var(--x2) + env(safe-area-inset-bottom, 0px)) var(--x4); box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle); background: var(--bg-layer-default); }
+.app-composer .md-input { flex: 1; min-height: 44px; border-radius: var(--full); }
+.app-pinned { flex: none; padding: var(--x3) var(--x4); display: flex; flex-direction: column; gap: 10px; background: var(--bg-layer-basement); box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle); }
+
+/* Map */
+.app-map { position: relative; flex: none; background: var(--bg-layer-basement); overflow: hidden; }
+.app-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.app-map .grid { fill: none; stroke: var(--stroke-neutral-weak); stroke-width: 1; }
+.app-map .suggest { fill: none; stroke: var(--fg-neutral-subtle); stroke-width: 3; stroke-dasharray: 2 8; stroke-linecap: round; }
+.app-map .walked { fill: none; stroke: var(--fg-informative); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.app-map .start { fill: var(--bg-layer-default); stroke: var(--fg-neutral); stroke-width: 2.5; }
+.app-map .end { fill: var(--fg-neutral); }
+.app-map .here-halo { fill: var(--bg-brand-weak-pressed); }
+.app-map .here { fill: var(--bg-brand-solid); stroke: var(--bg-layer-default); stroke-width: 2.5; }
+.app-map__caption { position: absolute; left: var(--x3); bottom: 10px; background: var(--bg-layer-default); padding: 2px 8px; border-radius: var(--r1_5); }
+.app-map__badge { position: absolute; left: var(--x3); top: var(--x3); box-shadow: var(--shadow-floating); }
+
+/* Floating action button (SEED Floating Action Button, Extended) */
+.app-fab { position: absolute; right: var(--x4); bottom: calc(var(--bottom-navigation) + var(--x4) + env(safe-area-inset-bottom, 0px)); border-radius: var(--full); min-height: 48px; padding: 0 18px; box-shadow: var(--shadow-floating); z-index: 5; }
+
+/* Snackbar region sits above the bottom navigation or footer */
+.app-snack { position: absolute; left: var(--x2); right: var(--x2); bottom: calc(var(--bottom-navigation) + var(--x2) + env(safe-area-inset-bottom, 0px)); z-index: 30; animation: app-rise 200ms var(--ease-enter) both; }
+.app-snack--high { bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+@keyframes app-rise { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Alert dialog and bottom sheet */
+.app-overlay { position: absolute; inset: 0; background: var(--bg-overlay); z-index: 40; display: flex; animation: app-fade 200ms var(--ease-enter) both; }
+@keyframes app-fade { from { opacity: 0; } to { opacity: 1; } }
+.app-dialog { margin: auto var(--x6); width: 100%; max-width: 320px; background: var(--bg-layer-floating); border-radius: var(--r4); padding: var(--x6) var(--x5) var(--x4); display: flex; flex-direction: column; gap: var(--x2); box-shadow: var(--shadow-floating); }
+.app-dialog p { margin: 0; color: var(--fg-neutral-muted); font-size: 15px; line-height: 21px; }
+.app-dialog__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--x2); margin-top: var(--x4); }
+.app-sheet { margin-top: auto; width: 100%; max-height: 85%; overflow-y: auto; background: var(--bg-layer-floating); border-radius: var(--r6) var(--r6) 0 0; padding: var(--x2) var(--x4) calc(var(--x6) + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: var(--x5); animation: app-sheet 250ms var(--ease-enter) both; }
+@keyframes app-sheet { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.app-sheet__handle { align-self: center; width: 36px; height: 4px; border-radius: var(--full); background: var(--stroke-neutral-weak); }
+.app-sheet__head { display: flex; align-items: center; justify-content: space-between; gap: var(--x2); }
+
+/* Check-menu trigger (preview only): a small handle on the right edge, clear of footers and tabs */
+.app-checkfab { position: absolute; left: 0; top: 45%; z-index: 20; width: 14px; height: 56px; padding: 0; border: 0; border-radius: 0 var(--r2) var(--r2) 0; background: var(--bg-neutral-solid); color: var(--fg-on-neutral-solid); display: grid; place-items: center; cursor: pointer; opacity: 0.55; box-shadow: var(--shadow-floating); }
+.app-checkfab:hover, .app-checkfab:focus-visible { opacity: 1; }
+
+/* Splash and entry */
+.app-splash { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--x3); padding: var(--x6); }
+.app-wordmark { font: 700 40px/48px var(--font-sans); letter-spacing: -0.03em; margin: 0; }
+.app-progress { width: 24px; height: 24px; border-radius: var(--full); border: 3px solid var(--bg-neutral-weak); border-top-color: var(--bg-brand-solid); animation: md-spin 0.8s linear infinite; margin-top: var(--x6); }
+.app-entry { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: var(--x3); padding: var(--x6) var(--x4) calc(var(--x6) + env(safe-area-inset-bottom, 0px)); }
+
+/* Calendar */
+.app-cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 4px; padding: 6px var(--x2) var(--x4); }
+.app-cal__dow { text-align: center; }
+.app-cal__day { display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; padding: 4px 0; border: 0; background: transparent; cursor: pointer; font: 500 15px/20px var(--font-sans); color: var(--fg-neutral); }
+.app-cal__num { display: grid; place-items: center; width: 30px; height: 30px; border-radius: var(--full); font-variant-numeric: tabular-nums; }
+.app-cal__day[data-dow="0"] .app-cal__num { color: var(--fg-critical); }
+.app-cal__day[data-dow="6"] .app-cal__num { color: var(--fg-informative); }
+.app-cal__day[data-today="true"] .app-cal__num { box-shadow: inset 0 0 0 1.5px var(--stroke-neutral-contrast); font-weight: 700; }
+.app-cal__day[aria-pressed="true"] .app-cal__num { background: var(--bg-neutral-solid); color: var(--fg-on-neutral-solid); font-weight: 700; box-shadow: none; }
+.app-dogtag { font: 500 11px/15px var(--font-sans); padding: 0 6px; border-radius: var(--r1); background: var(--bg-brand-weak); color: var(--fg-brand); }
+
+@media (prefers-reduced-motion: reduce) {
+  .app-screen--push, .app-screen--pop, .app-snack, .app-overlay, .app-sheet { animation: none; }
+  .app-progress { animation: none; }
+  .app-switch, .app-switch::after { transition: none; }
+}
+
+/* Switch rows are settings, not selections: no selected-row tint (that rule is for SitterList). */
+.md-item:has(.app-switch:checked) { background: var(--bg-layer-default); }
+
+/* Walk-in-progress banner (SEED Page Banner, Positive weak, actionable) */
+.app-banner { display: flex; align-items: center; gap: var(--x3); width: 100%; padding: var(--x3) var(--x4); border: 0; border-radius: var(--r3); background: var(--bg-brand-weak); color: var(--fg-neutral); text-align: left; cursor: pointer; font: inherit; }
+.app-banner:active { background: var(--bg-brand-weak-pressed); }
