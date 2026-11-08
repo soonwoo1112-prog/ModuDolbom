@@ -1,3 +1,4 @@
+import { Figs, Timeline, Section } from './walkparts.jsx';
 import React, { useState } from 'react';
 import { useApp, useLoad, useSend } from '../store.jsx';
 import { TopNav, IconButton, Btn, Badge, ChipGroup, Callout, ListHeader, Band, Avatar, Thumb, Tags, Icon, SkeletonList, SkeletonBlock, Result, ErrorResult, Region, RouteMap } from '../ui.jsx';
@@ -220,36 +221,37 @@ export function Sent({ params }) {
 // ── 9. 실시간 위치 ──
 export function Live() {
   const { push } = useApp();
-  const live = useLoad(() => ({ minutes: 12, km: 0.7 }));
+  const live = useLoad(() => ({ sec: 12 * 60 + 6, km: '0.73' }));
   return (
     <>
       <TopNav title="보리 산책중" />
       <div className="app-scroll">
         {live.status === 'loading'
-          ? <div aria-busy="true" aria-label="위치 불러오는 중"><SkeletonBlock height={320} radius={0} /><div style={{ padding: 16, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0,1fr))', gap: 12 }}><SkeletonBlock height={52} /><SkeletonBlock height={52} /><SkeletonBlock height={52} /></div></div>
+          ? <div aria-busy="true" aria-label="위치 불러오는 중"><SkeletonBlock height={280} radius={0} /><div style={{ padding: 16, display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0,1fr))', gap: 16 }}><SkeletonBlock height={58} /><SkeletonBlock height={58} /></div></div>
           : live.status === 'error' || live.status === 'empty'
             ? <Result title="지금 위치를 불러오지 못했어요" action="다시 시도" actionVariant="weak" onAction={live.retry} role="alert">시터의 휴대폰 연결이 잠시 끊겼을 수 있어요. 마지막으로 받은 위치는 산책 기록에 남아요.</Result>
             : (
               <>
-                <RouteMap height={320} label="보리가 지금까지 걸은 경로와 지금 위치">
-                  <span className="app-map__badge"><Badge tone="brandSolid">산책중</Badge></span>
-                  <span className="app-map__caption md-detail">1분 전 위치예요</span>
+                <RouteMap height={280} label="보리가 지금까지 걸은 경로와 지금 위치">
+                  <span className="app-map__badge"><Badge>1분 전 위치</Badge></span>
                 </RouteMap>
-                <div style={{ padding: '20px 16px 16px' }}>
-                  <dl className="md-stats"><div><dt>지난 시간</dt><dd>{live.data.minutes}<small>분</small></dd></div><div><dt>거리</dt><dd>{live.data.km}<small>km</small></dd></div><div><dt>끝나는 시간</dt><dd style={{ fontSize: 20 }}>오후 1:00</dd></div></dl>
-                </div>
+                <Section>
+                  <Figs items={[['산책 시간', `${Math.floor(live.data.sec / 60)}:${String(live.data.sec % 60).padStart(2, '0')}`], ['거리', live.data.km, 'km']]} />
+                  <p className="wk-sub" style={{ marginTop: -6 }}>30분 예약, 오후 1:00에 끝나요</p>
+                </Section>
                 <div className="md-item" style={{ cursor: 'default', boxShadow: 'inset 0 1px 0 var(--stroke-neutral-subtle), inset 0 -1px 0 var(--stroke-neutral-subtle)' }}>
                   <Avatar />
-                  <span className="md-item__body"><span className="md-item__head"><span className="md-list-title">김하늘 시터</span><Badge tone="brand">같은 아파트</Badge></span><span className="md-item__muted">보리와 산책하고 있어요</span></span>
+                  <span className="md-item__body"><span className="md-item__head"><span className="md-list-title">김하늘 시터</span><Badge tone="brand">같은 아파트</Badge></span><span className="md-item__muted">보리와 걷고 있어요</span></span>
                   <Btn size="small" onClick={() => push('chat', { id: 'c-haneul' })}>채팅</Btn>
                 </div>
-                <ListHeader>산책 소식</ListHeader>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: '0 16px 24px' }}>
-                  {[['오후 12:38', '소변 1회를 기록했어요'], ['오후 12:33', '공원 산책로에 들어섰어요'], ['오후 12:31', '보리를 데리고 산책을 시작했어요']].map(([t, m]) => (
-                    <div key={t} style={{ display: 'grid', gridTemplateColumns: '72px minmax(0,1fr)', gap: 8 }}><span className="md-detail md-num">{t}</span><span style={{ fontSize: 14, lineHeight: '19px' }}>{m}</span></div>
-                  ))}
-                  <Callout>산책이 끝나면 사진과 기록을 보내 드려요.</Callout>
-                </div>
+                <Section title="산책 소식">
+                  <Timeline events={[
+                    { time: '오후 12:41', kind: 'pee', text: '쉬했어요' },
+                    { time: '오후 12:38', kind: 'photo', text: '사진이 왔어요' },
+                    { time: '오후 12:31', kind: 'start', text: '김하늘 시터와 산책을 시작했어요' },
+                  ]} />
+                  <p className="wk-sub">산책이 끝나면 기록이 도착해요</p>
+                </Section>
               </>
             )}
       </div>
@@ -257,11 +259,10 @@ export function Live() {
   );
 }
 
-// ── 10. 산책 기록 받기와 후기 ──
 export function Log() {
-  const { flow, update, showSnack } = useApp();
+  const { flow, update, showSnack, pop } = useApp();
   const log = useLoad(() => true);
-  const [rating, setRating] = useState('또 맡기고 싶어요');
+  const [rating, setRating] = useState('또 맡길래요');
   const [share, setShare] = useState(true);
   const [busy, send] = useSend();
   return (
@@ -269,46 +270,55 @@ export function Log() {
       <TopNav title="산책 기록" />
       <div className="app-scroll">
         <Region load={log}
-          skeleton={<div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }} aria-busy="true" aria-label="산책 기록 불러오는 중"><SkeletonBlock height={190} radius={16} /><SkeletonBlock height={14} radius={9999} style={{ width: '50%' }} /><SkeletonBlock height={14} radius={9999} style={{ width: '80%' }} /></div>}
+          skeleton={<div aria-busy="true" aria-label="산책 기록 불러오는 중"><SkeletonBlock height={292} radius={0} /><div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}><SkeletonBlock height={20} radius={9999} style={{ width: '50%' }} /><SkeletonBlock height={44} /></div></div>}
           empty={<Result icon="Footprints" title="아직 받은 산책 기록이 없어요">산책이 끝나면 시터가 사진과 기록을 보내 줘요.</Result>}
           error={<ErrorResult what="산책 기록" onRetry={log.retry} />}>
           {() => (
-            <div className="app-pad" style={{ paddingTop: 12, gap: 20 }}>
-              <article className="md-card">
-                <div className="md-walk__media">
-                  <div className="md-slot"><Icon name="PawPrint" label="산책 사진" /></div>
-                  <RouteMap aspect="4 / 3" progress="full" label="보리가 걸은 산책 경로" />
+            <>
+              <div className="md-slot" style={{ position: 'relative', aspectRatio: '4 / 3' }}><Icon name="PawPrint" size={40} label="산책 사진" /><span className="md-badge" style={{ position: 'absolute', right: 12, bottom: 12, background: 'var(--bg-neutral-solid)', color: 'var(--fg-on-neutral-solid)' }}>1 / 3</span></div>
+              <Section title="보리의 점심 산책" sub="11월 7일 (토) 오후 12:30부터 1:00까지, 김하늘 시터">
+                <Figs small items={[['산책 시간', '30:12'], ['거리', '1.92', 'km'], ['쉬 1번, 응가 1번', '2', '번']]} />
+                <div className="wk-note" style={{ marginTop: 6 }}>
+                  <Avatar size={36} />
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}><span className="md-item__head"><span className="md-label">김하늘 시터</span><Badge>컨디션 좋았어요</Badge></span><p className="wk-note__bubble" style={{ margin: 0 }}>다른 강아지를 보고 한 번 짖었지만 금방 진정했어요. 물도 잘 마셨어요.</p></div>
                 </div>
-                <div className="md-walk__body">
-                  <div className="md-item__head" style={{ justifyContent: 'space-between' }}><h2 className="md-section-title">보리의 점심 산책</h2><Badge tone="brand">산책완료</Badge></div>
-                  <dl className="md-stats"><div><dt>산책 시간</dt><dd>30<small>분</small></dd></div><div><dt>거리</dt><dd>1.9<small>km</small></dd></div><div><dt>배변</dt><dd>2<small>회</small></dd></div></dl>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: 12, borderRadius: 'var(--r3)', background: 'var(--bg-layer-basement)' }}>
-                    <span className="md-item__head"><span className="md-label">김하늘 시터가 남긴 말</span><Badge>컨디션 좋았어요</Badge></span>
-                    <p style={{ margin: 0, fontSize: 14, lineHeight: '19px', color: 'var(--fg-neutral-muted)' }}>다른 강아지를 보고 한 번 짖었지만 금방 진정했어요. 물도 잘 마셨어요.</p>
-                  </div>
+              </Section>
+              <div className="md-band" />
+              <Section title="산책 소식">
+                <Timeline events={[
+                  { time: '오후 1:00', kind: 'end', text: '산책을 마쳤어요' },
+                  { time: '오후 12:49', kind: 'poop', text: '응가했어요' },
+                  { time: '오후 12:41', kind: 'pee', text: '쉬했어요' },
+                  { time: '오후 12:31', kind: 'start', text: '산책을 시작했어요' },
+                ]} />
+                <div style={{ borderRadius: 'var(--r3)', overflow: 'hidden', marginTop: 4 }}><RouteMap height={150} progress="full" fit="meet" label="보리가 걸은 산책 경로" /></div>
+              </Section>
+              <div className="md-band" />
+              <Section title="김하늘 시터는 어땠나요">
+                <div className="md-seg" role="group" aria-label="후기">
+                  {['또 맡길래요', '괜찮았어요', '아쉬웠어요'].map((r) => <button key={r} type="button" aria-pressed={rating === r} onClick={() => setRating(r)}>{r}</button>)}
                 </div>
-              </article>
-              <label style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) auto', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
-                <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}><span className="md-list-title">소셜 공유 허용</span><span className="md-detail">허용하면 시터가 이 기록을 동네 피드에 올릴 수 있어요. 경로 지도는 올라가지 않아요.</span></span>
-                <input type="checkbox" role="switch" className="app-switch" checked={share} onChange={() => setShare(!share)} aria-label="소셜 공유 허용" />
-              </label>
-              <hr className="md-divider" style={{ margin: 0 }} />
-              <section style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <h2 className="md-section-title">김하늘 시터는 어땠나요</h2>
-                <ChipGroup label="후기" options={['또 맡기고 싶어요', '괜찮았어요', '아쉬웠어요']} value={rating} onChange={setRating} />
-                <div className="md-field"><label className="md-field__label" htmlFor="review">후기<em>선택</em></label><textarea className="md-input" id="review" placeholder="예: 산책 소식을 자주 보내 줘서 안심됐어요" /></div>
+                <textarea className="md-input" aria-label="후기" placeholder="예: 산책 소식을 자주 보내 줘서 안심됐어요" />
                 <Btn variant="outline" style={{ width: '100%' }} onClick={() => { update({ pinned: !flow.pinned }); if (!flow.pinned) showSnack('다음 검색부터 김하늘 시터가 항상 보여요', { label: '되돌리기', run: () => update({ pinned: false }) }); }}>{flow.pinned ? '전담 시터로 지정했어요' : '전담 시터로 지정하기'}</Btn>
-              </section>
-            </div>
+                <label className="wk-switchrow" style={{ marginTop: 8 }}>
+                  <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}><span className="md-list-title">소셜 공유 허용</span><span className="md-detail">시터가 이 기록을 동네 피드에 올릴 수 있어요. 경로 지도는 올라가지 않아요.</span></span>
+                  <input type="checkbox" role="switch" className="app-switch" checked={share} onChange={() => setShare(!share)} aria-label="소셜 공유 허용" />
+                </label>
+              </Section>
+            </>
           )}
         </Region>
       </div>
-      {log.status === 'ready' ? <div className="app-footer"><Btn variant="brand" size="large" busy={busy} busyLabel="보내는 중" onClick={() => send(() => showSnack('김하늘 시터에게 후기를 보냈어요'))}>후기 보내기</Btn></div> : null}
+      {log.status === 'ready' ? (
+        <div className="app-footer" style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,2fr)', gap: 8 }}>
+          <Btn size="large" onClick={() => { pop(); showSnack('후기는 캘린더의 지난 산책에서 언제든 쓸 수 있어요'); }}>건너뛰기</Btn>
+          <Btn variant="brand" size="large" busy={busy} busyLabel="보내는 중" onClick={() => send(() => showSnack('김하늘 시터에게 후기를 보냈어요'))}>후기 보내기</Btn>
+        </div>
+      ) : null}
     </>
   );
 }
 
-// ── 13. 보호자 캘린더 ──
 export function GuardianCalendar() {
   const { push, goTab } = useApp();
   const [sel, setSel] = useState(7);

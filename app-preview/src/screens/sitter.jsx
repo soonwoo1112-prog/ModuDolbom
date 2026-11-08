@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useApp, useLoad, useSend } from '../store.jsx';
 import { TopNav, IconButton, Btn, Badge, ChipGroup, Callout, ListHeader, Band, Thumb, Tags, Icon, SkeletonList, SkeletonBlock, Result, ErrorResult, Region, RouteMap } from '../ui.jsx';
+import { Figs, Timeline, Section } from './walkparts.jsx';
 import { NEIGHBORHOOD, SITTER_TODAY, SITTER_WEEK, SITTER_HOURS } from '../data.js';
 
 // ── 5. 시터 오늘 탭 ──
@@ -67,125 +68,102 @@ export function SitterToday() {
 // ── 7. 산책중 ──
 export function Walking() {
   const { push, showSnack } = useApp();
-  const [poop, setPoop] = useState(1);
-  const [pee, setPee] = useState(2);
-  const [photos, setPhotos] = useState(2);
-  const [sec, setSec] = useState(18 * 60 + 42);
+  const [sec, setSec] = useState(18 * 60 + 43);
+  const [pee, setPee] = useState(1);
+  const [poop, setPoop] = useState(0);
+  const [photos, setPhotos] = useState(1);
+  const [events, setEvents] = useState([
+    { time: '오후 12:41', kind: 'pee', text: '쉬했어요' },
+    { time: '오후 12:38', kind: 'photo', text: '사진을 보냈어요' },
+    { time: '오후 12:30', kind: 'start', text: '콩이와 산책을 시작했어요' },
+  ]);
   useEffect(() => {
     const t = setInterval(() => setSec((x) => x + 1), 1000);
     return () => clearInterval(t);
   }, []);
-  const clock = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
-  const paws = (n) => Array.from({ length: Math.min(n, 8) }, (_, i) => <Icon key={i} name="PawPrint" size={14} />);
-  const addPhoto = (how) => { setPhotos((n) => n + 1); showSnack(how === 'camera' ? '사진을 찍어 보호자에게 보냈어요' : '사진을 올려 보호자에게 보냈어요'); };
-  const tile = (kind, label, count, onAdd) => (
-    <button type="button" className="md-potty__tile md-pressable" aria-label={`${label} 기록하기, 지금 ${count}번`} onClick={onAdd}>
-      <span className="md-potty__top">
-        <span className={`md-potty__icon md-potty__icon--${kind}`}><Icon name={kind === 'pee' ? 'Droplet' : 'Poop'} /></span>
-        <span className="md-potty__count">{count}<small>번</small></span>
-      </span>
-      <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <span className="md-potty__label">{label}</span>
-        <span className="md-potty__paws">{paws(count)}</span>
-      </span>
-    </button>
-  );
+  const now = () => { const m = 30 + Math.floor(sec / 60); return `오후 ${12 + Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`; };
+  const log = (kind, text) => setEvents((e) => [{ time: now(), kind, text }, ...e]);
+  const addPhoto = (how) => { setPhotos((n) => n + 1); log('photo', '사진을 보냈어요'); showSnack(how === 'camera' ? '찍은 사진을 보호자에게 보냈어요' : '고른 사진을 보호자에게 보냈어요'); };
   return (
     <>
       <TopNav title="콩이 산책중" />
-      <RouteMap height={320} label="지금까지 걸은 산책 경로와 추천 경로">
+      <RouteMap height={280} label="지금까지 걸은 경로와 지금 위치">
         <span className="app-map__badge"><Badge tone="info">보호자가 지금 위치를 보고 있어요</Badge></span>
-        <span className="app-map__caption md-detail" style={{ bottom: 30, borderRadius: 9999, padding: '2px 10px' }}>실선은 걸은 길, 점선은 추천 경로예요</span>
       </RouteMap>
-      <div className="app-scroll md-walk-panel">
-        <div className="app-pad" style={{ gap: 24, paddingTop: 20 }}>
-          <dl className="md-walk-hero" style={{ margin: 0 }}>
-            <div><dt><Icon name="Timer" size={16} />산책한 지</dt><dd>{clock}</dd></div>
-            <div><dt><Icon name="Route" size={16} />걸은 거리</dt><dd>{(sec / 60 * 0.06).toFixed(2)}<small>km</small></dd></div>
-          </dl>
-          <section className="app-section" style={{ gap: 10 }}>
-            <span className="md-field__label">배변 기록 <span className="md-detail" style={{ fontWeight: 400 }}>누를 때마다 한 번씩 남아요</span></span>
-            <div className="md-potty">
-              {tile('pee', '쉬했어요', pee, () => setPee(pee + 1))}
-              {tile('poop', '응가했어요', poop, () => setPoop(poop + 1))}
-            </div>
-          </section>
-          <section className="app-section" style={{ gap: 10 }}>
-            <span className="md-field__label">산책 사진 <span className="md-detail" style={{ fontWeight: 400 }}>보호자에게 바로 보여요</span></span>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0,1fr))', gap: 8 }}>
-              <Btn style={{ borderRadius: 'var(--r3)' }} onClick={() => addPhoto('camera')}><Icon name="Camera" size={20} />사진 찍기</Btn>
-              <Btn style={{ borderRadius: 'var(--r3)' }} onClick={() => addPhoto('album')}><Icon name="ImagePlus" size={20} />앨범에서 올리기</Btn>
-            </div>
-            <div className="md-walk-photos">
-              {Array.from({ length: photos }, (_, i) => <span key={i} role="img" aria-label={`산책 사진 ${i + 1}`}><Icon name="PawPrint" size={20} /></span>)}
-            </div>
-          </section>
-        </div>
+      <div className="app-scroll">
+        <Section>
+          <Figs items={[['산책 시간', `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`], ['거리', (sec / 60 * 0.06).toFixed(2), 'km']]} />
+          <p className="wk-sub" style={{ marginTop: -6 }}>30분 예약, 오후 1:00에 끝나요</p>
+        </Section>
+        <div className="md-band" />
+        <Section title="기록하기">
+          <div className="wk-counters">
+            <button type="button" className="wk-counter md-pressable" aria-label={`쉬 기록, 지금 ${pee}번`} onClick={() => { setPee(pee + 1); log('pee', '쉬했어요'); }}><Icon name="Droplet" size={20} /><span>쉬</span><b>{pee}</b></button>
+            <button type="button" className="wk-counter md-pressable" aria-label={`응가 기록, 지금 ${poop}번`} onClick={() => { setPoop(poop + 1); log('poop', '응가했어요'); }}><Icon name="Poop" size={20} /><span>응가</span><b>{poop}</b></button>
+          </div>
+          <div className="wk-photos">
+            <button type="button" className="wk-photos__add md-pressable" onClick={() => addPhoto('camera')}><Icon name="Camera" size={20} />찍기</button>
+            <button type="button" className="wk-photos__add md-pressable" onClick={() => addPhoto('album')}><Icon name="ImagePlus" size={20} />앨범</button>
+            {Array.from({ length: photos }, (_, i) => <span key={i} role="img" aria-label={`보낸 사진 ${i + 1}`}><Icon name="PawPrint" size={20} /></span>)}
+          </div>
+          <p className="wk-sub">누를 때마다 보호자에게 바로 알려요</p>
+        </Section>
+        <div className="md-band" />
+        <Section title="산책 소식"><Timeline events={events} /></Section>
       </div>
-      <div className="app-footer"><Btn variant="brand" size="large" style={{ borderRadius: 'var(--r4)' }} onClick={() => push('walklog', { sec, poop, pee })}>산책 끝내기</Btn></div>
+      <div className="app-footer"><Btn variant="brand" size="large" onClick={() => push('walklog', { sec, pee, poop, events: [{ time: now(), kind: 'end', text: '산책을 마쳤어요' }, ...events], photos })}>산책 끝내기</Btn></div>
     </>
   );
 }
 
 // ── 8. 산책 기록 보내기 ──
-const MOODS = [{ label: '좋았어요', icon: 'Laugh' }, { label: '보통이에요', icon: 'Smile' }, { label: '피곤해 보여요', icon: 'Moon' }];
-
 export function WalkLogWrite({ params }) {
   const { update, showSnack, goTab } = useApp();
   const [mood, setMood] = useState('좋았어요');
   const [share, setShare] = useState(true);
-  const [photos, setPhotos] = useState(2);
+  const [photos, setPhotos] = useState(params.photos || 2);
   const [busy, send] = useSend();
   const sec = params.sec || 31 * 60 + 8;
+  const pee = params.pee ?? 1;
   const poop = params.poop ?? 1;
-  const pee = params.pee ?? 2;
-  const paws = (n) => Array.from({ length: Math.min(n, 8) }, (_, i) => <Icon key={i} name="PawPrint" size={14} />);
+  const events = params.events || [
+    { time: '오후 1:01', kind: 'end', text: '산책을 마쳤어요' },
+    { time: '오후 12:52', kind: 'poop', text: '응가했어요' },
+    { time: '오후 12:41', kind: 'pee', text: '쉬했어요' },
+    { time: '오후 12:38', kind: 'photo', text: '사진을 보냈어요' },
+    { time: '오후 12:30', kind: 'start', text: '콩이와 산책을 시작했어요' },
+  ];
   return (
     <>
       <TopNav title="산책 기록" />
       <div className="app-scroll">
-        <div className="app-pad" style={{ paddingTop: 16, gap: 24 }}>
-          <section className="app-section" style={{ gap: 8 }}>
-            <div className="md-logmap">
-              <RouteMap height={168} progress="full" label="콩이가 걸은 산책 경로" />
-              <span className="md-logmap__title"><Icon name="Sparkles" size={14} />콩이의 오후 산책 끝!</span>
-            </div>
-            <dl className="md-walk-hero" style={{ margin: 0 }}>
-              <div><dt><Icon name="Timer" size={16} />산책한 시간</dt><dd>{Math.floor(sec / 60)}:{String(sec % 60).padStart(2, '0')}</dd></div>
-              <div><dt><Icon name="Route" size={16} />걸은 거리</dt><dd>{(sec / 60 * 0.065).toFixed(2)}<small>km</small></dd></div>
-            </dl>
-            <div className="md-potty md-potty--static">
-              <div className="md-potty__tile"><span className="md-potty__icon md-potty__icon--pee"><Icon name="Droplet" /></span><span style={{ display: 'flex', flexDirection: 'column' }}><span className="md-potty__label">쉬 <span className="md-num">{pee}</span>번</span><span className="md-potty__paws">{paws(pee)}</span></span></div>
-              <div className="md-potty__tile"><span className="md-potty__icon md-potty__icon--poop"><Icon name="Poop" /></span><span style={{ display: 'flex', flexDirection: 'column' }}><span className="md-potty__label">응가 <span className="md-num">{poop}</span>번</span><span className="md-potty__paws">{paws(poop)}</span></span></div>
-            </div>
-          </section>
-          <section className="app-section" style={{ gap: 10 }}>
-            <span className="md-field__label">산책 사진 <span className="md-detail" style={{ fontWeight: 400 }}>첫 사진이 대표로 보여요</span></span>
-            <div className="md-walk-photos">
-              <button type="button" className="md-walk-photos__add md-pressable" onClick={() => setPhotos((n) => n + 1)}><Icon name="ImagePlus" size={22} />추가</button>
-              {Array.from({ length: photos }, (_, i) => (
-                <span key={i} role="img" aria-label={`산책 사진 ${i + 1}${i === 0 ? ', 대표' : ''}`}><Icon name="PawPrint" size={20} />{i === 0 ? <span className="md-badge md-badge--brand-solid" style={{ position: 'absolute', left: 4, bottom: 4, minHeight: 18, padding: '1px 6px', fontSize: 11, lineHeight: '15px', borderRadius: 9999 }}>대표</span> : null}</span>
-              ))}
-            </div>
-          </section>
-          <section className="app-section" style={{ gap: 10 }}>
-            <span className="md-field__label">오늘 콩이는 어땠나요</span>
-            <div className="md-mood" role="group" aria-label="콩이 컨디션">
-              {MOODS.map((m) => <button key={m.label} type="button" className="md-pressable" aria-pressed={mood === m.label} onClick={() => setMood(m.label)}><Icon name={m.icon} size={28} /><span>{m.label}</span></button>)}
-            </div>
-          </section>
-          <section className="app-section" style={{ gap: 10 }}>
-            <label className="md-field__label" htmlFor="memo">보호자에게 남길 말 <span className="md-detail" style={{ fontWeight: 400 }}>선택</span></label>
-            <textarea className="md-softinput" id="memo" defaultValue="공원 한 바퀴 돌았어요. 물도 잘 마셨고, 다른 강아지와 인사도 했어요." />
-          </section>
-          <label className="md-softrow">
+        <RouteMap height={180} progress="full" fit="meet" label="콩이가 걸은 산책 경로" />
+        <Section title="콩이의 오후 산책" sub="11월 7일 (토) 오후 12:30에 시작했어요">
+          <Figs small items={[['산책 시간', `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`], ['거리', (sec / 60 * 0.065).toFixed(2), 'km'], [`쉬 ${pee}번, 응가 ${poop}번`, pee + poop, '번']]} />
+        </Section>
+        <div className="md-band" />
+        <Section title="산책 소식"><Timeline events={events} /></Section>
+        <div className="md-band" />
+        <Section title="사진" sub="첫 사진이 대표로 보여요">
+          <div className="wk-photos">
+            <button type="button" className="wk-photos__add md-pressable" onClick={() => setPhotos((n) => n + 1)}><Icon name="ImagePlus" size={20} />추가</button>
+            {Array.from({ length: photos }, (_, i) => <span key={i} role="img" aria-label={`산책 사진 ${i + 1}${i === 0 ? ', 대표' : ''}`}><Icon name="PawPrint" size={20} />{i === 0 ? <span className="wk-photos__tag">대표</span> : null}</span>)}
+          </div>
+        </Section>
+        <div className="md-band" />
+        <Section title="콩이 컨디션">
+          <div className="md-seg" role="group" aria-label="콩이 컨디션">
+            {['좋았어요', '보통이에요', '피곤해 보여요'].map((m) => <button key={m} type="button" aria-pressed={mood === m} onClick={() => setMood(m)}>{m}</button>)}
+          </div>
+          <div className="md-field" style={{ marginTop: 8 }}><label className="md-field__label" htmlFor="memo">보호자에게 남길 말<em>선택</em></label><textarea className="md-input" id="memo" defaultValue="공원 한 바퀴 돌았어요. 물도 잘 마셨고, 다른 강아지와 인사도 했어요." /></div>
+          <label className="wk-switchrow" style={{ marginTop: 8 }}>
             <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}><span className="md-list-title">소셜에도 올리기</span><span className="md-detail">콩이네 보호자가 공유를 허용했어요. 경로 지도는 빼고 올라가요.</span></span>
             <input type="checkbox" role="switch" className="app-switch" checked={share} onChange={() => setShare(!share)} aria-label="소셜에도 올리기" />
           </label>
-        </div>
+        </Section>
       </div>
       <div className="app-footer">
-        <Btn variant="brand" size="large" style={{ borderRadius: 'var(--r4)' }} busy={busy} busyLabel="보내는 중" onClick={() => send(() => { update({ walkDone: true }); goTab('today'); showSnack(share ? '기록을 보내고 소셜에도 올렸어요' : '콩이네 보호자에게 기록을 보냈어요'); })}>보호자에게 기록 보내기</Btn>
+        <Btn variant="brand" size="large" busy={busy} busyLabel="보내는 중" onClick={() => send(() => { update({ walkDone: true }); goTab('today'); showSnack(share ? '기록을 보내고 소셜에도 올렸어요' : '콩이네 보호자에게 기록을 보냈어요'); })}>보호자에게 기록 보내기</Btn>
       </div>
     </>
   );

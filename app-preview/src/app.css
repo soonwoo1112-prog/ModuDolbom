@@ -1,3 +1,8 @@
+/* Hallmark · shape: app screen · theme: custom (모두돌봄 DESIGN.md, SEED-structured, one forest green) · genre: modern-minimal · redesign: walk record (산책중, 산책 기록, 보호자 실시간·기록)
+ * critique: the walk is told as a time-stamped timeline with plain tabular figures; green only on the primary action; no icon tiles, no counting marks.
+ * waive 24b: SEED's spacing scale has half steps (x0_5 2px, x1_5 6px, x2_5 10px, x3_5 14px); this system follows SEED by the owner's request.
+ * v2.0.0 */
+:root { --mask-solid: #000; --fg-cover-pattern: oklch(88% 0.06 152); --bg-layer-scrim-light: rgba(255, 255, 255, 0.85); }
 /* App shell for the 모두돌봄 preview. Colours, sizes and radii come only from design/tokens.css. */
 html, body, #root { height: 100%; }
 body { background: var(--bg-layer-basement); }
@@ -161,7 +166,7 @@ button { font-family: inherit; }
 /* Wheel Picker (SEED): 44px items, five shown, the middle one picked; scroll-snaps */
 .app-wheels { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .app-wheels__band { position: absolute; left: 0; right: 0; top: 88px; height: 44px; border-radius: var(--r2); background: var(--bg-neutral-weak); pointer-events: none; }
-.app-wheel { position: relative; height: 220px; overflow-y: auto; scroll-snap-type: y mandatory; padding: 88px 0; box-sizing: border-box; scrollbar-width: none; -webkit-mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent); }
+.app-wheel { position: relative; height: 220px; overflow-y: auto; scroll-snap-type: y mandatory; padding: 88px 0; box-sizing: border-box; scrollbar-width: none; -webkit-mask-image: linear-gradient(transparent, var(--mask-solid) 30%, var(--mask-solid) 70%, transparent); mask-image: linear-gradient(transparent, var(--mask-solid) 30%, var(--mask-solid) 70%, transparent); }
 .app-wheel::-webkit-scrollbar { display: none; }
 .app-wheel__item { display: block; width: 100%; height: 44px; border: 0; background: transparent; scroll-snap-align: center; font: 400 16px/22px var(--font-sans); color: var(--fg-neutral-subtle); cursor: pointer; font-variant-numeric: tabular-nums; }
 .app-wheel__item[aria-selected="true"] { font: 700 18px/24px var(--font-sans); color: var(--fg-neutral); }
@@ -184,43 +189,15 @@ button { font-family: inherit; }
 .md-photos__add { --press: 0.96; border: 0; display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-shadow: inset 0 0 0 1px var(--stroke-neutral-weak); background: var(--bg-layer-default) !important; font: 500 13px/18px var(--font-sans); color: var(--fg-neutral-muted) !important; cursor: pointer; }
 .md-photos__add svg { width: 24px; height: 24px; }
 
-/* Walking: a soft panel that rises over the map, rounded corners and weak fills instead of outlines. */
-.md-walk-panel { position: relative; z-index: 1; margin-top: -20px; border-radius: var(--r6) var(--r6) 0 0; background: var(--bg-layer-default); box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06); }
-.md-walk-hero { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.md-walk-hero > div { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border-radius: var(--r4); background: var(--bg-brand-weak); }
-.md-walk-hero dt { display: inline-flex; align-items: center; gap: 4px; font: 500 13px/18px var(--font-sans); color: var(--fg-brand); }
-.md-walk-hero dt svg { width: 16px; height: 16px; }
-.md-walk-hero dd { margin: 0; font: 700 32px/40px var(--font-sans); letter-spacing: -0.5px; color: var(--fg-neutral); font-variant-numeric: tabular-nums; }
-.md-walk-hero dd small { margin-left: 2px; font-size: 16px; font-weight: 600; color: var(--fg-neutral-muted); }
-/* Potty log: two tap tiles, a round coloured icon, the count, and a paw stamp for each time. */
-.md-potty { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.md-potty__tile { --press: 0.97; display: flex; flex-direction: column; gap: 10px; padding: 14px; border: 0; border-radius: var(--r4); background: var(--bg-neutral-weak); color: var(--fg-neutral); text-align: left; cursor: pointer; font-family: var(--font-sans); }
-.md-potty__tile:active { background: var(--bg-neutral-weak-pressed); }
-.md-potty__top { display: flex; align-items: center; justify-content: space-between; }
-.md-potty__icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--full); }
-.md-potty__icon svg { width: 24px; height: 24px; }
-.md-potty__icon--pee { background: var(--bg-informative-weak); color: var(--fg-informative); }
-.md-potty__icon--poop { background: var(--bg-warning-weak); color: var(--fg-warning); }
-.md-potty__count { font: 700 24px/30px var(--font-sans); font-variant-numeric: tabular-nums; }
-.md-potty__count small { font-size: 14px; font-weight: 500; color: var(--fg-neutral-muted); margin-left: 1px; }
-.md-potty__label { font: 700 15px/20px var(--font-sans); }
-.md-potty__hint { font: 400 12px/16px var(--font-sans); color: var(--fg-neutral-subtle); }
-.md-potty__paws { display: flex; gap: 2px; min-height: 14px; color: var(--fg-brand); }
-.md-potty__paws svg { width: 14px; height: 14px; }
-/* Walk photos: take or upload, then a strip of what was sent. */
-.md-walk-photos { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-.md-walk-photos > span { flex: none; width: 72px; height: 72px; border-radius: var(--r3); background: var(--bg-neutral-weak); display: grid; place-items: center; color: var(--fg-neutral-subtle); }
-.md-walk-photos > span svg { width: 20px; height: 20px; }
-
 /* Chat booking bar: slim 28px actions under the dog row, so the conversation keeps the room. */
 .md-chatbar__btn { min-height: 28px !important; padding: 4px 10px !important; font-size: 13px !important; line-height: 18px !important; gap: 4px; border-radius: var(--r2); }
 .md-chatbar__btn svg { width: 14px; height: 14px; }
 .md-chatbar__name { font: 700 18px/24px var(--font-sans); color: var(--fg-neutral); }
 
 /* Dog profile head: a soft cover, a round photo that overlaps it, the name with a sex mark, and small fact chips. */
-.md-dogcover { position: relative; height: 132px; background: var(--bg-brand-weak); overflow: hidden; color: oklch(88% 0.06 152); }
+.md-dogcover { position: relative; height: 132px; background: var(--bg-brand-weak); overflow: hidden; color: var(--fg-cover-pattern); }
 .md-dogcover svg { position: absolute; width: 28px; height: 28px; }
-.md-dogcover__edit { position: absolute; right: 12px; top: 12px; display: inline-flex; align-items: center; gap: 4px; min-height: 30px; padding: 4px 10px; border: 0; border-radius: var(--full); background: rgba(255, 255, 255, 0.85); color: var(--fg-neutral); font: 500 13px/18px var(--font-sans); cursor: pointer; }
+.md-dogcover__edit { position: absolute; right: 12px; top: 12px; display: inline-flex; align-items: center; gap: 4px; min-height: 30px; padding: 4px 10px; border: 0; border-radius: var(--full); background: var(--bg-layer-scrim-light); color: var(--fg-neutral); font: 500 13px/18px var(--font-sans); cursor: pointer; }
 .md-dogcover__edit svg { position: static; width: 14px; height: 14px; color: var(--fg-neutral-muted); }
 .md-doghead { display: flex; flex-direction: column; gap: 10px; padding: 0 16px 20px; }
 .md-doghead__photo { position: relative; width: 96px; height: 96px; margin-top: -48px; border-radius: var(--full); background: var(--bg-neutral-weak); color: var(--fg-neutral-subtle); display: grid; place-items: center; box-shadow: 0 0 0 4px var(--bg-layer-default), var(--shadow-floating); }
@@ -233,20 +210,47 @@ button { font-family: inherit; }
 .md-dogchip { display: inline-flex; align-items: center; gap: 4px; min-height: 28px; padding: 4px 10px; border-radius: var(--full); background: var(--bg-neutral-weak); font: 500 13px/18px var(--font-sans); color: var(--fg-neutral); }
 .md-dogchip svg { width: 14px; height: 14px; color: var(--fg-brand); }
 
-/* Walk log: the same soft language as Walking — weak fills, r4 corners, a route card, mood tiles. */
-.md-logmap { border-radius: var(--r4); overflow: hidden; background: var(--bg-layer-basement); position: relative; }
-.md-logmap__title { position: absolute; left: 12px; top: 12px; display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: var(--full); background: var(--bg-layer-default); font: 700 14px/19px var(--font-sans); box-shadow: var(--shadow-floating); }
-.md-logmap__title svg { width: 14px; height: 14px; color: var(--fg-brand); }
-.md-potty--static .md-potty__tile { cursor: default; flex-direction: row; align-items: center; gap: 10px; padding: 12px; }
-.md-potty--static .md-potty__icon { width: 36px; height: 36px; }
-.md-potty--static .md-potty__icon svg { width: 20px; height: 20px; }
-.md-mood { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.md-mood button { --press: 0.97; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 4px 12px; border: 0; border-radius: var(--r4); background: var(--bg-neutral-weak); color: var(--fg-neutral-muted); font: 500 14px/19px var(--font-sans); cursor: pointer; }
-.md-mood button svg { width: 28px; height: 28px; }
-.md-mood button[aria-pressed="true"] { background: var(--bg-brand-weak); color: var(--fg-brand); font-weight: 700; box-shadow: inset 0 0 0 1.5px var(--stroke-brand-solid); }
-.md-softinput { box-sizing: border-box; width: 100%; min-height: 96px; padding: 12px 14px; border: 0; border-radius: var(--r4); background: var(--bg-neutral-weak); color: var(--fg-neutral); font: 400 15px/22px var(--font-sans); resize: none; }
-.md-softinput:focus { outline: 2px solid var(--stroke-focus-ring); outline-offset: 0; background: var(--bg-layer-default); }
-.md-softrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--r4); background: var(--bg-layer-basement); cursor: pointer; }
-.md-walk-photos__add { --press: 0.96; flex: none; width: 72px; height: 72px; border: 0; border-radius: var(--r3); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: var(--bg-layer-default); box-shadow: inset 0 0 0 1px var(--stroke-neutral-weak); color: var(--fg-neutral-muted); font: 500 12px/16px var(--font-sans); cursor: pointer; }
-.md-walk-photos__add svg { width: 22px; height: 22px; }
-.md-walk-photos > span { position: relative; }
+
+/* Walk record (산책중, 산책 기록, 보호자 실시간·기록): one shared language. Figures are plain tabular numbers
+   split by hairlines, the potty log is two neutral counters, and the timeline of what happened is the object. */
+.wk-figs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); margin: 0; }
+.wk-figs > div { display: flex; flex-direction: column; gap: 2px; padding: 0 16px; min-width: 0; }
+.wk-figs > div:first-child { padding-left: 0; }
+.wk-figs > div + div { box-shadow: inset 1px 0 0 var(--stroke-neutral-subtle); }
+.wk-figs dd { order: 1; margin: 0; font: 700 34px/40px var(--font-sans); letter-spacing: -0.5px; color: var(--fg-neutral); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.wk-figs dd small { display: inline-block; line-height: 1; margin-left: 2px; font-size: 17px; font-weight: 500; letter-spacing: 0; color: var(--fg-neutral-muted); }
+.wk-figs dt { order: 2; font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); }
+.wk-figs--sm dd { font-size: 24px; line-height: 30px; }
+.wk-figs--sm dd small { font-size: 14px; }
+.wk-sub { margin: 0; font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); }
+
+.wk-counters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.wk-counter { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; align-items: center; gap: 8px; min-height: var(--button-large); padding: 0 14px; border: 0; border-radius: var(--r3); background: var(--bg-neutral-weak); color: var(--fg-neutral); font: 500 15px/20px var(--font-sans); text-align: left; cursor: pointer; transition: background-color 150ms var(--ease-easing, ease); }
+.wk-counter:active { background: var(--bg-neutral-weak-pressed); }
+.wk-counter:focus-visible { outline: 2px solid var(--stroke-focus-ring); outline-offset: 2px; }
+.wk-counter svg { width: 20px; height: 20px; color: var(--fg-neutral-muted); }
+.wk-counter b { font: 700 17px/22px var(--font-sans); font-variant-numeric: tabular-nums; }
+
+.wk-photos { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.wk-photos > * { position: relative; flex: none; width: 76px; height: 76px; border-radius: var(--r2); background: var(--bg-neutral-weak); display: grid; place-items: center; color: var(--fg-neutral-subtle); }
+.wk-photos > * > svg { width: 20px; height: 20px; }
+.wk-photos__add { border: 0; box-shadow: inset 0 0 0 1px var(--stroke-neutral-weak); background: var(--bg-layer-default) !important; display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font: 500 12px/16px var(--font-sans); color: var(--fg-neutral-muted) !important; cursor: pointer; }
+.wk-photos__add:focus-visible { outline: 2px solid var(--stroke-focus-ring); outline-offset: 2px; }
+.wk-photos__tag { position: absolute; left: 4px; bottom: 4px; padding: 0 5px; border-radius: var(--r1); background: var(--bg-neutral-solid); color: var(--fg-on-neutral-solid); font: 700 11px/16px var(--font-sans); }
+
+.wk-tl { list-style: none; margin: 0; padding: 0; }
+.wk-tl li { position: relative; display: grid; grid-template-columns: 58px 16px minmax(0, 1fr); column-gap: 10px; padding-bottom: 14px; }
+.wk-tl li:last-child { padding-bottom: 0; }
+.wk-tl li::before { content: ""; position: absolute; left: 75.5px; top: 14px; bottom: -2px; width: 1px; background: var(--stroke-neutral-weak); }
+.wk-tl li:last-child::before { display: none; }
+.wk-tl time { font: 400 13px/20px var(--font-sans); color: var(--fg-neutral-subtle); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.wk-tl__node { width: 9px; height: 9px; margin: 5.5px 0 0 3.5px; border-radius: var(--full); background: var(--bg-layer-default); box-shadow: inset 0 0 0 2px var(--stroke-neutral-solid); }
+.wk-tl li:first-child .wk-tl__node { background: var(--fg-neutral); box-shadow: none; }
+.wk-tl__text { display: flex; flex-direction: column; gap: 6px; min-width: 0; font: 400 15px/20px var(--font-sans); color: var(--fg-neutral); }
+.wk-tl__text > span { display: inline-flex; align-items: center; gap: 6px; }
+.wk-tl__text svg { width: 16px; height: 16px; flex: none; color: var(--fg-neutral-muted); }
+.wk-tl__thumb { width: 96px; height: 72px; border-radius: var(--r2); background: var(--bg-neutral-weak); display: grid; place-items: center; color: var(--fg-neutral-subtle); }
+
+.wk-note { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 10px; align-items: start; }
+.wk-note__bubble { padding: 10px 14px; border-radius: 4px var(--r4) var(--r4) var(--r4); background: var(--bg-neutral-weak); font: 400 15px/22px var(--font-sans); color: var(--fg-neutral); }
+.wk-switchrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; cursor: pointer; }

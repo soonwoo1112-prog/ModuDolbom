@@ -200,14 +200,13 @@ export function SystemNote({ title, children }) {
   );
 }
 
-export function RouteMap({ height = 320, aspect, progress = 'part', label, children }) {
+export function RouteMap({ height = 320, aspect, progress = 'part', label, fit = 'slice', children }) {
   const full = 'M70 280 C 90 230, 130 220, 150 180 S 170 100, 230 92 S 320 110, 312 170 S 260 250, 205 238';
   const part = 'M70 280 C 90 230, 130 220, 150 180 S 170 100, 230 92';
   return (
     <div className="app-map" style={aspect ? { aspectRatio: aspect } : { height }}>
-      <svg viewBox="0 0 390 340" preserveAspectRatio="xMidYMid slice" role="img" aria-label={label}>
+      <svg viewBox="0 0 390 340" preserveAspectRatio={`xMidYMid ${fit}`} role="img" aria-label={label}>
         <path d="M0 85H390M0 170H390M0 255H390M98 0V340M195 0V340M292 0V340" className="grid" />
-        {progress === 'part' ? <path d={full} className="suggest" /> : null}
         <path d={progress === 'part' ? part : full} className="walked" />
         <circle cx="70" cy="280" r="7" className="start" />
         {progress === 'part'
