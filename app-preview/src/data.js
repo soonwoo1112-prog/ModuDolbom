@@ -32,9 +32,9 @@ export const CHAT_MESSAGES = [
 ];
 
 export const FEED = [
-  { id: 'p1', author: '김하늘', isSitter: true, time: '1시간 전', text: '보리와 점심 산책을 했어요. 공원 산책로에 은행잎이 많이 떨어져 있었어요.', likes: 12, comments: 3 },
-  { id: 'p2', author: '콩이네', isSitter: false, time: '3시간 전', text: '콩이가 처음으로 다른 강아지와 인사했어요. 산책 다녀오면 늘 기분이 좋아 보여요.', likes: 8, comments: 1 },
-  { id: 'p3', author: '정민준', isSitter: true, time: '어제', text: '아침 산책은 공기가 차가워져서 짧게 다녀왔어요. 두부가 낙엽 밟는 소리를 좋아해요.', likes: 5, comments: 0 },
+  { id: 'p1', author: '김하늘', dog: '보리', isSitter: true, time: '1시간 전', text: '보리와 점심 산책을 했어요. 공원 산책로에 은행잎이 많이 떨어져 있었어요.', likes: 12, comments: 3 },
+  { id: 'p2', author: '콩이네', dog: '콩이', isSitter: false, time: '3시간 전', text: '콩이가 처음으로 다른 강아지와 인사했어요. 산책 다녀오면 늘 기분이 좋아 보여요.', likes: 8, comments: 1 },
+  { id: 'p3', author: '정민준', dog: '두부', isSitter: true, time: '어제', text: '아침 산책은 공기가 차가워져서 짧게 다녀왔어요. 두부가 낙엽 밟는 소리를 좋아해요.', likes: 5, comments: 0 },
 ];
 
 export const COMMUNITY = [
@@ -45,10 +45,12 @@ export const COMMUNITY = [
 ];
 
 export const GUARDIAN_BOOKINGS = {
-  6: [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터와 산책하고 있어요', status: '산책중', tone: 'info', go: 'live' }],
-  3: [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터, 30분', status: '산책완료', tone: 'neutral', go: 'log' }],
-  7: [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터, 30분, 집', status: '예약확정', tone: 'brand', go: 'chat' }],
-  14: [{ title: '보리 산책, 오후 6:00', detail: '시터 2명에게 요청했어요', status: '요청중', tone: 'outline', go: 'sent' }],
+  '10-27': [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터, 30분', status: '산책완료', tone: 'neutral', go: 'log' }],
+  '11-3': [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터, 30분', status: '산책완료', tone: 'neutral', go: 'log' }],
+  '11-6': [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터와 산책하고 있어요', status: '산책중', tone: 'info', go: 'live' }],
+  '11-7': [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터, 30분, 집', status: '예약확정', tone: 'brand', go: 'chat' }],
+  '11-14': [{ title: '보리 산책, 오후 6:00', detail: '시터 2명에게 요청했어요', status: '요청중', tone: 'outline', go: 'sent' }],
+  '12-5': [{ title: '보리 산책, 오전 10:00', detail: '시터 3명에게 요청했어요', status: '요청중', tone: 'outline', go: 'sent' }],
 };
 
 export const SITTER_TODAY = [

@@ -311,3 +311,44 @@ textarea.md-input { min-height: 94px; padding: var(--x3_5) var(--x4); resize: ve
 .wk-note { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 10px; align-items: start; }
 .wk-note__bubble { padding: 10px 14px; border-radius: 4px var(--r4) var(--r4) var(--r4); background: var(--bg-neutral-weak); font: 400 15px/22px var(--font-sans); color: var(--fg-neutral); }
 .wk-switchrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; cursor: pointer; }
+
+/* Social feed: one 16px gutter for every row, the photo rounded inside it with the dog's name on it,
+   and an action row whose icons line up with the gutter. A liked heart pops once. */
+.fd-post { display: flex; flex-direction: column; gap: 12px; padding: 16px 16px 8px; }
+.fd-post + .fd-post { box-shadow: inset 0 8px 0 var(--bg-layer-basement); padding-top: 24px; }
+.fd-head { display: flex; align-items: center; gap: 10px; }
+.fd-photo { position: relative; aspect-ratio: 1; border-radius: var(--r4); background: var(--bg-neutral-weak); display: grid; place-items: center; color: var(--fg-neutral-subtle); overflow: hidden; }
+.fd-photo > svg { width: 40px; height: 40px; }
+.fd-dog { position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px 4px 8px; border-radius: var(--full); background: var(--bg-layer-default); color: var(--fg-neutral); font: 700 13px/18px var(--font-sans); box-shadow: var(--shadow-floating); }
+.fd-dog svg { width: 14px; height: 14px; color: var(--fg-brand); }
+.fd-text { margin: 0; font: 400 15px/22px var(--font-sans); color: var(--fg-neutral); }
+.fd-actions { display: flex; align-items: center; gap: 4px; margin: 0 -8px; }
+.fd-act { --press: 0.94; display: inline-flex; align-items: center; gap: 4px; min-height: 40px; padding: 0 8px; border: 0; border-radius: var(--full); background: transparent; color: var(--fg-neutral-muted); font: 500 14px/19px var(--font-sans); font-variant-numeric: tabular-nums; cursor: pointer; transition: background-color 150ms var(--ease-easing, ease); }
+.fd-act:active { background: var(--bg-transparent-pressed); }
+.fd-act:focus-visible, .fd-ask:focus-visible { outline: 2px solid var(--stroke-focus-ring); outline-offset: 2px; }
+.fd-act svg { width: 22px; height: 22px; }
+.fd-act[aria-pressed="true"] { color: var(--fg-critical); }
+.fd-act[aria-pressed="true"] svg { animation: fd-pop 320ms var(--ease-enter, ease-out); }
+@keyframes fd-pop { 0% { transform: scale(1); } 40% { transform: scale(1.28); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .fd-act[aria-pressed="true"] svg { animation: none; } }
+.fd-ask { --press: 0.96; margin-left: auto; display: inline-flex; align-items: center; gap: 4px; min-height: 34px; padding: 0 14px; border: 0; border-radius: var(--full); background: var(--bg-neutral-weak); color: var(--fg-neutral); font: 700 13px/18px var(--font-sans); text-decoration: none; cursor: pointer; }
+.fd-ask:active { background: var(--bg-neutral-weak-pressed); }
+.fd-ask svg { width: 14px; height: 14px; }
+
+/* Calendar: months scroll; the picked day and booked dots are forest green; tapping a day lifts a sheet. */
+.cl-month { padding: 4px 8px 12px; }
+.cl-month__title { position: sticky; top: 0; z-index: 1; margin: 0; padding: 12px 8px 8px; background: var(--bg-layer-default); font: 700 18px/24px var(--font-sans); font-variant-numeric: tabular-nums; }
+.cl-dow { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); padding: 8px 8px 6px; background: var(--bg-layer-default); box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle); }
+.cl-dow span { text-align: center; font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); }
+.cl-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 2px; }
+.cl-day { --press: 0.92; position: relative; display: grid; justify-items: center; align-content: start; gap: 2px; height: 50px; padding: 4px 0 0; border: 0; background: transparent; color: var(--fg-neutral); font: 500 15px/20px var(--font-sans); cursor: pointer; }
+.cl-day:focus-visible { outline: none; }
+.cl-day:focus-visible .cl-num { outline: 2px solid var(--stroke-focus-ring); outline-offset: 1px; }
+.cl-num { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--full); font-variant-numeric: tabular-nums; transition: background-color 150ms var(--ease-easing, ease); }
+.cl-day[data-sun="true"] .cl-num { color: var(--fg-critical); }
+.cl-day[data-today="true"] .cl-num { font-weight: 700; box-shadow: inset 0 0 0 1.5px var(--stroke-neutral-contrast); }
+.cl-day[aria-pressed="true"] .cl-num { background: var(--bg-brand-solid); color: var(--fg-on-brand-solid); font-weight: 700; box-shadow: none; }
+.cl-dot { width: 5px; height: 5px; border-radius: var(--full); background: var(--bg-brand-solid); }
+.cl-dot[data-past="true"] { background: var(--stroke-neutral-solid); }
+.cl-legend { display: flex; gap: 14px; padding: 4px 16px 16px; font: 400 12px/16px var(--font-sans); color: var(--fg-neutral-subtle); }
+.cl-legend span { display: inline-flex; align-items: center; gap: 6px; }

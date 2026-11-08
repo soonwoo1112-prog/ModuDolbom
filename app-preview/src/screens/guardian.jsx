@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useApp, useLoad, useSend } from '../store.jsx';
 import { TopNav, IconButton, Btn, Badge, ChipGroup, Callout, ListHeader, Band, Avatar, Thumb, Tags, Icon, SkeletonList, SkeletonBlock, Result, ErrorResult, Region, RouteMap } from '../ui.jsx';
 import { NEIGHBORHOOD, MY_DOGS, SITTERS, GUARDIAN_BOOKINGS } from '../data.js';
-import { DateSheet, AddressSheet, AddressDetailSheet, describeSchedule, entryText, PICKUP_HINTS } from './booking.jsx';
+import { Sheet, DateSheet, AddressSheet, AddressDetailSheet, describeSchedule, entryText, PICKUP_HINTS } from './booking.jsx';
 
 // ── 1. 예약 (guardian first tab) ──
 export function BookHome() {
@@ -319,45 +319,70 @@ export function Log() {
   );
 }
 
+// 2026: Oct 1 is a Thursday, Nov 1 a Sunday, Dec 1 a Tuesday.
+const CAL_MONTHS = [[10, 31, 4], [11, 30, 0], [12, 31, 2]];
+const TODAY = '11-6';
+
 export function GuardianCalendar() {
   const { push, goTab } = useApp();
-  const [sel, setSel] = useState(7);
+  const [sel, setSel] = useState(null);
   const cal = useLoad(() => GUARDIAN_BOOKINGS);
-  const today = 6;
-  const items = cal.status === 'ready' ? (cal.data[sel] || []) : [];
+  const scrollRef = React.useRef(null);
+  const nowRef = React.useRef(null);
+  React.useEffect(() => {
+    if (cal.status === 'ready' && nowRef.current && scrollRef.current) scrollRef.current.scrollTop = nowRef.current.offsetTop;
+  }, [cal.status]);
+  const items = sel && cal.status === 'ready' ? (cal.data[sel] || []) : [];
+  const [smo, sd] = sel ? sel.split('-') : [];
   return (
     <>
       <TopNav root title="캘린더" />
-      <div className="app-scroll">
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 8px 8px 16px' }}>
-          <span className="md-section-title md-num">2026년 11월</span>
-          <span style={{ display: 'flex' }}><IconButton icon="ChevronLeft" label="이전 달" /><IconButton icon="ChevronRight" label="다음 달" /></span>
-        </div>
-        <div className="app-cal" style={{ paddingBottom: 0 }} aria-hidden="true">{['일', '월', '화', '수', '목', '금', '토'].map((d) => <span key={d} className="md-detail app-cal__dow">{d}</span>)}</div>
-        <div className="app-cal" aria-busy={cal.status === 'loading' ? 'true' : undefined}>
-          {Array.from({ length: 30 }).map((_, i) => {
-            const day = i + 1;
-            const booked = cal.status === 'ready' && cal.data[day];
-            return (
-              <button key={day} type="button" className="app-cal__day md-pressable" data-dow={i % 7} data-today={day === today} aria-pressed={sel === day} aria-label={`11월 ${day}일${booked ? ', 산책 있음' : ''}`} onClick={() => setSel(day)}>
-                <span className="app-cal__num">{day}</span>
-                {booked ? <span className="app-dogtag">보리</span> : null}
-              </button>
-            );
-          })}
-        </div>
-        <Band />
-        <ListHeader>11월 {sel}일</ListHeader>
-        {cal.status === 'loading' ? <SkeletonList rows={1} avatar="square" label="일정 불러오는 중" />
+      <div className="cl-dow" aria-hidden="true">{['일', '월', '화', '수', '목', '금', '토'].map((d) => <span key={d}>{d}</span>)}</div>
+      <div className="app-scroll" ref={scrollRef} style={{ position: 'relative' }}>
+        {cal.status === 'loading' ? <div style={{ padding: 16 }} aria-busy="true" aria-label="일정 불러오는 중"><SkeletonBlock height={300} /></div>
           : cal.status === 'error' ? <ErrorResult what="일정" onRetry={cal.retry} />
-            : items.length ? items.map((it) => (
-              <button key={it.title} type="button" className="md-item md-pressable" style={{ border: 0, width: '100%', textAlign: 'left' }} onClick={() => push(it.go, { id: 'c-haneul' })}>
-                <Thumb />
-                <span className="md-item__body"><span className="md-item__head"><span className="md-list-title">{it.title}</span><Badge tone={it.tone === 'brand' ? 'brandSolid' : it.tone}>{it.status}</Badge></span><span className="md-item__muted">{it.detail}</span></span>
-                <Icon name="ChevronRight" size={18} style={{ color: 'var(--fg-neutral-subtle)' }} />
-              </button>
-            )) : <Result title="이 날은 예약된 산책이 없어요" action="이 날 산책 부탁하기" onAction={() => goTab('book')} />}
+            : (
+              <>
+                {CAL_MONTHS.map(([mo, len, lead]) => (
+                  <section key={mo} className="cl-month" aria-label={`2026년 ${mo}월`} ref={mo === 11 ? nowRef : undefined}>
+                    <h2 className="cl-month__title">2026년 {mo}월</h2>
+                    <div className="cl-grid" role="grid">
+                      {Array.from({ length: lead }, (_, i) => <span key={`b${i}`} />)}
+                      {Array.from({ length: len }, (_, i) => {
+                        const d = i + 1;
+                        const key = `${mo}-${d}`;
+                        const booked = !!cal.data[key];
+                        const past = mo < 11 || (mo === 11 && d < 6);
+                        return (
+                          <button key={key} type="button" className="cl-day md-pressable" data-today={key === TODAY} data-sun={(lead + i) % 7 === 0} aria-pressed={sel === key} aria-label={`${mo}월 ${d}일${booked ? ', 산책 있음' : ''}`} onClick={() => setSel(key)}>
+                            <span className="cl-num">{d}</span>
+                            {booked ? <span className="cl-dot" data-past={past} /> : null}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </section>
+                ))}
+                <div className="cl-legend"><span><span className="cl-dot" />예약한 산책</span><span><span className="cl-dot" data-past="true" />지난 산책</span></div>
+              </>
+            )}
       </div>
+      {sel ? (
+        <Sheet title={`${smo}월 ${sd}일`} onClose={() => setSel(null)}>
+          {items.length ? items.map((it) => (
+            <button key={it.title} type="button" className="md-item md-pressable" style={{ border: 0, margin: '0 -16px', width: 'calc(100% + 32px)', textAlign: 'left' }} onClick={() => { setSel(null); push(it.go, { id: 'c-haneul' }); }}>
+              <Thumb />
+              <span className="md-item__body"><span className="md-item__head"><span className="md-list-title">{it.title}</span><Badge tone={it.tone === 'brand' ? 'brandSolid' : it.tone}>{it.status}</Badge></span><span className="md-item__muted">{it.detail}</span></span>
+              <Icon name="ChevronRight" size={18} style={{ color: 'var(--fg-neutral-subtle)' }} />
+            </button>
+          )) : (
+            <>
+              <p className="md-detail" style={{ margin: 0, textAlign: 'center' }}>이 날은 예약된 산책이 없어요.</p>
+              <Btn variant="brand" size="large" onClick={() => { setSel(null); goTab('book'); }}>이 날 산책 부탁하기</Btn>
+            </>
+          )}
+        </Sheet>
+      ) : null}
     </>
   );
 }

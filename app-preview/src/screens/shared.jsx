@@ -158,18 +158,18 @@ function Feed() {
         {(list) => list.map((p) => {
           const on = !!flow.liked[p.id];
           return (
-            <article key={p.id} style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: '16px 0 12px', boxShadow: 'inset 0 -8px 0 var(--bg-layer-basement)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '0 16px' }}>
-                <Avatar size={36} />
+            <article key={p.id} className="fd-post">
+              <div className="fd-head">
+                <Avatar size={40} />
                 <span style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}><span className="md-item__head"><span className="md-label">{p.author}</span><Badge tone={p.isSitter ? 'brand' : 'neutral'}>{p.isSitter ? '시터' : '보호자'}</Badge></span><Tags items={[NEIGHBORHOOD, p.time]} /></span>
               </div>
-              <div className="md-slot"><Icon name="PawPrint" label={`${p.author}의 산책 사진`} /></div>
-              <p style={{ margin: 0, padding: '0 16px', fontSize: 15, lineHeight: '21px' }}>{p.text}</p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '0 8px' }}>
-                <Btn variant="ghost" size="small" aria-pressed={on} style={on ? { color: 'var(--fg-critical)' } : undefined} onClick={() => update((f) => ({ liked: { ...f.liked, [p.id]: !on } }))}><Icon name="Heart" size={18} fill={on ? 'currentColor' : 'none'} /><span className="md-num">좋아요 {p.likes + (on ? 1 : 0)}</span></Btn>
-                <Btn variant="ghost" size="small"><Icon name="MessageCircle" size={18} /><span className="md-num">댓글 {p.comments}</span></Btn>
-                {p.isSitter && role === 'guardian' ? <Btn size="small" style={{ marginLeft: 'auto' }} onClick={() => push('matching')}>산책 부탁하기</Btn> : null}
+              <div className="fd-photo"><Icon name="PawPrint" size={40} label={`${p.dog} 산책 사진`} /><span className="fd-dog"><Icon name="PawPrint" size={14} />{p.dog}</span></div>
+              <div className="fd-actions">
+                <button type="button" className="fd-act md-pressable" aria-pressed={on} aria-label={`좋아요 ${p.likes + (on ? 1 : 0)}개`} onClick={() => update((f) => ({ liked: { ...f.liked, [p.id]: !on } }))}><Icon name="Heart" size={22} fill={on ? 'currentColor' : 'none'} />{p.likes + (on ? 1 : 0)}</button>
+                <button type="button" className="fd-act md-pressable" aria-label={`댓글 ${p.comments}개`}><Icon name="MessageCircle" size={22} />{p.comments}</button>
+                {p.isSitter && role === 'guardian' ? <button type="button" className="fd-ask md-pressable" onClick={() => push('matching')}><Icon name="Footprints" size={14} />이 시터에게 부탁하기</button> : null}
               </div>
+              <p className="fd-text">{p.text}</p>
             </article>
           );
         })}
@@ -184,7 +184,7 @@ function Community() {
   return (
     <>
       <div className="app-chiprow" role="group" aria-label="이야기 종류">
-        {['전체', '잃어버렸어요', '추천', '나눔', '질문'].map((c) => <button key={c} type="button" className="md-chip md-pressable" aria-pressed={cat === c} onClick={() => setCat(c)}><span>{c}</span></button>)}
+        {['전체', '추천', '나눔', '질문', '잃어버렸어요'].map((c) => <button key={c} type="button" className="md-chip md-pressable" aria-pressed={cat === c} onClick={() => setCat(c)}><span>{c}</span></button>)}
       </div>
       <div className="app-scroll">
         <Region load={posts}
