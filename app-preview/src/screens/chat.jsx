@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useApp, useSend } from '../store.jsx';
-import { TopNav, Btn, Badge, Callout, Icon, Avatar } from '../ui.jsx';
+import { TopNav, Btn, Badge, Callout, Icon, Avatar, ListHeader } from '../ui.jsx';
 import { Sheet, fmtDay, entryText } from './booking.jsx';
 
 // ── 4-2. 예약 정보 (bottom sheet in the chat) ──
@@ -136,16 +136,41 @@ export function ChatEdit() {
 }
 
 // ── 4-4. 강아지 프로필 ──
+const DOG_FACTS = [
+  { icon: 'Dog', label: '견종', value: '진돗개 믹스' },
+  { icon: 'Weight', label: '무게', value: '12kg' },
+  { icon: 'Cake', label: '나이', value: '3살' },
+  { icon: 'Mars', label: '성별', value: '수컷', sub: '중성화 했어요' },
+];
+const DOG_FEEDBACK = [
+  { name: '김하늘', when: '11월 1일 산책', text: '공원 길에서 다른 강아지를 보고 두 번 짖었지만 이름을 부르니 금방 진정했어요. 물도 잘 마셨어요.' },
+  { name: '이도윤', when: '10월 27일 산책', text: '줄을 당길 때 잠깐 멈추면 옆으로 돌아와요. 길에 떨어진 간식을 주우려 해서 짧게 잡고 걸었어요.' },
+  { name: '김하늘', when: '10월 20일 산책', text: '오토바이 소리에 한 번 놀랐어요. 그 뒤로는 아파트 안쪽 길로 돌아왔어요.' },
+];
+
 export function DogProfile() {
+  const { showSnack } = useApp();
+  const [photos, setPhotos] = useState(5);
   return (
     <>
       <TopNav title="강아지 프로필" />
       <div className="app-scroll">
         <div className="md-slot"><Icon name="PawPrint" size={40} label="보리 사진" /></div>
-        <section style={{ padding: '20px 16px 24px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <h2 className="md-screen-title">보리</h2>
-          <div className="md-row"><Badge>중형견</Badge><Badge>3살</Badge><Badge>수컷, 중성화</Badge><Badge>12kg</Badge></div>
-          <p style={{ margin: '4px 0 0', color: 'var(--fg-neutral-muted)', fontSize: 15, lineHeight: '21px' }}>산책을 아주 좋아하는 진돗개 믹스예요. 사람한테는 순하지만 다른 강아지를 보면 조금 짖어요.</p>
+        <section style={{ padding: '20px 16px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            <h2 className="md-screen-title">보리</h2>
+            <p style={{ margin: 0, color: 'var(--fg-neutral-muted)', fontSize: 15, lineHeight: '21px' }}>산책을 아주 좋아해요. 사람한테는 순하지만 다른 강아지를 보면 조금 짖어요.</p>
+          </div>
+          <div className="md-facts">
+            {DOG_FACTS.map((f) => (
+              <div className="md-fact" key={f.label}>
+                <Icon name={f.icon} size={22} />
+                <span className="md-fact__label">{f.label}</span>
+                <span className="md-fact__value md-num">{f.value}</span>
+                {f.sub ? <span className="md-fact__label">{f.sub}</span> : null}
+              </div>
+            ))}
+          </div>
         </section>
         <div className="md-band" />
         <div className="md-list-header">성격</div>
@@ -156,11 +181,37 @@ export function DogProfile() {
           <li>큰 오토바이 소리에 놀라요.</li>
         </ul>
         <div className="md-list-header">건강</div>
-        <dl style={{ margin: 0, padding: '0 16px 32px', display: 'grid', gridTemplateColumns: '88px minmax(0,1fr)', rowGap: 8, fontSize: 15, lineHeight: '21px' }}>
+        <dl style={{ margin: 0, padding: '0 16px 20px', display: 'grid', gridTemplateColumns: '88px minmax(0,1fr)', rowGap: 8, fontSize: 15, lineHeight: '21px' }}>
           <dt className="md-label" style={{ color: 'var(--fg-neutral-subtle)' }}>예방접종</dt><dd style={{ margin: 0 }}>종합백신, 광견병 접종 완료</dd>
           <dt className="md-label" style={{ color: 'var(--fg-neutral-subtle)' }}>알레르기</dt><dd style={{ margin: 0 }}>닭고기</dd>
           <dt className="md-label" style={{ color: 'var(--fg-neutral-subtle)' }}>동물병원</dt><dd style={{ margin: 0 }}>역삼 24시 동물병원</dd>
         </dl>
+        <div className="md-band" />
+        <ListHeader>시터들이 남긴 피드백 <span className="md-num" style={{ color: 'var(--fg-neutral-subtle)' }}>{DOG_FEEDBACK.length}</span></ListHeader>
+        <div className="md-list">
+          {DOG_FEEDBACK.map((f, i) => (
+            <React.Fragment key={i}>
+              {i ? <hr className="md-divider" /> : null}
+              <div className="md-item md-item--top" style={{ cursor: 'default' }}>
+                <Avatar icon="User" size={36} />
+                <span className="md-item__body" style={{ gap: 4 }}>
+                  <span className="md-item__head"><span className="md-list-title">{f.name} 시터</span><span className="md-tagtext">{f.when}</span></span>
+                  <span style={{ fontSize: 15, lineHeight: '21px', color: 'var(--fg-neutral)' }}>{f.text}</span>
+                </span>
+                <span />
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
+        <div className="md-band" />
+        <div className="md-list-header" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <span>사진 <span className="md-num" style={{ color: 'var(--fg-neutral-subtle)' }}>{photos}</span></span>
+          <span className="md-detail" style={{ fontWeight: 400 }}>사진은 몇 장이든 올릴 수 있어요</span>
+        </div>
+        <div className="md-photos" style={{ paddingBottom: 32 }}>
+          <button type="button" className="md-photos__add md-pressable" onClick={() => { setPhotos((n) => n + 1); showSnack('사진을 올렸어요'); }}><Icon name="ImagePlus" />사진 추가</button>
+          {Array.from({ length: photos }, (_, i) => <span key={i} role="img" aria-label={`보리 사진 ${i + 1}`}><Icon name="PawPrint" size={22} /></span>)}
+        </div>
       </div>
     </>
   );

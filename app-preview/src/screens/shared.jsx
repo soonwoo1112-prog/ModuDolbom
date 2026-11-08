@@ -66,13 +66,13 @@ export function ChatRoom({ params }) {
   const confirm = () => send(() => { update({ confirmed: true }); showSnack('예약을 확정했어요'); });
   const askCancel = () => setDialog(confirmed ? {
     title: '예약을 취소할까요',
-    body: '취소하면 되돌릴 수 없어요. 산책 하루 전까지는 수수료 없이 취소할 수 있어요.',
+    body: isGuardian ? '취소하면 되돌릴 수 없어요. 산책 하루 전까지는 수수료 없이 취소할 수 있어요.' : `취소하면 되돌릴 수 없어요. ${dog}네 보호자에게 바로 알리고, 보호자는 다른 시터를 찾아야 해요.`,
     confirmLabel: '예약 취소',
     onConfirm: () => { update({ confirmed: false, requested: false }); showSnack('예약을 취소했어요'); },
   } : {
-    title: '요청을 취소할까요',
-    body: '김하늘 시터에게 보낸 요청이 닫혀요. 다시 요청하려면 처음부터 골라야 해요.',
-    confirmLabel: '요청 취소',
+    title: isGuardian ? '요청을 취소할까요' : '요청을 거절할까요',
+    body: isGuardian ? '김하늘 시터에게 보낸 요청이 닫혀요. 다시 요청하려면 처음부터 골라야 해요.' : `${dog}네 보호자에게 바로 알려요. 다시 하려면 보호자가 새로 요청해야 해요.`,
+    confirmLabel: isGuardian ? '요청 취소' : '요청 거절',
     onConfirm: () => { update({ requested: false }); showSnack('요청을 취소했어요'); },
   });
   const sendMsg = () => {
@@ -84,38 +84,26 @@ export function ChatRoom({ params }) {
   return (
     <>
       <TopNav title={title} />
-      {isGuardian ? (
-        <section className="app-pinned" style={{ paddingRight: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <button type="button" className="md-avatar md-pressable" aria-label="보리 프로필 보기" style={{ width: 40, height: 40, border: 0, background: 'var(--bg-layer-default)', cursor: 'pointer' }} onClick={() => push('dog')}><Icon name="PawPrint" size={20} /></button>
-            <span style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}>
-              <span className="md-list-title" style={{ fontWeight: 700 }}>{dog}</span>
-              {confirmed ? <Badge tone="brandSolid">예약확정</Badge> : null}
-              {flow.editSent ? <Badge tone="info">수정요청중</Badge> : null}
-            </span>
-            <IconButton icon="EllipsisVertical" label="더보기" onClick={() => setSheet('menu')} />
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0,1fr))', gap: 8, paddingRight: 8 }}>
-            {confirmed
-              ? <Btn size="small" disabled>확정했어요</Btn>
-              : <Btn variant="brand" size="small" busy={busy} busyLabel="확정 중" onClick={confirm}>예약 확정</Btn>}
-            <Btn size="small" onClick={() => push('chatEdit')}><Icon name="Pencil" size={16} />수정</Btn>
-            <Btn size="small" onClick={() => setSheet('info')}><Icon name="Info" size={16} />정보</Btn>
-          </div>
-        </section>
-      ) : (
-        <section className="app-pinned">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <Thumb size={44} />
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span className="md-list-title">{dog} 산책</span>{confirmed ? <Badge tone="brandSolid">예약확정</Badge> : null}</span>
-              <Tags items={[params.id === 's-kong' ? '오늘 오후 2:00' : '11월 7일 (토) 오후 12:30', '30분']} />
-              <span className="md-label md-num">15,000원</span>
-            </div>
-            {confirmed ? <Btn size="small" onClick={() => goTab('today')}>일정 보기</Btn> : null}
-          </div>
-        </section>
-      )}
+      <section className="app-pinned" style={{ paddingRight: 8, paddingTop: 8, paddingBottom: 10, gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <button type="button" className="md-avatar md-pressable" aria-label={`${dog} 프로필 보기`} style={{ width: 40, height: 40, border: 0, background: 'var(--bg-layer-default)', cursor: 'pointer' }} onClick={() => push('dog')}><Icon name="PawPrint" size={20} /></button>
+          <span style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}>
+            <span className="md-list-title" style={{ fontWeight: 700 }}>{dog}</span>
+            {confirmed ? <Badge tone="brandSolid">예약확정</Badge> : null}
+            {flow.editSent ? <Badge tone="info">수정요청중</Badge> : null}
+          </span>
+          <IconButton icon="EllipsisVertical" label="더보기" onClick={() => setSheet('menu')} />
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0,1fr))', gap: 8, paddingRight: 8 }}>
+          {isGuardian
+            ? (confirmed
+              ? <Btn size="xsmall" disabled>확정했어요</Btn>
+              : <Btn variant="brand" size="xsmall" busy={busy} busyLabel="확정 중" onClick={confirm}>예약 확정</Btn>)
+            : <Btn size="xsmall" disabled>{confirmed ? '확정됐어요' : '확정 기다리는 중'}</Btn>}
+          <Btn size="xsmall" onClick={() => push('chatEdit')}><Icon name="Pencil" size={14} />수정</Btn>
+          <Btn size="xsmall" onClick={() => setSheet('info')}><Icon name="Info" size={14} />정보</Btn>
+        </div>
+      </section>
       {sheet === 'info' ? <ChatInfoSheet onClose={() => setSheet(null)} /> : null}
       {sheet === 'menu' ? <ChatMenuSheet confirmed={confirmed} onClose={() => setSheet(null)} onCancel={askCancel} /> : null}
       <div className="app-scroll">

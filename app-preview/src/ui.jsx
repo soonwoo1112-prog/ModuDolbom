@@ -1,7 +1,13 @@
 import React from 'react';
-import { BadgeCheck, Bell, CalendarX, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X } from 'lucide-react';
+import { BadgeCheck, Bell, Cake, CalendarX, Dog, Weight, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X } from 'lucide-react';
 
-const Icons = { BadgeCheck, Bell, CalendarX, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X };
+// Mars is newer than this lucide-react; paths copied from lucide-static 1.70.0 (ISC).
+const Mars = React.forwardRef(({ size = 24, strokeWidth = 2, ...rest }, ref) => (
+  <svg ref={ref} xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" {...rest}>
+    <path d="M16 3h5v5" /><path d="m21 3-6.75 6.75" /><circle cx="10" cy="14" r="6" />
+  </svg>
+));
+const Icons = { Cake, Dog, Mars, Weight, BadgeCheck, Bell, CalendarX, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X };
 import { useApp, TABS } from './store.jsx';
 
 // Lucide icon (ISC), 24px by default, stroke 1.75 per the brand book.
@@ -60,7 +66,7 @@ export function BottomNav({ badges = {} }) {
 
 export function Btn({ variant = 'weak', size = 'medium', busy, busyLabel, children, className = '', ...rest }) {
   const v = { brand: 'md-btn--brand', neutral: 'md-btn--neutral', weak: '', outline: 'md-btn--outline', ghost: 'md-btn--ghost', critical: 'md-btn--critical' }[variant];
-  const s = { small: 'md-btn--small', medium: '', large: 'md-btn--large' }[size];
+  const s = { xsmall: 'md-btn--xsmall', small: 'md-btn--small', medium: '', large: 'md-btn--large' }[size];
   return (
     <button className={`md-btn ${v} ${s} md-pressable ${className}`} type="button" aria-busy={busy ? 'true' : undefined} disabled={rest.disabled} {...rest}>
       {busy ? <><span className="md-spinner" aria-hidden="true" />{busyLabel || children}</> : children}

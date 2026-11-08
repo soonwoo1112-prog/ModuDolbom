@@ -165,3 +165,21 @@ button { font-family: inherit; }
 .app-wheel::-webkit-scrollbar { display: none; }
 .app-wheel__item { display: block; width: 100%; height: 44px; border: 0; background: transparent; scroll-snap-align: center; font: 400 16px/22px var(--font-sans); color: var(--fg-neutral-subtle); cursor: pointer; font-variant-numeric: tabular-nums; }
 .app-wheel__item[aria-selected="true"] { font: 700 18px/24px var(--font-sans); color: var(--fg-neutral); }
+
+/* Button xsmall (SEED): 32px, for a row of actions packed under a header (chat booking bar). */
+.md-btn--xsmall { min-height: var(--button-xsmall); padding: 6px 12px; font-size: 14px; line-height: 19px; gap: 4px; }
+.md-btn--xsmall svg { width: 14px; height: 14px; }
+
+/* Dog facts: four figures in one row, each with an icon (견종, 무게, 나이, 성별). */
+.md-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 14px 4px; border-radius: var(--r3); background: var(--bg-layer-basement); }
+.md-fact { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 4px; text-align: center; min-width: 0; }
+.md-fact + .md-fact { box-shadow: inset 1px 0 0 var(--stroke-neutral-weak); }
+.md-fact svg { width: 22px; height: 22px; color: var(--fg-brand); margin-bottom: 2px; }
+.md-fact__label { font: 400 12px/16px var(--font-sans); color: var(--fg-neutral-subtle); }
+.md-fact__value { font: 700 15px/20px var(--font-sans); color: var(--fg-neutral); overflow-wrap: anywhere; }
+
+/* Photo grid: 3 across, square, the first tile adds a photo. */
+.md-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 0 16px 24px; }
+.md-photos > * { aspect-ratio: 1; border-radius: var(--r2); background: var(--bg-neutral-weak); display: grid; place-items: center; color: var(--fg-neutral-subtle); }
+.md-photos__add { --press: 0.96; border: 0; display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-shadow: inset 0 0 0 1px var(--stroke-neutral-weak); background: var(--bg-layer-default) !important; font: 500 13px/18px var(--font-sans); color: var(--fg-neutral-muted) !important; cursor: pointer; }
+.md-photos__add svg { width: 24px; height: 24px; }

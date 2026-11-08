@@ -2,7 +2,7 @@
 
 SEED Action Button 구조를 따르는 버튼입니다. 숲 초록(`bg-brand-solid`)은 화면에서 가장 중요한 행동 하나에만 씁니다.
 
-- **크기**: Small(`button-small` 36px, `r2`) · Medium(`button-medium` 40px, `r2`, 기본) · Large(`button-large` 52px, `r3`, 화면 아래 고정 CTA, 폭 100%).
+- **크기**: XSmall(`button-xsmall` 32px, 14px 글자, 헤더 아래에 여러 개를 나란히 둘 때. 예: 채팅 위 예약 확정·수정·정보) · Small(`button-small` 36px, `r2`) · Medium(`button-medium` 40px, `r2`, 기본) · Large(`button-large` 52px, `r3`, 화면 아래 고정 CTA, 폭 100%).
 - **Variant**
   - `md-btn--brand`(Brand Solid): 요청 보내기, 산책 시작. 화면당 하나.
   - `md-btn--neutral`(Neutral Solid): 브랜드가 아닌 강한 행동. 시터의 "대화창 열기".
