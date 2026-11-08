@@ -139,7 +139,7 @@ export function ChatEdit() {
 export function DogProfile() {
   return (
     <>
-      <TopNav title="보리" />
+      <TopNav title="강아지 프로필" />
       <div className="app-scroll">
         <div className="md-slot"><Icon name="PawPrint" size={40} label="보리 사진" /></div>
         <section style={{ padding: '20px 16px 24px', display: 'flex', flexDirection: 'column', gap: 8 }}>

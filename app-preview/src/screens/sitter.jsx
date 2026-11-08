@@ -15,7 +15,7 @@ export function SitterToday() {
     <>
       <TopNav root location title={NEIGHBORHOOD} right={<IconButton icon="Bell" label="알림" />} />
       <div className="app-scroll">
-        <div style={{ padding: '20px 16px 4px' }}><h2 className="md-screen-title">오늘도 동네 산책을 부탁받았어요</h2></div>
+        <div style={{ padding: '24px 16px 4px', display: 'flex', flexDirection: 'column', gap: 4 }}><h2 className="md-screen-title">오늘도 동네 산책을 부탁받았어요</h2><p className="md-item__muted" style={{ margin: 0 }}>새 요청과 오늘 예약을 확인해 보세요</p></div>
         <Region load={today}
           skeleton={<><ListHeader>새 요청</ListHeader><SkeletonList rows={1} avatar="square" label="새 요청 불러오는 중" /><Band /><ListHeader>오늘 예약</ListHeader><SkeletonList rows={2} avatar="square" label="오늘 예약 불러오는 중" /></>}
           empty={<Result icon="Calendar" title="오늘은 예약이 없어요" action="일할 수 있는 시간 열기" actionVariant="weak" onAction={() => goTab('calendar')}>시간을 열어 두면 동네 보호자가 요청을 보낼 수 있어요.</Result>}

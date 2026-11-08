@@ -21,7 +21,7 @@ export function BookHome() {
             <span style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 2 }}><span className="md-label">보리가 김하늘 시터와 산책중이에요</span><span className="md-detail">지금 위치와 산책 소식을 볼 수 있어요</span></span>
             <Icon name="ChevronRight" size={18} style={{ color: 'var(--fg-neutral-subtle)' }} />
           </button>
-          <h2 className="md-screen-title">오늘 산책, 누구에게 부탁할까요</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}><h2 className="md-screen-title">오늘 산책, 누구에게 부탁할까요</h2><p className="md-item__muted" style={{ margin: 0 }}>역삼동 이웃 시터 여러 명에게 한 번에 요청할 수 있어요</p></div>
           <section className="app-section">
             <span className="md-field__label">강아지</span>
             <Region load={dogs}
