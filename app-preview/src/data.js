@@ -64,6 +64,17 @@ export const SITTER_WEEK = [
   { dow: '토', day: 7, dogs: ['보리'] },
 ];
 
+export const SITTER_WALKS = {
+  '10-28': [{ dog: '보리', time: '오후 12:30', detail: '30분, 역삼로 123 101동', status: '산책완료', tone: 'neutral' }],
+  '11-2': [{ dog: '콩이', time: '오후 2:00', detail: '30분, 역삼로 123 103동', status: '산책완료', tone: 'neutral' }],
+  '11-3': [{ dog: '보리', time: '오후 12:30', detail: '30분, 역삼로 123 101동', status: '산책완료', tone: 'neutral' }],
+  '11-5': [{ dog: '두부', time: '오후 6:30', detail: '60분, 역삼로 123 101동', status: '산책완료', tone: 'neutral' }],
+  '11-6': [{ dog: '콩이', time: '오후 2:00', detail: '30분, 역삼로 123 103동', status: '오늘', tone: 'brandSolid' }, { dog: '두부', time: '오후 6:30', detail: '60분, 역삼로 123 101동', status: '예약확정', tone: 'outline' }],
+  '11-7': [{ dog: '보리', time: '오후 12:30', detail: '30분, 역삼로 123 101동', status: '예약확정', tone: 'outline' }],
+  '11-12': [{ dog: '콩이', time: '오후 2:00', detail: '30분, 역삼로 123 103동', status: '예약확정', tone: 'outline' }],
+  '11-20': [{ dog: '두부', time: '오후 6:30', detail: '60분, 역삼로 123 101동', status: '예약확정', tone: 'outline' }],
+};
+
 export const SITTER_HOURS = {
   월: '오전 7:00~9:00, 오전 11:30~오후 1:30', 화: '오전 11:30~오후 1:30', 수: '오전 11:30~오후 1:30',
   목: '오전 11:30~오후 1:30', 금: '오전 11:30~오후 2:30', 토: '오전 10:00~오후 7:00', 일: '오전 10:00~오후 5:00',

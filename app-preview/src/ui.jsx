@@ -41,7 +41,7 @@ export function TopNav({ title, root, location, right, onBack }) {
     <header className="md-topnav app-topnav">
       <button className="md-iconbtn md-pressable" type="button" aria-label="뒤로 가기" onClick={onBack || pop}><Icon name="ChevronLeft" /></button>
       <h1 className="md-topnav__title">{title}</h1>
-      <div style={{ width: 48, display: 'flex', justifyContent: 'flex-end' }}>{right}</div>
+      <div style={{ minWidth: 48, display: 'flex', justifyContent: 'flex-end' }}>{right}</div>
     </header>
   );
 }

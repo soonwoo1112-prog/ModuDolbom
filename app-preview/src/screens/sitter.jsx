@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useApp, useLoad, useSend } from '../store.jsx';
 import { TopNav, IconButton, Btn, Badge, ChipGroup, Callout, ListHeader, Band, Thumb, Tags, Icon, SkeletonList, SkeletonBlock, Result, ErrorResult, Region, RouteMap } from '../ui.jsx';
 import { Figs, Timeline, Section } from './walkparts.jsx';
-import { NEIGHBORHOOD, SITTER_TODAY, SITTER_WEEK, SITTER_HOURS } from '../data.js';
+import { NEIGHBORHOOD, SITTER_TODAY, SITTER_WEEK, SITTER_HOURS, SITTER_WALKS } from '../data.js';
+import { Sheet } from './booking.jsx';
 
 // ── 5. 시터 오늘 탭 ──
 export function SitterToday() {
@@ -170,50 +171,120 @@ export function WalkLogWrite({ params }) {
 }
 
 // ── 14. 시터 일할 수 있는 시간 ──
+const DOW = ['일', '월', '화', '수', '목', '금', '토'];
+const SC_MONTHS = [[10, 31, 4], [11, 30, 0], [12, 31, 2]];
+const keyOf = (dt) => `${dt.getMonth() + 1}-${dt.getDate()}`;
+const TODAY_DATE = new Date(2026, 10, 6);
+function useWorks() {
+  const { flow } = useApp();
+  return (dt) => { const k = keyOf(dt); return k in (flow.dayOverride || {}) ? flow.dayOverride[k] : !!flow.availability[DOW[dt.getDay()]]; };
+}
+
 export function SitterSchedule() {
-  const { flow, update, showSnack } = useApp();
-  const week = useLoad(() => SITTER_WEEK);
+  const { push } = useApp();
+  const walks = useLoad(() => SITTER_WALKS);
+  const works = useWorks();
+  const scrollRef = React.useRef(null);
+  const nowRef = React.useRef(null);
+  React.useEffect(() => { if (walks.status === 'ready' && nowRef.current && scrollRef.current) scrollRef.current.scrollTop = nowRef.current.offsetTop; }, [walks.status]);
   return (
     <>
       <TopNav root title="캘린더" />
-      <div className="app-scroll">
-        <div style={{ padding: '8px 16px 4px' }}><span className="md-section-title md-num">11월 첫째 주</span></div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0,1fr))', gap: 4, padding: '8px 12px 16px' }} aria-busy={week.status === 'loading' ? 'true' : undefined}>
-          {(week.status === 'ready' ? week.data : SITTER_WEEK.map((d) => ({ ...d, dogs: [] }))).map((d) => (
-            <div key={d.day} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, minHeight: 92, padding: '8px 2px', borderRadius: 12, background: d.day === 6 ? 'var(--bg-layer-basement)' : 'transparent', boxShadow: d.day === 6 ? 'inset 0 0 0 1.5px var(--stroke-neutral-contrast)' : 'none' }}>
-              <span className="md-detail">{d.dow}</span>
-              <span className="md-num" style={{ font: '700 16px/22px var(--font-sans)' }}>{d.day}</span>
-              {week.status === 'loading' ? <SkeletonBlock height={15} radius={4} style={{ width: 28 }} /> : d.dogs.map((n) => <span key={n} className="app-dogtag">{n}</span>)}
-            </div>
-          ))}
-        </div>
-        {week.status === 'error' ? <Callout tone="critical" title="이번 주 일정을 불러오지 못했어요">아래 시간 설정은 그대로 바꿀 수 있어요.</Callout> : null}
-        <Band />
-        <div style={{ padding: '20px 16px 4px', display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <span className="md-section-title">일할 수 있는 시간</span>
-          <span className="md-detail">켜 둔 시간에만 보호자의 검색 결과에 보여요</span>
-        </div>
-        <div className="md-list">
-          {['월', '화', '수', '목', '금', '토', '일'].map((k) => {
-            const on = !!flow.availability[k];
-            return (
-              <label key={k} className="md-item" style={{ gridTemplateColumns: '32px minmax(0,1fr) auto', boxShadow: 'inset 0 -1px 0 var(--stroke-neutral-subtle)' }}>
-                <span className="md-list-title">{k}</span>
-                <span className="md-item__muted md-num" style={on ? undefined : { color: 'var(--fg-neutral-subtle)' }}>{on ? SITTER_HOURS[k] : '쉬는 날'}</span>
-                <input type="checkbox" role="switch" className="app-switch" checked={on} aria-label={`${k}요일 일하기`}
-                  onChange={() => { update((f) => ({ availability: { ...f.availability, [k]: !on } })); showSnack(on ? `${k}요일을 쉬는 날로 바꿨어요` : `${k}요일에 일할 수 있게 열었어요`); }} />
-              </label>
-            );
-          })}
-        </div>
-        <div style={{ padding: '20px 16px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-            <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}><span className="md-list-title">내 산책 가격</span><span className="md-item__muted md-num">30분 15,000원, 60분 25,000원</span></span>
-            <Btn size="small" onClick={() => showSnack('가격 바꾸기는 다음 버전에서 볼 수 있어요')}>가격 바꾸기</Btn>
-          </div>
-          <Callout>가격과 시간은 직접 정해요. 바꾼 내용은 다음 검색부터 반영돼요.</Callout>
-        </div>
+      <div className="cl-dow" aria-hidden="true">{DOW.map((d) => <span key={d}>{d}</span>)}</div>
+      <div className="app-scroll" ref={scrollRef} style={{ position: 'relative' }}>
+        {walks.status === 'loading' ? <div style={{ padding: 16 }} aria-busy="true" aria-label="일정 불러오는 중"><SkeletonBlock height={300} /></div>
+          : walks.status === 'error' ? <ErrorResult what="일정" onRetry={walks.retry} />
+            : (
+              <>
+                {SC_MONTHS.map(([mo, len, lead]) => (
+                  <section key={mo} className="cl-month" aria-label={`2026년 ${mo}월`} ref={mo === 11 ? nowRef : undefined}>
+                    <h2 className="cl-month__title">2026년 {mo}월</h2>
+                    <div className="cl-grid">
+                      {Array.from({ length: lead }, (_, i) => <span key={`b${i}`} />)}
+                      {Array.from({ length: len }, (_, i) => {
+                        const dt = new Date(2026, mo - 1, i + 1);
+                        const k = keyOf(dt);
+                        const list = walks.data[k];
+                        const off = !works(dt);
+                        return (
+                          <button key={k} type="button" className="cl-day md-pressable" data-today={k === '11-6'} data-sun={dt.getDay() === 0} data-off={off} aria-label={`${mo}월 ${i + 1}일${list ? `, 산책 ${list.length}건` : ''}${off ? ', 쉬는 날' : ''}`} onClick={() => push('sitterWeek', { date: dt.getTime() })}>
+                            <span className="cl-num">{i + 1}</span>
+                            {list ? <span className="cl-dot" data-past={dt < TODAY_DATE} /> : null}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </section>
+                ))}
+                <div className="cl-legend"><span><span className="cl-dot" />예약된 산책</span><span><span className="cl-dot" data-past="true" />지난 산책</span><span><span className="cl-legend__off">13</span>쉬는 날</span></div>
+              </>
+            )}
       </div>
+    </>
+  );
+}
+
+export function SitterWeek({ params }) {
+  const { update, showSnack } = useApp();
+  const works = useWorks();
+  const first = new Date(params.date || TODAY_DATE.getTime());
+  const [start, setStart] = useState(() => new Date(first.getFullYear(), first.getMonth(), first.getDate() - first.getDay()));
+  const [sel, setSel] = useState(keyOf(first));
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(true);
+  const days = Array.from({ length: 7 }, (_, i) => new Date(start.getFullYear(), start.getMonth(), start.getDate() + i));
+  const selDate = days.find((dt) => keyOf(dt) === sel) || days[0];
+  const selKey = keyOf(selDate);
+  const on = works(selDate);
+  const list = SITTER_WALKS[selKey] || [];
+  const nth = ['첫째', '둘째', '셋째', '넷째', '다섯째'][Math.floor((start.getDate() + 5) / 7)] || '';
+  const shift = (n) => { const st = new Date(start.getFullYear(), start.getMonth(), start.getDate() + n); setStart(st); setSel(keyOf(st)); };
+  const dayTitle = `${selDate.getMonth() + 1}월 ${selDate.getDate()}일 (${DOW[selDate.getDay()]})`;
+  const weekTitle = `${start.getMonth() + 1}월 ${nth} 주`;
+  return (
+    <>
+      <TopNav title={weekTitle} right={<span style={{ display: 'flex' }}><IconButton icon="ChevronLeft" label="지난주" onClick={() => shift(-7)} /><IconButton icon="ChevronRight" label="다음 주" onClick={() => shift(7)} /></span>} />
+      <div className="sc-week" role="group" aria-label={weekTitle}>
+        {days.map((dt) => {
+          const k = keyOf(dt); const w = SITTER_WALKS[k]; const off = !works(dt);
+          return (
+            <button key={k} type="button" className="cl-day md-pressable" aria-pressed={k === selKey} data-today={k === '11-6'} data-sun={dt.getDay() === 0} data-off={off} aria-label={`${dt.getDate()}일 ${DOW[dt.getDay()]}요일${w ? `, 산책 ${w.length}건` : ''}${off ? ', 쉬는 날' : ''}`} onClick={() => setSel(k)}>
+              <span className="sc-dow">{DOW[dt.getDay()]}</span>
+              <span className="cl-num">{dt.getDate()}</span>
+              {w ? <span className="cl-dot" data-past={dt < TODAY_DATE} /> : null}
+            </button>
+          );
+        })}
+      </div>
+      <div className="app-scroll">
+        <div className="sc-day">
+          <h3>{dayTitle}</h3>
+          <p className="sc-avail" data-off={!on}><b>{on ? '일할 수 있는 날' : '쉬는 날'}</b> {on ? SITTER_HOURS[DOW[selDate.getDay()]] : '이 날은 검색 결과에 보이지 않아요'}</p>
+        </div>
+        {list.length ? (
+          <div className="md-list">
+            {list.map((it) => (
+              <div key={it.time} className="md-item" style={{ cursor: 'default' }}>
+                <Thumb />
+                <span className="md-item__body"><span className="md-item__head"><span className="md-list-title">{it.dog}, {it.time}</span><Badge tone={it.tone}>{it.status}</Badge></span><span className="md-item__muted">{it.detail}</span></span>
+                <span />
+              </div>
+            ))}
+          </div>
+        ) : <p className="md-detail" style={{ margin: 0, padding: '16px 16px 8px' }}>{on ? '아직 예약된 산책이 없어요. 요청이 오면 오늘 탭에 먼저 보여요.' : '쉬는 날이라 예약된 산책이 없어요.'}</p>}
+      </div>
+      <div className="app-footer"><Btn size="large" onClick={() => { setDraft(on); setEditing(true); }}><Icon name="Pencil" size={18} />이 날 일정 수정</Btn></div>
+      {editing ? (
+        <Sheet title={dayTitle} onClose={() => setEditing(false)}>
+          <div className="md-seg" role="group" aria-label="이 날 일하기">
+            <button type="button" aria-pressed={draft} onClick={() => setDraft(true)}>일할 수 있어요</button>
+            <button type="button" aria-pressed={!draft} onClick={() => setDraft(false)}>쉬어요</button>
+          </div>
+          <p className="md-detail" style={{ margin: 0 }}>{draft ? `시간은 프로필에서 정한 대로예요: ${SITTER_HOURS[DOW[selDate.getDay()]]}` : `이 날만 쉬어요. 다른 ${DOW[selDate.getDay()]}요일은 그대로예요.`}</p>
+          {!draft && list.length ? <Callout>이미 예약된 산책 {list.length}건은 그대로 남아요. 못 가게 되면 채팅에서 보호자와 먼저 이야기해 주세요.</Callout> : null}
+          <Btn variant="brand" size="large" onClick={() => { update((f) => ({ dayOverride: { ...(f.dayOverride || {}), [selKey]: draft } })); setEditing(false); showSnack(draft ? `${dayTitle}에 일할 수 있게 열었어요` : `${dayTitle}을 쉬는 날로 바꿨어요`); }}>저장하기</Btn>
+        </Sheet>
+      ) : null}
     </>
   );
 }
