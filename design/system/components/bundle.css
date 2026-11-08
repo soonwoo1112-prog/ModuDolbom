@@ -106,7 +106,7 @@ body {
   border: 0; border-radius: var(--r3);
   box-shadow: inset 0 0 0 1px var(--stroke-neutral-solid);
   background: var(--bg-layer-default); color: var(--fg-neutral);
-  font: 400 16px/22px var(--font-sans);
+  font: 400 16px/22px var(--font-sans); box-sizing: border-box; width: 100%;
   transition: box-shadow var(--dur-color) var(--ease-easing);
 }
 textarea.md-input { min-height: 94px; padding: var(--x3_5) var(--x4); resize: vertical; }
@@ -144,6 +144,9 @@ textarea.md-input { min-height: 94px; padding: var(--x3_5) var(--x4); resize: ve
 .md-tags { display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--x2); row-gap: 2px; font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); }
 .md-tags > span + span::before { content: ""; display: inline-block; width: 2px; height: 2px; border-radius: var(--full); background: currentColor; vertical-align: middle; margin-right: var(--x2); translate: 0 -2px; }
 .md-tags b { font-weight: 700; color: var(--fg-neutral-muted); }
+.md-stat-row { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; row-gap: 2px; font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); }
+.md-stat { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.md-stat svg { width: 14px; height: 14px; flex: none; }
 .md-divider { height: 1px; background: var(--stroke-neutral-subtle); margin: 0 var(--x4); border: 0; }
 .md-band { height: 8px; background: var(--bg-layer-basement); }
 
@@ -163,6 +166,26 @@ textarea.md-input { min-height: 94px; padding: var(--x3_5) var(--x4); resize: ve
 .md-tab { --press: 0.964; position: relative; display: grid; justify-items: center; align-content: center; gap: 2px; min-height: var(--bottom-navigation); border: 0; background: transparent; color: var(--fg-neutral-subtle); font: 500 11px/15px var(--font-sans); cursor: pointer; }
 .md-tab[aria-current="page"] { color: var(--fg-neutral); font-weight: 700; }
 .md-tab .md-nbadge { position: absolute; top: 4px; left: calc(50% + 6px); }
+
+/* ── Booking inputs: Segmented Control, Input Button, Bottom Sheet, Date Picker ── */
+.md-seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 2px; padding: 3px; border-radius: var(--full); background: var(--bg-neutral-weak); }
+.md-seg button { min-height: 34px; border: 0; border-radius: var(--full); background: transparent; color: var(--fg-neutral-subtle); font: 500 14px/19px var(--font-sans); cursor: pointer; }
+.md-seg button[aria-pressed="true"] { background: var(--bg-layer-default); color: var(--fg-neutral); font-weight: 700; box-shadow: var(--shadow-floating); }
+.md-inputbtn { display: flex; align-items: center; gap: 10px; box-sizing: border-box; width: 100%; min-height: var(--input-large); padding: 10px 16px; border: 0; border-radius: var(--r3); box-shadow: inset 0 0 0 1px var(--stroke-neutral-solid); background: var(--bg-layer-default); color: var(--fg-neutral); font: 400 16px/22px var(--font-sans); text-align: left; cursor: pointer; }
+.md-inputbtn:active { background: var(--bg-transparent-pressed); }
+.md-inputbtn > svg { width: 18px; height: 18px; flex: none; color: var(--fg-neutral-subtle); }
+.md-inputbtn__text { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.md-overlay { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; justify-content: flex-end; background: var(--bg-overlay); }
+.md-sheet { max-height: 90%; overflow-y: auto; background: var(--bg-layer-floating); border-radius: var(--r6) var(--r6) 0 0; padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 16px; }
+.md-sheet__handle { align-self: center; width: 36px; height: 4px; border-radius: var(--full); background: var(--stroke-neutral-weak); }
+.md-sheet__head { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; margin: 0 -8px; }
+.md-sheet__head h2 { margin: 0; text-align: center; font: 700 18px/24px var(--font-sans); }
+.md-cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 2px; }
+.md-cal__dow { text-align: center; font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); padding-bottom: 4px; }
+.md-cal__cell { position: relative; display: grid; place-items: center; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; font: 500 15px/20px var(--font-sans); color: var(--fg-neutral); }
+.md-cal__cell:disabled { cursor: default; color: var(--fg-disabled); }
+.md-cal__num { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--full); font-variant-numeric: tabular-nums; }
+.md-cal__dot { position: absolute; bottom: 3px; width: 4px; height: 4px; border-radius: var(--full); background: var(--bg-brand-solid); }
 
 /* ── Callout / Snackbar ── */
 .md-callout { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--x2); padding: var(--x3) var(--x4); border-radius: var(--r3); background: var(--bg-informative-weak); color: var(--fg-neutral); font: 400 14px/19px var(--font-sans); }

@@ -1,7 +1,7 @@
 import React from 'react';
-import { BadgeCheck, Bell, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, PawPrint, Pencil, Search, Send, Settings2, Star, User, Users, Wallet, X } from 'lucide-react';
+import { BadgeCheck, Bell, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X } from 'lucide-react';
 
-const Icons = { BadgeCheck, Bell, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, PawPrint, Pencil, Search, Send, Settings2, Star, User, Users, Wallet, X };
+const Icons = { BadgeCheck, Bell, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X };
 import { useApp, TABS } from './store.jsx';
 
 // Lucide icon (ISC), 24px by default, stroke 1.75 per the brand book.

@@ -33,7 +33,14 @@ export function AppProvider({ children }) {
 
   // What the person has done so far in this run of the preview.
   const [flow, setFlow] = useState({
-    dog: '보리', day: '내일', length: '30분', time: '오후 12:30', place: '101동 1층 현관',
+    dog: '보리', length: '30분', time: '오후 12:30',
+    freq: '한 번', once: 7, days: { 월: true, 수: true, 금: true }, start: 9, end: 30, noEnd: false, pickingEnd: false,
+    addrId: 'home',
+    addrs: {
+      home: { label: '집', line: '서울 강남구 역삼로 123', detail: '101동 1203호', method: '비밀번호', code: '#1203*' },
+      parents: { label: '부모님 댁', line: '서울 서초구 반포대로 45', detail: '3동 502호', method: '호출', code: '502' },
+    },
+    pickup: '제가 출근하는 시간이라 비밀번호로 들어오시면 돼요. 목줄이랑 용품은 현관 앞에 뒀어요.',
     picked: { haneul: true, doyun: true },
     requested: false, confirmed: false, declinedRequest: false,
     walkDone: false, logSent: false, pinned: false, liked: {},

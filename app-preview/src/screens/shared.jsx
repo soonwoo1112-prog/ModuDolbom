@@ -82,7 +82,7 @@ export function ChatRoom({ params }) {
           <Thumb size={44} />
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span className="md-list-title">{dog} 산책</span>{confirmed ? <Badge tone="brandSolid">예약확정</Badge> : null}</span>
-            <Tags items={[params.id === 's-kong' ? '오늘 오후 2:00' : '내일 오후 12:30', '30분']} />
+            <Tags items={[params.id === 's-kong' ? '오늘 오후 2:00' : '11월 7일 (토) 오후 12:30', '30분']} />
             <span className="md-label md-num">15,000원</span>
           </div>
           {isGuardian && !confirmed ? <Btn variant="brand" size="small" busy={busy} busyLabel="확정 중" onClick={confirm}>예약 확정하기</Btn> : null}
@@ -99,7 +99,7 @@ export function ChatRoom({ params }) {
             <div className="app-chat">
               <span className="md-tagtext" style={{ alignSelf: 'center' }}>오늘</span>
               {list.map((m, i) => <Bubble key={i} mine={(m.from === 'guardian') === isGuardian} text={m.text} time={m.time} />)}
-              {confirmed ? <SystemNote title={isGuardian ? '예약을 확정했어요' : `${dog}네 보호자가 예약을 확정했어요`}>{isGuardian ? '다른 시터에게 보낸 요청은 자동으로 닫혔어요.' : '오늘 탭에 일정이 추가됐어요.'}</SystemNote> : null}
+              {confirmed ? <SystemNote title={isGuardian ? '예약을 확정했어요' : `${dog}네 보호자가 예약을 확정했어요`}>{isGuardian ? '다른 시터에게 보낸 요청은 자동으로 닫혔어요.' : '이제 주소와 픽업 안내를 볼 수 있어요. 공동현관 비밀번호는 산책 당일에 보여요.'}</SystemNote> : null}
               {extra.map((m, i) => <Bubble key={`x${i}`} mine text={m.text} time={m.time} />)}
             </div>
           )}

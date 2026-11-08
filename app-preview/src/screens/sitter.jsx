@@ -30,7 +30,7 @@ export function SitterToday() {
                     <Thumb />
                     <span className="md-item__body">
                       <span className="md-item__head"><span className="md-list-title">보리</span><Badge>중형견</Badge><Badge tone="brand">같은 아파트</Badge></span>
-                      <span className="md-item__muted">내일 오후 12:30부터 30분, 101동 1층 현관</span>
+                      <span className="md-item__muted">11월 7일 (토) 오후 12:30부터 30분, 역삼로 123</span>
                       <Tags items={['3분 전', '보리네 보호자']} />
                       <span style={{ display: 'grid', gridTemplateColumns: 'minmax(0,2fr) minmax(0,1fr)', gap: 8, marginTop: 8 }}>
                         <Btn variant="neutral" size="small" onClick={() => push('chat', { id: 's-bori' })}>대화창 열기</Btn>

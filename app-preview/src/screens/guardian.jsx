@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { useApp, useLoad, useSend } from '../store.jsx';
 import { TopNav, IconButton, Btn, Badge, ChipGroup, Callout, ListHeader, Band, Avatar, Thumb, Tags, Icon, SkeletonList, SkeletonBlock, Result, ErrorResult, Region, RouteMap } from '../ui.jsx';
 import { NEIGHBORHOOD, MY_DOGS, SITTERS, GUARDIAN_BOOKINGS } from '../data.js';
+import { DateSheet, AddressSheet, AddressDetailSheet, describeSchedule, entryText, PICKUP_HINTS } from './booking.jsx';
 
 // ── 1. 예약 (guardian first tab) ──
 export function BookHome() {
   const { flow, update, push, showSnack } = useApp();
   const dogs = useLoad(() => MY_DOGS);
+  const [sheet, setSheet] = useState(null); // 'date' | 'address' | { detail: id }
+  const sched = describeSchedule(flow);
+  const addr = flow.addrs[flow.addrId];
   return (
     <>
       <TopNav root location title={NEIGHBORHOOD} right={<IconButton icon="Bell" label="알림" badge={flow.confirmed ? 1 : 0} onClick={() => push('log')} />} />
@@ -29,30 +33,64 @@ export function BookHome() {
           </section>
           <section className="app-section">
             <span className="md-field__label">날짜</span>
-            <ChipGroup label="날짜" options={['오늘', '내일', '날짜 고르기']} value={flow.day} onChange={(day) => update({ day })} />
+            <div className="md-seg" role="group" aria-label="산책 횟수">
+              {['한 번', '반복'].map((l) => <button key={l} type="button" aria-pressed={flow.freq === l} onClick={() => update({ freq: l })}>{l}</button>)}
+            </div>
+            <button type="button" className="md-inputbtn md-pressable" onClick={() => setSheet('date')}>
+              <Icon name="Calendar" size={18} />
+              <span className="md-inputbtn__text"><span>{sched.label}</span>{sched.sub ? <span className="md-detail">{sched.sub}</span> : null}</span>
+              <Icon name="ChevronRight" size={18} />
+            </button>
           </section>
           <section className="app-section">
             <span className="md-field__label">시작 시간</span>
-            <button className="md-input md-pressable" type="button" style={{ display: 'flex', alignItems: 'center', gap: 10, textAlign: 'left', cursor: 'pointer' }} onClick={() => showSnack('시간 고르기는 다음 버전에서 볼 수 있어요')}>
-              <Icon name="Clock" size={18} style={{ color: 'var(--fg-neutral-subtle)' }} /><span style={{ flex: 1 }}>{flow.time}</span><Icon name="ChevronRight" size={18} style={{ color: 'var(--fg-neutral-subtle)' }} />
+            <button className="md-inputbtn md-pressable" type="button" onClick={() => showSnack('시간 고르기는 다음 버전에서 볼 수 있어요')}>
+              <Icon name="Clock" size={18} /><span className="md-inputbtn__text">{flow.time}</span><Icon name="ChevronRight" size={18} />
             </button>
           </section>
           <section className="app-section">
             <span className="md-field__label">산책 길이</span>
             <ChipGroup label="산책 길이" options={['30분', '60분', '90분']} value={flow.length} onChange={(length) => update({ length })} />
           </section>
+          <section className="app-section">
+            <span className="md-field__label">주소</span>
+            <button type="button" className="md-inputbtn md-pressable" onClick={() => setSheet('address')}>
+              <Icon name="MapPin" size={18} />
+              <span className="md-inputbtn__text"><span style={{ fontWeight: 700 }}>{addr.label}</span><span className="md-detail">{addr.line}, {addr.detail}</span><span className="md-detail">{entryText(addr)}</span></span>
+              <Icon name="ChevronRight" size={18} />
+            </button>
+          </section>
           <div className="md-field">
-            <label className="md-field__label" htmlFor="place">만날 장소</label>
-            <input className="md-input" id="place" value={flow.place} onChange={(e) => update({ place: e.target.value })} aria-invalid={flow.place.trim() ? undefined : 'true'} aria-describedby="place-err" />
-            {flow.place.trim() ? null : <div className="md-field__foot"><span className="md-field__error" id="place-err">만날 장소를 적어 주세요. 시터가 찾아올 곳이에요.</span></div>}
+            <label className="md-field__label" htmlFor="pickup">픽업 안내<em>선택</em></label>
+            <textarea className="md-input" id="pickup" aria-describedby="pickup-help" placeholder="예: 제가 출근하는 시간이라 비밀번호로 들어오시면 돼요." value={flow.pickup} onChange={(e) => update({ pickup: e.target.value.slice(0, 300) })} />
+            <div className="md-row" role="group" aria-label="자주 쓰는 안내">
+              {Object.entries(PICKUP_HINTS).map(([label, text]) => (
+                <button key={label} type="button" className="md-chip md-chip--outline md-pressable" style={{ height: 32 }} onClick={() => update((f) => ({ pickup: ((f.pickup ? f.pickup + ' ' : '') + text).slice(0, 300) }))}><span>{label}</span></button>
+              ))}
+            </div>
+            <div className="md-field__foot"><span id="pickup-help">예약이 확정된 시터에게만 보여요.</span><span className="md-num">{flow.pickup.length}/300</span></div>
           </div>
           <Callout title="앱에서 예약한 산책만 보험으로 보장돼요">앱 밖에서 약속하면 사고가 나도 도움을 받을 수 없어요.</Callout>
         </div>
       </div>
       <div className="app-footer">
-        <Btn variant="brand" size="large" disabled={!flow.place.trim()} onClick={() => push('matching')}>조건에 맞는 시터 찾기</Btn>
+        <Btn variant="brand" size="large" disabled={!sched.ok} onClick={() => push('matching')}>{sched.ok ? '조건에 맞는 시터 찾기' : sched.why}</Btn>
       </div>
+      {sheet === 'date' ? <DateSheet onClose={() => setSheet(null)} /> : null}
+      {sheet === 'address' ? <AddressSheet onClose={() => setSheet(null)} onOpen={(id) => setSheet({ detail: id })} /> : null}
+      {sheet && sheet.detail ? <AddressDetailSheet id={sheet.detail} onClose={() => setSheet(null)} onBack={() => setSheet('address')} /> : null}
     </>
+  );
+}
+
+// Sitter stats with an icon in front of each figure: 리뷰, 반복고객, 답장.
+function SitterStats({ s }) {
+  return (
+    <span className="md-stat-row md-num">
+      <span className="md-stat"><Icon name="Star" size={14} />{s.reviews}</span>
+      {s.repeat ? <span className="md-stat"><Icon name="Repeat" size={14} />{s.repeat}</span> : null}
+      <span className="md-stat"><Icon name="MessageCircle" size={14} />{s.reply}</span>
+    </span>
   );
 }
 
@@ -66,7 +104,7 @@ export function Matching() {
     <>
       <TopNav title="시터 고르기" />
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '8px 16px 12px', boxShadow: 'inset 0 -1px 0 var(--stroke-neutral-subtle)' }}>
-        <span className="md-tags" style={{ fontSize: 14, lineHeight: '19px', color: 'var(--fg-neutral-muted)' }}><span><b>{flow.dog}</b></span><span>{flow.day} {flow.time}</span><span>{flow.length}</span></span>
+        <span className="md-tags" style={{ fontSize: 14, lineHeight: '19px', color: 'var(--fg-neutral-muted)' }}><span><b>{flow.dog}</b></span><span>{describeSchedule(flow).label} {flow.time}</span><span>{flow.length}</span></span>
         <Btn variant="ghost" size="small" onClick={pop}>조건 바꾸기</Btn>
       </div>
       <div className="app-scroll">
@@ -85,7 +123,7 @@ export function Matching() {
                       <span className="md-item__head"><span className="md-list-title">{s.name}</span>{s.sameApt ? <Badge tone="brand">같은 아파트</Badge> : null}{s.isNew ? <Badge>새로 온 시터</Badge> : null}</span>
                       <span className="md-item__muted">{s.bio}</span>
                       <span className="md-tags md-num"><span><b>{s.price}</b></span><span>{s.distance}</span></span>
-                      <Tags items={s.meta} />
+                      <SitterStats s={s} />
                     </span>
                     <input className="md-check" type="checkbox" checked={!!flow.picked[s.id]} onChange={() => update((f) => ({ picked: { ...f.picked, [s.id]: !f.picked[s.id] } }))} aria-label={`${s.name} 시터 선택`} style={{ marginTop: 12 }} />
                   </label>
@@ -123,7 +161,20 @@ export function Sent({ params }) {
         <section style={{ padding: '20px 16px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <Thumb />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}><span className="md-section-title">{flow.dog}의 {flow.day} 산책</span><Tags items={[flow.time, flow.length, flow.place]} /></div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}><span className="md-section-title">{flow.dog}의 {describeSchedule(flow).title} 산책</span>{describeSchedule(flow).sub ? <span className="md-detail">{describeSchedule(flow).sub}</span> : null}<Tags items={[flow.time, flow.length]} /></div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 12, borderRadius: 'var(--r3)', background: 'var(--bg-layer-basement)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '18px minmax(0,1fr)', gap: 8 }}>
+              <Icon name="MapPin" size={18} style={{ color: 'var(--fg-neutral-subtle)', marginTop: 1 }} />
+              <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}><span className="md-label">{flow.addrs[flow.addrId].label}</span><span className="md-item__muted">{flow.addrs[flow.addrId].line}, {flow.addrs[flow.addrId].detail}</span><span className="md-detail">{entryText(flow.addrs[flow.addrId])}</span></span>
+            </div>
+            {flow.pickup ? (
+              <div style={{ display: 'grid', gridTemplateColumns: '18px minmax(0,1fr)', gap: 8 }}>
+                <Icon name="NotebookPen" size={18} style={{ color: 'var(--fg-neutral-subtle)', marginTop: 1 }} />
+                <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}><span className="md-label">픽업 안내</span><span className="md-item__muted">{flow.pickup}</span></span>
+              </div>
+            ) : null}
+            <span className="md-detail">주소와 픽업 안내는 예약이 확정된 시터에게만 보여요</span>
           </div>
           <Callout>{flow.confirmed ? '예약을 확정해서 나머지 요청은 닫혔어요.' : '한 명과 예약을 확정하면 나머지 요청은 자동으로 닫혀요.'}</Callout>
         </section>
@@ -148,7 +199,7 @@ export function Sent({ params }) {
                           <span className="md-item__head"><span className="md-list-title">{s.name}</span>
                             {talking ? <Badge tone={flow.confirmed ? 'brandSolid' : 'info'}>{flow.confirmed ? '예약확정' : '대화중'}</Badge> : <Badge tone="outline">{closed ? '요청종료' : '요청중'}</Badge>}
                           </span>
-                          <span className="md-item__muted">{talking ? (flow.confirmed ? '내일 산책을 함께해요.' : '대화를 시작했어요. 조건을 맞춰 보세요.') : (closed ? '다른 시터와 확정해서 요청이 닫혔어요.' : '아직 답장이 없어요.')}</span>
+                          <span className="md-item__muted">{talking ? (flow.confirmed ? '산책을 함께하기로 했어요.' : '대화를 시작했어요. 조건을 맞춰 보세요.') : (closed ? '다른 시터와 확정해서 요청이 닫혔어요.' : '아직 답장이 없어요.')}</span>
                           <span className="md-tags md-num"><span><b>{s.price}</b></span><span>방금</span></span>
                         </span>
                         {talking ? <Btn variant="neutral" size="small" onClick={() => push('chat', { id: 'c-haneul' })}>대화창 열기</Btn> : <span />}
@@ -194,7 +245,7 @@ export function Live() {
                 </div>
                 <ListHeader>산책 소식</ListHeader>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: '0 16px 24px' }}>
-                  {[['오후 12:38', '소변 1회를 기록했어요'], ['오후 12:33', '공원 산책로에 들어섰어요'], ['오후 12:31', '101동 1층 현관에서 산책을 시작했어요']].map(([t, m]) => (
+                  {[['오후 12:38', '소변 1회를 기록했어요'], ['오후 12:33', '공원 산책로에 들어섰어요'], ['오후 12:31', '보리를 데리고 산책을 시작했어요']].map(([t, m]) => (
                     <div key={t} style={{ display: 'grid', gridTemplateColumns: '72px minmax(0,1fr)', gap: 8 }}><span className="md-detail md-num">{t}</span><span style={{ fontSize: 14, lineHeight: '19px' }}>{m}</span></div>
                   ))}
                   <Callout>산책이 끝나면 사진과 기록을 보내 드려요.</Callout>

@@ -8,27 +8,27 @@ export const MY_DOGS = [
 ];
 
 export const SITTERS = [
-  { id: 'haneul', name: '김하늘', sameApt: true, isNew: false, bio: '점심시간에 산책할 수 있어요', price: '30분 15,000원', distance: '120m', meta: ['리뷰 48', '재이용 12명', '답장 10분'] },
-  { id: 'doyun', name: '이도윤', sameApt: false, isNew: true, bio: '수업 없는 화요일과 목요일에 산책해요', price: '30분 12,000원', distance: '450m', meta: ['리뷰 아직 없음', '답장 25분'] },
-  { id: 'seoyeon', name: '박서연', sameApt: false, isNew: false, bio: '대형견 산책 경험이 많아요', price: '30분 18,000원', distance: '800m', meta: ['리뷰 112', '재이용 31명', '답장 5분'] },
-  { id: 'minjun', name: '정민준', sameApt: true, isNew: false, bio: '아침과 점심에 산책할 수 있어요', price: '30분 13,000원', distance: '200m', meta: ['리뷰 9', '답장 40분'] },
-  { id: 'yuna', name: '최유나', sameApt: false, isNew: false, bio: '천천히 걷는 산책을 좋아해요', price: '30분 14,000원', distance: '600m', meta: ['리뷰 23', '재이용 4명', '답장 15분'] },
+  { id: 'haneul', name: '김하늘', sameApt: true, isNew: false, bio: '점심시간에 산책할 수 있어요', price: '30분 15,000원', distance: '120m', reviews: '리뷰 48', repeat: '반복고객 12명', reply: '답장 10분' },
+  { id: 'doyun', name: '이도윤', sameApt: false, isNew: true, bio: '수업 없는 화요일과 목요일에 산책해요', price: '30분 12,000원', distance: '450m', reviews: '리뷰 아직 없음', repeat: '', reply: '답장 25분' },
+  { id: 'seoyeon', name: '박서연', sameApt: false, isNew: false, bio: '대형견 산책 경험이 많아요', price: '30분 18,000원', distance: '800m', reviews: '리뷰 112', repeat: '반복고객 31명', reply: '답장 5분' },
+  { id: 'minjun', name: '정민준', sameApt: true, isNew: false, bio: '아침과 점심에 산책할 수 있어요', price: '30분 13,000원', distance: '200m', reviews: '리뷰 9', repeat: '', reply: '답장 40분' },
+  { id: 'yuna', name: '최유나', sameApt: false, isNew: false, bio: '천천히 걷는 산책을 좋아해요', price: '30분 14,000원', distance: '600m', reviews: '리뷰 23', repeat: '반복고객 4명', reply: '답장 15분' },
 ];
 
 export const GUARDIAN_CHATS = [
-  { id: 'c-haneul', with: '김하늘', sub: '보리 산책, 내일 오후 12:30', last: '확정해 주시면 내일 101동 1층 현관에서 만나요.', time: '오후 3:05', unread: 1, status: '대화중' },
-  { id: 'c-doyun', with: '이도윤', sub: '보리 산책, 내일 오후 12:30', last: '요청을 보냈어요', time: '오후 2:58', unread: 0, status: '요청중' },
+  { id: 'c-haneul', with: '김하늘', sub: '보리 산책, 11월 7일 (토) 오후 12:30', last: '확정해 주시면 픽업 안내대로 들어갈게요.', time: '오후 3:05', unread: 1, status: '대화중' },
+  { id: 'c-doyun', with: '이도윤', sub: '보리 산책, 11월 7일 (토) 오후 12:30', last: '요청을 보냈어요', time: '오후 2:58', unread: 0, status: '요청중' },
 ];
 
 export const SITTER_CHATS = [
-  { id: 's-bori', with: '보리네 보호자', sub: '보리 산책, 내일 오후 12:30', last: '좋아요. 보리가 다른 강아지를 보면 조금 짖어요.', time: '오후 3:04', unread: 1, status: '대화중' },
+  { id: 's-bori', with: '보리네 보호자', sub: '보리 산책, 11월 7일 (토) 오후 12:30', last: '좋아요. 보리가 다른 강아지를 보면 조금 짖어요.', time: '오후 3:04', unread: 1, status: '대화중' },
   { id: 's-kong', with: '콩이네 보호자', sub: '콩이 산책, 오늘 오후 2:00', last: '오늘도 잘 부탁드려요.', time: '오전 10:12', unread: 0, status: '예약확정' },
 ];
 
 export const CHAT_MESSAGES = [
   { from: 'sitter', text: '안녕하세요. 같은 아파트 103동에 살아요. 내일 12시 반에 산책할 수 있어요.', time: '오후 3:02' },
   { from: 'guardian', text: '좋아요. 보리가 다른 강아지를 보면 조금 짖어요.', time: '오후 3:04' },
-  { from: 'sitter', text: '괜찮아요. 강아지가 적은 공원 길로 걸을게요. 확정해 주시면 내일 101동 1층 현관에서 만나요.', time: '오후 3:05' },
+  { from: 'sitter', text: '괜찮아요. 강아지가 적은 공원 길로 걸을게요. 확정해 주시면 픽업 안내대로 들어갈게요.', time: '오후 3:05' },
 ];
 
 export const FEED = [
@@ -47,13 +47,13 @@ export const COMMUNITY = [
 export const GUARDIAN_BOOKINGS = {
   6: [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터와 산책하고 있어요', status: '산책중', tone: 'info', go: 'live' }],
   3: [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터, 30분', status: '산책완료', tone: 'neutral', go: 'log' }],
-  7: [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터, 30분, 101동 1층 현관', status: '예약확정', tone: 'brand', go: 'chat' }],
+  7: [{ title: '보리 산책, 오후 12:30', detail: '김하늘 시터, 30분, 집', status: '예약확정', tone: 'brand', go: 'chat' }],
   14: [{ title: '보리 산책, 오후 6:00', detail: '시터 2명에게 요청했어요', status: '요청중', tone: 'outline', go: 'sent' }],
 };
 
 export const SITTER_TODAY = [
-  { id: 'kong', dog: '콩이', time: '오후 2:00', detail: '30분, 103동 정문', guardian: '콩이네 보호자', canStart: true },
-  { id: 'dubu', dog: '두부', time: '오후 6:30', detail: '60분, 101동 1층 현관', guardian: '두부네 보호자', canStart: false },
+  { id: 'kong', dog: '콩이', time: '오후 2:00', detail: '30분, 역삼로 123 103동', guardian: '콩이네 보호자', canStart: true },
+  { id: 'dubu', dog: '두부', time: '오후 6:30', detail: '60분, 역삼로 123 101동', guardian: '두부네 보호자', canStart: false },
 ];
 
 export const SITTER_WEEK = [
