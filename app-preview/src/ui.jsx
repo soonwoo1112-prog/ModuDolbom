@@ -1,5 +1,5 @@
 import React from 'react';
-import { BadgeCheck, Bell, Cake, CalendarX, Dog, Weight, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X } from 'lucide-react';
+import { BadgeCheck, Bell, Cake, CalendarX, Dog, Droplet, Route, Timer, Weight, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X } from 'lucide-react';
 
 // Mars is newer than this lucide-react; paths copied from lucide-static 1.70.0 (ISC).
 const Mars = React.forwardRef(({ size = 24, strokeWidth = 2, ...rest }, ref) => (
@@ -7,7 +7,13 @@ const Mars = React.forwardRef(({ size = 24, strokeWidth = 2, ...rest }, ref) => 
     <path d="M16 3h5v5" /><path d="m21 3-6.75 6.75" /><circle cx="10" cy="14" r="6" />
   </svg>
 ));
-const Icons = { Cake, Dog, Mars, Weight, BadgeCheck, Bell, CalendarX, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X };
+// 모두돌봄 custom icon (not Lucide), drawn on Lucide's 24px grid and stroke: a three-tier swirl with two eyes.
+const Poop = React.forwardRef(({ size = 24, strokeWidth = 2, ...rest }, ref) => (
+  <svg ref={ref} xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" {...rest}>
+    <path d="M5 20h14a2.5 2.5 0 0 0 0-5H5a2.5 2.5 0 0 0 0 5z" /><path d="M7 15a2.5 2.5 0 0 1 0-5h10a2.5 2.5 0 0 1 0 5" /><path d="M9 10a2 2 0 0 1 1-3.7C10.5 5 11.6 4 13 4a3 3 0 0 1 2 6" /><path d="M10 17.5h.01" /><path d="M14 17.5h.01" />
+  </svg>
+));
+const Icons = { Cake, Dog, Droplet, Mars, Poop, Route, Timer, Weight, BadgeCheck, Bell, CalendarX, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X };
 import { useApp, TABS } from './store.jsx';
 
 // Lucide icon (ISC), 24px by default, stroke 1.75 per the brand book.

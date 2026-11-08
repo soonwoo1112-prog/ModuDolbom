@@ -183,3 +183,31 @@ button { font-family: inherit; }
 .md-photos > * { aspect-ratio: 1; border-radius: var(--r2); background: var(--bg-neutral-weak); display: grid; place-items: center; color: var(--fg-neutral-subtle); }
 .md-photos__add { --press: 0.96; border: 0; display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-shadow: inset 0 0 0 1px var(--stroke-neutral-weak); background: var(--bg-layer-default) !important; font: 500 13px/18px var(--font-sans); color: var(--fg-neutral-muted) !important; cursor: pointer; }
 .md-photos__add svg { width: 24px; height: 24px; }
+
+/* Walking: a soft panel that rises over the map, rounded corners and weak fills instead of outlines. */
+.md-walk-panel { position: relative; z-index: 1; margin-top: -20px; border-radius: var(--r6) var(--r6) 0 0; background: var(--bg-layer-default); box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06); }
+.md-walk-hero { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.md-walk-hero > div { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border-radius: var(--r4); background: var(--bg-brand-weak); }
+.md-walk-hero dt { display: inline-flex; align-items: center; gap: 4px; font: 500 13px/18px var(--font-sans); color: var(--fg-brand); }
+.md-walk-hero dt svg { width: 16px; height: 16px; }
+.md-walk-hero dd { margin: 0; font: 700 32px/40px var(--font-sans); letter-spacing: -0.5px; color: var(--fg-neutral); font-variant-numeric: tabular-nums; }
+.md-walk-hero dd small { margin-left: 2px; font-size: 16px; font-weight: 600; color: var(--fg-neutral-muted); }
+/* Potty log: two tap tiles, a round coloured icon, the count, and a paw stamp for each time. */
+.md-potty { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.md-potty__tile { --press: 0.97; display: flex; flex-direction: column; gap: 10px; padding: 14px; border: 0; border-radius: var(--r4); background: var(--bg-neutral-weak); color: var(--fg-neutral); text-align: left; cursor: pointer; font-family: var(--font-sans); }
+.md-potty__tile:active { background: var(--bg-neutral-weak-pressed); }
+.md-potty__top { display: flex; align-items: center; justify-content: space-between; }
+.md-potty__icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--full); }
+.md-potty__icon svg { width: 24px; height: 24px; }
+.md-potty__icon--pee { background: var(--bg-informative-weak); color: var(--fg-informative); }
+.md-potty__icon--poop { background: var(--bg-warning-weak); color: var(--fg-warning); }
+.md-potty__count { font: 700 24px/30px var(--font-sans); font-variant-numeric: tabular-nums; }
+.md-potty__count small { font-size: 14px; font-weight: 500; color: var(--fg-neutral-muted); margin-left: 1px; }
+.md-potty__label { font: 700 15px/20px var(--font-sans); }
+.md-potty__hint { font: 400 12px/16px var(--font-sans); color: var(--fg-neutral-subtle); }
+.md-potty__paws { display: flex; gap: 2px; min-height: 14px; color: var(--fg-brand); }
+.md-potty__paws svg { width: 14px; height: 14px; }
+/* Walk photos: take or upload, then a strip of what was sent. */
+.md-walk-photos { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.md-walk-photos > span { flex: none; width: 72px; height: 72px; border-radius: var(--r3); background: var(--bg-neutral-weak); display: grid; place-items: center; color: var(--fg-neutral-subtle); }
+.md-walk-photos > span svg { width: 20px; height: 20px; }
