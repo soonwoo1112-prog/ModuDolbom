@@ -42,7 +42,7 @@ export function AppProvider({ children }) {
     },
     pickup: '제가 출근하는 시간이라 비밀번호로 들어오시면 돼요. 목줄이랑 용품은 현관 앞에 뒀어요.',
     picked: { haneul: true, doyun: true },
-    requested: false, confirmed: false, declinedRequest: false,
+    requested: false, confirmed: false, declinedRequest: false, editSent: false, editDay: null, editTime: null,
     walkDone: false, logSent: false, pinned: false, liked: {},
     availability: { 월: true, 화: true, 수: false, 목: true, 금: true, 토: true, 일: false },
   });

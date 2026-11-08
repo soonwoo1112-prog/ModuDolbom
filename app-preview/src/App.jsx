@@ -5,12 +5,13 @@ import { Splash, Login, Neighborhood, RolePick } from './screens/entry.jsx';
 import { BookHome, Matching, Sent, Live, Log, GuardianCalendar } from './screens/guardian.jsx';
 import { SitterToday, Walking, WalkLogWrite, SitterSchedule } from './screens/sitter.jsx';
 import { ChatList, ChatRoom, Social, More, CheckSheet } from './screens/shared.jsx';
+import { ChatEdit, DogProfile } from './screens/chat.jsx';
 
 const ROOTS = {
   guardian: { book: BookHome, chat: ChatList, social: Social, calendar: GuardianCalendar, more: More },
   sitter: { today: SitterToday, chat: ChatList, social: Social, calendar: SitterSchedule, more: More },
 };
-const PUSHED = { matching: Matching, sent: Sent, chat: ChatRoom, live: Live, log: Log, walking: Walking, walklog: WalkLogWrite };
+const PUSHED = { matching: Matching, sent: Sent, chat: ChatRoom, live: Live, log: Log, walking: Walking, walklog: WalkLogWrite, chatEdit: ChatEdit, dog: DogProfile };
 
 function Main() {
   const { role, nav, flow, setSheetOpen } = useApp();

@@ -32,7 +32,7 @@ export const PICKUP_HINTS = {
   '크레이트에 있어요': '크레이트 안에 있어요. 꺼내 주시고 산책 후에는 풀어 두세요.',
 };
 
-function Sheet({ title, onClose, onBack, children }) {
+export function Sheet({ title, onClose, onBack, children }) {
   const host = document.querySelector('.app-shell');
   const sheet = (
     <div className="app-overlay" onClick={onClose}>

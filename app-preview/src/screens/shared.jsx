@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp, useLoad, useSend } from '../store.jsx';
 import { TopNav, IconButton, Btn, Badge, ChipGroup, Callout, ListHeader, Band, Avatar, Thumb, Tags, Icon, SkeletonList, SkeletonBlock, Result, ErrorResult, Region, Bubble, SystemNote } from '../ui.jsx';
+import { ChatInfoSheet, ChatMenuSheet } from './chat.jsx';
 import { NEIGHBORHOOD, GUARDIAN_CHATS, SITTER_CHATS, CHAT_MESSAGES, FEED, COMMUNITY } from '../data.js';
 
 const STATUS_TONE = { 대화중: 'info', 요청중: 'outline', 예약확정: 'brandSolid' };
@@ -51,7 +52,7 @@ export function ChatList() {
 
 // ── 4·6. 채팅방 ──
 export function ChatRoom({ params }) {
-  const { role, flow, update, setDialog, showSnack, goTab } = useApp();
+  const { role, flow, update, setDialog, showSnack, goTab, push } = useApp();
   const isGuardian = role === 'guardian';
   const msgs = useLoad(() => CHAT_MESSAGES, [params.id]);
   const [busy, send] = useSend();
@@ -61,12 +62,18 @@ export function ChatRoom({ params }) {
   const dog = params.id === 's-kong' ? '콩이' : '보리';
   const confirmed = params.id === 's-kong' ? true : flow.confirmed;
 
+  const [sheet, setSheet] = useState(null); // 'info' | 'menu'
   const confirm = () => send(() => { update({ confirmed: true }); showSnack('예약을 확정했어요'); });
-  const askCancel = () => setDialog({
+  const askCancel = () => setDialog(confirmed ? {
     title: '예약을 취소할까요',
     body: '취소하면 되돌릴 수 없어요. 산책 하루 전까지는 수수료 없이 취소할 수 있어요.',
     confirmLabel: '예약 취소',
     onConfirm: () => { update({ confirmed: false, requested: false }); showSnack('예약을 취소했어요'); },
+  } : {
+    title: '요청을 취소할까요',
+    body: '김하늘 시터에게 보낸 요청이 닫혀요. 다시 요청하려면 처음부터 골라야 해요.',
+    confirmLabel: '요청 취소',
+    onConfirm: () => { update({ requested: false }); showSnack('요청을 취소했어요'); },
   });
   const sendMsg = () => {
     if (!draft.trim()) return;
@@ -76,20 +83,41 @@ export function ChatRoom({ params }) {
 
   return (
     <>
-      <TopNav title={title} right={confirmed && isGuardian ? <IconButton icon="EllipsisVertical" label="예약 관리" onClick={askCancel} /> : null} />
-      <section className="app-pinned">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <Thumb size={44} />
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span className="md-list-title">{dog} 산책</span>{confirmed ? <Badge tone="brandSolid">예약확정</Badge> : null}</span>
-            <Tags items={[params.id === 's-kong' ? '오늘 오후 2:00' : '11월 7일 (토) 오후 12:30', '30분']} />
-            <span className="md-label md-num">15,000원</span>
+      <TopNav title={title} />
+      {isGuardian ? (
+        <section className="app-pinned" style={{ paddingRight: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <button type="button" className="md-avatar md-pressable" aria-label="보리 프로필 보기" style={{ width: 40, height: 40, border: 0, background: 'var(--bg-layer-default)', cursor: 'pointer' }} onClick={() => push('dog')}><Icon name="PawPrint" size={20} /></button>
+            <span style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}>
+              <span className="md-list-title" style={{ fontWeight: 700 }}>{dog}</span>
+              {confirmed ? <Badge tone="brandSolid">예약확정</Badge> : null}
+              {flow.editSent ? <Badge tone="info">수정요청중</Badge> : null}
+            </span>
+            <IconButton icon="EllipsisVertical" label="더보기" onClick={() => setSheet('menu')} />
           </div>
-          {isGuardian && !confirmed ? <Btn variant="brand" size="small" busy={busy} busyLabel="확정 중" onClick={confirm}>예약 확정하기</Btn> : null}
-          {!isGuardian && confirmed ? <Btn size="small" onClick={() => goTab('today')}>일정 보기</Btn> : null}
-        </div>
-        <span className="md-detail" style={{ display: 'flex', alignItems: 'center', gap: 6 }}><Icon name="Info" size={16} style={{ color: 'var(--fg-informative)' }} />앱에서 예약한 산책만 보험으로 보장돼요</span>
-      </section>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0,1fr))', gap: 8, paddingRight: 8 }}>
+            {confirmed
+              ? <Btn size="small" disabled>확정했어요</Btn>
+              : <Btn variant="brand" size="small" busy={busy} busyLabel="확정 중" onClick={confirm}>예약 확정</Btn>}
+            <Btn size="small" onClick={() => push('chatEdit')}><Icon name="Pencil" size={16} />수정</Btn>
+            <Btn size="small" onClick={() => setSheet('info')}><Icon name="Info" size={16} />정보</Btn>
+          </div>
+        </section>
+      ) : (
+        <section className="app-pinned">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <Thumb size={44} />
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><span className="md-list-title">{dog} 산책</span>{confirmed ? <Badge tone="brandSolid">예약확정</Badge> : null}</span>
+              <Tags items={[params.id === 's-kong' ? '오늘 오후 2:00' : '11월 7일 (토) 오후 12:30', '30분']} />
+              <span className="md-label md-num">15,000원</span>
+            </div>
+            {confirmed ? <Btn size="small" onClick={() => goTab('today')}>일정 보기</Btn> : null}
+          </div>
+        </section>
+      )}
+      {sheet === 'info' ? <ChatInfoSheet onClose={() => setSheet(null)} /> : null}
+      {sheet === 'menu' ? <ChatMenuSheet confirmed={confirmed} onClose={() => setSheet(null)} onCancel={askCancel} /> : null}
       <div className="app-scroll">
         <Region load={msgs}
           skeleton={<div className="app-chat" aria-busy="true" aria-label="대화 불러오는 중"><SkeletonBlock height={62} radius={16} style={{ width: '70%' }} /><SkeletonBlock height={42} radius={16} style={{ width: '55%', alignSelf: 'flex-end' }} /><SkeletonBlock height={62} radius={16} style={{ width: '75%' }} /></div>}
