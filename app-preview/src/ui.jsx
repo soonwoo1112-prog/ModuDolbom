@@ -1,7 +1,7 @@
 import React from 'react';
-import { BadgeCheck, Bell, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, PawPrint, Pencil, Search, Send, Settings2, Star, User, Users, Wallet, X } from 'lucide-react';
+import { BadgeCheck, Bell, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, PawPrint, Pencil, Search, Send, Settings2, Star, User, Users, Wallet, X } from 'lucide-react';
 
-const Icons = { BadgeCheck, Bell, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, PawPrint, Pencil, Search, Send, Settings2, Star, User, Users, Wallet, X };
+const Icons = { BadgeCheck, Bell, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, PawPrint, Pencil, Search, Send, Settings2, Star, User, Users, Wallet, X };
 import { useApp, TABS } from './store.jsx';
 
 // Lucide icon (ISC), 24px by default, stroke 1.75 per the brand book.
@@ -11,12 +11,16 @@ export function Icon({ name, size = 24, label, style, fill }) {
   return <C size={size} strokeWidth={1.75} aria-hidden={label ? undefined : true} aria-label={label} role={label ? 'img' : undefined} style={style} fill={fill || 'none'} />;
 }
 
-export function TopNav({ title, root, right, onBack }) {
-  const { pop } = useApp();
+// `location`: the root title is the neighbourhood picker (SEED Root Top Navigation, Button title type),
+// t6 Bold with a chevron, so it never reads as a second heading above the screen title.
+export function TopNav({ title, root, location, right, onBack }) {
+  const { pop, showSnack } = useApp();
   if (root) {
     return (
       <header className="md-topnav md-topnav--root app-topnav">
-        <h1 className="md-topnav__title">{title}</h1>
+        {location
+          ? <h1 style={{ margin: 0 }}><button className="md-topnav__location md-pressable" type="button" aria-label={`동네 바꾸기, 지금 ${title}`} onClick={() => showSnack('동네 바꾸기는 다음 버전에서 볼 수 있어요')}>{title}<Icon name="ChevronDown" size={18} /></button></h1>
+          : <h1 className="md-topnav__title">{title}</h1>}
         <div style={{ display: 'flex' }}>{right}</div>
       </header>
     );

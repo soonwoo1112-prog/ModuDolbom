@@ -13,7 +13,7 @@ export function SitterToday() {
   };
   return (
     <>
-      <TopNav root title={NEIGHBORHOOD} right={<IconButton icon="Bell" label="알림" />} />
+      <TopNav root location title={NEIGHBORHOOD} right={<IconButton icon="Bell" label="알림" />} />
       <div className="app-scroll">
         <div style={{ padding: '20px 16px 4px' }}><h2 className="md-screen-title">오늘도 동네 산책을 부탁받았어요</h2></div>
         <Region load={today}

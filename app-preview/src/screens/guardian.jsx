@@ -9,7 +9,7 @@ export function BookHome() {
   const dogs = useLoad(() => MY_DOGS);
   return (
     <>
-      <TopNav root title={NEIGHBORHOOD} right={<IconButton icon="Bell" label="알림" badge={flow.confirmed ? 1 : 0} onClick={() => push('log')} />} />
+      <TopNav root location title={NEIGHBORHOOD} right={<IconButton icon="Bell" label="알림" badge={flow.confirmed ? 1 : 0} onClick={() => push('log')} />} />
       <div className="app-scroll">
         <div className="app-pad">
           <button type="button" className="app-banner md-pressable" onClick={() => push('live')}>

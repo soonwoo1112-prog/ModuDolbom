@@ -122,3 +122,8 @@ button { font-family: inherit; }
 /* Walk-in-progress banner (SEED Page Banner, Positive weak, actionable) */
 .app-banner { display: flex; align-items: center; gap: var(--x3); width: 100%; padding: var(--x3) var(--x4); border: 0; border-radius: var(--r3); background: var(--bg-brand-weak); color: var(--fg-neutral); text-align: left; cursor: pointer; font: inherit; }
 .app-banner:active { background: var(--bg-brand-weak-pressed); }
+
+/* Root top navigation, Button title type: the neighbourhood picker (t6 Bold + chevron). */
+.md-topnav__location { --press: 0.95; display: inline-flex; align-items: center; gap: 2px; min-height: 44px; margin-left: -4px; padding: 0 6px 0 4px; border: 0; border-radius: var(--r2); background: transparent; color: var(--fg-neutral); font: 700 18px/24px var(--font-sans); cursor: pointer; }
+.md-topnav__location:active { background: var(--bg-transparent-pressed); }
+.md-topnav__location svg { color: var(--fg-neutral-subtle); }
