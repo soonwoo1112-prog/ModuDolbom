@@ -1,5 +1,5 @@
 import React from 'react';
-import { BadgeCheck, Bell, Cake, CalendarX, Dog, Droplet, Route, Timer, Weight, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X } from 'lucide-react';
+import { BadgeCheck, Bell, Cake, CalendarX, Dog, Droplet, Laugh, Moon, Route, ShieldCheck, Smile, Sparkles, Timer, Weight, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X } from 'lucide-react';
 
 // Mars is newer than this lucide-react; paths copied from lucide-static 1.70.0 (ISC).
 const Mars = React.forwardRef(({ size = 24, strokeWidth = 2, ...rest }, ref) => (
@@ -13,7 +13,7 @@ const Poop = React.forwardRef(({ size = 24, strokeWidth = 2, ...rest }, ref) => 
     <path d="M5 20h14a2.5 2.5 0 0 0 0-5H5a2.5 2.5 0 0 0 0 5z" /><path d="M7 15a2.5 2.5 0 0 1 0-5h10a2.5 2.5 0 0 1 0 5" /><path d="M9 10a2 2 0 0 1 1-3.7C10.5 5 11.6 4 13 4a3 3 0 0 1 2 6" /><path d="M10 17.5h.01" /><path d="M14 17.5h.01" />
   </svg>
 ));
-const Icons = { Cake, Dog, Droplet, Mars, Poop, Route, Timer, Weight, BadgeCheck, Bell, CalendarX, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X };
+const Icons = { Cake, Dog, Droplet, Laugh, Mars, Moon, Poop, Route, ShieldCheck, Smile, Sparkles, Timer, Weight, BadgeCheck, Bell, CalendarX, Flag, Headset, Phone, Calendar, Camera, ChartColumn, ChevronLeft, ChevronRight, ChevronDown, CircleHelp, Clock, CreditCard, EllipsisVertical, Footprints, Heart, House, ImagePlus, Info, MapPin, Menu, MessageCircle, NotebookPen, PawPrint, Pencil, Plus, Repeat, Search, Send, Settings2, Star, User, Users, Wallet, X };
 import { useApp, TABS } from './store.jsx';
 
 // Lucide icon (ISC), 24px by default, stroke 1.75 per the brand book.

@@ -211,3 +211,42 @@ button { font-family: inherit; }
 .md-walk-photos { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
 .md-walk-photos > span { flex: none; width: 72px; height: 72px; border-radius: var(--r3); background: var(--bg-neutral-weak); display: grid; place-items: center; color: var(--fg-neutral-subtle); }
 .md-walk-photos > span svg { width: 20px; height: 20px; }
+
+/* Chat booking bar: slim 28px actions under the dog row, so the conversation keeps the room. */
+.md-chatbar__btn { min-height: 28px !important; padding: 4px 10px !important; font-size: 13px !important; line-height: 18px !important; gap: 4px; border-radius: var(--r2); }
+.md-chatbar__btn svg { width: 14px; height: 14px; }
+.md-chatbar__name { font: 700 18px/24px var(--font-sans); color: var(--fg-neutral); }
+
+/* Dog profile head: a soft cover, a round photo that overlaps it, the name with a sex mark, and small fact chips. */
+.md-dogcover { position: relative; height: 132px; background: var(--bg-brand-weak); overflow: hidden; color: oklch(88% 0.06 152); }
+.md-dogcover svg { position: absolute; width: 28px; height: 28px; }
+.md-dogcover__edit { position: absolute; right: 12px; top: 12px; display: inline-flex; align-items: center; gap: 4px; min-height: 30px; padding: 4px 10px; border: 0; border-radius: var(--full); background: rgba(255, 255, 255, 0.85); color: var(--fg-neutral); font: 500 13px/18px var(--font-sans); cursor: pointer; }
+.md-dogcover__edit svg { position: static; width: 14px; height: 14px; color: var(--fg-neutral-muted); }
+.md-doghead { display: flex; flex-direction: column; gap: 10px; padding: 0 16px 20px; }
+.md-doghead__photo { position: relative; width: 96px; height: 96px; margin-top: -48px; border-radius: var(--full); background: var(--bg-neutral-weak); color: var(--fg-neutral-subtle); display: grid; place-items: center; box-shadow: 0 0 0 4px var(--bg-layer-default), var(--shadow-floating); }
+.md-doghead__photo > svg { width: 40px; height: 40px; }
+.md-doghead__cam { position: absolute; right: -2px; bottom: -2px; display: grid; place-items: center; width: 30px; height: 30px; border: 0; border-radius: var(--full); background: var(--bg-neutral-solid); color: var(--fg-on-neutral-solid); box-shadow: 0 0 0 3px var(--bg-layer-default); cursor: pointer; }
+.md-doghead__cam svg { width: 15px; height: 15px; }
+.md-doghead__name { display: flex; align-items: center; gap: 6px; margin: 0; font: 700 24px/32px var(--font-sans); }
+.md-doghead__name svg { width: 20px; height: 20px; color: var(--fg-informative); }
+.md-dogchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.md-dogchip { display: inline-flex; align-items: center; gap: 4px; min-height: 28px; padding: 4px 10px; border-radius: var(--full); background: var(--bg-neutral-weak); font: 500 13px/18px var(--font-sans); color: var(--fg-neutral); }
+.md-dogchip svg { width: 14px; height: 14px; color: var(--fg-brand); }
+
+/* Walk log: the same soft language as Walking — weak fills, r4 corners, a route card, mood tiles. */
+.md-logmap { border-radius: var(--r4); overflow: hidden; background: var(--bg-layer-basement); position: relative; }
+.md-logmap__title { position: absolute; left: 12px; top: 12px; display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: var(--full); background: var(--bg-layer-default); font: 700 14px/19px var(--font-sans); box-shadow: var(--shadow-floating); }
+.md-logmap__title svg { width: 14px; height: 14px; color: var(--fg-brand); }
+.md-potty--static .md-potty__tile { cursor: default; flex-direction: row; align-items: center; gap: 10px; padding: 12px; }
+.md-potty--static .md-potty__icon { width: 36px; height: 36px; }
+.md-potty--static .md-potty__icon svg { width: 20px; height: 20px; }
+.md-mood { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.md-mood button { --press: 0.97; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 4px 12px; border: 0; border-radius: var(--r4); background: var(--bg-neutral-weak); color: var(--fg-neutral-muted); font: 500 14px/19px var(--font-sans); cursor: pointer; }
+.md-mood button svg { width: 28px; height: 28px; }
+.md-mood button[aria-pressed="true"] { background: var(--bg-brand-weak); color: var(--fg-brand); font-weight: 700; box-shadow: inset 0 0 0 1.5px var(--stroke-brand-solid); }
+.md-softinput { box-sizing: border-box; width: 100%; min-height: 96px; padding: 12px 14px; border: 0; border-radius: var(--r4); background: var(--bg-neutral-weak); color: var(--fg-neutral); font: 400 15px/22px var(--font-sans); resize: none; }
+.md-softinput:focus { outline: 2px solid var(--stroke-focus-ring); outline-offset: 0; background: var(--bg-layer-default); }
+.md-softrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--r4); background: var(--bg-layer-basement); cursor: pointer; }
+.md-walk-photos__add { --press: 0.96; flex: none; width: 72px; height: 72px; border: 0; border-radius: var(--r3); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: var(--bg-layer-default); box-shadow: inset 0 0 0 1px var(--stroke-neutral-weak); color: var(--fg-neutral-muted); font: 500 12px/16px var(--font-sans); cursor: pointer; }
+.md-walk-photos__add svg { width: 22px; height: 22px; }
+.md-walk-photos > span { position: relative; }

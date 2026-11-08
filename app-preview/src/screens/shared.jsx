@@ -86,9 +86,9 @@ export function ChatRoom({ params }) {
       <TopNav title={title} />
       <section className="app-pinned" style={{ paddingRight: 8, paddingTop: 8, paddingBottom: 10, gap: 8 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <button type="button" className="md-avatar md-pressable" aria-label={`${dog} 프로필 보기`} style={{ width: 40, height: 40, border: 0, background: 'var(--bg-layer-default)', cursor: 'pointer' }} onClick={() => push('dog')}><Icon name="PawPrint" size={20} /></button>
+          <button type="button" className="md-avatar md-pressable" aria-label={`${dog} 프로필 보기`} style={{ width: 48, height: 48, border: 0, background: 'var(--bg-layer-default)', cursor: 'pointer' }} onClick={() => push('dog')}><Icon name="PawPrint" size={24} /></button>
           <span style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}>
-            <span className="md-list-title" style={{ fontWeight: 700 }}>{dog}</span>
+            <span className="md-chatbar__name">{dog}</span>
             {confirmed ? <Badge tone="brandSolid">예약확정</Badge> : null}
             {flow.editSent ? <Badge tone="info">수정요청중</Badge> : null}
           </span>
@@ -97,11 +97,11 @@ export function ChatRoom({ params }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0,1fr))', gap: 8, paddingRight: 8 }}>
           {isGuardian
             ? (confirmed
-              ? <Btn size="xsmall" disabled>확정했어요</Btn>
-              : <Btn variant="brand" size="xsmall" busy={busy} busyLabel="확정 중" onClick={confirm}>예약 확정</Btn>)
-            : <Btn size="xsmall" disabled>{confirmed ? '확정됐어요' : '확정 기다리는 중'}</Btn>}
-          <Btn size="xsmall" onClick={() => push('chatEdit')}><Icon name="Pencil" size={14} />수정</Btn>
-          <Btn size="xsmall" onClick={() => setSheet('info')}><Icon name="Info" size={14} />정보</Btn>
+              ? <Btn size="xsmall" className="md-chatbar__btn" disabled>확정했어요</Btn>
+              : <Btn variant="brand" size="xsmall" className="md-chatbar__btn" busy={busy} busyLabel="확정 중" onClick={confirm}>예약 확정</Btn>)
+            : <Btn size="xsmall" className="md-chatbar__btn" disabled>{confirmed ? '확정됐어요' : '확정 기다리는 중'}</Btn>}
+          <Btn size="xsmall" className="md-chatbar__btn" onClick={() => push('chatEdit')}><Icon name="Pencil" size={14} />수정</Btn>
+          <Btn size="xsmall" className="md-chatbar__btn" onClick={() => setSheet('info')}><Icon name="Info" size={14} />정보</Btn>
         </div>
       </section>
       {sheet === 'info' ? <ChatInfoSheet onClose={() => setSheet(null)} /> : null}

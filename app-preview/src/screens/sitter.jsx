@@ -122,58 +122,70 @@ export function Walking() {
           </section>
         </div>
       </div>
-      <div className="app-footer"><Btn variant="brand" size="large" style={{ borderRadius: 'var(--r4)' }} onClick={() => push('walklog', { minutes: Math.round(sec / 60), poop, pee })}>산책 끝내기</Btn></div>
+      <div className="app-footer"><Btn variant="brand" size="large" style={{ borderRadius: 'var(--r4)' }} onClick={() => push('walklog', { sec, poop, pee })}>산책 끝내기</Btn></div>
     </>
   );
 }
 
 // ── 8. 산책 기록 보내기 ──
+const MOODS = [{ label: '좋았어요', icon: 'Laugh' }, { label: '보통이에요', icon: 'Smile' }, { label: '피곤해 보여요', icon: 'Moon' }];
+
 export function WalkLogWrite({ params }) {
   const { update, showSnack, goTab } = useApp();
   const [mood, setMood] = useState('좋았어요');
   const [share, setShare] = useState(true);
+  const [photos, setPhotos] = useState(2);
   const [busy, send] = useSend();
-  const minutes = params.minutes || 31;
+  const sec = params.sec || 31 * 60 + 8;
   const poop = params.poop ?? 1;
   const pee = params.pee ?? 2;
+  const paws = (n) => Array.from({ length: Math.min(n, 8) }, (_, i) => <Icon key={i} name="PawPrint" size={14} />);
   return (
     <>
       <TopNav title="산책 기록" />
       <div className="app-scroll">
-        <div className="app-pad" style={{ paddingTop: 16 }}>
-          <section className="md-card" style={{ display: 'grid', gridTemplateColumns: '120px minmax(0,1fr)', alignItems: 'center' }}>
-            <RouteMap aspect="1" progress="full" label="콩이가 걸은 산책 경로" />
-            <div style={{ padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span className="md-list-title">콩이의 오후 산책</span>
-              <dl className="md-stats" style={{ gap: 8 }}>
-                <div><dt>시간</dt><dd style={{ fontSize: 20, lineHeight: '27px' }}>{minutes}<small>분</small></dd></div>
-                <div><dt>거리</dt><dd style={{ fontSize: 20, lineHeight: '27px' }}>{(minutes * 0.065).toFixed(1)}<small>km</small></dd></div>
-                <div><dt>배변</dt><dd style={{ fontSize: 20, lineHeight: '27px' }}>{poop + pee}<small>회</small></dd></div>
-              </dl>
-              <span className="md-detail">대변 {poop}회, 소변 {pee}회</span>
+        <div className="app-pad" style={{ paddingTop: 16, gap: 24 }}>
+          <section className="app-section" style={{ gap: 8 }}>
+            <div className="md-logmap">
+              <RouteMap height={168} progress="full" label="콩이가 걸은 산책 경로" />
+              <span className="md-logmap__title"><Icon name="Sparkles" size={14} />콩이의 오후 산책 끝!</span>
+            </div>
+            <dl className="md-walk-hero" style={{ margin: 0 }}>
+              <div><dt><Icon name="Timer" size={16} />산책한 시간</dt><dd>{Math.floor(sec / 60)}:{String(sec % 60).padStart(2, '0')}</dd></div>
+              <div><dt><Icon name="Route" size={16} />걸은 거리</dt><dd>{(sec / 60 * 0.065).toFixed(2)}<small>km</small></dd></div>
+            </dl>
+            <div className="md-potty md-potty--static">
+              <div className="md-potty__tile"><span className="md-potty__icon md-potty__icon--pee"><Icon name="Droplet" /></span><span style={{ display: 'flex', flexDirection: 'column' }}><span className="md-potty__label">쉬 <span className="md-num">{pee}</span>번</span><span className="md-potty__paws">{paws(pee)}</span></span></div>
+              <div className="md-potty__tile"><span className="md-potty__icon md-potty__icon--poop"><Icon name="Poop" /></span><span style={{ display: 'flex', flexDirection: 'column' }}><span className="md-potty__label">응가 <span className="md-num">{poop}</span>번</span><span className="md-potty__paws">{paws(poop)}</span></span></div>
             </div>
           </section>
-          <section className="app-section">
-            <span className="md-field__label">사진<em>2/10</em></span>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0,1fr))', gap: 8 }}>
-              <button className="md-thumb md-pressable" type="button" aria-label="사진 추가" style={{ width: 'auto', aspectRatio: '1', border: 0, cursor: 'pointer', boxShadow: 'inset 0 0 0 1px var(--stroke-neutral-weak)', background: 'var(--bg-layer-default)' }}><Icon name="ImagePlus" /></button>
-              <div className="md-thumb" style={{ width: 'auto', aspectRatio: '1', position: 'relative' }}><Icon name="PawPrint" label="산책 사진 1" /><span className="md-badge md-badge--brand-solid" style={{ position: 'absolute', left: 4, bottom: 4, minHeight: 18, padding: '1px 5px', fontSize: 11, lineHeight: '15px' }}>대표</span></div>
-              <div className="md-thumb" style={{ width: 'auto', aspectRatio: '1' }}><Icon name="PawPrint" label="산책 사진 2" /></div>
+          <section className="app-section" style={{ gap: 10 }}>
+            <span className="md-field__label">산책 사진 <span className="md-detail" style={{ fontWeight: 400 }}>첫 사진이 대표로 보여요</span></span>
+            <div className="md-walk-photos">
+              <button type="button" className="md-walk-photos__add md-pressable" onClick={() => setPhotos((n) => n + 1)}><Icon name="ImagePlus" size={22} />추가</button>
+              {Array.from({ length: photos }, (_, i) => (
+                <span key={i} role="img" aria-label={`산책 사진 ${i + 1}${i === 0 ? ', 대표' : ''}`}><Icon name="PawPrint" size={20} />{i === 0 ? <span className="md-badge md-badge--brand-solid" style={{ position: 'absolute', left: 4, bottom: 4, minHeight: 18, padding: '1px 6px', fontSize: 11, lineHeight: '15px', borderRadius: 9999 }}>대표</span> : null}</span>
+              ))}
             </div>
           </section>
-          <section className="app-section">
-            <span className="md-field__label">콩이 컨디션</span>
-            <ChipGroup label="콩이 컨디션" options={['좋았어요', '보통이에요', '피곤해 보여요']} value={mood} onChange={setMood} />
+          <section className="app-section" style={{ gap: 10 }}>
+            <span className="md-field__label">오늘 콩이는 어땠나요</span>
+            <div className="md-mood" role="group" aria-label="콩이 컨디션">
+              {MOODS.map((m) => <button key={m.label} type="button" className="md-pressable" aria-pressed={mood === m.label} onClick={() => setMood(m.label)}><Icon name={m.icon} size={28} /><span>{m.label}</span></button>)}
+            </div>
           </section>
-          <div className="md-field"><label className="md-field__label" htmlFor="memo">보호자에게 남길 말<em>선택</em></label><textarea className="md-input" id="memo" defaultValue="공원 한 바퀴 돌았어요. 물도 잘 마셨고, 다른 강아지와 인사도 했어요." /></div>
-          <label style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) auto', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
+          <section className="app-section" style={{ gap: 10 }}>
+            <label className="md-field__label" htmlFor="memo">보호자에게 남길 말 <span className="md-detail" style={{ fontWeight: 400 }}>선택</span></label>
+            <textarea className="md-softinput" id="memo" defaultValue="공원 한 바퀴 돌았어요. 물도 잘 마셨고, 다른 강아지와 인사도 했어요." />
+          </section>
+          <label className="md-softrow">
             <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}><span className="md-list-title">소셜에도 올리기</span><span className="md-detail">콩이네 보호자가 공유를 허용했어요. 경로 지도는 빼고 올라가요.</span></span>
             <input type="checkbox" role="switch" className="app-switch" checked={share} onChange={() => setShare(!share)} aria-label="소셜에도 올리기" />
           </label>
         </div>
       </div>
       <div className="app-footer">
-        <Btn variant="brand" size="large" busy={busy} busyLabel="보내는 중" onClick={() => send(() => { update({ walkDone: true }); goTab('today'); showSnack(share ? '기록을 보내고 소셜에도 올렸어요' : '콩이네 보호자에게 기록을 보냈어요'); })}>보호자에게 기록 보내기</Btn>
+        <Btn variant="brand" size="large" style={{ borderRadius: 'var(--r4)' }} busy={busy} busyLabel="보내는 중" onClick={() => send(() => { update({ walkDone: true }); goTab('today'); showSnack(share ? '기록을 보내고 소셜에도 올렸어요' : '콩이네 보호자에게 기록을 보냈어요'); })}>보호자에게 기록 보내기</Btn>
       </div>
     </>
   );

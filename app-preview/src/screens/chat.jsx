@@ -138,10 +138,11 @@ export function ChatEdit() {
 // ── 4-4. 강아지 프로필 ──
 const DOG_FACTS = [
   { icon: 'Dog', label: '견종', value: '진돗개 믹스' },
-  { icon: 'Weight', label: '무게', value: '12kg' },
   { icon: 'Cake', label: '나이', value: '3살' },
-  { icon: 'Mars', label: '성별', value: '수컷', sub: '중성화 했어요' },
+  { icon: 'Weight', label: '무게', value: '12kg' },
+  { icon: 'ShieldCheck', label: '중성화', value: '중성화' },
 ];
+const COVER_PAWS = [[24, 18, -20], [92, 64, 15], [170, 22, -8], [250, 70, 20], [330, 30, -15], [300, 96, 5]];
 const DOG_FEEDBACK = [
   { name: '김하늘', when: '11월 1일 산책', text: '공원 길에서 다른 강아지를 보고 두 번 짖었지만 이름을 부르니 금방 진정했어요. 물도 잘 마셨어요.' },
   { name: '이도윤', when: '10월 27일 산책', text: '줄을 당길 때 잠깐 멈추면 옆으로 돌아와요. 길에 떨어진 간식을 주우려 해서 짧게 잡고 걸었어요.' },
@@ -155,22 +156,17 @@ export function DogProfile() {
     <>
       <TopNav title="강아지 프로필" />
       <div className="app-scroll">
-        <div className="md-slot"><Icon name="PawPrint" size={40} label="보리 사진" /></div>
-        <section style={{ padding: '20px 16px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <h2 className="md-screen-title">보리</h2>
-            <p style={{ margin: 0, color: 'var(--fg-neutral-muted)', fontSize: 15, lineHeight: '21px' }}>산책을 아주 좋아해요. 사람한테는 순하지만 다른 강아지를 보면 조금 짖어요.</p>
+        <div className="md-dogcover">
+          {COVER_PAWS.map(([x, y, r], i) => <Icon key={i} name="PawPrint" style={{ left: x, top: y, transform: `rotate(${r}deg)` }} />)}
+          <button type="button" className="md-dogcover__edit md-pressable" onClick={() => showSnack('프로필 꾸미기는 곧 열려요')}><Icon name="Pencil" size={14} />프로필 꾸미기</button>
+        </div>
+        <section className="md-doghead">
+          <div className="md-doghead__photo"><Icon name="PawPrint" size={40} label="보리 사진" /><button type="button" className="md-doghead__cam md-pressable" aria-label="프로필 사진 바꾸기"><Icon name="Camera" size={15} /></button></div>
+          <h2 className="md-doghead__name">보리<Icon name="Mars" size={20} label="수컷" /></h2>
+          <div className="md-dogchips">
+            {DOG_FACTS.map((f) => <span key={f.label} className="md-dogchip md-num"><Icon name={f.icon} size={14} />{f.value}</span>)}
           </div>
-          <div className="md-facts">
-            {DOG_FACTS.map((f) => (
-              <div className="md-fact" key={f.label}>
-                <Icon name={f.icon} size={22} />
-                <span className="md-fact__label">{f.label}</span>
-                <span className="md-fact__value md-num">{f.value}</span>
-                {f.sub ? <span className="md-fact__label">{f.sub}</span> : null}
-              </div>
-            ))}
-          </div>
+          <p style={{ margin: 0, color: 'var(--fg-neutral-muted)', fontSize: 15, lineHeight: '22px' }}>산책을 아주 좋아해요. 사람한테는 순하지만 다른 강아지를 보면 조금 짖어요.</p>
         </section>
         <div className="md-band" />
         <div className="md-list-header">성격</div>
