@@ -32,7 +32,7 @@ export function ChatList() {
               <div className="md-list">
                 {shown.map((c) => (
                   <button key={c.id} type="button" className="md-item md-pressable" style={{ border: 0, width: '100%', textAlign: 'left', boxShadow: 'inset 0 -1px 0 var(--stroke-neutral-subtle)' }} onClick={() => push('chat', { id: c.id })}>
-                    <Avatar />
+                    <Avatar name={c.with} />
                     <span className="md-item__body">
                       <span className="md-item__head"><span className="md-list-title">{c.with}</span><Badge tone={STATUS_TONE[c.status]}>{c.status}</Badge></span>
                       <span className="md-item__muted" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.last}</span>
@@ -86,7 +86,7 @@ export function ChatRoom({ params }) {
       <TopNav title={title} />
       <section className="app-pinned" style={{ paddingRight: 8, paddingTop: 8, paddingBottom: 10, gap: 8 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <button type="button" className="md-avatar md-pressable" aria-label={`${dog} 프로필 보기`} style={{ width: 48, height: 48, border: 0, background: 'var(--bg-layer-default)', cursor: 'pointer' }} onClick={() => push('dog')}><Icon name="PawPrint" size={24} /></button>
+          <button type="button" className="md-pressable" aria-label={`${dog} 프로필 보기`} style={{ padding: 0, border: 0, background: 'transparent', cursor: 'pointer', borderRadius: 'var(--r3)' }} onClick={() => push('dog')}><Thumb name={dog} size={48} /></button>
           <span style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}>
             <span className="md-chatbar__name">{dog}</span>
             {confirmed ? <Badge tone="brandSolid">예약확정</Badge> : null}
@@ -160,7 +160,7 @@ function Feed() {
           return (
             <article key={p.id} className="fd-post">
               <div className="fd-head">
-                <Avatar size={40} />
+                <Avatar size={40} name={p.author} />
                 <span style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}><span className="md-item__head"><span className="md-label">{p.author}</span><Badge tone={p.isSitter ? 'brand' : 'neutral'}>{p.isSitter ? '시터' : '보호자'}</Badge></span><Tags items={[NEIGHBORHOOD, p.time]} /></span>
               </div>
               <div className="fd-photo"><Icon name="PawPrint" size={40} label={`${p.dog} 산책 사진`} /><span className="fd-dog"><Icon name="PawPrint" size={14} />{p.dog}</span></div>
@@ -228,7 +228,7 @@ export function More() {
       <TopNav root title="더보기" />
       <div className="app-scroll">
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '16px 16px 20px' }}>
-          <Avatar size={56} />
+          <Avatar size={56} name={role === 'guardian' ? '보리네' : '김하늘'} />
           <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}><span className="md-section-title">{role === 'guardian' ? '보리네 보호자' : '김하늘'}</span><span className="md-detail">{NEIGHBORHOOD}, {role === 'guardian' ? '보호자' : '시터'}로 쓰는 중</span></span>
         </div>
         <Band />

@@ -63,9 +63,12 @@ export function AppProvider({ children }) {
 
   const [sheetOpen, setSheetOpen] = useState(false);
 
-  const push = useCallback((name, params = {}) => setNav((n) => ({ ...n, stack: [...n.stack, { name, params, key: Date.now() }], dir: 'push' })), []);
-  const pop = useCallback(() => setNav((n) => ({ ...n, stack: n.stack.slice(0, -1), dir: 'pop' })), []);
-  const goTab = useCallback((tab) => setNav({ tab, stack: [], dir: 'none' }), []);
+  // A snackbar belongs to the screen that raised it: moving to another screen closes it, so it never covers the
+  // next screen's content. A snack raised right after navigating (showSnack after goTab) still shows.
+  const leave = () => { clearTimeout(snackTimer.current); setSnack(null); };
+  const push = useCallback((name, params = {}) => { leave(); setNav((n) => ({ ...n, stack: [...n.stack, { name, params, key: Date.now() }], dir: 'push' })); }, []);
+  const pop = useCallback(() => { leave(); setNav((n) => ({ ...n, stack: n.stack.slice(0, -1), dir: 'pop' })); }, []);
+  const goTab = useCallback((tab) => { leave(); setNav({ tab, stack: [], dir: 'none' }); }, []);
   const resetTo = useCallback((tab, name, params = {}) => setNav({ tab, stack: name ? [{ name, params, key: Date.now() }] : [], dir: 'push' }), []);
 
   const setRole = useCallback((r) => {

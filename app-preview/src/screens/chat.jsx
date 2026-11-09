@@ -13,7 +13,7 @@ export function ChatInfoSheet({ onClose }) {
   return (
     <Sheet title="예약 정보" onClose={onClose}>
       <button type="button" className="md-item md-pressable" style={{ border: 0, textAlign: 'left', margin: '0 -16px', width: 'calc(100% + 32px)' }} onClick={() => { onClose(); push('dog'); }}>
-        <Avatar icon="PawPrint" />
+        <Avatar name="보리" />
         <span className="md-item__body"><span className="md-list-title">보리</span><span className="md-item__muted">중형견, 3살</span></span>
         <span className="md-label" style={{ display: 'inline-flex', alignItems: 'center', gap: 2, color: 'var(--fg-brand)' }}>프로필 보기<Icon name="ChevronRight" size={16} /></span>
       </button>
@@ -24,7 +24,7 @@ export function ChatInfoSheet({ onClose }) {
         {row('주소', `${a.label}, ${a.line} ${a.detail}`)}
         {row('들어오는 방법', entryText(a))}
       </dl>
-      <Callout>앱에서 예약한 산책만 보험으로 보장돼요.</Callout>
+      <p className="wk-sub">앱에서 예약한 산책만 보험으로 보장돼요.</p>
     </Sheet>
   );
 }
@@ -189,7 +189,7 @@ export function DogProfile() {
             <React.Fragment key={i}>
               {i ? <hr className="md-divider" /> : null}
               <div className="md-item md-item--top" style={{ cursor: 'default' }}>
-                <Avatar icon="User" size={36} />
+                <Avatar size={36} name={f.name} />
                 <span className="md-item__body" style={{ gap: 4 }}>
                   <span className="md-item__head"><span className="md-list-title">{f.name} 시터</span><span className="md-tagtext">{f.when}</span></span>
                   <span style={{ fontSize: 15, lineHeight: '21px', color: 'var(--fg-neutral)' }}>{f.text}</span>

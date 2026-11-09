@@ -52,11 +52,11 @@ export function Neighborhood() {
           <div className="md-card" style={{ padding: 16, display: 'flex', alignItems: 'center', gap: 12 }}>
             <span className="md-thumb" style={{ width: 48, height: 48 }}><Icon name="MapPin" /></span>
             <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <span className="md-list-title">{found ? NEIGHBORHOOD : '위치를 확인하고 있어요'}</span>
-              <span className="md-detail">{found ? '서울 강남구 역삼동이 맞나요?' : '현재 위치로 동네를 찾아요'}</span>
+              <span className="md-list-title">{found ? NEIGHBORHOOD : busy ? '위치를 확인하고 있어요' : '아직 동네를 찾지 않았어요'}</span>
+              <span className="md-detail">{found ? '서울 강남구 역삼동이 맞나요?' : '아래 버튼을 누르면 위치 권한을 물어봐요'}</span>
             </span>
           </div>
-          <Callout title="같은 아파트 인증은 나중에 할 수 있어요">거주지 인증을 마치면 같은 단지 이웃을 먼저 볼 수 있어요.</Callout>
+          <p className="wk-sub">같은 아파트 인증은 나중에 할 수 있어요. 거주지 인증을 마치면 같은 단지 이웃을 먼저 볼 수 있어요.</p>
         </div>
       </div>
       <div className="app-footer">

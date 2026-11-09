@@ -29,7 +29,7 @@ export function SitterToday() {
                 ? <p className="md-detail" style={{ margin: 0, padding: '0 16px 12px' }}>새 요청이 오면 여기에 맨 먼저 보여요.</p>
                 : (
                   <div className="md-item md-item--top" style={{ cursor: 'default' }}>
-                    <Thumb />
+                    <Thumb name="보리" />
                     <span className="md-item__body">
                       <span className="md-item__head"><span className="md-list-title">보리</span><Badge>중형견</Badge><Badge tone="brand">같은 아파트</Badge></span>
                       <span className="md-item__muted">11월 7일 (토) 오후 12:30부터 30분, 역삼로 123</span>
@@ -49,7 +49,7 @@ export function SitterToday() {
                   <React.Fragment key={b.id}>
                     {i > 0 ? <hr className="md-divider" /> : null}
                     <div className="md-item" style={{ cursor: 'default' }}>
-                      <Thumb />
+                      <Thumb name={b.dog} />
                       <span className="md-item__body"><span className="md-list-title">{b.dog}, {b.time}</span><span className="md-item__muted">{b.detail}</span></span>
                       {b.canStart
                         ? (flow.walkDone ? <Badge tone="brand">산책완료</Badge> : <Btn variant="brand" size="small" onClick={() => push('walking')}><Icon name="Footprints" size={16} />산책 시작</Btn>)
@@ -140,7 +140,7 @@ export function WalkLogWrite({ params }) {
       <div className="app-scroll">
         <RouteMap height={180} progress="full" fit="meet" label="콩이가 걸은 산책 경로" />
         <Section title="콩이의 오후 산책" sub="11월 7일 (토) 오후 12:30에 시작했어요">
-          <Figs small items={[['산책 시간', `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`], ['거리', (sec / 60 * 0.065).toFixed(2), 'km'], [`쉬 ${pee}번, 응가 ${poop}번`, pee + poop, '번']]} />
+          <Figs small items={[['산책 시간', `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`], ['거리', (sec / 60 * 0.065).toFixed(2), 'km'], [`쉬 ${pee}, 응가 ${poop}`, pee + poop, '번']]} />
         </Section>
         <div className="md-band" />
         <Section title="산책 소식"><Timeline events={events} /></Section>
@@ -265,7 +265,7 @@ export function SitterWeek({ params }) {
           <div className="md-list">
             {list.map((it) => (
               <div key={it.time} className="md-item" style={{ cursor: 'default' }}>
-                <Thumb />
+                <Thumb name={it.dog} />
                 <span className="md-item__body"><span className="md-item__head"><span className="md-list-title">{it.dog}, {it.time}</span><Badge tone={it.tone}>{it.status}</Badge></span><span className="md-item__muted">{it.detail}</span></span>
                 <span />
               </div>
@@ -281,7 +281,7 @@ export function SitterWeek({ params }) {
             <button type="button" aria-pressed={!draft} onClick={() => setDraft(false)}>쉬어요</button>
           </div>
           <p className="md-detail" style={{ margin: 0 }}>{draft ? `시간은 프로필에서 정한 대로예요: ${SITTER_HOURS[DOW[selDate.getDay()]]}` : `이 날만 쉬어요. 다른 ${DOW[selDate.getDay()]}요일은 그대로예요.`}</p>
-          {!draft && list.length ? <Callout>이미 예약된 산책 {list.length}건은 그대로 남아요. 못 가게 되면 채팅에서 보호자와 먼저 이야기해 주세요.</Callout> : null}
+          {!draft && list.length ? <Callout tone="warning">이미 예약된 산책 {list.length}건은 그대로 남아요. 못 가게 되면 채팅에서 보호자와 먼저 이야기해 주세요.</Callout> : null}
           <Btn variant="brand" size="large" onClick={() => { update((f) => ({ dayOverride: { ...(f.dayOverride || {}), [selKey]: draft } })); setEditing(false); showSnack(draft ? `${dayTitle}에 일할 수 있게 열었어요` : `${dayTitle}을 쉬는 날로 바꿨어요`); }}>저장하기</Btn>
         </Sheet>
       ) : null}

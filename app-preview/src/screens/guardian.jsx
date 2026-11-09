@@ -119,7 +119,7 @@ export function Matching() {
               <div className="md-list">
                 {list.map((s) => (
                   <label key={s.id} className="md-item md-item--top md-pressable">
-                    <Avatar />
+                    <Avatar name={s.name} />
                     <span className="md-item__body">
                       <span className="md-item__head"><span className="md-list-title">{s.name}</span>{s.sameApt ? <Badge tone="brand">같은 아파트</Badge> : null}{s.isNew ? <Badge>새로 온 시터</Badge> : null}</span>
                       <span className="md-item__muted">{s.bio}</span>
@@ -161,7 +161,7 @@ export function Sent({ params }) {
       <div className="app-scroll">
         <section style={{ padding: '20px 16px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <Thumb />
+            <Thumb name={flow.dog} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}><span className="md-section-title">{flow.dog}의 {describeSchedule(flow).title} 산책</span>{describeSchedule(flow).sub ? <span className="md-detail">{describeSchedule(flow).sub}</span> : null}<Tags items={[flow.time, flow.length]} /></div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 12, borderRadius: 'var(--r3)', background: 'var(--bg-layer-basement)' }}>
@@ -177,7 +177,7 @@ export function Sent({ params }) {
             ) : null}
             <span className="md-detail">주소와 픽업 안내는 예약이 확정된 시터에게만 보여요</span>
           </div>
-          <Callout>{flow.confirmed ? '예약을 확정해서 나머지 요청은 닫혔어요.' : '한 명과 예약을 확정하면 나머지 요청은 자동으로 닫혀요.'}</Callout>
+          <p className="wk-sub">{flow.confirmed ? '예약을 확정해서 나머지 요청은 닫혔어요.' : '한 명과 예약을 확정하면 나머지 요청은 자동으로 닫혀요.'}</p>
         </section>
         <Band />
         <Region load={status}
@@ -195,7 +195,7 @@ export function Sent({ params }) {
                     <React.Fragment key={s.id}>
                       {i > 0 ? <hr className="md-divider" /> : null}
                       <div className="md-item md-item--top" style={{ cursor: 'default' }}>
-                        <Avatar />
+                        <Avatar name={s.name} />
                         <span className="md-item__body">
                           <span className="md-item__head"><span className="md-list-title">{s.name}</span>
                             {talking ? <Badge tone={flow.confirmed ? 'brandSolid' : 'info'}>{flow.confirmed ? '예약확정' : '대화중'}</Badge> : <Badge tone="outline">{closed ? '요청종료' : '요청중'}</Badge>}
@@ -240,7 +240,7 @@ export function Live() {
                   <p className="wk-sub" style={{ marginTop: -6 }}>30분 예약, 오후 1:00에 끝나요</p>
                 </Section>
                 <div className="md-item" style={{ cursor: 'default', boxShadow: 'inset 0 1px 0 var(--stroke-neutral-subtle), inset 0 -1px 0 var(--stroke-neutral-subtle)' }}>
-                  <Avatar />
+                  <Avatar name="김하늘" />
                   <span className="md-item__body"><span className="md-item__head"><span className="md-list-title">김하늘 시터</span><Badge tone="brand">같은 아파트</Badge></span><span className="md-item__muted">보리와 걷고 있어요</span></span>
                   <Btn size="small" onClick={() => push('chat', { id: 'c-haneul' })}>채팅</Btn>
                 </div>
@@ -277,9 +277,9 @@ export function Log() {
             <>
               <div className="md-slot" style={{ position: 'relative', aspectRatio: '4 / 3' }}><Icon name="PawPrint" size={40} label="산책 사진" /><span className="md-badge" style={{ position: 'absolute', right: 12, bottom: 12, background: 'var(--bg-neutral-solid)', color: 'var(--fg-on-neutral-solid)' }}>1 / 3</span></div>
               <Section title="보리의 점심 산책" sub="11월 7일 (토) 오후 12:30부터 1:00까지, 김하늘 시터">
-                <Figs small items={[['산책 시간', '30:12'], ['거리', '1.92', 'km'], ['쉬 1번, 응가 1번', '2', '번']]} />
+                <Figs small items={[['산책 시간', '30:12'], ['거리', '1.92', 'km'], ['쉬 1, 응가 1', '2', '번']]} />
                 <div className="wk-note" style={{ marginTop: 6 }}>
-                  <Avatar size={36} />
+                  <Avatar size={36} name="김하늘" />
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}><span className="md-item__head"><span className="md-label">김하늘 시터</span><Badge>컨디션 좋았어요</Badge></span><p className="wk-note__bubble" style={{ margin: 0 }}>다른 강아지를 보고 한 번 짖었지만 금방 진정했어요. 물도 잘 마셨어요.</p></div>
                 </div>
               </Section>
@@ -371,7 +371,7 @@ export function GuardianCalendar() {
         <Sheet title={`${smo}월 ${sd}일`} onClose={() => setSel(null)}>
           {items.length ? items.map((it) => (
             <button key={it.title} type="button" className="md-item md-pressable" style={{ border: 0, margin: '0 -16px', width: 'calc(100% + 32px)', textAlign: 'left' }} onClick={() => { setSel(null); push(it.go, { id: 'c-haneul' }); }}>
-              <Thumb />
+              <Thumb name="보리" />
               <span className="md-item__body"><span className="md-item__head"><span className="md-list-title">{it.title}</span><Badge tone={it.tone === 'brand' ? 'brandSolid' : it.tone}>{it.status}</Badge></span><span className="md-item__muted">{it.detail}</span></span>
               <Icon name="ChevronRight" size={18} style={{ color: 'var(--fg-neutral-subtle)' }} />
             </button>

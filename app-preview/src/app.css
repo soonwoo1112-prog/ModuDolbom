@@ -312,3 +312,23 @@ a.cl-day { text-decoration: none; }
 .sc-avail { margin: 0; font: 400 14px/19px var(--font-sans); color: var(--fg-neutral-muted); }
 .sc-avail b { font-weight: 700; color: var(--fg-neutral); }
 .sc-avail[data-off="true"] b { color: var(--fg-neutral-subtle); }
+
+/* Photo stand-ins until real photos arrive: a first letter on a soft tint, picked from the name. */
+:root {
+  --bg-tint-sand: oklch(94% 0.03 80); --fg-tint-sand: oklch(42% 0.07 70);
+  --bg-tint-sky: oklch(94% 0.03 240); --fg-tint-sky: oklch(42% 0.08 245);
+  --bg-tint-moss: oklch(94% 0.035 140); --fg-tint-moss: oklch(40% 0.08 145);
+  --bg-tint-peach: oklch(94% 0.035 40); --fg-tint-peach: oklch(45% 0.09 40);
+}
+.md-initial { display: grid; place-items: center; flex: none; border-radius: var(--full); font-family: var(--font-sans); font-weight: 700; line-height: 1; }
+.md-initial[data-kind="dog"] { border-radius: var(--r3); }
+.md-initial--sand { background: var(--bg-tint-sand); color: var(--fg-tint-sand); }
+.md-initial--sky { background: var(--bg-tint-sky); color: var(--fg-tint-sky); }
+.md-initial--moss { background: var(--bg-tint-moss); color: var(--fg-tint-moss); }
+.md-initial--peach { background: var(--bg-tint-peach); color: var(--fg-tint-peach); }
+
+/* Meta lines stay on one line: the first item gives way with an ellipsis, times and counts never wrap alone. */
+.md-tags { flex-wrap: nowrap; min-width: 0; }
+.md-tags > span { white-space: nowrap; }
+.md-tags > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.wk-figs dt { white-space: nowrap; }

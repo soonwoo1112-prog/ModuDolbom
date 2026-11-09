@@ -116,11 +116,20 @@ export function ListHeader({ children, sub }) {
 
 export const Band = () => <div className="md-band" />;
 
-export function Avatar({ size = 48, icon = 'User' }) {
+// A person or a dog without a photo yet: their first letter on a soft tint chosen from their name, so a list of
+// placeholders still tells people apart. A real photo replaces it (src).
+const TINTS = ['sand', 'sky', 'moss', 'peach'];
+const tintOf = (name) => TINTS[[...name].reduce((n, ch) => n + ch.charCodeAt(0), 0) % TINTS.length];
+export function Initial({ name, size, kind }) {
+  return <span className={`md-initial md-initial--${tintOf(name)}`} data-kind={kind} style={{ width: size, height: size, fontSize: Math.round(size * 0.4) }} role="img" aria-label={`${name} 사진 자리`}>{[...name][0]}</span>;
+}
+export function Avatar({ size = 48, icon = 'User', name }) {
+  if (name) return <Initial name={name} size={size} kind="person" />;
   return <span className="md-avatar" style={{ width: size, height: size }}><Icon name={icon} size={Math.round(size / 2)} /></span>;
 }
 
-export function Thumb({ size = 56, icon = 'PawPrint', label }) {
+export function Thumb({ size = 56, icon = 'PawPrint', label, name }) {
+  if (name) return <Initial name={name} size={size} kind="dog" />;
   return <span className="md-thumb" style={{ width: size, height: size }}><Icon name={icon} label={label} /></span>;
 }
 
