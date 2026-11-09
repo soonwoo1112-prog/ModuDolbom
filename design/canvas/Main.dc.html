@@ -21,12 +21,12 @@ a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
 <a class="md-iconbtn md-pressable" href="Notifications.dc.html" aria-label="알림"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></svg></a>
 </header>
 <main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; padding: 24px 16px 24px;">
-<div style="display: flex; flex-direction: column; gap: 4px;"><h2 class="md-screen-title">오늘 산책, 누구에게 부탁할까요</h2><p class="md-item__muted" style="margin: 0;">역삼동 이웃 시터 여러 명에게 한 번에 요청할 수 있어요</p><a class="md-btn md-btn--small md-pressable" href="GuardianWalk.dc.html" style="align-self: flex-start; margin-top: 8px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--sm"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /><path d="M16 17h4" /><path d="M4 13h4" /></svg>지금 직접 산책 나가요, 기록하기</a></div>
+<div style="display: flex; flex-direction: column; gap: 4px;"><h2 class="md-screen-title">오늘 산책, 누구에게 부탁할까요</h2><p class="md-item__muted" style="margin: 0;">역삼동 이웃 시터 여러 명에게 한 번에 요청할 수 있어요</p><a class="bk-self md-pressable" href="GuardianWalk.dc.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--sm"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /><path d="M16 17h4" /><path d="M4 13h4" /></svg>지금 직접 산책 나가요, 기록하기</a></div>
 <section style="display: flex; flex-direction: column; gap: 8px;">
 <span class="md-field__label">강아지</span>
 <div class="md-row" role="group" aria-label="강아지">
 <sc-for list="{{dogs}}" as="item" hint-placeholder-count="2">
-<button class="md-chip md-pressable" type="button" aria-pressed="{{item.pressed}}" onClick="{{item.pick}}"><span>{{item.label}}</span></button>
+<button class="md-chip bk-dog md-pressable" type="button" aria-pressed="{{item.pressed}}" onClick="{{item.pick}}"><img class="md-photo" src="{{item.photo}}" alt=""><span>{{item.label}}</span></button>
 </sc-for>
 </div>
 </section>
@@ -37,31 +37,32 @@ a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
 <button type="button" aria-pressed="{{item.pressed}}" onClick="{{item.pick}}">{{item.label}}</button>
 </sc-for>
 </div>
+<div class="bk-group">
 <button class="md-inputbtn md-pressable" type="button" onClick="{{openDate}}">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /></svg>
 <span class="md-inputbtn__text"><span>{{dateLabel}}</span><sc-if value="{{dateSub}}" hint-placeholder-val="{{ false }}"><span class="md-detail">{{dateSub}}</span></sc-if></span>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
 </button>
-</section>
-<section style="display: flex; flex-direction: column; gap: 8px;">
-<span class="md-field__label">시작 시간</span>
 <button class="md-inputbtn md-pressable" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span class="md-inputbtn__text">오후 12:30</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></button>
+</div>
 </section>
 <section style="display: flex; flex-direction: column; gap: 8px;">
 <span class="md-field__label">산책 길이</span>
-<div class="md-row" role="group" aria-label="산책 길이">
+<div class="md-seg" role="group" aria-label="산책 길이">
 <sc-for list="{{lengths}}" as="item" hint-placeholder-count="3">
-<button class="md-chip md-pressable" type="button" aria-pressed="{{item.pressed}}" onClick="{{item.pick}}"><span>{{item.label}}</span></button>
+<button type="button" aria-pressed="{{item.pressed}}" onClick="{{item.pick}}">{{item.label}}</button>
 </sc-for>
 </div>
 </section>
 <section style="display: flex; flex-direction: column; gap: 8px;">
-<span class="md-field__label">주소</span>
+<span class="md-field__label">만나는 곳</span>
+<div class="bk-group">
 <button class="md-inputbtn md-pressable" type="button" onClick="{{openAddress}}">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg>
 <span class="md-inputbtn__text"><span style="font-weight: 700;">{{addr.label}}</span><span class="md-detail">{{addr.line}}, {{addr.detail}}</span><span class="md-detail">{{addr.entry}}</span></span>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
 </button>
+</div>
 </section>
 <section class="md-field">
 <label class="md-field__label" for="pickup">픽업 안내<em>선택</em></label>
@@ -280,7 +281,7 @@ class Component extends DCLogic {
     };
 
     return {
-      dogs: this.group('dog', ['보리', '콩이']),
+      dogs: this.group('dog', ['보리', '콩이']).map((d) => Object.assign(d, { photo: d.label === '보리' ? 'img/bori.jpg' : 'img/kong.jpg' })),
       lengths: this.group('length', ['30분', '60분', '90분']),
       freqs: ['한 번', '반복'].map((label) => ({ label: label, pressed: s.freq === label, pick: () => this.setState({ freq: label }) })),
       isRepeat: isRepeat,
