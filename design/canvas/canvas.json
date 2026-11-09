@@ -385,6 +385,14 @@
       "w": 390,
       "x": 940,
       "y": 8708
+    },
+    "MainR.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1R. 예약 (새 방향: 한 번에 하나씩)",
+      "w": 390,
+      "x": 0,
+      "y": 9952
     }
   },
   "createdOnFiles": {
@@ -411,7 +419,8 @@
     "profiles",
     "more",
     "compose",
-    "taste"
+    "taste",
+    "direction"
   ],
   "notes": {
     "flow": {
@@ -477,6 +486,14 @@
       "w": 240,
       "x": 0,
       "y": 8408
+    },
+    "direction": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "새 방향 (토스·크림·애플·당근 원칙, design/direction.md)",
+      "w": 240,
+      "x": 0,
+      "y": 9652
     }
   },
   "order": [
@@ -527,7 +544,8 @@
     "GuardianWalk.dc.html",
     "MainT.dc.html",
     "SitterProfileT.dc.html",
-    "SocialFeedT.dc.html"
+    "SocialFeedT.dc.html",
+    "MainR.dc.html"
   ],
   "pages": [],
   "title": "모두돌봄 예약 흐름"

@@ -4,10 +4,9 @@ import { h, Component } from 'preact';
 import { Board } from './player.js';
 
 export const PAIRS = [
-  { id: 'booking', label: '예약 첫 화면', a: 'Main', b: 'MainT' },
-  { id: 'profile', label: '시터 프로필', a: 'SitterProfile', b: 'SitterProfileT' },
+  { id: 'booking', label: '예약 첫 화면', a: 'Main', b: 'MainR' },
 ];
-const KEY = 'modudolbom-compare-v2';
+const KEY = 'modudolbom-compare-v3';
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } };
 const save = (v) => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { /* private mode: keep in memory */ } };
 const fresh = () => ({ order: PAIRS.map(() => Math.random() < 0.5), step: 0, answers: {} });
@@ -33,9 +32,9 @@ export class Compare extends Component {
     const { s, bh } = size;
     if (step >= PAIRS.length) {
       const wins = PAIRS.filter((p) => answers[p.id] && answers[p.id].taste).length;
-      const lines = PAIRS.map((p) => { const a = answers[p.id] || {}; return `${p.label}: ${a.taste ? '실험 버전' : '지금 버전'}을 골랐어요${a.why ? ` (${a.why})` : ''}`; });
+      const lines = PAIRS.map((p) => { const a = answers[p.id] || {}; return `${p.label}: ${a.taste ? '새 버전' : '지금 버전'}을 골랐어요${a.why ? ` (${a.why})` : ''}`; });
       return h('div', { class: 'pv-result' },
-        h('h2', null, `실험 버전을 ${PAIRS.length}개 중 ${wins}개 골랐어요`),
+        h('h2', null, `새 버전을 ${PAIRS.length}개 중 ${wins}개 골랐어요`),
         h('p', { class: 'pv-result__sub' }, wins * 3 >= PAIRS.length * 2 ? '3분의 2 이상이라 실험 원칙을 모든 화면에 넓히는 쪽이에요.' : '3분의 2 미만이라 이긴 화면의 방식만 가져가는 쪽이에요.'),
         h('ul', null, lines.map((l) => h('li', null, l))),
         h('textarea', { class: 'md-input', readOnly: true, rows: 5, 'aria-label': '결과 복사용', value: lines.join('\n') }),

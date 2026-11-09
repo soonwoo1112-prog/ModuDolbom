@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>예약 (새 방향)</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav md-topnav--root">
+<h1 style="margin: 0;"><button class="md-topnav__location md-pressable" type="button" aria-label="동네 바꾸기, 지금 역삼동">역삼동<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></h1>
+<a class="md-iconbtn md-pressable" href="Notifications.dc.html" aria-label="알림"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></svg></a>
+</header>
+<main style="flex: 1; overflow-y: auto;">
+<sc-if value="{{hasDone}}" hint-placeholder-val="{{ true }}"><ul class="rb-done" aria-label="고른 조건">
+<sc-for list="{{done}}" as="d" hint-placeholder-count="2"><li class="{{d.cls}}"><button class="md-pressable" type="button" onClick="{{d.edit}}" aria-label="{{d.label}} 바꾸기, 지금 {{d.value}}"><small>{{d.label}}</small><b>{{d.value}}</b><span>바꾸기</span></button></li></sc-for>
+</ul></sc-if>
+<section class="{{qCls}}" aria-labelledby="rb-q">
+<h1 id="rb-q" class="rb-title">{{title}}</h1>
+<sc-if value="{{sub}}" hint-placeholder-val="{{ false }}"><p class="rb-sub">{{sub}}</p></sc-if>
+
+<sc-if value="{{isDog}}" hint-placeholder-val="{{ true }}"><div class="rb-dogs">
+<sc-for list="{{dogs}}" as="g" hint-placeholder-count="2"><button class="rb-dog md-pressable" type="button" aria-pressed="{{g.on}}" onClick="{{g.pick}}"><img class="md-photo" src="{{g.photo}}" alt="" style="object-position: {{g.focus}};"><b>{{g.name}}</b><small>{{g.meta}}</small></button></sc-for>
+</div>
+<a class="rb-self" href="GuardianWalk.dc.html">오늘은 내가 걸어요, 내 산책 기록하기</a></sc-if>
+
+<sc-if value="{{isDate}}" hint-placeholder-val="{{ false }}">
+<div class="md-seg" role="group" aria-label="한 번 또는 반복"><sc-for list="{{freqs}}" as="f" hint-placeholder-count="2"><button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+<sc-if value="{{isOnce}}" hint-placeholder-val="{{ true }}"><div class="rb-days" role="group" aria-label="날짜">
+<sc-for list="{{days}}" as="d" hint-placeholder-count="7"><button class="rb-day md-pressable" type="button" aria-pressed="{{d.on}}" aria-label="{{d.aria}}" onClick="{{d.pick}}"><small>{{d.week}}</small><b>{{d.num}}</b></button></sc-for>
+</div><a class="rb-more" href="BookDateOnce.dc.html">다른 날짜 고르기</a></sc-if>
+<sc-if value="{{isRepeat}}" hint-placeholder-val="{{ false }}"><div class="rb-weeks" role="group" aria-label="요일">
+<sc-for list="{{weeks}}" as="w" hint-placeholder-count="7"><button class="rb-wk md-pressable" type="button" aria-pressed="{{w.on}}" onClick="{{w.pick}}">{{w.label}}</button></sc-for>
+</div><a class="rb-more" href="BookDateRepeat.dc.html">시작일과 끝나는 날 정하기</a></sc-if>
+</sc-if>
+
+<sc-if value="{{isTime}}" hint-placeholder-val="{{ false }}"><div class="rb-times" role="group" aria-label="시작 시간">
+<sc-for list="{{times}}" as="t" hint-placeholder-count="6"><button class="rb-time md-pressable" type="button" aria-pressed="{{t.on}}" onClick="{{t.pick}}"><small>{{t.half}}</small><b>{{t.clock}}</b></button></sc-for>
+</div><a class="rb-more" href="BookDateOnce.dc.html">다른 시간 고르기</a></sc-if>
+
+<sc-if value="{{isLen}}" hint-placeholder-val="{{ false }}"><div class="rb-rows" role="group" aria-label="산책 길이">
+<sc-for list="{{lens}}" as="l" hint-placeholder-count="3"><button class="rb-row md-pressable" type="button" aria-pressed="{{l.on}}" onClick="{{l.pick}}"><b>{{l.label}}</b><small>{{l.note}}</small><span class="rb-row__check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span></button></sc-for>
+</div></sc-if>
+
+<sc-if value="{{isAddr}}" hint-placeholder-val="{{ false }}"><div class="rb-rows" role="group" aria-label="만나는 곳">
+<sc-for list="{{addrs}}" as="a" hint-placeholder-count="2"><button class="rb-row md-pressable" type="button" aria-pressed="{{a.on}}" onClick="{{a.pick}}"><b>{{a.label}}</b><small>{{a.line}}</small><span class="rb-row__check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span></button></sc-for>
+<a class="rb-row rb-row--add md-pressable" href="BookAddressDetail.dc.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--sm"><path d="M5 12h14" /><path d="M12 5v14" /></svg><b>새 주소 추가</b></a>
+</div></sc-if>
+
+<sc-if value="{{isReady}}" hint-placeholder-val="{{ false }}"><p class="rb-note">픽업 안내: {{pickup}}</p></sc-if>
+</section>
+</main>
+<sc-if value="{{showCta}}" hint-placeholder-val="{{ false }}"><div class="rb-cta"><sc-if value="{{isReady}}" hint-placeholder-val="{{ true }}"><a class="md-btn md-btn--brand md-btn--large md-pressable" href="Matching.dc.html" style="box-sizing: border-box;">시터 찾기</a></sc-if><sc-if value="{{isRepeatNext}}" hint-placeholder-val="{{ false }}"><button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{next}}" disabled="{{noWeek}}">다음</button></sc-if></div></sc-if>
+<nav class="md-bottomnav" aria-label="보호자 메뉴">
+<a class="md-tab md-pressable" href="Main.dc.html" aria-current="page" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="4" r="2" /><circle cx="18" cy="8" r="2" /><circle cx="20" cy="16" r="2" /><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" /></svg>예약</a>
+<a class="md-tab md-pressable" href="Sent.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>채팅</a>
+<button class="md-tab md-pressable" type="button"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>소셜</button>
+<button class="md-tab md-pressable" type="button"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /></svg>캘린더</button>
+<button class="md-tab md-pressable" type="button"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>더보기</button>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: 0, dog: null, freq: 'once', day: null, weeks: {}, time: null, len: null, addr: null };
+    this.DOGS = [{ name: '보리', photo: 'img/bori.jpg', focus: 'center 30%', meta: '진돗개 믹스, 21kg' }, { name: '콩이', photo: 'img/kong.jpg', focus: 'center 40%', meta: '푸들 믹스, 4kg' }];
+    this.DAYS = [['토', 7], ['일', 8], ['월', 9], ['화', 10], ['수', 11], ['목', 12], ['금', 13]];
+    this.WEEK = ['월', '화', '수', '목', '금', '토', '일'];
+    this.TIMES = [['오전', '8:00'], ['오전', '10:00'], ['오후', '12:30'], ['오후', '3:00'], ['오후', '6:30'], ['오후', '8:00']];
+    this.LENS = [['30분', '짧게 동네 한 바퀴'], ['60분', '공원까지 다녀오기'], ['90분', '넉넉하게 오래']];
+    this.ADDRS = [{ label: '집', line: '서울 강남구 역삼로 123, 101동' }, { label: '부모님 댁', line: '서울 서초구 반포대로 45, 3동' }];
+  }
+  go(patch, step) { this.setState(Object.assign({}, patch, { step: step })); }
+  dateText() {
+    const s = this.state;
+    if (s.freq === 'repeat') { const w = this.WEEK.filter((d) => s.weeks[d]); return '매주 ' + w.join(', '); }
+    const d = this.DAYS[s.day];
+    return '11월 ' + d[1] + '일 (' + d[0] + ')' + (s.day === 0 ? ', 오늘' : '');
+  }
+  renderVals() {
+    const s = this.state;
+    const Q = [
+      ['누구를 산책시킬까요?', ''],
+      ['언제 맡길까요?', ''],
+      ['몇 시에 나갈까요?', ''],
+      ['얼마나 걸을까요?', '시터마다 가격이 달라요. 시터를 고를 때 보여 드려요.'],
+      ['어디서 만날까요?', '공동현관 비밀번호는 확정된 시터에게, 산책 당일에만 보여요.'],
+      ['이 조건으로 시터를 찾을게요', '같은 동네에서 조건에 맞는 시터를 추려 드려요.']
+    ];
+    const answered = [
+      s.dog != null && ['강아지', this.DOGS[s.dog].name, 0],
+      (s.day != null || (s.freq === 'repeat' && s.step > 1)) && ['날짜', this.dateText(), 1],
+      s.time != null && ['시간', this.TIMES[s.time].join(' ') + '부터', 2],
+      s.len != null && ['길이', this.LENS[s.len][0], 3],
+      s.addr != null && ['만나는 곳', this.ADDRS[s.addr].label, 4]
+    ].filter(Boolean).filter((a) => a[2] < s.step || s.step === 5);
+    const newest = answered.length ? answered[answered.length - 1][2] : -1;
+    const repeatPicked = this.WEEK.some((d) => s.weeks[d]);
+    return {
+      hasDone: answered.length > 0,
+      done: answered.map((a) => ({ label: a[0], value: a[1], cls: a[2] === newest && s.step !== 5 ? 'rb-new' + (s.step % 2 ? 'a' : 'b') : '', edit: () => this.setState({ step: a[2] }) })),
+      qCls: 'rb-q rb-q' + (s.step % 2 ? 'a' : 'b'),
+      title: Q[s.step][0], sub: Q[s.step][1],
+      isDog: s.step === 0, isDate: s.step === 1, isTime: s.step === 2, isLen: s.step === 3, isAddr: s.step === 4, isReady: s.step === 5,
+      dogs: this.DOGS.map((g, i) => ({ name: g.name, photo: g.photo, focus: g.focus, meta: g.meta, on: s.dog === i, pick: () => this.go({ dog: i }, 1) })),
+      freqs: [['once', '한 번'], ['repeat', '매주 반복']].map(([k, label]) => ({ label: label, on: s.freq === k, pick: () => this.setState({ freq: k }) })),
+      isOnce: s.freq === 'once', isRepeat: s.freq === 'repeat',
+      days: this.DAYS.map((d, i) => ({ week: i === 0 ? '오늘' : d[0], num: d[1], aria: '11월 ' + d[1] + '일 ' + d[0] + '요일', on: s.day === i, pick: () => this.go({ day: i }, 2) })),
+      weeks: this.WEEK.map((d) => ({ label: d, on: !!s.weeks[d], pick: () => this.setState({ weeks: Object.assign({}, s.weeks, { [d]: !s.weeks[d] }) }) })),
+      times: this.TIMES.map((t, i) => ({ half: t[0], clock: t[1], on: s.time === i, pick: () => this.go({ time: i }, 3) })),
+      lens: this.LENS.map((l, i) => ({ label: l[0], note: l[1], on: s.len === i, pick: () => this.go({ len: i }, 4) })),
+      addrs: this.ADDRS.map((a, i) => ({ label: a.label, line: a.line, on: s.addr === i, pick: () => this.go({ addr: i }, 5) })),
+      pickup: '출근하는 시간이라 비밀번호로 들어오시면 돼요. 목줄은 현관 앞에 있어요.',
+      showCta: s.step === 5 || (s.step === 1 && s.freq === 'repeat'),
+      isRepeatNext: s.step === 1 && s.freq === 'repeat',
+      noWeek: !repeatPicked,
+      next: () => this.setState({ step: 2 })
+    };
+  }
+}
+</script>
+</body>
+</html>
