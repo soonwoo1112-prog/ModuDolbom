@@ -39,6 +39,12 @@ The locked system. Every Hallmark run reads this first and pages share it. Chang
 ## Motion
 - Character: brisk; colour 150ms on `--ease-easing`, press 150ms on `--ease-enter`; screen transitions only above 200ms; under reduced motion the shrink and shimmer stop.
 
+## Feed posts (decided by blind test, 2026-11-09)
+- A post keeps the shape of what it holds: a walk post leads with a 4:3 photo, then one fact line (dog name in Bold, then duration, distance, place), then the text; a guardian's note leads with the text and a smaller square photo; a short post sits as a thumbnail beside its text.
+- The author is a small byline under the post (initial, name, time) that links to the profile; there is no per-post "ask this sitter" button.
+- The feed opens with the dogs walked in the neighbourhood today, as photos with names.
+- The same test kept the form-led booking screen (1) and the tabbed sitter profile (2-1) over sentence-led and photo-led versions, so those patterns are not adopted.
+
 ## Departures from the Hallmark floor, by the owner's SEED request
 - System sans as the only face (Hallmark bans system-ui as a default; here it is the brief).
 - SEED Tag Group separators between meta items in lists (`md-tags`), drawn as 2px dots, not typed middle dots.

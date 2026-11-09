@@ -365,7 +365,7 @@
     "MainT.dc.html": {
       "h": 844,
       "is_interactive": true,
-      "title": "1T. 예약 (Taste 실험)",
+      "title": "1T. 예약 (Taste 실험, 지금 버전 선택)",
       "w": 390,
       "x": 0,
       "y": 8708
@@ -373,7 +373,7 @@
     "SitterProfileT.dc.html": {
       "h": 844,
       "is_interactive": true,
-      "title": "2-1T. 시터 프로필 (Taste 실험)",
+      "title": "2-1T. 시터 프로필 (Taste 실험, 지금 버전 선택)",
       "w": 390,
       "x": 470,
       "y": 8708
@@ -381,7 +381,7 @@
     "SocialFeedT.dc.html": {
       "h": 844,
       "is_interactive": true,
-      "title": "11T. 소셜 피드 (Taste 실험)",
+      "title": "11T. 소셜 피드 (Taste 실험, 채택해서 11에 반영)",
       "w": 390,
       "x": 940,
       "y": 8708
@@ -473,7 +473,7 @@
     "taste": {
       "kind": "title1",
       "maxW": 1800,
-      "text": "실험 1: Taste 원칙 (원본 1, 2-1, 11과 비교)",
+      "text": "실험 1 결과: 피드만 실험 버전 채택",
       "w": 240,
       "x": 0,
       "y": 8408

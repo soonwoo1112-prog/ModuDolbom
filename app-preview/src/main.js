@@ -81,7 +81,7 @@ class App extends Component {
           h('div', { class: 'md-sheet__handle' }),
           h('h2', { class: 'pv-sheet__title' }, '화면 목록'),
           h('p', { class: 'pv-sheet__sub' }, `캔버스와 같은 화면 ${Object.keys(boards).length}개예요. 화면 안의 버튼과 링크도 그대로 움직여요.`),
-          h('a', { class: 'pv-item pv-item--cmp md-pressable', href: '#compare' }, '블라인드 비교 시작하기: 지금 화면과 실험 화면 3쌍'),
+          h('a', { class: 'pv-item pv-item--cmp md-pressable', href: '#compare' }, '블라인드 비교 시작하기: 지금 화면과 실험 화면'),
           this.groups.map((g) => h('section', { class: 'pv-group' },
             h('h3', { class: 'pv-group__title' }, g.title),
             g.items.map((it) => h('button', { type: 'button', class: 'pv-item md-pressable', 'aria-current': it.name === name ? 'page' : null, onClick: () => this.go(it.name) }, it.title)))))));
