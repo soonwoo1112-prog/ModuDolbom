@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>소셜 피드 (Taste 실험)</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav md-topnav--root">
+<h1 class="md-topnav__title">역삼동 소셜</h1>
+<button class="md-iconbtn md-pressable" type="button" aria-label="검색"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg></button>
+</header>
+<nav aria-label="소셜 보기" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: 44px; box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle);">
+<a href="SocialFeed.dc.html" aria-current="page" style="display: grid; place-items: center; font: 700 15px/20px var(--font-sans); color: var(--fg-neutral); text-decoration: none; box-shadow: inset 0 -2px 0 var(--fg-neutral);">산책 피드</a>
+<a href="Community.dc.html" style="display: grid; place-items: center; font: 500 15px/20px var(--font-sans); color: var(--fg-neutral-subtle); text-decoration: none;">동네 이야기</a>
+</nav>
+<main style="flex: 1; overflow-y: auto;">
+<section class="tt-today" aria-label="오늘 동네에서 산책한 강아지">
+<p>오늘 역삼동에서 강아지 4마리가 앱으로 산책했어요</p>
+<div><span><img class="md-photo" src="img/bori.jpg" alt=""><b>보리</b></span><span><img class="md-photo" src="img/kong.jpg" alt=""><b>콩이</b></span><span><img class="md-photo" src="img/gureum.jpg" alt=""><b>구름</b></span><span><img class="md-photo" src="img/dubu.jpg" alt=""><b>두부</b></span></div>
+</section>
+<article class="tt-walk">
+<div class="tt-walk__photo"><img class="md-photo" src="img/bori.jpg" alt="역삼공원에서 산책하는 보리"></div>
+<p class="tt-walk__facts"><b>보리</b><span>30분</span><span>1.9km</span><span>역삼공원</span></p>
+<p class="tt-walk__text">공원 산책로에 은행잎이 많이 떨어져 있었어요.</p>
+<div class="tt-by"><a href="SitterProfileT.dc.html"><span class="md-initial md-initial--sand">김</span>김하늘 시터</a><span>1시간 전</span><span class="tt-by__acts"><button class="fd-act md-pressable" type="button" aria-pressed="{{a.liked}}" onClick="{{a.like}}" aria-label="좋아요 {{a.likes}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{{a.heartFill}}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>{{a.likes}}</button><button class="fd-act md-pressable" type="button" aria-label="댓글 {{a.comments}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>{{a.comments}}</button></span></div>
+</article>
+<article class="tt-note2">
+<div class="tt-by"><span class="tt-by__who"><span class="md-initial md-initial--sky">콩</span>콩이네 보호자</span><span>3시간 전</span></div>
+<p class="tt-note2__text">콩이가 처음으로 다른 강아지와 인사했어요.</p>
+<img class="md-photo" src="img/kong.jpg" alt="콩이 사진">
+<div class="tt-by"><span></span><span class="tt-by__acts"><button class="fd-act md-pressable" type="button" aria-pressed="{{b.liked}}" onClick="{{b.like}}" aria-label="좋아요 {{b.likes}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{{b.heartFill}}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>{{b.likes}}</button><button class="fd-act md-pressable" type="button" aria-label="댓글 {{b.comments}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>{{b.comments}}</button></span></div>
+</article>
+<article class="tt-row">
+<img class="md-photo" src="img/gureum.jpg" alt="꽃 골목의 구름" style="object-position: center 70%;">
+<div class="tt-row__body"><p class="tt-walk__facts"><b>구름</b><span>30분</span><span>선릉로 골목</span></p>
+<p class="tt-walk__text">꽃이 많은 골목으로 돌아왔어요. 바람이 불 때마다 귀가 날려서 자꾸 멈춰 섰어요.</p></div>
+<div class="tt-by"><a href="SitterProfile.dc.html"><span class="md-initial md-initial--peach">정</span>정민준 시터</a><span>어제</span><span class="tt-by__acts"><button class="fd-act md-pressable" type="button" aria-pressed="{{c.liked}}" onClick="{{c.like}}" aria-label="좋아요 {{c.likes}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{{c.heartFill}}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>{{c.likes}}</button><button class="fd-act md-pressable" type="button" aria-label="댓글 {{c.comments}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>{{c.comments}}</button></span></div>
+</article>
+</main>
+<a class="md-btn md-btn--brand md-pressable" href="ComposePick.dc.html" style="text-decoration: none; position: absolute; right: 16px; bottom: 72px; border-radius: var(--full); min-height: 48px; padding: 0 18px; box-shadow: var(--shadow-floating);"><svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>글쓰기</a>
+<nav class="md-bottomnav" aria-label="보호자 메뉴">
+<a class="md-tab md-pressable" href="Main.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="4" r="2" /><circle cx="18" cy="8" r="2" /><circle cx="20" cy="16" r="2" /><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" /></svg>예약</a>
+<a class="md-tab md-pressable" href="Sent.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>채팅</a>
+<a class="md-tab md-pressable" href="SocialFeed.dc.html" aria-current="page" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>소셜</a>
+<a class="md-tab md-pressable" href="GuardianCalendar.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /></svg>캘린더</a>
+<button class="md-tab md-pressable" type="button"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>더보기</button>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { liked: {} };
+  }
+  renderVals() {
+    const liked = this.state.liked;
+    const base = { a: [12, 3], b: [8, 1], c: [21, 4] };
+    const out = {};
+    for (const k of Object.keys(base)) {
+      const on = !!liked[k];
+      out[k] = { liked: on, likes: base[k][0] + (on ? 1 : 0), comments: base[k][1], heartFill: on ? 'currentColor' : 'none',
+        like: () => this.setState({ liked: Object.assign({}, liked, { [k]: !on }) }) };
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>

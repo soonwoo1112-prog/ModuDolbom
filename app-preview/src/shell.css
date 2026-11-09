@@ -20,3 +20,16 @@ html, body { margin: 0; height: 100%; background: var(--bg-layer-basement); }
 .pv-item { --press: 0.98; display: block; width: 100%; min-height: 44px; padding: 10px 12px; margin: 0 -12px; width: calc(100% + 24px); border: 0; border-radius: var(--r2); background: transparent; color: var(--fg-neutral); font: 400 15px/20px var(--font-sans); text-align: left; cursor: pointer; }
 .pv-item:active { background: var(--bg-transparent-pressed); }
 .pv-item[aria-current="page"] { background: var(--bg-brand-weak); color: var(--fg-brand); font-weight: 700; }
+.pv-item--cmp { margin-top: 12px; background: var(--bg-neutral-weak); font-weight: 700; text-decoration: none; box-sizing: border-box; }
+.pv-bar--cmp { justify-content: space-between; gap: 8px; }
+.pv-cmp { display: contents; }
+.pv-cmp__step { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 14px/19px var(--font-sans); }
+.pv-cmp__seg { display: flex; padding: 3px; border-radius: var(--full); background: var(--bg-neutral-weak); flex: none; }
+.pv-cmp__seg button { min-width: 44px; min-height: 30px; border: 0; border-radius: var(--full); background: transparent; color: var(--fg-neutral-muted); font: 700 14px/19px var(--font-sans); cursor: pointer; }
+.pv-cmp__seg button[aria-pressed="true"] { background: var(--bg-layer-default); color: var(--fg-neutral); box-shadow: var(--shadow-floating); }
+.pv-cmp__pick { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+.pv-cmp__pick .md-btn { font-size: 16px; }
+.pv-result { box-sizing: border-box; width: 100%; max-width: 520px; padding: 32px 20px; display: flex; flex-direction: column; gap: 14px; background: var(--bg-layer-default); min-height: 100%; }
+.pv-result h2 { margin: 0; font: 800 24px/32px var(--font-sans); letter-spacing: -0.5px; }
+.pv-result__sub { margin: -6px 0 0; color: var(--fg-neutral-muted); font: 400 15px/22px var(--font-sans); }
+.pv-result ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font: 400 15px/22px var(--font-sans); }

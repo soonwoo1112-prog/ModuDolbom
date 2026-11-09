@@ -5,6 +5,7 @@ import '../../design/canvas/modudolbom.css';
 import '../../design/canvas/ds/modudolbom/components/bundle.css';
 import './shell.css';
 import { Board } from './player.js';
+import { Compare } from './compare.js';
 import { boards, canvas } from './boards.gen.js';
 
 const W = 390;
@@ -29,7 +30,7 @@ function groups() {
 
 const fromHash = () => {
   const n = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
-  return boards[n] ? n : 'Main';
+  return n === 'compare' || boards[n] ? n : 'Main';
 };
 
 const ListIcon = () => h('svg', { class: 'md-ico md-ico--md', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true' },
@@ -67,6 +68,7 @@ class App extends Component {
   };
   render(_, { name, list, size, visit }) {
     const { s, bh } = size;
+    if (name === 'compare') return h('div', { class: 'pv' }, h(Compare, { size }));
     return h('div', { class: 'pv' },
       h('header', { class: 'pv-bar' },
         h('button', { class: 'pv-bar__btn md-pressable', type: 'button', onClick: () => this.setState({ list: true }), 'aria-haspopup': 'dialog' },
@@ -79,6 +81,7 @@ class App extends Component {
           h('div', { class: 'md-sheet__handle' }),
           h('h2', { class: 'pv-sheet__title' }, '화면 목록'),
           h('p', { class: 'pv-sheet__sub' }, `캔버스와 같은 화면 ${Object.keys(boards).length}개예요. 화면 안의 버튼과 링크도 그대로 움직여요.`),
+          h('a', { class: 'pv-item pv-item--cmp md-pressable', href: '#compare' }, '블라인드 비교 시작하기: 지금 화면과 실험 화면 3쌍'),
           this.groups.map((g) => h('section', { class: 'pv-group' },
             h('h3', { class: 'pv-group__title' }, g.title),
             g.items.map((it) => h('button', { type: 'button', class: 'pv-item md-pressable', 'aria-current': it.name === name ? 'page' : null, onClick: () => this.go(it.name) }, it.title)))))));

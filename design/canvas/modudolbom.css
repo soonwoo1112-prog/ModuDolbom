@@ -520,3 +520,85 @@ div.dg-size { cursor: default; min-height: 108px; }
 }
 /* One heading voice: settings groups read like every other section. */
 :root .st-group__title { font-size: 20px; line-height: 27px; font-weight: 800; letter-spacing: -0.4px; padding-top: 20px; }
+
+/* ---- Experiment: Taste principles (boards 1T, 2-1T, 11T) ---- */
+/* 1T: the booking reads as one sentence; every underlined word is a control. */
+.tt-dogphoto { position: relative; height: 232px; background: var(--bg-neutral-weak); }
+.tt-dogphoto img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tt-dogpick { position: absolute; left: 16px; bottom: 14px; display: flex; gap: 6px; }
+.tt-dogpick button { --press: 0.95; min-height: 34px; padding: 0 14px; border: 0; border-radius: var(--full); background: var(--bg-layer-scrim-light); color: var(--fg-neutral); font: 700 14px/19px var(--font-sans); cursor: pointer; }
+.tt-dogpick button[aria-pressed="true"] { background: var(--bg-neutral-solid); color: var(--fg-on-neutral-solid); }
+.tt-ask { display: flex; flex-direction: column; gap: 18px; padding: 24px 16px 20px; }
+.tt-sentence { margin: 0; font: 800 27px/42px var(--font-sans); letter-spacing: -0.6px; word-break: keep-all; }
+.tt-tok { --press: 0.97; display: inline; padding: 0; border: 0; background: none; font: inherit; letter-spacing: inherit; color: var(--fg-brand); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 7px; text-decoration-color: var(--bg-brand-weak-pressed); cursor: pointer; }
+.tt-tok:hover { text-decoration-color: var(--fg-brand); }
+.tt-where { --press: 0.98; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: var(--r3); background: var(--bg-neutral-weak); color: var(--fg-neutral); text-decoration: none; font: 500 15px/20px var(--font-sans); }
+.tt-where small { display: block; font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); }
+.tt-note { margin: -6px 0 0; font: 400 14px/19px var(--font-sans); color: var(--fg-neutral-muted); }
+.tt-note a { font-weight: 700; color: var(--fg-neutral); }
+.tt-match { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 14px; margin: 0 16px; padding: 16px; border-radius: var(--r3); box-shadow: inset 0 0 0 1px var(--stroke-neutral-weak); }
+.tt-match p { margin: 0; font: 400 14px/21px var(--font-sans); color: var(--fg-neutral); }
+.tt-faces { display: flex; }
+.tt-faces .md-initial { width: 30px; height: 30px; font-size: 12px; border-radius: var(--full); box-shadow: 0 0 0 2px var(--bg-layer-default); }
+.tt-faces .md-initial + .md-initial { margin-left: -9px; }
+.tt-faces .md-initial:nth-child(n+4) { display: none; }
+.tt-self { margin: 18px 16px 24px; font: 500 14px/19px var(--font-sans); }
+.tt-self a { display: inline-flex; align-items: center; gap: 6px; color: var(--fg-neutral-muted); text-decoration: none; }
+
+/* 2-1T: photographs lead, then the answers to a guardian's questions, in order. */
+.tt-mosaic { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; height: 248px; }
+.tt-mosaic img { width: 100%; height: 100%; min-height: 0; }
+.tt-mosaic img:first-child { grid-row: 1 / 3; }
+.tt-who { display: flex; align-items: center; gap: 12px; padding: 20px 16px 0; }
+.tt-who .md-initial { width: 56px; height: 56px; font-size: 22px; border-radius: var(--full); flex: none; }
+.tt-who h2 { display: flex; align-items: center; gap: 4px; margin: 0; font: 800 24px/31px var(--font-sans); letter-spacing: -0.5px; }
+.tt-who h2 svg { width: 20px; height: 20px; color: var(--fg-brand); }
+.tt-who p { margin: 2px 0 0; font: 400 14px/19px var(--font-sans); color: var(--fg-neutral-muted); }
+.tt-bio { margin: 14px 16px 0; font: 400 16px/25px var(--font-sans); }
+.tt-fit { margin: 20px 16px 4px; padding: 16px; border-radius: var(--r3); background: var(--bg-brand-weak); }
+.tt-fit h3 { margin: 0 0 8px; font: 800 17px/23px var(--font-sans); color: var(--fg-brand); }
+.tt-fit ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.tt-fit li { display: flex; align-items: center; gap: 8px; font: 500 15px/20px var(--font-sans); }
+.tt-fit svg { width: 18px; height: 18px; flex: none; color: var(--fg-brand); }
+.tt-sec { display: flex; flex-direction: column; gap: 12px; padding: 24px 16px 4px; }
+.tt-sechead { display: flex; align-items: baseline; justify-content: space-between; }
+.tt-sechead a { text-decoration: none; }
+.tt-prose { margin: 0; font: 400 15px/24px var(--font-sans); }
+.tt-quote { margin: 0; padding: 0 0 0 16px; box-shadow: inset 3px 0 0 var(--bg-brand-weak-pressed); }
+.tt-quote p { margin: 0; font: 500 17px/27px var(--font-sans); letter-spacing: -0.2px; }
+.tt-quote footer { margin-top: 8px; font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); }
+.tt-prices { display: grid; grid-template-columns: minmax(0, 1fr) auto; row-gap: 10px; margin: 0; font: 400 15px/20px var(--font-sans); }
+.tt-prices dt { color: var(--fg-neutral-muted); }
+.tt-prices dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+.tt-more { --press: 0.98; display: flex; align-items: center; justify-content: space-between; margin: 24px 16px 24px; padding: 14px 16px; border-radius: var(--r3); background: var(--bg-neutral-weak); color: var(--fg-neutral); text-decoration: none; font: 700 15px/20px var(--font-sans); }
+.tt-cta { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px; padding: 12px 16px 16px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle); }
+.tt-cta > span { display: flex; flex-direction: column; }
+.tt-cta b { font: 800 20px/26px var(--font-sans); font-variant-numeric: tabular-nums; }
+.tt-cta small { font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); }
+
+/* 11T: posts keep the shape of what they hold; walk facts sit in one line under the photo. */
+.tt-today { padding: 16px 0 18px; box-shadow: inset 0 -8px 0 var(--bg-layer-basement); }
+.tt-today p { margin: 0 16px 12px; font: 700 15px/20px var(--font-sans); }
+.tt-today > div { display: flex; gap: 12px; padding: 0 16px 8px; overflow-x: auto; }
+.tt-today span { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: none; }
+.tt-today img { width: 64px; height: 64px; border-radius: var(--r4); }
+.tt-today b { font: 500 13px/18px var(--font-sans); }
+.tt-walk, .tt-note2, .tt-row { padding: 20px 16px; box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle); }
+.tt-walk__photo { aspect-ratio: 4 / 3; border-radius: var(--r4); overflow: hidden; }
+.tt-walk__photo img { width: 100%; height: 100%; }
+.tt-walk__facts { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 12px 0 0; font: 400 14px/19px var(--font-sans); color: var(--fg-neutral-muted); font-variant-numeric: tabular-nums; }
+.tt-walk__facts b { font: 800 18px/24px var(--font-sans); color: var(--fg-neutral); letter-spacing: -0.3px; }
+.tt-walk__text { margin: 6px 0 0; font: 400 15px/23px var(--font-sans); }
+.tt-by { display: flex; align-items: center; gap: 8px; margin-top: 12px; font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); }
+.tt-by a, .tt-by__who { display: inline-flex; align-items: center; gap: 6px; font: 700 13px/18px var(--font-sans); color: var(--fg-neutral); text-decoration: none; }
+.tt-by .md-initial { width: 24px; height: 24px; font-size: 11px; border-radius: var(--full); }
+.tt-by__acts { margin-left: auto; display: inline-flex; }
+.tt-note2 > .tt-by:first-child { margin-top: 0; }
+.tt-note2__text { margin: 10px 0 12px; font: 500 18px/28px var(--font-sans); letter-spacing: -0.3px; }
+.tt-note2 > img { display: block; width: 62%; aspect-ratio: 1; border-radius: var(--r4); }
+.tt-note2 > .tt-by:last-child { margin-top: 4px; }
+.tt-row { display: grid; grid-template-columns: 112px minmax(0, 1fr); column-gap: 14px; }
+.tt-row > img { width: 112px; height: 112px; border-radius: var(--r3); }
+.tt-row .tt-walk__facts { margin-top: 0; }
+.tt-row .tt-walk__text { font-size: 14px; line-height: 21px; }
+.tt-row > .tt-by { grid-column: 1 / -1; }

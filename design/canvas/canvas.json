@@ -361,6 +361,30 @@
       "w": 390,
       "x": 1410,
       "y": 7464
+    },
+    "MainT.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1T. 예약 (Taste 실험)",
+      "w": 390,
+      "x": 0,
+      "y": 8708
+    },
+    "SitterProfileT.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "2-1T. 시터 프로필 (Taste 실험)",
+      "w": 390,
+      "x": 470,
+      "y": 8708
+    },
+    "SocialFeedT.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "11T. 소셜 피드 (Taste 실험)",
+      "w": 390,
+      "x": 940,
+      "y": 8708
     }
   },
   "createdOnFiles": {
@@ -386,7 +410,8 @@
     "socialcal",
     "profiles",
     "more",
-    "compose"
+    "compose",
+    "taste"
   ],
   "notes": {
     "flow": {
@@ -444,6 +469,14 @@
       "w": 240,
       "x": 0,
       "y": 7164
+    },
+    "taste": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "실험 1: Taste 원칙 (원본 1, 2-1, 11과 비교)",
+      "w": 240,
+      "x": 0,
+      "y": 8408
     }
   },
   "order": [
@@ -491,7 +524,10 @@
     "DogProfilePhotos.dc.html",
     "ComposePick.dc.html",
     "ComposeWalk.dc.html",
-    "GuardianWalk.dc.html"
+    "GuardianWalk.dc.html",
+    "MainT.dc.html",
+    "SitterProfileT.dc.html",
+    "SocialFeedT.dc.html"
   ],
   "pages": [],
   "title": "모두돌봄 예약 흐름"
