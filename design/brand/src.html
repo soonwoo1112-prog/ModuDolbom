@@ -65,12 +65,12 @@ h2 { margin: 0 0 4px; font: 800 24px/1.3 var(--f-ui); letter-spacing: -0.01em; }
   </section>
 
   <section aria-labelledby="h-marks">
-    <h2 id="h-marks">로고 마크 3안</h2>
+    <h2 id="h-marks">로고 마크: 나란히 걷기 다듬기</h2>
     <p class="sec-note">마크는 서체와 따로 고를 수 있어요. 아래 버튼으로 옆에 붙는 글자 서체를 바꿔 보세요.</p>
     <div class="picker" role="group" aria-label="로고 글자 서체">
       <button type="button" id="pk-pretendard" data-font="Pretendard" aria-pressed="false">Pretendard</button>
-      <button type="button" id="pk-suit" data-font="SUIT" aria-pressed="false">SUIT</button>
-      <button type="button" id="pk-wanted" data-font="Wanted Sans" aria-pressed="true">Wanted Sans</button>
+      <button type="button" id="pk-suit" data-font="SUIT" aria-pressed="true">SUIT</button>
+      <button type="button" id="pk-wanted" data-font="Wanted Sans" aria-pressed="false">Wanted Sans</button>
       <button type="button" id="pk-line" data-font="LINE Seed Sans KR" aria-pressed="false">LINE Seed</button>
       <button type="button" id="pk-hahmlet" data-font="Hahmlet" aria-pressed="false">Hahmlet</button>
     </div>
@@ -87,6 +87,6 @@ h2 { margin: 0 0 4px; font: 800 24px/1.3 var(--f-ui); letter-spacing: -0.01em; }
     document.querySelectorAll('.lockup span').forEach(function (s) { s.style.fontFamily = '"' + btn.dataset.font + '", var(--f-ui)'; });
   }
   buttons.forEach(function (b) { b.addEventListener('click', function () { use(b); }); });
-  use(document.getElementById('pk-wanted'));
+  use(document.getElementById("pk-suit"));
 })();
 </script>

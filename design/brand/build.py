@@ -24,12 +24,8 @@ def card(label, fam, note, body):
 </article>'''
 cards='\n'.join(card(*f) for f in FONTS)
 MARKS={
- 'route': ('산책 길','출발점(빈 원)에서 한 바퀴 돌아 도착점(점)에서 끝나는 산책 경로. 산책 기록 지도와 같은 언어예요.',
-  '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="37.5" r="3.6" stroke-width="3.4"/><path d="M14 34.6C21 29 9.5 18 17.5 11.2 25.5 4.4 39.6 9.4 38.6 20.4 37.8 29 28.4 30.6 27.2 24.6"/><circle cx="26.6" cy="22.6" r="4.6" fill="currentColor" stroke="none"/></svg>'),
- 'leash': ('나란히 걷기','큰 점(이웃)과 작은 점(강아지)이 같은 길을 나란히 걷는 모양. 가장 단순해서 작은 크기에서도 또렷해요.',
-  '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" aria-hidden="true"><circle cx="17" cy="17.5" r="7" fill="currentColor" stroke="none"/><circle cx="32.5" cy="23" r="4.6" fill="currentColor" stroke="none"/><path d="M6.5 36.5C16 30.5 32 30.5 41.5 36.5"/></svg>'),
- 'home': ('동네 집','지붕 아래 발자국. 가장 바로 읽히지만, 반려동물 앱에서 흔한 모양이라 기억에 덜 남을 수 있어요.',
-  '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 22.5 24 8.5l16.5 14V38a3 3 0 0 1-3 3h-27a3 3 0 0 1-3-3z"/><g fill="currentColor" stroke="none"><ellipse cx="24" cy="32.6" rx="5.4" ry="4.4"/><circle cx="17.6" cy="25.8" r="2.4"/><circle cx="24" cy="23.4" r="2.4"/><circle cx="30.4" cy="25.8" r="2.4"/></g></svg>'),
+ 'smile': ('나란히 걷기 · 웃는 길','이웃(큰 점)과 강아지 발바닥(작은 점과 발가락 셋)이 아래로 휘어 웃는 모양의 길 위를 걸어요.', '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" aria-hidden="true"><circle cx="16.5" cy="20" r="7" fill="currentColor" stroke="none"/><circle cx="32.5" cy="25" r="4.3" fill="currentColor" stroke="none"/><circle cx="28.1" cy="19.8" r="1.75" fill="currentColor" stroke="none"/><circle cx="32.5" cy="17.8" r="1.75" fill="currentColor" stroke="none"/><circle cx="36.9" cy="19.8" r="1.75" fill="currentColor" stroke="none"/><path d="M7 33.5C16.5 40.5 31.5 40.5 41 33.5"/></svg>'),
+ 'diag': ('나란히 걷기 · 오르막 직선','같은 둘이 왼쪽 아래에서 오른쪽 위로 곧게 뻗은 길을 걸어요. 앞으로 나아가는 느낌이 더 강해요.', '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" aria-hidden="true"><circle cx="14.5" cy="23.5" r="7" fill="currentColor" stroke="none"/><circle cx="32" cy="19.5" r="4.3" fill="currentColor" stroke="none"/><circle cx="27.6" cy="14.3" r="1.75" fill="currentColor" stroke="none"/><circle cx="32" cy="12.3" r="1.75" fill="currentColor" stroke="none"/><circle cx="36.4" cy="14.3" r="1.75" fill="currentColor" stroke="none"/><path d="M7 41.5 41 28"/></svg>'),
 }
 def mark(k):
     t,d,svg=MARKS[k]
