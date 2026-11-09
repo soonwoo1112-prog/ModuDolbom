@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>시터 분석</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav">
+<a class="md-iconbtn md-pressable" href="SitterMore.dc.html" aria-label="뒤로 가기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico"><path d="m15 18-6-6 6-6" /></svg></a>
+<h1 class="md-topnav__title">시터 분석</h1>
+<span style="width: 48px;"></span>
+</header>
+<div style="padding: 10px 16px 0;"><div class="md-seg" role="group" aria-label="기간"><sc-for list="{{periods}}" as="p" hint-placeholder-count="2"><button type="button" aria-pressed="{{p.on}}" onClick="{{p.pick}}">{{p.label}}</button></sc-for></div></div>
+<div class="chip-scroll" role="group" aria-label="볼 숫자"><sc-for list="{{metrics}}" as="m" hint-placeholder-count="7"><button class="md-chip md-pressable" type="button" aria-pressed="{{m.on}}" onClick="{{m.pick}}"><span>{{m.label}}</span></button></sc-for></div>
+<main style="flex: 1; overflow-y: auto;">
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;">
+<div class="ch-head"><span>{{metricName}}, {{latestLabel}}</span><b>{{latestText}}</b><span>{{changeText}}</span></div>
+<div><div class="ch-plot" role="img" aria-label="{{chartAria}}"><sc-for list="{{bars}}" as="b" hint-placeholder-count="8"><button class="ch-bar" type="button" aria-pressed="{{b.sel}}" data-last="{{b.last}}" aria-label="{{b.aria}}" onClick="{{b.pick}}"><sc-if value="{{b.show}}" hint-placeholder-val="{{ false }}"><em>{{b.text}}</em></sc-if><i style="height: {{b.h}};"></i></button></sc-for></div>
+<div class="ch-axis" aria-hidden="true"><sc-for list="{{bars}}" as="b" hint-placeholder-count="8"><span>{{b.label}}</span></sc-for></div></div>
+<p class="wk-sub">막대를 누르면 그 {{unitWord}}의 숫자를 볼 수 있어요. 미리보기용 예시 숫자예요</p>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; flex-direction: column; gap: 2px;"><h2 class="md-section-title" style="margin: 0;">지금까지 번 돈</h2></div>
+<ul class="pf-pricelist"><li data-base="true"><span>모두돌봄에서 번 돈<small>2025년 9월에 시작, 산책 86번</small></span><b>1,284,000원</b></li><li><span>{{periodWord}} 번 돈</span><b>{{periodIncome}}</b></li></ul>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; flex-direction: column; gap: 2px;"><h2 class="md-section-title" style="margin: 0;">고객이 어디서 왔나요</h2><p class="wk-sub">{{periodWord}} 요청한 보호자 기준</p></div>
+<div class="ch-src"><sc-for list="{{sources}}" as="r" hint-placeholder-count="4"><div><span>{{r.label}}</span><i style="width: {{r.w}};"></i><b>{{r.n}}명</b></div></sc-for></div>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; flex-direction: column; gap: 2px;"><h2 class="md-section-title" style="margin: 0;">요청에서 예약까지</h2></div>
+<ul class="pf-pricelist"><sc-for list="{{steps}}" as="s" hint-placeholder-count="4"><li><span>{{s.label}}<small>{{s.note}}</small></span><b>{{s.value}}</b></li></sc-for></ul>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; flex-direction: column; gap: 2px;"><h2 class="md-section-title" style="margin: 0;">보호자가 많이 찾는 때</h2><p class="wk-sub">이때 시간을 열어 두면 더 많이 보여요</p></div>
+<ul class="pf-pricelist"><li><span>요일</span><b>토요일</b></li><li><span>시간</span><b>오후 12시</b></li></ul>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { period: 'week', metric: 'views', sel: -1 };
+  }
+  renderVals() {
+    const s = this.state;
+    const w = s.period === 'week';
+    const D = {
+      views: { name: '검색 노출', unit: '번', week: [22, 25, 24, 30, 28, 35, 38, 42], month: [64, 88, 102, 131, 150, 168] },
+      profile: { name: '프로필 조회', unit: '번', week: [8, 9, 11, 10, 13, 15, 14, 18], month: [21, 30, 38, 49, 60, 71] },
+      requests: { name: '받은 요청', unit: '건', week: [3, 2, 4, 4, 5, 6, 5, 7], month: [6, 9, 12, 17, 21, 26] },
+      walks: { name: '확정된 산책', unit: '번', week: [2, 2, 3, 3, 3, 4, 3, 4], month: [4, 7, 9, 12, 13, 15] },
+      likes: { name: '피드 좋아요', unit: '개', week: [10, 14, 12, 19, 25, 22, 31, 36], month: [20, 41, 58, 77, 96, 118] },
+      income: { name: '수입', unit: '원', week: [30000, 30000, 45000, 45000, 45000, 60000, 45000, 70800], month: [60000, 105000, 135000, 180000, 195000, 225000] }
+    };
+    const m = D[s.metric];
+    const vals = w ? m.week : m.month;
+    const labels = w ? ['9/14', '9/21', '9/28', '10/5', '10/12', '10/19', '10/26', '11/2'] : ['6월', '7월', '8월', '9월', '10월', '11월'];
+    const max = Math.max.apply(null, vals);
+    const fmt = (v) => m.unit === '원' ? v.toLocaleString('ko-KR') + '원' : v + m.unit;
+    const last = vals[vals.length - 1], prev = vals[vals.length - 2];
+    const diff = last - prev;
+    const unitWord = w ? '주' : '달';
+    const showI = s.sel >= 0 && s.sel < vals.length ? s.sel : vals.length - 1;
+    return {
+      periods: [['week', '주별'], ['month', '월별']].map(([k, l]) => ({ label: l, on: s.period === k, pick: () => this.setState({ period: k, sel: -1 }) })),
+      metrics: Object.keys(D).map((k) => ({ label: D[k].name, on: s.metric === k, pick: () => this.setState({ metric: k, sel: -1 }) })),
+      metricName: m.name,
+      latestLabel: w ? '이번 주' : '이번 달',
+      latestText: fmt(last),
+      changeText: diff === 0 ? '지난' + unitWord + '와 같아요' : '지난' + unitWord + '보다 ' + fmt(Math.abs(diff)) + (diff > 0 ? ' 늘었어요' : ' 줄었어요'),
+      chartAria: m.name + ', ' + labels[0] + '부터 ' + labels[labels.length - 1] + '까지 ' + vals.map(fmt).join(', '),
+      unitWord: unitWord,
+      bars: vals.map((v, i) => ({ h: Math.max(4, Math.round(v / max * 140)) + 'px', label: labels[i], text: fmt(v), show: i === showI, sel: i === s.sel, last: i === vals.length - 1, aria: labels[i] + ' ' + fmt(v), pick: () => this.setState({ sel: i }) })),
+      periodWord: w ? '이번 주' : '이번 달',
+      periodIncome: (w ? 70800 : 225000).toLocaleString('ko-KR') + '원',
+      sources: (w ? [['검색', 4], ['피드', 2], ['반복고객', 1], ['전담 시터', 0]] : [['검색', 14], ['피드', 6], ['반복고객', 4], ['전담 시터', 2]]).map(([l, n], i, a) => ({ label: l, n: n, w: Math.max(2, Math.round(n / a[0][1] * 100)) + '%' })),
+      steps: [
+        { label: '받은 요청', note: '', value: (w ? 7 : 26) + '건' },
+        { label: '대화한 요청', note: '거절하지 않고 대화창을 열었어요', value: (w ? 5 : 19) + '건' },
+        { label: '확정된 예약', note: '대화한 요청 중 ' + (w ? 80 : 79) + '%', value: (w ? 4 : 15) + '건' },
+        { label: '평균 답장 시간', note: '요청을 받고 대화창을 열기까지', value: '10분' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

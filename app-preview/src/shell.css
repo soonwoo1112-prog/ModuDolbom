@@ -1,0 +1,22 @@
+/* Preview shell only. The screens themselves are styled by the canvas CSS. */
+html, body { margin: 0; height: 100%; background: var(--bg-layer-basement); }
+#root { height: 100%; }
+.pv { position: relative; display: flex; flex-direction: column; align-items: center; height: 100%; overflow: hidden; }
+.pv-bar { flex: none; align-self: stretch; display: flex; align-items: center; justify-content: center; height: 44px; padding: 0 12px; background: var(--bg-layer-default); box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle); }
+.pv-bar__btn { --press: 0.97; display: inline-flex; align-items: center; gap: 8px; max-width: 100%; min-height: 36px; padding: 0 14px; border: 0; border-radius: var(--full); background: var(--bg-neutral-weak); color: var(--fg-neutral); font: 700 14px/19px var(--font-sans); cursor: pointer; }
+.pv-bar__title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pv-stage { flex: none; position: relative; overflow: hidden; background: var(--bg-layer-default); }
+.pv-board { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.pv-board > div { width: 100% !important; height: 100% !important; }
+@media (min-width: 500px) {
+  .pv-stage { margin-top: 16px; border-radius: 28px; box-shadow: 0 0 0 1px var(--stroke-neutral-subtle), var(--shadow-floating); }
+}
+.pv-overlay { position: fixed; z-index: 50; }
+.pv-sheet { max-width: 520px; width: 100%; box-sizing: border-box; align-self: center; gap: 0; padding-bottom: 24px; }
+.pv-sheet__title { margin: 12px 0 2px; font: 800 20px/27px var(--font-sans); letter-spacing: -0.4px; }
+.pv-sheet__sub { margin: 0 0 8px; font: 400 13px/18px var(--font-sans); color: var(--fg-neutral-subtle); }
+.pv-group { display: flex; flex-direction: column; padding-top: 16px; }
+.pv-group__title { margin: 0 0 4px; font: 700 14px/19px var(--font-sans); color: var(--fg-neutral-muted); }
+.pv-item { --press: 0.98; display: block; width: 100%; min-height: 44px; padding: 10px 12px; margin: 0 -12px; width: calc(100% + 24px); border: 0; border-radius: var(--r2); background: transparent; color: var(--fg-neutral); font: 400 15px/20px var(--font-sans); text-align: left; cursor: pointer; }
+.pv-item:active { background: var(--bg-transparent-pressed); }
+.pv-item[aria-current="page"] { background: var(--bg-brand-weak); color: var(--fg-brand); font-weight: 700; }

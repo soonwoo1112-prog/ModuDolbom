@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>시터 채팅</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav">
+<a class="md-iconbtn md-pressable" href="SitterToday.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a>
+<h1 class="md-topnav__title">보리네 보호자</h1>
+<span style="width: 48px;"></span>
+</header>
+<section style="padding: 8px 8px 10px 16px; display: flex; flex-direction: column; gap: 8px; background: var(--bg-layer-basement); box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle);">
+<div style="display: flex; align-items: center; gap: 10px;">
+<a class="md-pressable" href="DogProfile.dc.html" aria-label="보리 프로필 보기" style="display: block; flex: none; border-radius: var(--r3);"><img class="md-photo" src="img/bori.jpg" alt="보리 사진" style="width: 48px; height: 48px; border-radius: var(--r3);"></a>
+<span style="flex: 1; display: flex; align-items: center; gap: 6px; min-width: 0;"><span class="md-chatbar__name">보리</span><sc-if value="{{confirmed}}" hint-placeholder-val="{{ true }}"><span class="md-badge md-badge--brand-solid">예약확정</span></sc-if><sc-if value="{{editSent}}" hint-placeholder-val="{{ false }}"><span class="md-badge md-badge--info">수정요청중</span></sc-if></span>
+<button class="md-iconbtn md-pressable" type="button" aria-label="더보기" onClick="{{openMenu}}"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg></button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding-right: 8px;">
+<sc-if value="{{open}}" hint-placeholder-val="{{ false }}">
+<button class="md-btn md-btn--xsmall md-chatbar__btn" type="button" disabled>확정 기다리는 중</button>
+</sc-if>
+<sc-if value="{{confirmed}}" hint-placeholder-val="{{ true }}">
+<button class="md-btn md-btn--xsmall md-chatbar__btn" type="button" disabled>확정됐어요</button>
+</sc-if>
+<a class="md-btn md-btn--xsmall md-chatbar__btn md-pressable" href="ChatEdit.dc.html"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>수정</a>
+<button class="md-btn md-btn--xsmall md-chatbar__btn md-pressable" type="button" onClick="{{openInfo}}"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg>정보</button>
+</div>
+</section>
+<main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding: 16px;">
+<span class="md-tagtext" style="align-self: center;">오늘</span>
+<div style="display: flex; align-items: flex-end; gap: 6px; max-width: 290px; align-self: flex-end; flex-direction: row-reverse;">
+<p style="margin: 0; padding: 10px 14px; border-radius: 16px 16px 4px 16px; background: var(--bg-brand-weak); font-size: 15px; line-height: 21px;">안녕하세요. 같은 아파트 103동에 살아요. 내일 12시 반에 산책할 수 있어요.</p>
+<span class="md-tagtext" style="flex: none;">오후 3:02</span>
+</div>
+<div style="display: flex; align-items: flex-end; gap: 6px; max-width: 290px;">
+<p style="margin: 0; padding: 10px 14px; border-radius: 16px 16px 16px 4px; background: var(--bg-neutral-weak); font-size: 15px; line-height: 21px;">좋아요. 보리가 다른 강아지를 보면 조금 짖어요.</p>
+<span class="md-tagtext" style="flex: none;">오후 3:04</span>
+</div>
+<div style="display: flex; align-items: flex-end; gap: 6px; max-width: 290px; align-self: flex-end; flex-direction: row-reverse;">
+<p style="margin: 0; padding: 10px 14px; border-radius: 16px 16px 4px 16px; background: var(--bg-brand-weak); font-size: 15px; line-height: 21px;">괜찮아요. 강아지가 적은 공원 길로 걸을게요. 확정해 주시면 픽업 안내대로 들어갈게요.</p>
+<span class="md-tagtext" style="flex: none;">오후 3:05</span>
+</div>
+<div role="status" style="align-self: center; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 16px; border-radius: var(--r3); background: var(--bg-layer-basement); text-align: center; max-width: 300px;">
+<span class="md-label" style="color: var(--fg-positive);">보리네 보호자가 예약을 확정했어요</span>
+<span class="md-detail">이제 주소와 픽업 안내를 볼 수 있어요. 공동현관 비밀번호는 산책 당일에 보여요.</span>
+</div>
+<div style="display: flex; align-items: flex-end; gap: 6px; max-width: 290px;">
+<p style="margin: 0; padding: 10px 14px; border-radius: 16px 16px 16px 4px; background: var(--bg-neutral-weak); font-size: 15px; line-height: 21px;">확정했어요. 내일 잘 부탁드려요.</p>
+<span class="md-tagtext" style="flex: none;">오후 3:07</span>
+</div>
+</main>
+<form style="display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 16px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle); background: var(--bg-layer-default);">
+<label for="msg" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%);">메시지</label>
+<input class="md-input" id="msg" placeholder="메시지 보내기" style="flex: 1; min-height: 44px; border-radius: var(--full);">
+<button class="md-iconbtn md-pressable" type="button" aria-label="보내기" style="color: var(--fg-brand);"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" /></svg></button>
+</form>
+
+<sc-if value="{{showInfo}}" hint-placeholder-val="{{ false }}">
+<div class="md-overlay" onClick="{{close}}">
+<div class="md-sheet" role="dialog" aria-modal="true" aria-label="예약 정보" onClick="{{stop}}">
+<span class="md-sheet__handle" aria-hidden="true"></span>
+<div class="md-sheet__head"><span></span><h2>예약 정보</h2><button class="md-iconbtn md-pressable" type="button" aria-label="닫기" onClick="{{close}}"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button></div>
+<a class="md-item md-pressable" href="DogProfile.dc.html" style="margin: 0 -16px;">
+<img class="md-photo" src="img/bori.jpg" alt="보리 사진" style="width: 48px; height: 48px; border-radius: var(--full);">
+<span class="md-item__body"><span class="md-list-title">보리</span><span class="md-item__muted">중형견, 3살</span></span>
+<span class="md-label" style="display: inline-flex; align-items: center; gap: 2px; color: var(--fg-brand);">프로필 보기<svg class="md-ico md-ico--sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span>
+</a>
+<dl style="margin: 0; display: grid; grid-template-columns: 72px minmax(0, 1fr); row-gap: 12px; column-gap: 12px; font: 400 15px/21px var(--font-sans);">
+<dt class="md-label" style="color: var(--fg-neutral-subtle);">시작</dt><dd style="margin: 0;">11월 7일 (토) 오후 12:30</dd>
+<dt class="md-label" style="color: var(--fg-neutral-subtle);">끝</dt><dd style="margin: 0;">11월 7일 (토) 오후 1:00</dd>
+<dt class="md-label" style="color: var(--fg-neutral-subtle);">비용</dt><dd style="margin: 0;" class="md-num"><b>15,000원</b> <span class="md-detail">30분 산책 1번</span></dd>
+<dt class="md-label" style="color: var(--fg-neutral-subtle);">주소</dt><dd style="margin: 0;">집, 서울 강남구 역삼로 123 101동 1203호</dd>
+</dl>
+<p class="md-detail" style="margin: 0;">앱에서 예약한 산책만 보험으로 보장돼요.</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{showMenu}}" hint-placeholder-val="{{ false }}">
+<div class="md-overlay" onClick="{{close}}">
+<div class="md-sheet" role="dialog" aria-modal="true" aria-label="더보기" onClick="{{stop}}" style="gap: 0; padding-bottom: 24px;">
+<span class="md-sheet__handle" aria-hidden="true" style="margin-bottom: 8px;"></span>
+<button class="md-item md-pressable" type="button" style="border: 0; text-align: left; margin: 0 -16px; grid-template-columns: 24px minmax(0, 1fr);"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg><span style="display: flex; flex-direction: column; gap: 2px;"><span class="md-list-title">전화 걸기</span><span class="md-detail">안심번호로 연결돼요</span></span></button>
+<button class="md-item md-pressable" type="button" style="border: 0; text-align: left; margin: 0 -16px; grid-template-columns: 24px minmax(0, 1fr);"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z" /><path d="M21 16v2a4 4 0 0 1-4 4h-5" /></svg><span class="md-list-title">고객센터</span></button>
+<button class="md-item md-pressable" type="button" style="border: 0; text-align: left; margin: 0 -16px; grid-template-columns: 24px minmax(0, 1fr);"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></svg><span class="md-list-title">신고하기</span></button>
+<button class="md-item md-pressable" type="button" onClick="{{askCancel}}" style="border: 0; text-align: left; margin: 0 -16px; grid-template-columns: 24px minmax(0, 1fr); color: var(--fg-critical);"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path d="m14 13-4 4" /><path d="m10 13 4 4" /></svg><span class="md-list-title">{{cancelLabel}}</span></button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{showCancel}}" hint-placeholder-val="{{ false }}">
+<div class="md-overlay" style="justify-content: center; padding: 24px;" onClick="{{close}}">
+<div role="alertdialog" aria-modal="true" aria-labelledby="cancel-title" onClick="{{stop}}" style="background: var(--bg-layer-floating); border-radius: var(--r4); padding: 24px 20px 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-floating);">
+<h2 id="cancel-title" class="md-section-title">{{cancelTitle}}</h2>
+<p style="margin: 0; color: var(--fg-neutral-muted); font-size: 15px; line-height: 21px;">{{cancelBody}}</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 16px;">
+<button class="md-btn md-pressable" type="button" onClick="{{close}}">닫기</button>
+<button class="md-btn md-btn--critical md-pressable" type="button" onClick="{{doCancel}}">{{cancelLabel}}</button>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"initialSheet":{"editor":"enum","options":["none","info","menu"],"default":"none"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { confirmed: true, editSent: false, sheet: props.initialSheet || 'none' };
+  }
+  renderVals() {
+    const s = this.state;
+    return {
+      confirmed: s.confirmed,
+      open: !s.confirmed,
+      editSent: s.editSent,
+      confirm: () => this.setState({ confirmed: true }),
+      showInfo: s.sheet === 'info',
+      showMenu: s.sheet === 'menu',
+      showCancel: s.sheet === 'cancel',
+      openInfo: () => this.setState({ sheet: 'info' }),
+      openMenu: () => this.setState({ sheet: 'menu' }),
+      askCancel: () => this.setState({ sheet: 'cancel' }),
+      close: () => this.setState({ sheet: 'none' }),
+      stop: (e) => e.stopPropagation(),
+      cancelLabel: s.confirmed ? '예약 취소하기' : '요청 거절하기',
+      cancelTitle: s.confirmed ? '예약을 취소할까요' : '요청을 거절할까요',
+      cancelBody: s.confirmed ? '취소하면 되돌릴 수 없어요. 보리네 보호자에게 바로 알리고, 보호자는 다른 시터를 찾아야 해요.' : '보리네 보호자에게 바로 알려요. 다시 하려면 보호자가 새로 요청해야 해요.',
+      doCancel: () => this.setState({ sheet: 'none', confirmed: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

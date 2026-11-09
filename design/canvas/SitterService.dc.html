@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>서비스 설정</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav">
+<a class="md-iconbtn md-pressable" href="SitterMore.dc.html" aria-label="뒤로 가기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico"><path d="m15 18-6-6 6-6" /></svg></a>
+<h1 class="md-topnav__title">서비스 설정</h1>
+<span style="width: 48px;"></span>
+</header>
+<main style="flex: 1; overflow-y: auto;">
+<div class="st-group"><h2 class="st-group__title">산책 설정</h2>
+<label class="st-row md-pressable"><span>보호자 검색에 보이기<small>끄면 지금 손님만 받고 새 검색에는 안 보여요</small></span><input class="md-switch" type="checkbox" checked="{{visible}}" onChange="{{t_visible}}" aria-label="보호자 검색에 보이기"></label>
+<label class="st-row md-pressable"><span>새 보호자 받기<small>예약이 꽉 찼다면 꺼 두세요. 반복고객은 계속 받아요</small></span><input class="md-switch" type="checkbox" checked="{{newClients}}" onChange="{{t_newClients}}" aria-label="새 보호자 받기"></label>
+<label class="st-row md-pressable"><span>반복 예약 받기<small>매주 같은 요일 산책 요청을 받아요</small></span><input class="md-switch" type="checkbox" checked="{{repeat}}" onChange="{{t_repeat}}" aria-label="반복 예약 받기"></label>
+</div>
+<div class="md-band"></div>
+<div class="st-group"><h2 class="st-group__title">가격</h2>
+<div class="st-block"><span>30분 산책 기본 가격<small>이것만 정하면 나머지는 자동으로 계산돼요</small></span>
+<div class="st-stepper" style="justify-content: space-between; width: 100%;"><button type="button" aria-label="1,000원 내리기" onClick="{{priceDown}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /></svg></button><b style="flex: 1; font-size: 22px;">{{priceText}}원</b><button type="button" aria-label="1,000원 올리기" onClick="{{priceUp}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg></button></div>
+<ul class="pf-pricelist"><sc-for list="{{prices}}" as="p" hint-placeholder-count="5"><li><span>{{p.name}}<small>{{p.rule}}</small></span><b>{{p.value}}</b></li></sc-for></ul>
+<p class="wk-sub">비율은 모두돌봄이 정하고, 바꾸면 미리 알려 드려요</p>
+</div>
+</div>
+<div class="md-band"></div>
+<div class="st-group"><h2 class="st-group__title">가능한 시간</h2>
+<div class="st-row"><span>하루 최대 산책<small>넘으면 그날은 검색에 안 보여요</small></span><span class="st-stepper"><button type="button" aria-label="하나 줄이기" onClick="{{maxDown}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /></svg></button><b>{{maxWalks}}번</b><button type="button" aria-label="하나 늘리기" onClick="{{maxUp}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg></button></span></div>
+<div class="st-block"><span>일하는 요일</span><div class="md-row" role="group" aria-label="일하는 요일"><sc-for list="{{days}}" as="d" hint-placeholder-count="7"><button class="md-chip md-pressable" type="button" aria-pressed="{{d.on}}" onClick="{{d.toggle}}" style="min-width: 40px; justify-content: center;"><span>{{d.label}}</span></button></sc-for></div></div>
+<label class="st-row md-pressable"><span>요일마다 다른 시간<small>끄면 모든 요일에 같은 시간대를 써요</small></span><input class="md-switch" type="checkbox" checked="{{perDay}}" onChange="{{t_perDay}}" aria-label="요일마다 다른 시간"></label>
+<div class="st-block"><span>{{editTitle}}<small>{{rangeText}}</small></span>
+<sc-if value="{{perDay}}" hint-placeholder-val="{{ false }}"><div class="md-row" role="group" aria-label="시간을 바꿀 요일"><sc-for list="{{workDays}}" as="w" hint-placeholder-count="5"><button class="md-chip md-chip--outline md-pressable" type="button" aria-pressed="{{w.on}}" onClick="{{w.pick}}" style="min-width: 40px; justify-content: center;"><span>{{w.label}}</span></button></sc-for></div></sc-if>
+<div class="st-range" role="img" aria-label="일하는 시간대 {{rangeText}}"><span class="st-range__track"></span><span class="st-range__fill" style="{{fillStyle}}"></span><span class="st-range__thumb" style="{{startStyle}}"></span><span class="st-range__thumb" style="{{endStyle}}"></span><span class="st-range__ticks"><span>오전 6시</span><span>정오</span><span>오후 10시</span></span></div>
+<div class="st-row" style="min-height: 52px; padding: 4px 0;"><span>시작</span><span class="st-stepper"><button type="button" aria-label="시작 30분 앞당기기" onClick="{{startDown}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /></svg></button><b style="min-width: 92px;">{{startText}}</b><button type="button" aria-label="시작 30분 늦추기" onClick="{{startUp}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg></button></span></div>
+<div class="st-row" style="min-height: 52px; padding: 4px 0; box-shadow: none;"><span>끝</span><span class="st-stepper"><button type="button" aria-label="끝 30분 앞당기기" onClick="{{endDown}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /></svg></button><b style="min-width: 92px;">{{endText}}</b><button type="button" aria-label="끝 30분 늦추기" onClick="{{endUp}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg></button></span></div>
+<sc-if value="{{perDay}}" hint-placeholder-val="{{ false }}"><ul class="pf-pricelist" style="margin-top: 4px;"><sc-for list="{{summary}}" as="r" hint-placeholder-count="5"><li style="padding: 10px 0;"><span>{{r.label}}요일</span><b style="font-size: 14px; font-weight: 500;">{{r.text}}</b></li></sc-for></ul></sc-if>
+<span class="md-detail">특정 날짜만 쉬거나 바꾸려면 캘린더에서 그 날을 눌러요</span></div>
+<div class="st-block"><span>최소 언제까지 요청을 받을까요</span><div class="md-seg" role="group" aria-label="최소 요청 시간"><sc-for list="{{notice}}" as="n" hint-placeholder-count="3"><button type="button" aria-pressed="{{n.on}}" onClick="{{n.pick}}">{{n.label}}</button></sc-for></div></div>
+</div>
+<div class="md-band"></div>
+<div class="st-group"><h2 class="st-group__title">받는 강아지</h2>
+<div class="st-block"><span>크기<small>몸무게로 나눠요. 여러 개를 고를 수 있어요</small></span><div class="dg-sizes"><button class="dg-size md-pressable" type="button" aria-pressed="{{sz0}}" onClick="{{tsz0}}"><svg viewBox="0 0 64 40" width="40" height="25" fill="currentColor" aria-hidden="true"><path d="M14 24 Q6 20 7 11" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" /><rect x="13" y="20" width="34" height="15" rx="7.5" /><rect x="40" y="13" width="11" height="14" rx="4" /><circle cx="49" cy="14" r="8" /><rect x="51" y="14" width="11" height="7" rx="3.5" /><path d="M43 8 Q39 15 42 21 L46 17 Z" /><rect x="16" y="31" width="4.5" height="9" rx="2.25" /><rect x="23" y="31" width="4.5" height="9" rx="2.25" /><rect x="36" y="31" width="4.5" height="9" rx="2.25" /><rect x="42.5" y="31" width="4.5" height="9" rx="2.25" /><circle cx="51" cy="12" r="1.3" style="fill: var(--bg-layer-default);" /></svg><b>소형견</b><small>10kg 미만</small></button><button class="dg-size md-pressable" type="button" aria-pressed="{{sz1}}" onClick="{{tsz1}}"><svg viewBox="0 0 64 43" width="54" height="36" fill="currentColor" aria-hidden="true"><path d="M14 24 Q6 20 7 11" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" /><rect x="13" y="20" width="34" height="15" rx="7.5" /><rect x="40" y="13" width="11" height="14" rx="4" /><circle cx="49" cy="14" r="8" /><rect x="51" y="14" width="11" height="7" rx="3.5" /><path d="M43 8 Q39 15 42 21 L46 17 Z" /><rect x="16" y="31" width="4.5" height="12" rx="2.25" /><rect x="23" y="31" width="4.5" height="12" rx="2.25" /><rect x="36" y="31" width="4.5" height="12" rx="2.25" /><rect x="42.5" y="31" width="4.5" height="12" rx="2.25" /><circle cx="51" cy="12" r="1.3" style="fill: var(--bg-layer-default);" /></svg><b>중형견</b><small>10~25kg</small></button><button class="dg-size md-pressable" type="button" aria-pressed="{{sz2}}" onClick="{{tsz2}}"><svg viewBox="0 0 64 46" width="70" height="50" fill="currentColor" aria-hidden="true"><path d="M14 24 Q6 20 7 11" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" /><rect x="13" y="20" width="34" height="15" rx="7.5" /><rect x="40" y="13" width="11" height="14" rx="4" /><circle cx="49" cy="14" r="8" /><rect x="51" y="14" width="11" height="7" rx="3.5" /><path d="M43 8 Q39 15 42 21 L46 17 Z" /><rect x="16" y="31" width="4.5" height="15" rx="2.25" /><rect x="23" y="31" width="4.5" height="15" rx="2.25" /><rect x="36" y="31" width="4.5" height="15" rx="2.25" /><rect x="42.5" y="31" width="4.5" height="15" rx="2.25" /><circle cx="51" cy="12" r="1.3" style="fill: var(--bg-layer-default);" /></svg><b>대형견</b><small>25kg 이상</small></button></div></div>
+<label class="st-row md-pressable"><span>1살 미만 강아지<small>배변 훈련과 휴식이 더 필요해요. +3,000원이 붙어요</small></span><input class="md-switch" type="checkbox" checked="{{puppy}}" onChange="{{t_puppy}}" aria-label="1살 미만 강아지"></label>
+<label class="st-row md-pressable"><span>한 집 강아지 두 마리 함께<small>한 번에 최대 2마리, 한 마리 더 +50%</small></span><input class="md-switch" type="checkbox" checked="{{multi}}" onChange="{{t_multi}}" aria-label="한 집 강아지 두 마리 함께"></label>
+<label class="st-row md-pressable"><span>노견 (10살 이상)<small>천천히 짧게 걸어요</small></span><input class="md-switch" type="checkbox" checked="{{senior}}" onChange="{{t_senior}}" aria-label="노견 (10살 이상)"></label>
+</div>
+<div class="md-band"></div>
+<div class="st-group"><h2 class="st-group__title">취소 정책</h2>
+<div class="st-block" style="box-shadow: none;"><span>보호자가 취소할 때<small>시터 프로필의 가격 탭에 보여요</small></span>
+<div class="st-policy"><sc-for list="{{policies}}" as="p" hint-placeholder-count="3"><button type="button" aria-pressed="{{p.on}}" onClick="{{p.pick}}"><i></i><span><b>{{p.name}}</b><span>{{p.desc}}</span></span></button></sc-for></div></div>
+</div>
+<div style="height: 16px;"></div>
+</main>
+<div style="padding: 12px 16px 16px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle);"><button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{save}}" style="width: 100%;">저장하기</button></div>
+<sc-if value="{{toast}}" hint-placeholder-val="{{ false }}"><div style="position: absolute; left: 8px; right: 8px; bottom: 88px;"><div class="md-snackbar" role="status"><span>{{toast}}</span></div></div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { visible: true, newClients: true, repeat: true, puppy: false, multi: true, senior: true, price: 15000, maxWalks: 3,
+      days: { 월: true, 화: true, 수: false, 목: true, 금: true, 토: true, 일: false }, perDay: false, editDay: '월', all: [690, 870],
+      hours: { 월: [690, 870], 화: [690, 870], 수: [690, 870], 목: [690, 870], 금: [690, 870], 토: [600, 1140], 일: [600, 1020] }, sizes: [true, true, false], notice: '3시간 전', policy: '보통', toast: '' };
+  }
+  renderVals() {
+    const s = this.state;
+    const won = (n) => Math.round(n / 500) * 500;
+    const f = (n) => n.toLocaleString('ko-KR') + '원';
+    const p = s.price;
+    const flip = (k) => () => this.setState({ [k]: !s[k] });
+    const out = {
+      visible: s.visible, newClients: s.newClients, repeat: s.repeat, puppy: s.puppy, multi: s.multi, senior: s.senior,
+      t_visible: flip('visible'), t_newClients: flip('newClients'), t_repeat: flip('repeat'), t_puppy: flip('puppy'), t_multi: flip('multi'), t_senior: flip('senior'),
+      priceText: p.toLocaleString('ko-KR'),
+      priceUp: () => this.setState({ price: Math.min(p + 1000, 40000) }),
+      priceDown: () => this.setState({ price: Math.max(p - 1000, 8000) }),
+      prices: [
+        { name: '60분 산책', rule: '30분 가격의 1.7배', value: f(won(p * 1.7)) },
+        { name: '강아지 한 마리 더', rule: '30분 가격의 절반', value: '+' + f(won(p * 0.5)) },
+        { name: '주말·공휴일', rule: '기본 가격의 20%', value: '+' + f(won(p * 0.2)) },
+        { name: '연휴 (설·추석)', rule: '기본 가격의 50%', value: '+' + f(won(p * 0.5)) },
+        { name: '이른 아침·늦은 밤', rule: '오전 7시 전, 오후 9시 뒤', value: '+2,000원' }
+      ],
+      maxWalks: s.maxWalks,
+      maxUp: () => this.setState({ maxWalks: Math.min(s.maxWalks + 1, 8) }),
+      maxDown: () => this.setState({ maxWalks: Math.max(s.maxWalks - 1, 1) }),
+      days: ['월', '화', '수', '목', '금', '토', '일'].map((k) => ({ label: k, on: !!s.days[k], toggle: () => this.setState({ days: Object.assign({}, s.days, { [k]: !s.days[k] }) }) })),
+      notice: ['1시간 전', '3시간 전', '하루 전'].map((k) => ({ label: k, on: s.notice === k, pick: () => this.setState({ notice: k }) })),
+      policies: [
+        { name: '유연', desc: '산책 2시간 전까지 무료로 취소해요' },
+        { name: '보통', desc: '하루 전까지 무료, 그 뒤에는 50%를 받아요' },
+        { name: '엄격', desc: '이틀 전까지 무료, 그 뒤에는 전액을 받아요' }
+      ].map((x) => Object.assign({}, x, { on: s.policy === x.name, pick: () => this.setState({ policy: x.name }) })),
+      save: () => this.setState({ toast: '저장했어요. 다음 검색부터 반영돼요' }),
+      toast: s.toast
+    };
+    const fmt = (m) => (m < 720 ? '오전 ' : '오후 ') + ((Math.floor(m / 60) + 11) % 12 + 1) + ':' + String(m % 60).padStart(2, '0');
+    const work = ['월', '화', '수', '목', '금', '토', '일'].filter((k) => s.days[k]);
+    const day = work.indexOf(s.editDay) >= 0 ? s.editDay : work[0];
+    const cur = s.perDay && day ? s.hours[day] : s.all;
+    const put = (r) => s.perDay && day ? this.setState({ hours: Object.assign({}, s.hours, { [day]: r }) }) : this.setState({ all: r });
+    const pct = (m) => ((m - 360) / 960 * 100).toFixed(1) + '%';
+    Object.assign(out, {
+      perDay: s.perDay, t_perDay: () => this.setState({ perDay: !s.perDay }),
+      editTitle: s.perDay ? (day || '') + '요일 시간대' : '모든 요일 시간대',
+      workDays: work.map((k) => ({ label: k, on: k === day, pick: () => this.setState({ editDay: k }) })),
+      rangeText: fmt(cur[0]) + '부터 ' + fmt(cur[1]) + '까지',
+      startText: fmt(cur[0]), endText: fmt(cur[1]),
+      fillStyle: 'left: ' + pct(cur[0]) + '; width: ' + ((cur[1] - cur[0]) / 960 * 100).toFixed(1) + '%;',
+      startStyle: 'left: ' + pct(cur[0]) + ';', endStyle: 'left: ' + pct(cur[1]) + ';',
+      startDown: () => put([Math.max(cur[0] - 30, 360), cur[1]]),
+      startUp: () => put([Math.min(cur[0] + 30, cur[1] - 60), cur[1]]),
+      endDown: () => put([cur[0], Math.max(cur[1] - 30, cur[0] + 60)]),
+      endUp: () => put([cur[0], Math.min(cur[1] + 30, 1320)]),
+      summary: work.map((k) => ({ label: k, text: fmt(s.hours[k][0]) + '~' + fmt(s.hours[k][1]) }))
+    });
+    [0, 1, 2].forEach((i) => { out['sz' + i] = s.sizes[i]; out['tsz' + i] = () => { const z = s.sizes.slice(); z[i] = !z[i]; this.setState({ sizes: z }); }; });
+    return out;
+  }
+}
+</script>
+</body>
+</html>

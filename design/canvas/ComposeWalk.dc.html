@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>산책 올리기</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav">
+<a class="md-iconbtn md-pressable" href="ComposePick.dc.html" aria-label="뒤로 가기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico"><path d="m15 18-6-6 6-6" /></svg></a>
+<h1 class="md-topnav__title">산책 올리기</h1>
+<a class="md-btn md-btn--brand md-btn--small md-pressable" href="SocialFeed.dc.html" style="margin-right: 8px; min-height: 32px; padding: 0 14px;">올리기</a>
+</header>
+<main style="flex: 1; overflow-y: auto;">
+<div class="cw-walk" style="cursor: default;"><img src="img/gureum.jpg" alt=""><span class="cw-walk__text"><b>구름, 오늘 오전 10:00</b><span>30분, 1.9km. 경로 지도는 올라가지 않아요</span></span><span></span></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; flex-direction: column; gap: 2px;"><h2 class="md-section-title" style="margin: 0;">사진 순서</h2><p class="wk-sub">사진을 누른 채로 옆으로 밀어 순서를 바꿔요. 맨 앞 사진이 대표 사진이 돼요</p></div>
+<div class="cw-order" role="listbox" aria-label="사진 순서, 왼쪽 오른쪽 화살표로도 옮길 수 있어요" onPointerMove="{{dragMove}}" onPointerUp="{{dragEnd}}" onPointerCancel="{{dragEnd}}" onPointerLeave="{{dragEnd}}"><sc-for list="{{photos}}" as="p" hint-placeholder-count="3"><button type="button" role="option" aria-selected="{{p.sel}}" aria-label="{{p.aria}}" data-drag="{{p.drag}}" onPointerDown="{{p.down}}" onKeyDown="{{p.key}}" onFocus="{{p.focus}}"><img src="{{p.src}}" alt="" draggable="false"><span class="cw-order__num">{{p.n}}</span><sc-if value="{{p.cover}}" hint-placeholder-val="{{ false }}"><span class="cw-order__cover">대표</span></sc-if></button></sc-for></div>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div class="md-field"><label class="md-field__label" for="cwt">글</label><textarea class="md-input" id="cwt" style="min-height: 120px;">바람 부는 날 구름이. 꽃 많은 골목에서 귀가 날려서 자꾸 멈춰 섰어요.</textarea></div>
+<p class="wk-sub">구름이네 보호자가 공유를 허용한 산책이에요</p></section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { order: [0, 1, 2], sel: 0, drag: -1 };
+  }
+  // Move the photo at index i to index j and keep it selected.
+  moveTo(i, j) {
+    const o = this.state.order.slice();
+    if (j < 0 || j >= o.length || i === j) return;
+    const [x] = o.splice(i, 1); o.splice(j, 0, x);
+    this.setState({ order: o, sel: j, drag: this.state.drag >= 0 ? j : -1 });
+  }
+  renderVals() {
+    const s = this.state;
+    const pics = [['img/gureum.jpg', '꽃길의 구름'], ['img/bori.jpg', '공원 사진'], ['img/kong.jpg', '친구 강아지와 인사']];
+    const SLOT = 104; // 96px photo + 8px gap
+    return {
+      photos: s.order.map((k, i) => ({
+        src: pics[k][0], n: i + 1, cover: i === 0, sel: i === s.sel, drag: i === s.drag,
+        aria: (i + 1) + '번째 사진, ' + pics[k][1] + (i === 0 ? ', 대표 사진' : ''),
+        down: (e) => { e.preventDefault && e.preventDefault(); this.setState({ drag: i, sel: i }); },
+        focus: () => this.setState({ sel: i }),
+        key: (e) => { if (e.key === 'ArrowLeft') { e.preventDefault(); this.moveTo(i, i - 1); } if (e.key === 'ArrowRight') { e.preventDefault(); this.moveTo(i, i + 1); } }
+      })),
+      dragMove: (e) => {
+        if (this.state.drag < 0) return;
+        const box = e.currentTarget.getBoundingClientRect();
+        const j = Math.max(0, Math.min(this.state.order.length - 1, Math.floor((e.clientX - box.left + e.currentTarget.scrollLeft) / SLOT)));
+        if (j !== this.state.drag) this.moveTo(this.state.drag, j);
+      },
+      dragEnd: () => { if (this.state.drag >= 0) this.setState({ drag: -1 }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

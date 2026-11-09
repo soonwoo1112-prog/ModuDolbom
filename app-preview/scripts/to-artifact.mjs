@@ -3,12 +3,14 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const html = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
-const styles = [...html.matchAll(/<style[^>]*>[\s\S]*?<\/style>/g)].map((m) => m[0]);
+const head = html.replace(/<script[\s\S]*?<\/script>/g, '');
+const styles = [...head.matchAll(/<style[^>]*>[\s\S]*?<\/style>/g)].map((m) => m[0]);
 const scripts = [...html.matchAll(/<script type="module"[^>]*>[\s\S]*?<\/script>/g)].map((m) => m[0]);
 if (!scripts.length) throw new Error('No inline module script found in dist/index.html');
 
 const page = [
   '<title>모두돌봄 미리보기</title>',
+  '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">',
   ...styles,
   '<div id="root"></div>',
   ...scripts,

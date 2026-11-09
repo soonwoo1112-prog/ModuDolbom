@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>시터 캘린더</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav md-topnav--root">
+<h1 class="md-topnav__title">캘린더</h1>
+<a class="md-btn md-btn--small md-pressable" href="SitterService.dc.html" style="margin-right: 8px;">일하는 시간</a>
+</header>
+<div class="cl-dow" aria-hidden="true"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+<main style="flex: 1; overflow-y: auto;">
+<sc-for list="{{months}}" as="m" hint-placeholder-count="3">
+<section class="cl-month" aria-label="{{m.title}}">
+<h2 class="cl-month__title">{{m.title}}</h2>
+<div class="cl-grid">
+<sc-for list="{{m.cells}}" as="c" hint-placeholder-count="35">
+<a class="cl-day md-pressable" href="SitterWeek.dc.html" aria-label="{{c.aria}}" data-today="{{c.today}}" data-sun="{{c.sun}}" data-off="{{c.off}}" style="{{c.hide}}"><span class="cl-num">{{c.day}}</span><sc-if value="{{c.booked}}" hint-placeholder-val="{{ false }}"><span class="cl-dot" data-past="{{c.past}}"></span></sc-if></a>
+</sc-for>
+</div>
+</section>
+</sc-for>
+<div class="cl-legend"><span><span class="cl-dot"></span>예약된 산책</span><span><span class="cl-dot" data-past="true"></span>지난 산책</span><span><span class="cl-legend__off">13</span>쉬는 날</span></div>
+</main>
+<nav class="md-bottomnav" aria-label="시터 메뉴">
+<a class="md-tab md-pressable" href="SitterToday.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>오늘</a>
+<a class="md-tab md-pressable" href="SitterChat.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>채팅</a>
+<a class="md-tab md-pressable" href="SocialFeed.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>소셜</a>
+<a class="md-tab md-pressable" href="SitterSchedule.dc.html" aria-current="page" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /></svg>캘린더</a>
+<button class="md-tab md-pressable" type="button"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>더보기</button>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const walks = {
+      '10-28': [{ dog: '보리', time: '오후 12:30', detail: '30분, 역삼로 123 101동', status: '산책완료', badge: 'md-badge' }],
+      '11-2': [{ dog: '콩이', time: '오후 2:00', detail: '30분, 역삼로 123 103동', status: '산책완료', badge: 'md-badge' }],
+      '11-3': [{ dog: '보리', time: '오후 12:30', detail: '30분, 역삼로 123 101동', status: '산책완료', badge: 'md-badge' }],
+      '11-5': [{ dog: '두부', time: '오후 6:30', detail: '60분, 역삼로 123 101동', status: '산책완료', badge: 'md-badge' }],
+      '11-6': [{ dog: '콩이', time: '오후 2:00', detail: '30분, 역삼로 123 103동', status: '오늘', badge: 'md-badge md-badge--brand-solid' }, { dog: '두부', time: '오후 6:30', detail: '60분, 역삼로 123 101동', status: '예약확정', badge: 'md-badge md-badge--outline' }],
+      '11-7': [{ dog: '보리', time: '오후 12:30', detail: '30분, 역삼로 123 101동', status: '예약확정', badge: 'md-badge md-badge--outline' }],
+      '11-12': [{ dog: '콩이', time: '오후 2:00', detail: '30분, 역삼로 123 103동', status: '예약확정', badge: 'md-badge md-badge--outline' }],
+      '11-20': [{ dog: '두부', time: '오후 6:30', detail: '60분, 역삼로 123 101동', status: '예약확정', badge: 'md-badge md-badge--outline' }]
+    };
+    // From the sitter's profile: the weekdays they work, and the hours.
+    const weekly = { 0: false, 1: true, 2: true, 3: false, 4: true, 5: true, 6: true };
+    const hours = ['오전 10:00~오후 5:00', '오전 7:00~9:00, 오전 11:30~오후 1:30', '오전 11:30~오후 1:30', '오전 11:30~오후 1:30', '오전 11:30~오후 1:30', '오전 11:30~오후 2:30', '오전 10:00~오후 7:00'];
+    const DOW = ['일', '월', '화', '수', '목', '금', '토'];
+    const specs = [[10, 31, 4], [11, 30, 0], [12, 31, 2]];
+    const months = specs.map(([mo, len, lead]) => {
+      const cells = [];
+      for (let i = 0; i < lead; i++) cells.push({ day: '', hide: 'visibility: hidden;', booked: false, today: false, sun: false, off: false, past: false, aria: '' });
+      for (let d = 1; d <= len; d++) {
+        const key = mo + '-' + d;
+        const dow = (lead + d - 1) % 7;
+        const off = !weekly[dow];
+        cells.push({ day: d, hide: '', booked: !!walks[key], past: mo < 11 || (mo === 11 && d < 6), today: key === '11-6', sun: dow === 0, off: off,
+          aria: mo + '월 ' + d + '일' + (walks[key] ? ', 산책 ' + walks[key].length + '건' : '') + (off ? ', 쉬는 날' : '') });
+      }
+      return { title: '2026년 ' + mo + '월', cells: cells };
+    });
+    return { months: months };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>요청 현황</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden; position: relative;">
+<header class="md-topnav">
+<a class="md-iconbtn md-pressable" href="Matching.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a>
+<h1 class="md-topnav__title">요청 현황</h1>
+<span style="width: 48px;"></span>
+</header>
+<main style="flex: 1; overflow-y: auto;">
+<section style="padding: 20px 16px 24px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: center; gap: 12px;">
+<img class="md-photo" src="img/bori.jpg" alt="보리 사진" style="width: 56px; height: 56px; border-radius: var(--r3);">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+<span class="md-section-title">보리의 11월 7일 (토) 산책</span>
+<span class="md-tags"><span>오후 12:30</span><span>30분</span></span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 12px; border-radius: var(--r3); background: var(--bg-layer-basement);">
+<div style="display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px;">
+<svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--fg-neutral-subtle); margin-top: 1px;"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg>
+<span style="display: flex; flex-direction: column; gap: 2px;"><span class="md-label">집</span><span class="md-item__muted">서울 강남구 역삼로 123, 101동 1203호</span><span class="md-detail">공동현관 비밀번호로 들어와요</span></span>
+</div>
+<div style="display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px;">
+<svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--fg-neutral-subtle); margin-top: 1px;"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" /><path d="M2 6h4" /><path d="M2 10h4" /><path d="M2 14h4" /><path d="M2 18h4" /><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" /></svg>
+<span style="display: flex; flex-direction: column; gap: 2px;"><span class="md-label">픽업 안내</span><span class="md-item__muted">제가 출근하는 시간이라 비밀번호로 들어오시면 돼요. 목줄이랑 용품은 현관 앞에 뒀어요.</span><span class="md-detail">주소와 픽업 안내는 예약이 확정된 시터에게만 보여요</span></span>
+</div>
+</div>
+<p class="md-detail" style="margin: 0;">한 명과 예약을 확정하면 나머지 요청은 자동으로 닫혀요.</p>
+</section>
+<div class="md-band"></div>
+<div class="md-list-header">요청한 시터 2명</div>
+<div class="md-list">
+<div class="md-item md-item--top" style="cursor: default;">
+<span class="md-initial md-initial--sand" role="img" aria-label="김하늘 사진 자리" style="width: 48px; height: 48px; font-size: 19px; border-radius: var(--full);">김</span>
+<span class="md-item__body">
+<span class="md-item__head"><span class="md-list-title">김하늘</span><span class="md-badge md-badge--brand">같은 아파트</span><span class="md-badge md-badge--info">대화중</span></span>
+<span class="md-item__muted">대화를 시작했어요. 조건을 맞춰 보세요.</span>
+<span class="md-tags md-num"><span><b>30분 15,000원</b></span><span>3분 전</span></span>
+</span>
+<a class="md-btn md-btn--neutral md-btn--small md-pressable" href="Chat.dc.html" style="margin-top: 4px;">대화창 열기</a>
+</div>
+<hr class="md-divider">
+<div class="md-item md-item--top" style="cursor: default;">
+<span class="md-initial md-initial--sand" role="img" aria-label="이도윤 사진 자리" style="width: 48px; height: 48px; font-size: 19px; border-radius: var(--full);">이</span>
+<span class="md-item__body">
+<span class="md-item__head"><span class="md-list-title">이도윤</span><span class="md-badge">새로 온 시터</span><span class="md-badge md-badge--outline">요청중</span></span>
+<span class="md-item__muted">아직 답장이 없어요. 보통 25분 안에 답장해요.</span>
+<span class="md-tags md-num"><span><b>30분 12,000원</b></span><span>3분 전</span></span>
+</span>
+<span></span>
+</div>
+</div>
+<div style="padding: 24px 16px 96px;">
+<a class="md-btn md-btn--outline md-pressable" href="Matching.dc.html" style="width: 100%; box-sizing: border-box;">다른 시터에게도 요청하기</a>
+</div>
+</main>
+<div style="position: absolute; left: 8px; right: 8px; bottom: 16px;">
+<div class="md-snackbar" role="status"><span>2명에게 요청을 보냈어요</span><a href="Matching.dc.html" style="color: inherit; font-weight: 700; font-size: 14px; padding: 4px 6px; text-underline-offset: 0.2em;">요청 취소</a></div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

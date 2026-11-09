@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>이번 주 일정</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav">
+<a class="md-iconbtn md-pressable" href="SitterSchedule.dc.html" aria-label="달력으로 돌아가기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico"><path d="m15 18-6-6 6-6" /></svg></a>
+<h1 class="md-topnav__title">{{weekTitle}}</h1>
+<span style="display: flex;"><button class="md-iconbtn md-pressable" type="button" aria-label="지난주" onClick="{{prevWeek}}" style="width: 40px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico"><path d="m15 18-6-6 6-6" /></svg></button><button class="md-iconbtn md-pressable" type="button" aria-label="다음 주" onClick="{{nextWeek}}" style="width: 40px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico"><path d="m9 18 6-6-6-6" /></svg></button></span>
+</header>
+<div class="sc-week" role="group" aria-label="{{weekTitle}}">
+<sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+<button class="cl-day md-pressable" type="button" onClick="{{d.pick}}" aria-pressed="{{d.selected}}" aria-label="{{d.aria}}" data-today="{{d.today}}" data-sun="{{d.sun}}" data-off="{{d.off}}"><span class="sc-dow">{{d.dow}}</span><span class="cl-num">{{d.day}}</span><sc-if value="{{d.booked}}" hint-placeholder-val="{{ false }}"><span class="cl-dot" data-past="{{d.past}}"></span></sc-if></button>
+</sc-for>
+</div>
+<main style="flex: 1; overflow-y: auto;">
+<div class="sc-day">
+<h3>{{dayTitle}}</h3>
+<p class="sc-avail" data-off="{{dayOff}}"><b>{{availLabel}}</b> {{availHours}}</p>
+</div>
+<sc-if value="{{hasWalks}}" hint-placeholder-val="{{ true }}">
+<div class="md-list">
+<sc-for list="{{walks}}" as="it" hint-placeholder-count="2">
+<a class="md-item md-pressable" href="SitterChat.dc.html">
+<img class="md-photo" src="{{it.photo}}" alt="{{it.dog}} 사진" style="width: 56px; height: 56px; border-radius: var(--r3);">
+<span class="md-item__body"><span class="md-item__head"><span class="md-list-title">{{it.dog}}, {{it.time}}</span><span class="{{it.badge}}">{{it.status}}</span></span><span class="md-item__muted">{{it.detail}}</span></span>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--md" style="color: var(--fg-neutral-subtle);"><path d="m9 18 6-6-6-6" /></svg>
+</a>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{noWalks}}" hint-placeholder-val="{{ false }}">
+<p class="md-detail" style="margin: 0; padding: 16px 16px 8px;">{{emptyText}}</p>
+</sc-if>
+</main>
+<div style="padding: 12px 16px 16px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle);">
+<button class="md-btn md-btn--large md-pressable" type="button" onClick="{{openEdit}}" style="width: 100%;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--md"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>이 날 일정 수정</button>
+</div>
+<sc-if value="{{editing}}" hint-placeholder-val="{{ false }}">
+<div class="md-overlay" onClick="{{close}}">
+<div class="md-sheet" role="dialog" aria-modal="true" aria-label="{{dayTitle}} 일정 수정" onClick="{{stop}}" style="padding-bottom: 20px;">
+<span class="md-sheet__handle" aria-hidden="true"></span>
+<div class="md-sheet__head"><span></span><h2>{{dayTitle}}</h2><button class="md-iconbtn md-pressable" type="button" aria-label="닫기" onClick="{{close}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button></div>
+<div class="md-seg" role="group" aria-label="이 날 일하기">
+<button type="button" aria-pressed="{{draftOn}}" onClick="{{setOn}}">일할 수 있어요</button>
+<button type="button" aria-pressed="{{draftOff}}" onClick="{{setOff}}">쉬어요</button>
+</div>
+<p class="md-detail" style="margin: 0;">{{draftNote}}</p>
+<sc-if value="{{warn}}" hint-placeholder-val="{{ false }}"><div class="md-callout" role="note"><span>{{warnText}}</span></div></sc-if>
+<button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{save}}">저장하기</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{toast}}" hint-placeholder-val="{{ false }}"><div style="position: absolute; left: 8px; right: 8px; bottom: 88px;"><div class="md-snackbar" role="status"><span>{{toast}}</span></div></div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"initialSheet":{"editor":"enum","options":["none","edit"],"default":"none"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    // The week of Sunday 2026-11-01; the 6th (today) picked.
+    this.state = { start: new Date(2026, 10, 1), sel: '11-6', override: {}, editing: props.initialSheet === 'edit', draft: true, toast: '' };
+  }
+  renderVals() {
+    const walks = {
+      '10-28': [{ dog: '보리', time: '오후 12:30', detail: '30분, 역삼로 123 101동', status: '산책완료', badge: 'md-badge' }],
+      '11-2': [{ dog: '콩이', time: '오후 2:00', detail: '30분, 역삼로 123 103동', status: '산책완료', badge: 'md-badge' }],
+      '11-3': [{ dog: '보리', time: '오후 12:30', detail: '30분, 역삼로 123 101동', status: '산책완료', badge: 'md-badge' }],
+      '11-5': [{ dog: '두부', time: '오후 6:30', detail: '60분, 역삼로 123 101동', status: '산책완료', badge: 'md-badge' }],
+      '11-6': [{ dog: '콩이', time: '오후 2:00', detail: '30분, 역삼로 123 103동', status: '오늘', badge: 'md-badge md-badge--brand-solid' }, { dog: '두부', time: '오후 6:30', detail: '60분, 역삼로 123 101동', status: '예약확정', badge: 'md-badge md-badge--outline' }],
+      '11-7': [{ dog: '보리', time: '오후 12:30', detail: '30분, 역삼로 123 101동', status: '예약확정', badge: 'md-badge md-badge--outline' }],
+      '11-12': [{ dog: '콩이', time: '오후 2:00', detail: '30분, 역삼로 123 103동', status: '예약확정', badge: 'md-badge md-badge--outline' }],
+      '11-20': [{ dog: '두부', time: '오후 6:30', detail: '60분, 역삼로 123 101동', status: '예약확정', badge: 'md-badge md-badge--outline' }]
+    };
+    // From the sitter's profile: the weekdays they work, and the hours.
+    const weekly = { 0: false, 1: true, 2: true, 3: false, 4: true, 5: true, 6: true };
+    const hours = ['오전 10:00~오후 5:00', '오전 7:00~9:00, 오전 11:30~오후 1:30', '오전 11:30~오후 1:30', '오전 11:30~오후 1:30', '오전 11:30~오후 1:30', '오전 11:30~오후 2:30', '오전 10:00~오후 7:00'];
+    const DOW = ['일', '월', '화', '수', '목', '금', '토'];
+    const s = this.state;
+    const keyOf = (dt) => (dt.getMonth() + 1) + '-' + dt.getDate();
+    const isOn = (dt) => { const k = keyOf(dt); return k in s.override ? s.override[k] : weekly[dt.getDay()]; };
+    const days = Array.from({ length: 7 }, (_, i) => new Date(s.start.getFullYear(), s.start.getMonth(), s.start.getDate() + i));
+    const selDate = days.find((dt) => keyOf(dt) === s.sel) || days[0];
+    const selKey = keyOf(selDate);
+    const on = isOn(selDate);
+    const PHOTO = { 보리: 'img/bori.jpg', 콩이: 'img/kong.jpg', 두부: 'img/dubu.jpg' };
+    const list = (walks[selKey] || []).map((w) => Object.assign({}, w, { photo: PHOTO[w.dog] }));
+    const nth = ['첫째', '둘째', '셋째', '넷째', '다섯째'][Math.floor((s.start.getDate() + 5) / 7)] || '';
+    const shift = (n) => { const st = new Date(s.start.getFullYear(), s.start.getMonth(), s.start.getDate() + n); this.setState({ start: st, sel: keyOf(st) }); };
+    const dayTitle = (selDate.getMonth() + 1) + '월 ' + selDate.getDate() + '일 (' + DOW[selDate.getDay()] + ')';
+    return {
+      weekTitle: (s.start.getMonth() + 1) + '월 ' + nth + ' 주',
+      prevWeek: () => shift(-7),
+      nextWeek: () => shift(7),
+      week: days.map((dt) => {
+        const k = keyOf(dt);
+        return { dow: DOW[dt.getDay()], day: dt.getDate(), selected: k === selKey, today: k === '11-6', sun: dt.getDay() === 0, off: !isOn(dt), booked: !!walks[k],
+          past: dt < new Date(2026, 10, 6), aria: dt.getDate() + '일 ' + DOW[dt.getDay()] + '요일' + (walks[k] ? ', 산책 ' + walks[k].length + '건' : '') + (isOn(dt) ? '' : ', 쉬는 날'),
+          pick: () => this.setState({ sel: k }) };
+      }),
+      dayTitle: dayTitle,
+      dayOff: !on,
+      availLabel: on ? '일할 수 있는 날' : '쉬는 날',
+      availHours: on ? hours[selDate.getDay()] : '이 날은 검색 결과에 보이지 않아요',
+      walks: list,
+      hasWalks: list.length > 0,
+      noWalks: list.length === 0,
+      emptyText: on ? '아직 예약된 산책이 없어요. 요청이 오면 오늘 탭에 먼저 보여요.' : '쉬는 날이라 예약된 산책이 없어요.',
+      editing: s.editing,
+      openEdit: () => this.setState({ editing: true, draft: on }),
+      close: () => this.setState({ editing: false }),
+      stop: (e) => e.stopPropagation(),
+      draftOn: s.draft,
+      draftOff: !s.draft,
+      setOn: () => this.setState({ draft: true }),
+      setOff: () => this.setState({ draft: false }),
+      draftNote: s.draft ? '시간은 프로필에서 정한 대로예요: ' + hours[selDate.getDay()] : '이 날만 쉬어요. 다른 ' + DOW[selDate.getDay()] + '요일은 그대로예요.',
+      warn: !s.draft && list.length > 0,
+      warnText: '이미 예약된 산책 ' + list.length + '건은 그대로 남아요. 못 가게 되면 채팅에서 보호자와 먼저 이야기해 주세요.',
+      save: () => this.setState({ editing: false, override: Object.assign({}, s.override, { [selKey]: s.draft }), toast: dayTitle + (s.draft ? '에 일할 수 있게 열었어요' : '을 쉬는 날로 바꿨어요') }),
+      toast: s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

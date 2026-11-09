@@ -10,7 +10,7 @@ iOS와 Android 앱으로 출시한다(2026-11-09 확인). 두 OS가 하나의 �
 
 ## Stack
 
-미정. 실제 앱을 만들 기술(예: React Native, Flutter, 각 OS 네이티브)은 아직 정하지 않았다. `app-preview/`(React 18, Vite)는 미리보기용이며 앱의 스택을 정한 것이 아니다.
+미정. 실제 앱을 만들 기술(예: React Native, Flutter, 각 OS 네이티브)은 아직 정하지 않았다. `app-preview/`(Preact, Vite로 캔버스 화면을 그대로 실행)는 미리보기용이며 앱의 스택을 정한 것이 아니다.
 
 ## Users
 

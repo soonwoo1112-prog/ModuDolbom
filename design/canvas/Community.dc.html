@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>동네 이야기</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden; position: relative;">
+<header class="md-topnav md-topnav--root">
+<h1 class="md-topnav__title">역삼동 소셜</h1>
+<button class="md-iconbtn md-pressable" type="button" aria-label="검색"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg></button>
+</header>
+<nav aria-label="소셜 보기" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: 44px; box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle);">
+<a href="SocialFeed.dc.html" style="display: grid; place-items: center; font: 500 15px/20px var(--font-sans); color: var(--fg-neutral-subtle); text-decoration: none;">산책 피드</a>
+<a href="Community.dc.html" aria-current="page" style="display: grid; place-items: center; font: 700 15px/20px var(--font-sans); color: var(--fg-neutral); text-decoration: none; box-shadow: inset 0 -2px 0 var(--fg-neutral);">동네 이야기</a>
+</nav>
+<div style="display: flex; gap: 8px; padding: 12px 16px; overflow-x: auto;" role="group" aria-label="이야기 종류">
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="5">
+<button class="md-chip md-pressable" type="button" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}" style="flex: none;"><span>{{c.label}}</span></button>
+</sc-for>
+</div>
+<main style="flex: 1; overflow-y: auto;">
+<div class="md-list">
+<sc-for list="{{posts}}" as="p" hint-placeholder-count="4">
+<a class="md-item md-item--top md-pressable" href="Community.dc.html" style="grid-template-columns: minmax(0, 1fr) auto; box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle);">
+<span class="md-item__body" style="gap: 4px;">
+<span class="md-item__head"><span class="{{p.catClass}}">{{p.cat}}</span></span>
+<span class="md-list-title">{{p.title}}</span>
+<span class="md-item__muted" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{p.body}}</span>
+<span class="md-tags md-num"><span>{{p.place}}</span><span>{{p.time}}</span><span>댓글 {{p.comments}}</span></span>
+</span>
+<sc-if value="{{p.hasPhoto}}" hint-placeholder-val="{{ false }}">
+<span class="md-thumb" style="width: 64px; height: 64px;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="첨부 사진"><circle cx="11" cy="4" r="2" /><circle cx="18" cy="8" r="2" /><circle cx="20" cy="16" r="2" /><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" /></svg></span>
+</sc-if>
+</a>
+</sc-for>
+</div>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<section class="md-result"><h3 class="md-section-title">아직 올라온 이야기가 없어요</h3><p>역삼동 이웃에게 처음으로 이야기를 남겨 보세요.</p></section>
+</sc-if>
+</main>
+<button class="md-btn md-btn--brand md-pressable" type="button" style="position: absolute; right: 16px; bottom: 72px; border-radius: var(--full); min-height: 48px; padding: 0 18px; box-shadow: var(--shadow-floating);"><svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>글쓰기</button>
+<nav class="md-bottomnav" aria-label="보호자 메뉴">
+<a class="md-tab md-pressable" href="Main.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="4" r="2" /><circle cx="18" cy="8" r="2" /><circle cx="20" cy="16" r="2" /><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" /></svg>예약</a>
+<a class="md-tab md-pressable" href="Sent.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>채팅</a>
+<a class="md-tab md-pressable" href="SocialFeed.dc.html" aria-current="page" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>소셜</a>
+<a class="md-tab md-pressable" href="GuardianCalendar.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /></svg>캘린더</a>
+<button class="md-tab md-pressable" type="button"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>더보기</button>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cat: '전체' };
+  }
+  renderVals() {
+    const all = [
+      { cat: '잃어버렸어요', title: '하얀 말티즈를 찾고 있어요', body: '오늘 오전 9시쯤 역삼공원 정문 근처에서 잃어버렸어요. 빨간 목줄을 하고 있어요. 보신 분은 댓글 남겨 주세요.', place: '역삼동', time: '20분 전', comments: 6, hasPhoto: true },
+      { cat: '추천', title: '강아지와 들어갈 수 있는 카페 있나요', body: '테라스 말고 실내에도 함께 들어갈 수 있는 곳을 찾고 있어요.', place: '역삼동', time: '1시간 전', comments: 4, hasPhoto: false },
+      { cat: '나눔', title: '소형견 하네스 나눔해요', body: 'S 사이즈예요. 몇 번 안 썼어요. 101동 앞에서 드릴게요.', place: '역삼동', time: '어제', comments: 2, hasPhoto: true },
+      { cat: '질문', title: '겨울 산책 몇 분이 적당할까요', body: '추워지니까 산책 시간을 줄여야 할지 고민이에요.', place: '역삼동', time: '2일 전', comments: 9, hasPhoto: false }
+    ];
+    const cat = this.state.cat;
+    const posts = all.filter((p) => cat === '전체' || p.cat === cat).map((p) => ({
+      ...p,
+      catClass: p.cat === '잃어버렸어요' ? 'md-badge md-badge--critical' : 'md-badge'
+    }));
+    return {
+      cats: ['전체', '추천', '나눔', '질문', '잃어버렸어요'].map((label) => ({
+        label: label,
+        pressed: cat === label,
+        pick: () => this.setState({ cat: label })
+      })),
+      posts: posts,
+      empty: posts.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

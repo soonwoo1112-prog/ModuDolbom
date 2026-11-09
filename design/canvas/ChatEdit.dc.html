@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>예약 수정 요청</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav">
+<a class="md-iconbtn md-pressable" href="Chat.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a>
+<h1 class="md-topnav__title">예약 수정 요청</h1>
+<span style="width: 48px;"></span>
+</header>
+<main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; padding: 16px 16px 24px;">
+<div style="display: flex; flex-direction: column; gap: 2px; padding: 12px; border-radius: var(--r3); background: var(--bg-layer-basement);">
+<span class="md-detail">지금 예약</span>
+<span class="md-label md-num">보리, 11월 7일 (토) 오후 12:30부터 30분</span>
+</div>
+<section style="display: flex; flex-direction: column; gap: 6px;">
+<div style="display: flex; align-items: center; justify-content: space-between;"><span class="md-section-title">날짜</span><span class="md-label md-num" style="color: var(--fg-brand);">{{dateText}}</span></div>
+<div class="md-cal" aria-hidden="true"><span class="md-cal__dow" style="color: var(--fg-critical);">일</span><span class="md-cal__dow">월</span><span class="md-cal__dow">화</span><span class="md-cal__dow">수</span><span class="md-cal__dow">목</span><span class="md-cal__dow">금</span><span class="md-cal__dow" style="color: var(--fg-informative);">토</span></div>
+<div class="md-cal" role="grid" aria-label="2026년 11월">
+<sc-for list="{{cells}}" as="c" hint-placeholder-count="30">
+<button class="md-cal__cell" type="button" disabled="{{c.disabled}}" aria-pressed="{{c.picked}}" aria-label="{{c.aria}}" onClick="{{c.pick}}"><span class="md-cal__num" style="{{c.num}}">{{c.day}}</span></button>
+</sc-for>
+</div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; align-items: center; justify-content: space-between;"><span class="md-section-title">시작 시간</span><span class="md-label md-num" style="color: var(--fg-brand);">{{timeText}}</span></div>
+<div style="position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;" role="group" aria-label="시작 시간">
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 88px; height: 44px; border-radius: var(--r2); background: var(--bg-neutral-weak);"></div>
+<sc-for list="{{wheels}}" as="w" hint-placeholder-count="3">
+<div style="position: relative; display: flex; flex-direction: column;" role="listbox" aria-label="{{w.label}}">
+<sc-for list="{{w.items}}" as="i" hint-placeholder-count="5">
+<button type="button" role="option" aria-selected="{{i.selected}}" onClick="{{i.pick}}" style="{{i.style}}">{{i.text}}</button>
+</sc-for>
+</div>
+</sc-for>
+</div>
+<span class="md-detail">실제 앱에서는 위아래로 넘겨 골라요. 미리보기에서는 위아래 숫자를 눌러 보세요.</span>
+</section>
+<div class="md-field">
+<label class="md-field__label" for="reason">수정 이유</label>
+<textarea class="md-input" id="reason" aria-describedby="reason-help" placeholder="예: 회의가 늦게 끝나서 30분 늦춰도 될까요?" value="{{reason}}" onChange="{{typeReason}}"></textarea>
+<div class="md-field__foot"><span id="reason-help">시터에게 수정 요청과 함께 보내져요.</span><span class="md-num">{{reasonCount}}/200</span></div>
+</div>
+</main>
+<div style="padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle); background: var(--bg-layer-default);">
+<sc-if value="{{canSend}}" hint-placeholder-val="{{ true }}">
+<a class="md-btn md-btn--brand md-btn--large md-pressable" href="Chat.dc.html" style="box-sizing: border-box;">수정 요청 보내기</a>
+</sc-if>
+<sc-if value="{{cantSend}}" hint-placeholder-val="{{ false }}">
+<button class="md-btn md-btn--large" type="button" disabled>{{why}}</button>
+</sc-if>
+<span class="md-detail" style="text-align: center;">시터가 수락하면 예약이 바뀌어요</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { day: 7, ampm: '오후', hour: 1, minute: '00', reason: '회의가 늦게 끝나서 30분 늦춰도 될까요?' };
+  }
+  wheel(key, values, label) {
+    const cur = this.state[key];
+    const idx = values.indexOf(cur);
+    const items = [];
+    for (let k = -2; k <= 2; k++) {
+      const v = values[idx + k];
+      const on = k === 0;
+      items.push({
+        text: v === undefined ? '' : String(v),
+        selected: on,
+        pick: v === undefined ? null : () => this.setState({ [key]: v }),
+        style: 'height: 44px; border: 0; background: transparent; cursor: pointer; font: ' + (on ? '700 18px/24px' : '400 16px/22px') + ' var(--font-sans); color: ' + (on ? 'var(--fg-neutral)' : (Math.abs(k) === 1 ? 'var(--fg-neutral-subtle)' : 'var(--fg-disabled)')) + '; position: relative;'
+      });
+    }
+    return { label: label, items: items };
+  }
+  renderVals() {
+    const s = this.state;
+    const DOW = ['일', '월', '화', '수', '목', '금', '토'];
+    const fmt = (d) => '11월 ' + d + '일 (' + DOW[(d - 1) % 7] + ')';
+    const cells = [];
+    for (let d = 1; d <= 30; d++) {
+      const picked = d === s.day;
+      cells.push({
+        day: d, disabled: d < 6, picked: picked, aria: fmt(d),
+        num: picked ? 'background: var(--bg-brand-solid); color: var(--fg-on-brand-solid); font-weight: 700;' : (d === 6 ? 'box-shadow: inset 0 0 0 1.5px var(--stroke-neutral-contrast); font-weight: 700;' : ''),
+        pick: () => this.setState({ day: d })
+      });
+    }
+    const hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    const mins = ['00', '10', '20', '30', '40', '50'];
+    const changed = !(s.day === 7 && s.ampm === '오후' && s.hour === 12 && s.minute === '30');
+    const hasReason = s.reason.trim().length > 0;
+    return {
+      cells: cells,
+      dateText: fmt(s.day),
+      timeText: s.ampm + ' ' + s.hour + ':' + s.minute,
+      wheels: [this.wheel('ampm', ['오전', '오후'], '오전 오후'), this.wheel('hour', hours, '시'), this.wheel('minute', mins, '분')],
+      reason: s.reason,
+      reasonCount: s.reason.length,
+      typeReason: (e) => this.setState({ reason: e.target.value.slice(0, 200) }),
+      canSend: changed && hasReason,
+      cantSend: !(changed && hasReason),
+      why: !changed ? '바꿀 날짜나 시간을 골라 주세요' : '수정 이유를 적어 주세요'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>채팅</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav md-topnav--root">
+<h1 class="md-topnav__title">채팅</h1>
+<span></span>
+</header>
+<div class="chip-scroll" role="group" aria-label="대화 나눠 보기"><sc-for list="{{filters}}" as="c" hint-placeholder-count="7"><button class="md-chip md-pressable" type="button" aria-pressed="{{c.on}}" onClick="{{c.pick}}"><span>{{c.label}}<b>{{c.count}}</b></span></button></sc-for></div>
+<main style="flex: 1; overflow-y: auto;">
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+<a class="md-item md-pressable" href="SitterChat.dc.html" style="box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle);">
+<sc-if value="{{r.f}}" hint-placeholder-val="{{ true }}"><img class="md-photo" src="{{r.src}}" alt="" style="width: 52px; height: 52px; border-radius: var(--full);"></sc-if><sc-if value="{{r.noPhoto}}" hint-placeholder-val="{{ false }}"><span class="md-initial md-initial--peach" style="width: 52px; height: 52px; font-size: 21px; border-radius: var(--full);">몽</span></sc-if>
+<span class="md-item__body"><span class="md-item__head"><span class="md-list-title">{{r.name}}</span><span class="{{r.cls}}">{{r.status}}</span></span><span class="md-item__muted" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{r.last}}</span></span>
+<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;"><span class="md-tagtext">{{r.when}}</span><sc-if value="{{r.unread}}" hint-placeholder-val="{{ false }}"><span class="md-nbadge">{{r.unread}}</span></sc-if></span>
+</a>
+</sc-for>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><section class="md-result"><p>{{emptyText}}</p></section></sc-if>
+</main>
+<nav class="md-bottomnav" aria-label="시터 메뉴">
+<a class="md-tab md-pressable" href="SitterToday.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>오늘</a>
+<a class="md-tab md-pressable" href="SitterChat.dc.html" style="text-decoration: none;" aria-current="page"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>채팅</a>
+<a class="md-tab md-pressable" href="SocialFeed.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>소셜</a>
+<a class="md-tab md-pressable" href="SitterSchedule.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /></svg>캘린더</a>
+<button class="md-tab md-pressable" type="button"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>더보기</button>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filter: 'all' };
+  }
+  renderVals() {
+    const all = [{ key: 'wait', unread: 1, html: true, f: "bori", name: '보리네 보호자', last: "새 요청이에요. 11월 7일 (토) 오후 12:30, 30분", when: '방금', status: '대기 중', cls: 'md-badge md-badge--info' }, { key: 'confirmed', unread: 0, html: true, f: "kong", name: '콩이네 보호자', last: "오늘도 잘 부탁드려요.", when: '오전 10:12', status: '확정', cls: 'md-badge md-badge--brand-solid' }, { key: 'active', unread: 2, html: true, f: "dubu", name: '두부네 보호자', last: "그늘 많은 길로 부탁드려요!", when: '어제', status: '진행 중', cls: 'md-badge md-badge--outline' }, { key: 'past', unread: 0, html: true, f: "gureum", name: '구름이네 보호자', last: "오늘도 감사했어요. 다음 주에 또 부탁드려요.", when: '11월 1일', status: '지난 대화', cls: 'md-badge' }, { key: 'archived', unread: 0, html: true, f: null, name: '몽이네 보호자', last: "일정이 안 맞아 다음에 연락드릴게요.", when: '10월 20일', status: '보관함', cls: 'md-badge' }];
+    const F = [['all', '전체'], ['unread', '안 읽음'], ['wait', '대기 중'], ['active', '진행 중'], ['confirmed', '확정'], ['past', '지난 대화'], ['archived', '보관함']];
+    const match = (r, k) => k === 'all' ? r.key !== 'archived' : k === 'unread' ? r.unread > 0 : r.key === k;
+    const rows = all.filter((r) => match(r, this.state.filter)).map((r) => Object.assign({}, r, { src: r.f ? 'img/' + r.f + '.jpg' : '', noPhoto: !r.f }));
+    return {
+      filters: F.map(([k, l]) => ({ label: l, count: all.filter((r) => match(r, k)).length, on: this.state.filter === k, pick: () => this.setState({ filter: k }) })),
+      rows: rows, empty: rows.length === 0, emptyText: '이 보기에 해당하는 대화가 없어요.'
+    };
+  }
+}
+</script>
+</body>
+</html>

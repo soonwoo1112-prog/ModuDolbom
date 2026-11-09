@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>새 요청</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav">
+<a class="md-iconbtn md-pressable" href="SitterToday.dc.html" aria-label="뒤로 가기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico"><path d="m15 18-6-6 6-6" /></svg></a>
+<h1 class="md-topnav__title">새 요청</h1>
+<span style="width: 48px;"></span>
+</header>
+<main style="flex: 1; overflow-y: auto;">
+<div style="position: relative; height: 240px; flex: none;"><img class="md-photo" src="img/bori.jpg" alt="보리 사진" style="width: 100%; height: 100%; object-position: center 30%;"></div>
+<section style="display: flex; flex-direction: column; gap: 8px; padding: 20px 16px;">
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;"><h2 class="sp-head__name">보리</h2><span class="md-badge">중형견</span><span class="md-badge">3살</span><span class="md-badge md-badge--brand">같은 아파트</span></div>
+<p class="wk-sub">보리네 보호자, 3분 전에 보냈어요</p>
+<a class="md-label" href="DogProfile.dc.html" style="display: inline-flex; align-items: center; gap: 2px; text-decoration: none;">보리 프로필 보기<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--sm"><path d="m9 18 6-6-6-6" /></svg></a>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;"><div style="display: flex; flex-direction: column; gap: 2px;"><h2 class="md-section-title" style="margin: 0;">요청 내용</h2></div></div>
+<dl class="sp-rows"><dt>날짜</dt><dd>11월 7일 (토)</dd><dt>시간</dt><dd>오후 12:30부터 30분</dd><dt>만나는 곳</dt><dd>역삼로 123 부근<small>같은 단지, 120m</small></dd><dt>받는 금액</dt><dd><b>15,000원</b><small>내 30분 가격</small></dd></dl>
+<div class="sp-note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg><span>정확한 동·호수와 픽업 안내는 보호자가 예약을 확정하면 보여요.</span></div>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;"><div style="display: flex; flex-direction: column; gap: 2px;"><h2 class="md-section-title" style="margin: 0;">알아 두세요</h2></div></div>
+<ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font: 400 15px/22px var(--font-sans);"><li>다른 강아지를 보면 조금 짖어요.</li><li>길에 떨어진 음식을 주워 먹으려고 해요.</li><li>닭고기 알레르기가 있어요.</li></ul>
+<div class="sp-note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg><span>보호자가 시터 2명에게 함께 요청했어요. 대화를 열면 조건을 맞춘 뒤 보호자가 한 명을 확정해요.</span></div>
+</section>
+</main>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 8px; padding: 12px 16px 16px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle);">
+<a class="md-btn md-btn--large md-pressable" href="SitterToday.dc.html" style="box-sizing: border-box;">거절</a>
+<a class="md-btn md-btn--brand md-btn--large md-pressable" href="SitterChat.dc.html" style="box-sizing: border-box;">대화창 열기</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

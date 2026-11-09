@@ -1,0 +1,498 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "BookAddress.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1-3. 주소 목록",
+      "w": 390,
+      "x": 1410,
+      "y": 0
+    },
+    "BookAddressDetail.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1-4. 주소 자세히",
+      "w": 390,
+      "x": 1880,
+      "y": 0
+    },
+    "BookDateOnce.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1-1. 날짜 고르기 (한 번)",
+      "w": 390,
+      "x": 470,
+      "y": 0
+    },
+    "BookDateRepeat.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1-2. 날짜 고르기 (반복)",
+      "w": 390,
+      "x": 940,
+      "y": 0
+    },
+    "Chat.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "4. 채팅과 예약 확정",
+      "w": 390,
+      "x": 3290,
+      "y": 0
+    },
+    "ChatEdit.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "4-1. 예약 수정 요청",
+      "w": 390,
+      "x": 3760,
+      "y": 0
+    },
+    "ChatInfo.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "4-2. 예약 정보",
+      "w": 390,
+      "x": 4230,
+      "y": 0
+    },
+    "ChatMenu.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "4-3. 채팅 더보기",
+      "w": 390,
+      "x": 4700,
+      "y": 0
+    },
+    "Community.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "12. 동네 이야기",
+      "w": 390,
+      "x": 470,
+      "y": 3732
+    },
+    "DogProfile.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "4-4. 강아지 프로필",
+      "w": 390,
+      "x": 5170,
+      "y": 0
+    },
+    "GuardianCalendar.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "13. 보호자 캘린더",
+      "w": 390,
+      "x": 940,
+      "y": 3732
+    },
+    "GuardianCalendarDay.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "13-1. 날짜를 누르면",
+      "w": 390,
+      "x": 1410,
+      "y": 3732
+    },
+    "GuardianLive.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "9. 실시간 위치 보기",
+      "w": 390,
+      "x": 0,
+      "y": 2488
+    },
+    "GuardianLog.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "10. 산책 기록 받기와 후기",
+      "w": 390,
+      "x": 470,
+      "y": 2488
+    },
+    "Main.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1. 예약 조건 입력",
+      "w": 390,
+      "x": 0,
+      "y": 0
+    },
+    "Matching.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "2. 시터 고르기",
+      "w": 390,
+      "x": 2350,
+      "y": 0
+    },
+    "Sent.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "3. 요청 현황",
+      "w": 390,
+      "x": 2820,
+      "y": 0
+    },
+    "SitterChat.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "6. 시터 채팅",
+      "w": 390,
+      "x": 470,
+      "y": 1244
+    },
+    "SitterSchedule.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "14. 시터 캘린더",
+      "w": 390,
+      "x": 1880,
+      "y": 3732
+    },
+    "SitterToday.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "5. 시터 오늘 탭",
+      "w": 390,
+      "x": 0,
+      "y": 1244
+    },
+    "SitterWeek.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "14-1. 날짜를 누르면 그 주",
+      "w": 390,
+      "x": 2350,
+      "y": 3732
+    },
+    "SitterWeekEdit.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "14-2. 이 날 일정 수정",
+      "w": 390,
+      "x": 2820,
+      "y": 3732
+    },
+    "SocialFeed.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "11. 소셜 산책 피드",
+      "w": 390,
+      "x": 0,
+      "y": 3732
+    },
+    "WalkLogWrite.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "8. 산책 기록 보내기",
+      "w": 390,
+      "x": 1410,
+      "y": 1244
+    },
+    "Walking.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "7. 산책중",
+      "w": 390,
+      "x": 940,
+      "y": 1244
+    },
+    "SitterProfile.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "2-1. 시터 프로필 (보호자가 보는)",
+      "w": 390,
+      "x": 0,
+      "y": 4976
+    },
+    "SitterRequest.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "5-1. 새 요청 자세히",
+      "w": 390,
+      "x": 1880,
+      "y": 4976
+    },
+    "SitterProfileEdit.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "15-2. 프로필 꾸미기",
+      "w": 390,
+      "x": 3290,
+      "y": 4976
+    },
+    "SitterProfileSelf.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "2-2. 내 프로필 (시터 본인)",
+      "w": 390,
+      "x": 1410,
+      "y": 4976
+    },
+    "SitterMore.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "15. 시터 더보기",
+      "w": 390,
+      "x": 2350,
+      "y": 4976
+    },
+    "SitterService.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "15-1. 서비스 설정",
+      "w": 390,
+      "x": 2820,
+      "y": 4976
+    },
+    "SitterProfileFeed.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "w": 390,
+      "y": 4976,
+      "title": "2-1a. 시터 프로필: 산책 기록 탭",
+      "x": 470
+    },
+    "SitterProfilePrice.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "w": 390,
+      "y": 4976,
+      "title": "2-1b. 시터 프로필: 가격 탭",
+      "x": 940
+    },
+    "GuardianMore.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "16. 보호자 더보기",
+      "w": 390,
+      "x": 0,
+      "y": 6220
+    },
+    "DogEdit.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "16-1. 강아지 프로필 수정·꾸미기",
+      "w": 390,
+      "x": 470,
+      "y": 6220
+    },
+    "Notifications.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "17. 알림",
+      "w": 390,
+      "x": 940,
+      "y": 6220
+    },
+    "Compose.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "11-3. 기록 없이 직접 쓰기",
+      "w": 390,
+      "x": 940,
+      "y": 7464
+    },
+    "SitterChatList.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "6-0. 시터 채팅 목록",
+      "w": 390,
+      "x": 1410,
+      "y": 6220
+    },
+    "SitterAnalytics.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "15-3. 시터 분석",
+      "w": 390,
+      "x": 1880,
+      "y": 6220
+    },
+    "SitterPayout.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "15-4. 정산",
+      "w": 390,
+      "x": 2350,
+      "y": 6220
+    },
+    "DogProfileFeed.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "4-4a. 강아지 프로필: 산책 기록 탭",
+      "w": 390,
+      "x": 5640,
+      "y": 0
+    },
+    "DogProfilePhotos.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "4-4b. 강아지 프로필: 사진 탭",
+      "w": 390,
+      "x": 6110,
+      "y": 0
+    },
+    "ComposePick.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "11-1. 글쓰기: 산책 고르기",
+      "w": 390,
+      "x": 0,
+      "y": 7464
+    },
+    "ComposeWalk.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "11-2. 산책으로 글쓰기",
+      "w": 390,
+      "x": 470,
+      "y": 7464
+    },
+    "GuardianWalk.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "18. 보호자 직접 산책 기록",
+      "w": 390,
+      "x": 1410,
+      "y": 7464
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-06T03:33:44Z",
+    "v": 1
+  },
+  "designSystems": [
+    {
+      "artifact": "https://claude.ai/artifact/E4ZG6scBSJ4dygGEngKh3E",
+      "copiedAt": "2026-11-06T03:33:44Z",
+      "namespace": "modudolbom",
+      "title": "모두돌봄",
+      "version": "1793933457-9306"
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  },
+  "noteOrder": [
+    "flow",
+    "sitterflow",
+    "guardianwalk",
+    "socialcal",
+    "profiles",
+    "more",
+    "compose"
+  ],
+  "notes": {
+    "flow": {
+      "kind": "title1",
+      "maxW": 6500,
+      "text": "보호자 예약 흐름",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "guardianwalk": {
+      "kind": "title1",
+      "maxW": 860,
+      "text": "보호자 산책 확인",
+      "w": 240,
+      "x": 0,
+      "y": 2188
+    },
+    "sitterflow": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "시터 산책 흐름",
+      "w": 240,
+      "x": 0,
+      "y": 944
+    },
+    "socialcal": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "소셜과 캘린더",
+      "w": 240,
+      "x": 0,
+      "y": 3432
+    },
+    "profiles": {
+      "kind": "title1",
+      "maxW": 3680,
+      "text": "프로필과 요청",
+      "w": 240,
+      "x": 0,
+      "y": 4676
+    },
+    "more": {
+      "kind": "title1",
+      "maxW": 3200,
+      "text": "더보기, 알림, 글쓰기",
+      "w": 240,
+      "x": 0,
+      "y": 5920
+    },
+    "compose": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "글쓰기와 내 산책",
+      "w": 240,
+      "x": 0,
+      "y": 7164
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "BookDateOnce.dc.html",
+    "BookDateRepeat.dc.html",
+    "BookAddress.dc.html",
+    "BookAddressDetail.dc.html",
+    "Matching.dc.html",
+    "Sent.dc.html",
+    "Chat.dc.html",
+    "ChatEdit.dc.html",
+    "ChatInfo.dc.html",
+    "ChatMenu.dc.html",
+    "DogProfile.dc.html",
+    "SitterToday.dc.html",
+    "SitterChat.dc.html",
+    "Walking.dc.html",
+    "WalkLogWrite.dc.html",
+    "GuardianLive.dc.html",
+    "GuardianLog.dc.html",
+    "SocialFeed.dc.html",
+    "Community.dc.html",
+    "GuardianCalendar.dc.html",
+    "GuardianCalendarDay.dc.html",
+    "SitterSchedule.dc.html",
+    "SitterWeek.dc.html",
+    "SitterWeekEdit.dc.html",
+    "SitterProfile.dc.html",
+    "SitterProfileFeed.dc.html",
+    "SitterProfilePrice.dc.html",
+    "SitterRequest.dc.html",
+    "SitterProfileEdit.dc.html",
+    "SitterProfileSelf.dc.html",
+    "SitterMore.dc.html",
+    "SitterService.dc.html",
+    "GuardianMore.dc.html",
+    "DogEdit.dc.html",
+    "Notifications.dc.html",
+    "Compose.dc.html",
+    "SitterChatList.dc.html",
+    "SitterAnalytics.dc.html",
+    "SitterPayout.dc.html",
+    "DogProfileFeed.dc.html",
+    "DogProfilePhotos.dc.html",
+    "ComposePick.dc.html",
+    "ComposeWalk.dc.html",
+    "GuardianWalk.dc.html"
+  ],
+  "pages": [],
+  "title": "모두돌봄 예약 흐름"
+}

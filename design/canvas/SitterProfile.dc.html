@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>시터 프로필</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav">
+<a class="md-iconbtn md-pressable" href="Matching.dc.html" aria-label="뒤로 가기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico"><path d="m15 18-6-6 6-6" /></svg></a>
+<h1 class="md-topnav__title">{{title}}</h1>
+<span style="width: 48px;"></span>
+</header>
+<main style="flex: 1; overflow-y: auto;">
+<div class="pf-cover"><img src="img/gureum.jpg" alt="김하늘 시터가 산책하며 찍은 사진" style="object-position: center 68%;">
+<sc-if value="{{self}}" hint-placeholder-val="{{ false }}"><a class="pf-cover__edit md-pressable" href="SitterProfileEdit.dc.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>프로필 수정</a></sc-if></div>
+<section class="pf-head">
+<span class="md-initial md-initial--sand pf-head__photo" role="img" aria-label="김하늘 사진 자리" style="width: 88px; height: 88px; font-size: 35px; border-radius: var(--full);">김</span>
+<h2 class="pf-head__name">김하늘<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" role="img" aria-label="인증된 시터"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /><path d="m9 12 2 2 4-4" /></svg></h2>
+<p class="pf-head__bio">점심시간마다 역삼공원을 천천히 걷는 이웃 시터예요</p>
+<span class="md-tags"><span>역삼동</span><span>같은 아파트 103동</span><span>120m</span></span>
+<dl class="pf-stats"><div><dt>별점</dt><dd><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="fill: currentColor;"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" /></svg>4.9</dd></div><div><dt>후기</dt><dd>48</dd></div><div><dt>반복고객</dt><dd>12<small>명</small></dd></div><div><dt>평균 답장</dt><dd>10<small>분</small></dd></div></dl>
+<div class="pf-marks"><span class="pf-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /><path d="m9 12 2 2 4-4" /></svg>본인 인증</span><span class="pf-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /><path d="m9 12 2 2 4-4" /></svg>계좌 인증</span><span class="pf-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /><path d="m9 12 2 2 4-4" /></svg>거주지 인증</span><span class="pf-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>펫보험 가입</span></div>
+</section>
+<div class="pf-tabs" role="tablist" aria-label="시터 프로필">
+<button type="button" role="tab" aria-selected="{{tInfo}}" onClick="{{showInfo}}">정보</button>
+<button type="button" role="tab" aria-selected="{{tFeed}}" onClick="{{showFeed}}">산책 기록</button>
+<button type="button" role="tab" aria-selected="{{tPrice}}" onClick="{{showPrice}}">가격</button>
+</div>
+<sc-if value="{{tInfo}}" hint-placeholder-val="{{ true }}">
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; align-items: baseline; justify-content: space-between;"><h2 class="md-section-title" style="margin: 0;">소개</h2></div>
+<p style="margin: 0; font: 400 15px/23px var(--font-sans);">강아지를 정말 좋아해서 시터를 시작했어요. 어릴 때부터 진돗개와 함께 자랐고, 지금은 점심시간과 주말에 이웃 강아지들과 걸어요. 산책 중에는 사진과 소식을 자주 보내 드려요.</p>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; align-items: baseline; justify-content: space-between;"><h2 class="md-section-title" style="margin: 0;">케어 경험</h2></div>
+<dl class="sp-rows"><dt>시터 경력</dt><dd>2년<small>산책 180번</small></dd><dt>반려 경험</dt><dd>12년<small>진돗개, 푸들</small></dd><dt>돌봐 본 강아지</dt><dd>소형견부터 대형견까지<small>노견 2마리</small></dd></dl>
+<div class="pf-chips"><span>약 먹이기</span><span>노견 돌봄</span><span>겁 많은 강아지</span><span>줄 당김 교정</span><span>사진 자주 보내기</span></div>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; align-items: baseline; justify-content: space-between;"><h2 class="md-section-title" style="margin: 0;">함께 걸을 수 있는 강아지</h2></div><div class="dg-sizes"><div class="dg-size" data-on="true"><svg viewBox="0 0 64 40" width="40" height="25" fill="currentColor" aria-hidden="true"><path d="M14 24 Q6 20 7 11" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" /><rect x="13" y="20" width="34" height="15" rx="7.5" /><rect x="40" y="13" width="11" height="14" rx="4" /><circle cx="49" cy="14" r="8" /><rect x="51" y="14" width="11" height="7" rx="3.5" /><path d="M43 8 Q39 15 42 21 L46 17 Z" /><rect x="16" y="31" width="4.5" height="9" rx="2.25" /><rect x="23" y="31" width="4.5" height="9" rx="2.25" /><rect x="36" y="31" width="4.5" height="9" rx="2.25" /><rect x="42.5" y="31" width="4.5" height="9" rx="2.25" /><circle cx="51" cy="12" r="1.3" style="fill: var(--bg-layer-default);" /></svg><b>소형견</b><small>10kg 미만</small></div><div class="dg-size" data-on="true"><svg viewBox="0 0 64 43" width="54" height="36" fill="currentColor" aria-hidden="true"><path d="M14 24 Q6 20 7 11" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" /><rect x="13" y="20" width="34" height="15" rx="7.5" /><rect x="40" y="13" width="11" height="14" rx="4" /><circle cx="49" cy="14" r="8" /><rect x="51" y="14" width="11" height="7" rx="3.5" /><path d="M43 8 Q39 15 42 21 L46 17 Z" /><rect x="16" y="31" width="4.5" height="12" rx="2.25" /><rect x="23" y="31" width="4.5" height="12" rx="2.25" /><rect x="36" y="31" width="4.5" height="12" rx="2.25" /><rect x="42.5" y="31" width="4.5" height="12" rx="2.25" /><circle cx="51" cy="12" r="1.3" style="fill: var(--bg-layer-default);" /></svg><b>중형견</b><small>10~25kg</small></div><div class="dg-size" data-on="false"><svg viewBox="0 0 64 46" width="70" height="50" fill="currentColor" aria-hidden="true"><path d="M14 24 Q6 20 7 11" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" /><rect x="13" y="20" width="34" height="15" rx="7.5" /><rect x="40" y="13" width="11" height="14" rx="4" /><circle cx="49" cy="14" r="8" /><rect x="51" y="14" width="11" height="7" rx="3.5" /><path d="M43 8 Q39 15 42 21 L46 17 Z" /><rect x="16" y="31" width="4.5" height="15" rx="2.25" /><rect x="23" y="31" width="4.5" height="15" rx="2.25" /><rect x="36" y="31" width="4.5" height="15" rx="2.25" /><rect x="42.5" y="31" width="4.5" height="15" rx="2.25" /><circle cx="51" cy="12" r="1.3" style="fill: var(--bg-layer-default);" /></svg><b>대형견</b><small>25kg 이상</small></div></div></section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; align-items: baseline; justify-content: space-between;"><h2 class="md-section-title" style="margin: 0;">일하는 시간</h2></div><div class="sp-days" aria-label="일하는 요일: 월, 화, 목, 금, 토"><span data-on="true">월</span><span data-on="true">화</span><span data-on="false">수</span><span data-on="true">목</span><span data-on="true">금</span><span data-on="true">토</span><span data-on="false">일</span></div><p class="wk-sub">평일 오전 11:30~오후 2:30, 토요일 오전 10:00~오후 7:00</p></section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; align-items: baseline; justify-content: space-between;"><h2 class="md-section-title" style="margin: 0;">후기 48개</h2><a class="md-label" href="SitterProfile.dc.html" style="text-decoration: none;">모두 보기</a></div><div class="sp-review"><span class="md-initial md-initial--sand" role="img" aria-label="보리네 사진 자리" style="width: 36px; height: 36px; font-size: 14px; border-radius: var(--full);">보</span><div><div class="sp-review__head"><span class="md-label">보리네</span><span class="md-tagtext">보리, 11월 3일</span></div><p>산책 소식이 시간마다 와서 회사에서도 마음이 놓였어요. 다른 강아지를 보면 짖는 걸 알고 일부러 조용한 길로 돌아 주셨대요.</p></div></div><div class="sp-review"><span class="md-initial md-initial--sky" role="img" aria-label="콩이네 사진 자리" style="width: 36px; height: 36px; font-size: 14px; border-radius: var(--full);">콩</span><div><div class="sp-review__head"><span class="md-label">콩이네</span><span class="md-tagtext">콩이, 10월 29일</span></div><p>콩이가 겁이 많아서 걱정했는데, 처음 5분은 현관 앞에서 냄새만 맡게 기다려 주셨어요. 사진 속 표정이 너무 편해 보여요.</p></div></div></section>
+</sc-if>
+<sc-if value="{{tFeed}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 4px 16px 16px;"><article class="fd-post" style="padding-left: 0; padding-right: 0;">
+<div class="fd-photo"><img class="md-photo" src="img/bori.jpg" alt="보리 산책 사진" style="position: absolute; inset: 0; width: 100%; height: 100%;"><span class="fd-dog"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="4" r="2" /><circle cx="18" cy="8" r="2" /><circle cx="20" cy="16" r="2" /><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" /></svg>보리</span></div>
+<div class="fd-actions"><span class="fd-act"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>14</span><span class="fd-act"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>2</span><span class="md-tagtext" style="margin-left: auto; padding-right: 8px;">11월 3일</span></div>
+<p class="fd-text">보리와 점심 산책. 다른 강아지를 피해 아파트 뒷길로 돌았더니 한 번도 안 짖었어요.</p>
+</article><article class="fd-post" style="padding-left: 0; padding-right: 0;">
+<div class="fd-photo"><img class="md-photo" src="img/kong.jpg" alt="콩이 산책 사진" style="position: absolute; inset: 0; width: 100%; height: 100%;"><span class="fd-dog"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="4" r="2" /><circle cx="18" cy="8" r="2" /><circle cx="20" cy="16" r="2" /><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" /></svg>콩이</span></div>
+<div class="fd-actions"><span class="fd-act"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>22</span><span class="fd-act"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>5</span><span class="md-tagtext" style="margin-left: auto; padding-right: 8px;">10월 29일</span></div>
+<p class="fd-text">콩이 첫 산책! 처음엔 현관에서 한참 냄새만 맡다가 공원에 가서는 신나게 뛰었어요.</p>
+</article><article class="fd-post" style="padding-left: 0; padding-right: 0;">
+<div class="fd-photo"><img class="md-photo" src="img/gureum.jpg" alt="구름 산책 사진" style="position: absolute; inset: 0; width: 100%; height: 100%;"><span class="fd-dog"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="4" r="2" /><circle cx="18" cy="8" r="2" /><circle cx="20" cy="16" r="2" /><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" /></svg>구름</span></div>
+<div class="fd-actions"><span class="fd-act"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>31</span><span class="fd-act"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>3</span><span class="md-tagtext" style="margin-left: auto; padding-right: 8px;">10월 20일</span></div>
+<p class="fd-text">바람 부는 날 구름이. 꽃 많은 골목에서 귀가 날려서 자꾸 멈춰 섰어요.</p>
+</article></div>
+</sc-if>
+<sc-if value="{{tPrice}}" hint-placeholder-val="{{ false }}">
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;"><div style="display: flex; align-items: baseline; justify-content: space-between;"><h2 class="md-section-title" style="margin: 0;">가격</h2></div><p class="wk-sub" style="margin-top: -6px;">시터가 정한 30분 가격을 바탕으로 나머지는 모두돌봄이 계산해요</p>
+<ul class="pf-pricelist"><li data-base="true"><span>30분 산책<small>기본 가격, 시터가 정해요</small></span><b>15,000원</b></li><li data-base="false"><span>60분 산책<small>30분 가격의 1.7배</small></span><b>25,500원</b></li><li data-base="false"><span>강아지 한 마리 더<small>같은 집 강아지, 30분 기준 절반</small></span><b>+7,500원</b></li><li data-base="false"><span>1살 미만 강아지<small>배변 훈련과 휴식 시간이 더 필요해요</small></span><b>+3,000원</b></li><li data-base="false"><span>주말·공휴일<small>기본 가격의 20%</small></span><b>+3,000원</b></li><li data-base="false"><span>연휴 (설·추석)<small>기본 가격의 50%</small></span><b>+7,500원</b></li><li data-base="false"><span>이른 아침·늦은 밤<small>오전 7시 전, 오후 9시 뒤</small></span><b>+2,000원</b></li></ul>
+<p class="wk-sub">취소는 산책 하루 전까지 수수료가 없어요. 앱에서 예약한 산책만 보험으로 보장돼요.</p>
+</section>
+</sc-if>
+</main>
+<sc-if value="{{guardian}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 16px 16px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle);">
+<sc-if value="{{notPicked}}" hint-placeholder-val="{{ true }}"><button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{pick}}" style="width: 100%;">이 시터 선택하기</button></sc-if>
+<sc-if value="{{picked}}" hint-placeholder-val="{{ false }}"><a class="md-btn md-btn--large md-pressable" href="Matching.dc.html" style="box-sizing: border-box;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--md"><path d="M20 6 9 17l-5-5" /></svg>선택했어요, 목록으로 돌아가기</a></sc-if>
+<span class="md-detail" style="text-align: center;">고른 시터들에게 한 번에 요청을 보내요</span>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"initialTab":{"editor":"enum","options":["info","feed","price"],"default":"info"},"viewer":{"editor":"enum","options":["guardian","self"],"default":"guardian"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: props.initialTab || 'info', picked: false, self: props.viewer === 'self' };
+  }
+  renderVals() {
+    const s = this.state;
+    const self = s.self;
+    return {
+      title: self ? '내 프로필' : '시터 프로필',
+      self: self, guardian: !self,
+      tInfo: s.tab === 'info', tFeed: s.tab === 'feed', tPrice: s.tab === 'price',
+      showInfo: () => this.setState({ tab: 'info' }), showFeed: () => this.setState({ tab: 'feed' }), showPrice: () => this.setState({ tab: 'price' }),
+      picked: s.picked, notPicked: !s.picked, pick: () => this.setState({ picked: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

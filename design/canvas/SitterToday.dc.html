@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>시터 오늘</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden; position: relative;">
+<header class="md-topnav md-topnav--root">
+<h1 style="margin: 0;"><button class="md-topnav__location md-pressable" type="button" aria-label="동네 바꾸기, 지금 역삼동">역삼동<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></h1>
+<button class="md-iconbtn md-pressable" type="button" aria-label="알림"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></svg></button>
+</header>
+<main style="flex: 1; overflow-y: auto;">
+<div style="padding: 24px 16px 4px; display: flex; flex-direction: column; gap: 4px;"><h2 class="md-screen-title">오늘도 동네 산책을 부탁받았어요</h2><p class="md-item__muted" style="margin: 0;">새 요청과 오늘 예약을 확인해 보세요</p></div>
+<sc-if value="{{showRequest}}" hint-placeholder-val="{{ true }}">
+<h2 class="md-section-title" style="padding: 24px 16px 8px;">새 요청 1건</h2>
+<div class="md-item md-item--top" style="cursor: default;">
+<img class="md-photo" src="img/bori.jpg" alt="보리 사진" style="width: 56px; height: 56px; border-radius: var(--r3);">
+<span class="md-item__body">
+<span class="md-item__head"><a class="md-list-title" href="SitterRequest.dc.html" style="color: inherit; text-decoration: none;">보리</a><span class="md-badge">중형견</span><span class="md-badge md-badge--brand">같은 아파트</span></span>
+<span class="md-item__muted">11월 7일 (토) 오후 12:30부터 30분, 역삼로 123</span>
+<span class="md-tags"><span>3분 전</span><span>보리네 보호자</span></span>
+<span style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 8px; margin-top: 8px;">
+<a class="md-btn md-btn--neutral md-btn--small md-pressable" href="SitterChat.dc.html">대화창 열기</a>
+<button class="md-btn md-btn--small md-pressable" type="button" onClick="{{decline}}">거절</button>
+</span>
+</span>
+<span></span>
+</div>
+</sc-if>
+<sc-if value="{{noRequest}}" hint-placeholder-val="{{ false }}">
+<h2 class="md-section-title" style="padding: 24px 16px 8px;">새 요청</h2>
+<p class="md-detail" style="margin: 0; padding: 0 16px 12px;">새 요청이 오면 여기에 맨 먼저 보여요.</p>
+</sc-if>
+<div class="md-band" style="margin-top: 8px;"></div>
+<h2 class="md-section-title" style="padding: 24px 16px 8px;">끝난 산책</h2>
+<div class="md-item" style="cursor: default;">
+<img class="md-photo" src="img/gureum.jpg" alt="구름 사진" style="width: 56px; height: 56px; border-radius: var(--r3);">
+<span class="md-item__body"><span class="md-list-title">구름, 오전 10:00</span><span class="md-item__muted">30분, 1.9km, 사진 3장</span></span>
+<a class="md-btn md-btn--small md-pressable" href="ComposeWalk.dc.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--sm"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>피드에 올리기</a>
+</div>
+<div class="md-band" style="margin-top: 8px;"></div>
+<h2 class="md-section-title" style="padding: 24px 16px 8px;">오늘 예약 2건</h2>
+<div class="md-list">
+<div class="md-item" style="cursor: default;">
+<img class="md-photo" src="img/kong.jpg" alt="콩이 사진" style="width: 56px; height: 56px; border-radius: var(--r3);">
+<span class="md-item__body"><span class="md-list-title">콩이, 오후 2:00</span><span class="md-item__muted">30분, 역삼로 123 103동</span></span>
+<a class="md-btn md-btn--brand md-btn--small md-pressable" href="Walking.dc.html"><svg class="md-ico md-ico--sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /><path d="M16 17h4" /><path d="M4 13h4" /></svg>산책 시작</a>
+</div>
+<hr class="md-divider">
+<div class="md-item" style="cursor: default;">
+<img class="md-photo" src="img/dubu.jpg" alt="두부 사진" style="width: 56px; height: 56px; border-radius: var(--r3);">
+<span class="md-item__body"><span class="md-list-title">두부, 오후 6:30</span><span class="md-item__muted">60분, 역삼로 123 101동</span></span>
+<span class="md-badge md-badge--outline">예약확정</span>
+</div>
+</div>
+</main>
+<sc-if value="{{declined}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 8px; right: 8px; bottom: 72px;">
+<div class="md-snackbar" role="status"><span>요청을 거절했어요</span><button type="button" onClick="{{undo}}">되돌리기</button></div>
+</div>
+</sc-if>
+<nav class="md-bottomnav" aria-label="시터 메뉴">
+<a class="md-tab md-pressable" href="SitterToday.dc.html" aria-current="page" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>오늘</a>
+<a class="md-tab md-pressable" href="SitterChat.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>채팅<span class="md-nbadge">1</span></a>
+<button class="md-tab md-pressable" type="button"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>소셜</button>
+<button class="md-tab md-pressable" type="button"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /></svg>캘린더</button>
+<button class="md-tab md-pressable" type="button"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>더보기</button>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { declined: false };
+  }
+  renderVals() {
+    const declined = this.state.declined;
+    return {
+      declined: declined,
+      showRequest: !declined,
+      noRequest: declined,
+      decline: () => this.setState({ declined: true }),
+      undo: () => this.setState({ declined: false })
+    };
+  }
+}
+</script>
+</body>
+</html>
