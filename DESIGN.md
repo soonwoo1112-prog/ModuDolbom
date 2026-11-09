@@ -42,8 +42,12 @@ The locked system. Every Hallmark run reads this first and pages share it. Chang
 ## Feed posts (decided by blind test, 2026-11-09)
 - A post keeps the shape of what it holds: a walk post leads with a 4:3 photo, then one fact line (dog name in Bold, then duration, distance, place), then the text; a guardian's note leads with the text and a smaller square photo; a short post sits as a thumbnail beside its text.
 - The author is a small byline under the post (initial, name, time) that links to the profile; there is no per-post "ask this sitter" button.
-- The feed opens with the dogs walked in the neighbourhood today, as photos with names.
+- The feed opens with the dogs walked in the neighbourhood today, as photos with names; tapping one shows only that dog's posts. Posts sort by most likes by default, with latest as the other choice.
+- The same post layout is used in the sitter profile's and the dog profile's walk-record tabs (no author byline on the sitter's own tab; on the dog's tab the bold name is who walked).
 - The same test kept the form-led booking screen (1) and the tabbed sitter profile (2-1) over sentence-led and photo-led versions, so those patterns are not adopted.
+
+## Direction under review (owner, 2026-11-09)
+The owner finds the current screens unconvincing overall and wants the next pass to follow apps that feel obvious to use: Toss (bold motion that reads as professional), KREAM, Apple's built-in apps, Karrot. Plain, intuitive structure where each screen says exactly what it is.
 
 ## Departures from the Hallmark floor, by the owner's SEED request
 - System sans as the only face (Hallmark bans system-ui as a default; here it is the brief).

@@ -26,27 +26,20 @@ a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
 </nav>
 <main style="flex: 1; overflow-y: auto;">
 <section class="tt-today" aria-label="오늘 동네에서 산책한 강아지">
-<p>오늘 역삼동에서 강아지 4마리가 앱으로 산책했어요</p>
-<div><span><img class="md-photo" src="img/bori.jpg" alt=""><b>보리</b></span><span><img class="md-photo" src="img/kong.jpg" alt=""><b>콩이</b></span><span><img class="md-photo" src="img/gureum.jpg" alt=""><b>구름</b></span><span><img class="md-photo" src="img/dubu.jpg" alt=""><b>두부</b></span></div>
+<p>오늘 역삼동에서 강아지 {{todayCount}}마리가 앱으로 산책했어요</p>
+<div role="group" aria-label="강아지별로 보기"><sc-for list="{{dogs}}" as="d" hint-placeholder-count="4"><button class="md-pressable" type="button" aria-pressed="{{d.on}}" onClick="{{d.pick}}"><img class="md-photo" src="{{d.photo}}" alt=""><b>{{d.name}}</b></button></sc-for></div>
 </section>
-<article class="tt-walk">
-<div class="tt-walk__photo"><img class="md-photo" src="img/bori.jpg" alt="역삼공원에서 산책하는 보리"></div>
-<p class="tt-walk__facts"><b>보리</b><span>30분</span><span>1.9km</span><span>역삼공원</span></p>
-<p class="tt-walk__text">공원 산책로에 은행잎이 많이 떨어져 있었어요.</p>
-<div class="tt-by"><a href="SitterProfile.dc.html"><span class="md-initial md-initial--sand">김</span>김하늘 시터</a><span>1시간 전</span><span class="tt-by__acts"><button class="fd-act md-pressable" type="button" aria-pressed="{{a.liked}}" onClick="{{a.like}}" aria-label="좋아요 {{a.likes}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{{a.heartFill}}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>{{a.likes}}</button><button class="fd-act md-pressable" type="button" aria-label="댓글 {{a.comments}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>{{a.comments}}</button></span></div>
+<div class="tt-sort"><span>{{listTitle}}</span><div class="tt-sort__seg" role="group" aria-label="정렬"><sc-for list="{{sorts}}" as="o" hint-placeholder-count="2"><button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}">{{o.label}}</button></sc-for></div></div>
+<sc-for list="{{posts}}" as="p" hint-placeholder-count="3">
+<article class="{{p.cls}}">
+<sc-if value="{{p.isWalk}}" hint-placeholder-val="{{ true }}"><div class="tt-walk__photo"><img class="md-photo" src="{{p.photo}}" alt="{{p.alt}}" style="object-position: {{p.focus}};"></div></sc-if>
+<sc-if value="{{p.isRow}}" hint-placeholder-val="{{ false }}"><img class="md-photo" src="{{p.photo}}" alt="{{p.alt}}" style="object-position: {{p.focus}};"></sc-if>
+<div class="tt-post__body"><sc-if value="{{p.hasFacts}}" hint-placeholder-val="{{ true }}"><p class="tt-walk__facts"><b>{{p.dog}}</b><sc-for list="{{p.facts}}" as="f" hint-placeholder-count="2"><span>{{f}}</span></sc-for></p></sc-if><p class="tt-walk__text">{{p.text}}</p></div>
+<sc-if value="{{p.isNote}}" hint-placeholder-val="{{ false }}"><img class="md-photo" src="{{p.photo}}" alt="{{p.alt}}"></sc-if>
+<div class="tt-by"><a href="{{p.href}}"><span class="md-initial md-initial--{{p.tint}}">{{p.first}}</span>{{p.author}}</a><span>{{p.time}}</span><span class="tt-by__acts"><button class="fd-act md-pressable" type="button" aria-pressed="{{p.liked}}" onClick="{{p.like}}" aria-label="좋아요 {{p.likes}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{{p.heartFill}}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>{{p.likes}}</button><button class="fd-act md-pressable" type="button" aria-label="댓글 {{p.comments}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>{{p.comments}}</button></span></div>
 </article>
-<article class="tt-note2">
-<div class="tt-by"><span class="tt-by__who"><span class="md-initial md-initial--sky">콩</span>콩이네 보호자</span><span>3시간 전</span></div>
-<p class="tt-note2__text">콩이가 처음으로 다른 강아지와 인사했어요.</p>
-<img class="md-photo" src="img/kong.jpg" alt="콩이 사진">
-<div class="tt-by"><span></span><span class="tt-by__acts"><button class="fd-act md-pressable" type="button" aria-pressed="{{b.liked}}" onClick="{{b.like}}" aria-label="좋아요 {{b.likes}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{{b.heartFill}}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>{{b.likes}}</button><button class="fd-act md-pressable" type="button" aria-label="댓글 {{b.comments}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>{{b.comments}}</button></span></div>
-</article>
-<article class="tt-row">
-<img class="md-photo" src="img/gureum.jpg" alt="꽃 골목의 구름" style="object-position: center 70%;">
-<div class="tt-row__body"><p class="tt-walk__facts"><b>구름</b><span>30분</span><span>선릉로 골목</span></p>
-<p class="tt-walk__text">꽃이 많은 골목으로 돌아왔어요. 바람이 불 때마다 귀가 날려서 자꾸 멈춰 섰어요.</p></div>
-<div class="tt-by"><a href="SitterProfile.dc.html"><span class="md-initial md-initial--peach">정</span>정민준 시터</a><span>어제</span><span class="tt-by__acts"><button class="fd-act md-pressable" type="button" aria-pressed="{{c.liked}}" onClick="{{c.like}}" aria-label="좋아요 {{c.likes}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{{c.heartFill}}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>{{c.likes}}</button><button class="fd-act md-pressable" type="button" aria-label="댓글 {{c.comments}}개"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>{{c.comments}}</button></span></div>
-</article>
+</sc-for>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><p class="tt-empty">{{emptyText}}</p></sc-if>
 </main>
 <a class="md-btn md-btn--brand md-pressable" href="ComposePick.dc.html" style="text-decoration: none; position: absolute; right: 16px; bottom: 72px; border-radius: var(--full); min-height: 48px; padding: 0 18px; box-shadow: var(--shadow-floating);"><svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>글쓰기</a>
 <nav class="md-bottomnav" aria-label="보호자 메뉴">
@@ -62,18 +55,43 @@ a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { liked: {} };
+    this.state = { liked: {}, dog: null, sort: 'popular' };
+    // Sample posts. Walk facts come from the walk record; nothing here is shown on a route map.
+    this.posts = [
+      { id: 'p1', order: 1, kind: 'walk', dog: '보리', photo: 'img/bori.jpg', focus: 'center', facts: ['30분', '1.9km', '역삼공원'], text: '공원 산책로에 은행잎이 많이 떨어져 있었어요.', author: '김하늘 시터', first: '김', tint: 'sand', href: 'SitterProfile.dc.html', time: '1시간 전', likes: 12, comments: 3, today: true },
+      { id: 'p2', order: 2, kind: 'note', dog: '콩이', photo: 'img/kong.jpg', focus: 'center', facts: [], text: '콩이가 처음으로 다른 강아지와 인사했어요.', author: '콩이네 보호자', first: '콩', tint: 'sky', href: 'DogProfile.dc.html', time: '3시간 전', likes: 8, comments: 1, today: true },
+      { id: 'p3', order: 3, kind: 'row', dog: '구름', photo: 'img/gureum.jpg', focus: 'center 70%', facts: ['30분', '선릉로 골목'], text: '꽃이 많은 골목으로 돌아왔어요. 바람이 불 때마다 귀가 날려서 자꾸 멈춰 섰어요.', author: '정민준 시터', first: '정', tint: 'peach', href: 'SitterProfile.dc.html', time: '5시간 전', likes: 21, comments: 4, today: true },
+      { id: 'p4', order: 4, kind: 'walk', dog: '두부', photo: 'img/dubu.jpg', focus: 'center', facts: ['60분', '3.1km', '도곡공원'], text: '처음 만난 날이라 천천히 걸었어요.', author: '이도윤 시터', first: '이', tint: 'moss', href: 'SitterProfile.dc.html', time: '8시간 전', likes: 15, comments: 2, today: true },
+      { id: 'p5', order: 5, kind: 'row', dog: '보리', photo: 'img/bori.jpg', focus: 'center', facts: ['직접 산책', '3km', '한강공원'], text: '퇴근하고 보리랑 한강 공원까지 걸었어요.', author: '보리네 보호자', first: '보', tint: 'sand', href: 'DogProfile.dc.html', time: '어제', likes: 9, comments: 1, today: false }
+    ];
   }
   renderVals() {
-    const liked = this.state.liked;
-    const base = { a: [12, 3], b: [8, 1], c: [21, 4] };
-    const out = {};
-    for (const k of Object.keys(base)) {
-      const on = !!liked[k];
-      out[k] = { liked: on, likes: base[k][0] + (on ? 1 : 0), comments: base[k][1], heartFill: on ? 'currentColor' : 'none',
-        like: () => this.setState({ liked: Object.assign({}, liked, { [k]: !on }) }) };
-    }
-    return out;
+    const s = this.state;
+    const liked = s.liked;
+    const dogs = [];
+    this.posts.forEach((p) => { if (p.today && !dogs.some((d) => d.name === p.dog)) dogs.push({ name: p.dog, photo: p.photo }); });
+    let list = this.posts.filter((p) => !s.dog || p.dog === s.dog);
+    const likes = (p) => p.likes + (liked[p.id] ? 1 : 0);
+    list = list.slice().sort((a, b) => (s.sort === 'popular' ? likes(b) - likes(a) : 0) || a.order - b.order);
+    return {
+      todayCount: dogs.length,
+      dogs: dogs.map((d) => ({ name: d.name, photo: d.photo, on: s.dog === d.name, pick: () => this.setState({ dog: s.dog === d.name ? null : d.name }) })),
+      listTitle: s.dog ? s.dog + '의 산책 ' + list.length + '개' : '동네 산책 ' + list.length + '개',
+      sorts: [['popular', '좋아요 많은 순'], ['latest', '최신순']].map(([k, label]) => ({ label: label, on: s.sort === k, pick: () => this.setState({ sort: k }) })),
+      posts: list.map((p) => {
+        const on = !!liked[p.id];
+        return Object.assign({}, p, {
+          cls: p.kind === 'walk' ? 'tt-walk' : p.kind === 'note' ? 'tt-note2' : 'tt-row',
+          isWalk: p.kind === 'walk', isNote: p.kind === 'note', isRow: p.kind === 'row',
+          hasFacts: p.facts.length > 0,
+          alt: p.dog + ' 산책 사진',
+          liked: on, likes: likes(p), heartFill: on ? 'currentColor' : 'none',
+          like: () => this.setState({ liked: Object.assign({}, liked, { [p.id]: !on }) })
+        });
+      }),
+      empty: list.length === 0,
+      emptyText: '아직 올라온 산책이 없어요'
+    };
   }
 }
 </script>
