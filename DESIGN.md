@@ -49,6 +49,11 @@ The locked system. Every Hallmark run reads this first and pages share it. Chang
 ## Direction under review (owner, 2026-11-09)
 The owner finds the current screens unconvincing overall and wants the next pass to follow apps that feel obvious to use: Toss (bold motion that reads as professional), KREAM, Apple's built-in apps, Karrot. Plain, intuitive structure where each screen says exactly what it is.
 
+## Brand (decided 2026-11-09)
+- Logo: the side-by-side mark (a neighbour, a paw, a smiling path); files and rules in `design/brand/logo/README.md`.
+- Display type: SUIT (OFL) for headings, numbers and the wordmark, chosen for its rounder, friendlier figures and wide weight range; body text stays a plain Korean sans until the app's type tokens are switched.
+- Research behind the system: `design/system-research.md`.
+
 ## Departures from the Hallmark floor, by the owner's SEED request
 - System sans as the only face (Hallmark bans system-ui as a default; here it is the brief).
 - SEED Tag Group separators between meta items in lists (`md-tags`), drawn as 2px dots, not typed middle dots.

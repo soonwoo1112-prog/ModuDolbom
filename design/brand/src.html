@@ -47,14 +47,41 @@ h2 { margin: 0 0 4px; font: 800 24px/1.3 var(--f-ui); letter-spacing: -0.01em; }
 .picker button { min-height: 40px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--ink); font: 600 14px/1 var(--f-ui); cursor: pointer; }
 .picker button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .picker button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.final { display: grid; gap: 16px; }
+.final__lock { padding: 32px 28px; border-radius: 20px; background: var(--surface); }
+.final__lock svg { display: block; width: min(100%, 420px); height: auto; }
+.final__lock--dark { background: #141a16; }
+.final__icons { display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; padding: 24px 28px; border-radius: 20px; background: var(--surface); }
+.final__icons span { display: block; } .final__icons svg { display: block; width: 100%; height: auto; }
+.final__lighticon svg { border-radius: 22.4%; box-shadow: 0 0 0 1px var(--line); }
+.final__rules { margin: 0; padding: 0 0 0 18px; display: grid; gap: 6px; max-width: 70ch; }
+.final__rules b { margin-right: 6px; }
 .tag { display: inline-block; padding: 2px 8px; border-radius: 6px; background: var(--bg); font-size: 12px; font-weight: 600; color: var(--muted); }
 </style>
 
 <div class="page">
   <header>
-    <h1>모두돌봄 서체와 로고 시안</h1>
+    <h1>모두돌봄 서체와 로고</h1>
     <p class="lead">본문은 읽기 편한 고딕 하나로 두고, 제목·숫자·로고에 모두돌봄의 얼굴이 될 서체를 하나 더 고릅니다. 아래 서체는 모두 상업적으로 자유롭게 쓸 수 있는 OFL 글꼴이고, 앱의 실제 문구로 보여 드려요.</p>
   </header>
+
+  <section aria-labelledby="h-final">
+    <h2 id="h-final">확정 로고: 나란히 걷기</h2>
+    <p class="sec-note">이웃(큰 원)과 강아지 발바닥(작은 원과 발가락 셋)이 웃는 길 위를 함께 걸어요. 글자는 SUIT ExtraBold를 윤곽선으로 바꿔 붙였어요.</p>
+    <div class="final">
+      <div class="final__lock final__lock--light"><!--LOCKUP--></div>
+      <div class="final__lock final__lock--dark"><!--LOCKUPW--></div>
+      <div class="final__icons" role="img" aria-label="앱 아이콘 180, 60, 29픽셀과 흰 바탕 아이콘, 브라우저 탭 크기 16픽셀">
+        <span style="width:120px"><!--ICON--></span><span style="width:60px"><!--ICON--></span><span style="width:29px"><!--ICON--></span><span style="width:60px" class="final__lighticon"><!--ICONL--></span><span style="width:16px"><!--FAV--></span>
+      </div>
+      <ul class="final__rules">
+        <li><b>여백</b> 마크 둘레에 작은 원 지름만큼 비워 둬요.</li>
+        <li><b>최소 크기</b> 마크 너비 16px, 글자와 붙인 로고는 높이 20px부터.</li>
+        <li><b>색</b> 숲색 #00733A, 어두운 바탕에서는 흰색 하나로. 그라데이션과 그림자는 쓰지 않아요.</li>
+        <li><b>하지 않을 것</b> 원의 크기 비율 바꾸기, 길을 아래로 뒤집기(우는 얼굴), 마크를 돌리기.</li>
+      </ul>
+    </div>
+  </section>
 
   <section aria-labelledby="h-fonts">
     <h2 id="h-fonts">서체 후보</h2>

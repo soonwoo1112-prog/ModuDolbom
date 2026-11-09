@@ -37,6 +37,9 @@ def mark(k):
 </div>
 </article>'''
 marks='\n'.join(mark(k) for k in MARKS)
+L='/home/user/ModuDolbom/design/brand/logo/'
+rd=lambda n: open(L+n).read().strip()
+src=src.replace('<!--LOCKUP-->',rd('lockup.svg')).replace('<!--LOCKUPW-->',rd('lockup-white.svg')).replace('<!--ICON-->',rd('app-icon.svg')).replace('<!--ICONL-->',rd('app-icon-light.svg')).replace('<!--FAV-->',rd('favicon.svg'))
 out=src.replace('<!--CARDS-->',cards).replace('<!--MARKS-->',marks)
 # subset each local font to the page's text
 text=re.sub(r'<[^>]+>',' ',out); text=html.unescape(text)
