@@ -1,0 +1,92 @@
+<title>모두돌봄 서체와 로고</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&display=swap">
+<style>
+/*FONTFACES*/
+/* layout: one column of labelled specimens; each font shown on the app's real words, then marks shown at icon sizes */
+:root {
+  --bg: #ffffff; --surface: #f3f5f3; --ink: #141a16; --muted: #59625c; --line: #e2e7e3; --brand: #00733a; --brand-ink: #ffffff;
+  --f-ui: "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #101411; --surface: #1a201c; --ink: #eef2ef; --muted: #a3ada6; --line: #2a322d; --brand: #3fae6f; --brand-ink: #08130c; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #101411; --surface: #1a201c; --ink: #eef2ef; --muted: #a3ada6; --line: #2a322d; --brand: #3fae6f; --brand-ink: #08130c; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 400 15px/1.6 var(--f-ui); }
+.page { max-width: 1120px; margin: 0 auto; padding-block: 40px 72px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 56px; }
+h1 { margin: 0; font: 800 34px/1.2 var(--f-ui); letter-spacing: -0.02em; text-wrap: balance; }
+h2 { margin: 0 0 4px; font: 800 24px/1.3 var(--f-ui); letter-spacing: -0.01em; }
+.lead { margin: 8px 0 0; max-width: 62ch; color: var(--muted); }
+.sec-note { margin: 0 0 20px; max-width: 62ch; color: var(--muted); }
+.fonts { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.fcard { min-width: 0; display: grid; gap: 14px; align-content: start; padding: 22px 20px; border-radius: 20px; background: var(--surface); }
+.fcard__name { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font: 700 13px/1.4 var(--f-ui); color: var(--muted); }
+.fcard__name b { color: var(--ink); font-size: 15px; }
+.s-word { font-size: 52px; line-height: 1.05; font-weight: 800; letter-spacing: -0.03em; }
+.s-title { font-size: 25px; line-height: 1.3; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+.s-nums { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 30px; line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.s-nums small { font-size: 15px; font-weight: 500; color: var(--muted); margin-left: 2px; }
+.s-row { display: flex; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 16px; }
+.s-row i { width: 36px; height: 36px; border-radius: 50%; background: var(--line); flex: none; }
+.s-row span { color: var(--muted); font-size: 14px; }
+.s-body { font-size: 15px; line-height: 1.6; color: var(--ink); }
+.fcard__note { margin: 0; font-size: 13px; color: var(--muted); }
+.marks { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.mcard { min-width: 0; display: grid; gap: 18px; padding: 22px 20px; border-radius: 20px; background: var(--surface); }
+.mcard h3 { margin: 0; font: 700 17px/1.3 var(--f-ui); }
+.mcard p { margin: -10px 0 0; font-size: 14px; color: var(--muted); }
+.lockup { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.lockup svg { width: 52px; height: 52px; flex: none; color: var(--brand); }
+.lockup span { font-size: 36px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
+.icons { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; }
+.appicon { display: grid; place-items: center; background: var(--brand-fixed, #00733a); color: #fff; border-radius: 22.5%; box-shadow: inset 0 0 0 .5px rgb(0 0 0 / .12); }
+.appicon svg { width: 62%; height: 62%; }
+.appicon--l { width: 112px; height: 112px; } .appicon--m { width: 60px; height: 60px; } .appicon--s { width: 29px; height: 29px; }
+.appicon--light { background: #ffffff; color: #00733a; box-shadow: inset 0 0 0 1px #dfe5e0; }
+.fav { display: grid; place-items: center; width: 24px; height: 24px; color: var(--ink); }
+.fav svg { width: 20px; height: 20px; }
+.picker { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+.picker button { min-height: 40px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--ink); font: 600 14px/1 var(--f-ui); cursor: pointer; }
+.picker button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.picker button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 6px; background: var(--bg); font-size: 12px; font-weight: 600; color: var(--muted); }
+</style>
+
+<div class="page">
+  <header>
+    <h1>모두돌봄 서체와 로고 시안</h1>
+    <p class="lead">본문은 읽기 편한 고딕 하나로 두고, 제목·숫자·로고에 모두돌봄의 얼굴이 될 서체를 하나 더 고릅니다. 아래 서체는 모두 상업적으로 자유롭게 쓸 수 있는 OFL 글꼴이고, 앱의 실제 문구로 보여 드려요.</p>
+  </header>
+
+  <section aria-labelledby="h-fonts">
+    <h2 id="h-fonts">서체 후보</h2>
+    <p class="sec-note">같은 문구를 다섯 서체로 짰어요. 큰 숫자와 "모두돌봄" 글자에서 성격 차이가 가장 크게 보여요.</p>
+    <div class="fonts">
+      <!--CARDS-->
+    </div>
+  </section>
+
+  <section aria-labelledby="h-marks">
+    <h2 id="h-marks">로고 마크 3안</h2>
+    <p class="sec-note">마크는 서체와 따로 고를 수 있어요. 아래 버튼으로 옆에 붙는 글자 서체를 바꿔 보세요.</p>
+    <div class="picker" role="group" aria-label="로고 글자 서체">
+      <button type="button" id="pk-pretendard" data-font="Pretendard" aria-pressed="false">Pretendard</button>
+      <button type="button" id="pk-suit" data-font="SUIT" aria-pressed="false">SUIT</button>
+      <button type="button" id="pk-wanted" data-font="Wanted Sans" aria-pressed="true">Wanted Sans</button>
+      <button type="button" id="pk-line" data-font="LINE Seed Sans KR" aria-pressed="false">LINE Seed</button>
+      <button type="button" id="pk-hahmlet" data-font="Hahmlet" aria-pressed="false">Hahmlet</button>
+    </div>
+    <div class="marks">
+      <!--MARKS-->
+    </div>
+  </section>
+</div>
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.picker button');
+  function use(btn) {
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+    document.querySelectorAll('.lockup span').forEach(function (s) { s.style.fontFamily = '"' + btn.dataset.font + '", var(--f-ui)'; });
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { use(b); }); });
+  use(document.getElementById('pk-wanted'));
+})();
+</script>
