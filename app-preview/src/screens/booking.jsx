@@ -95,9 +95,9 @@ export function DateSheet({ onClose }) {
             const picked = repeat ? isStart || isEnd : d === flow.once;
             const walk = repeat && !picked && flow.days[dowOf(d)] && d >= flow.start && (end ? d <= end : true);
             let band;
-            if (repeat && end && d > flow.start && d < end) band = { background: 'var(--bg-brand-weak)' };
-            if (repeat && end && isStart && end > flow.start) band = { background: 'linear-gradient(to right, transparent 50%, var(--bg-brand-weak) 50%)' };
-            if (isEnd) band = { background: 'linear-gradient(to left, transparent 50%, var(--bg-brand-weak) 50%)' };
+            if (repeat && end && d > flow.start && d < end) band = { background: 'linear-gradient(var(--bg-brand-weak), var(--bg-brand-weak))', backgroundSize: '100% 36px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' };
+            if (repeat && end && isStart && end > flow.start) band = { background: 'linear-gradient(to right, transparent 50%, var(--bg-brand-weak) 50%)', backgroundSize: '100% 36px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' };
+            if (isEnd) band = { background: 'linear-gradient(to left, transparent 50%, var(--bg-brand-weak) 50%)', backgroundSize: '100% 36px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' };
             const num = picked ? { background: 'var(--bg-brand-solid)', color: 'var(--fg-on-brand-solid)', fontWeight: 700 }
               : walk ? { color: 'var(--fg-brand)', fontWeight: 700 }
                 : d === TODAY ? { boxShadow: 'inset 0 0 0 1.5px var(--stroke-neutral-contrast)', fontWeight: 700 } : undefined;
