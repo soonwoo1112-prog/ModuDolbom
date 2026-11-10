@@ -441,6 +441,14 @@
       "w": 390,
       "x": 1880,
       "y": 11196
+    },
+    "GuardianChatList.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "16-0. 보호자 채팅 목록",
+      "w": 390,
+      "x": 2820,
+      "y": 6220
     }
   },
   "createdOnFiles": {
@@ -587,6 +595,7 @@
     "SitterProfileSelf.dc.html",
     "SitterMore.dc.html",
     "SitterService.dc.html",
+    "GuardianChatList.dc.html",
     "GuardianMore.dc.html",
     "DogEdit.dc.html",
     "Notifications.dc.html",

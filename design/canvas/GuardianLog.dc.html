@@ -12,7 +12,7 @@
 <helmet>
 <style>
 body{margin:0}
-a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </style>
 </helmet>
 <div style="width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden; position: relative;">
@@ -52,7 +52,7 @@ a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
 </main>
 <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 8px; padding: 12px 16px 16px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle);">
 <button class="md-btn md-btn--large md-pressable" type="button" onClick="{{skip}}">건너뛰기</button>
-<button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{send}}">후기 보내기</button>
+<button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{send}}" disabled="{{noRating}}">{{sendText}}</button>
 </div>
 <sc-if value="{{toast}}" hint-placeholder-val="{{ false }}"><div style="position: absolute; left: 8px; right: 8px; bottom: 88px;"><div class="md-snackbar" role="status"><span>{{toast}}</span></div></div></sc-if>
 </div>
@@ -63,7 +63,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.lmSetup();
-    this.state = { share: true, rating: 5, pinned: false, toast: '', k: this.RK, playing: false, sel: null };
+    this.state = { share: true, rating: 0, pinned: false, toast: '', k: this.RK, playing: false, sel: null };
     this.evs = [
       { id: 4, at: 1800, time: '오후 1:00', kind: 'end', text: '산책을 마쳤어요' },
       { id: 3, at: 1140, time: '오후 12:49', kind: 'poop', text: '응가했어요' },
@@ -77,11 +77,13 @@ class Component extends DCLogic {
       share: s.share,
       toggleShare: () => this.setState({ share: !s.share }),
       stars: [1, 2, 3, 4, 5].map((n) => ({ n: n, on: n <= s.rating, checked: n === s.rating, pick: () => this.setState({ rating: n }) })),
-      word: ['', '아쉬웠어요', '조금 아쉬웠어요', '괜찮았어요', '좋았어요', '최고였어요, 또 맡길래요'][s.rating] + ' (' + s.rating + '점)',
+      word: s.rating ? ['', '아쉬웠어요', '조금 아쉬웠어요', '괜찮았어요', '좋았어요', '최고였어요, 또 맡길래요'][s.rating] + ' (' + s.rating + '점)' : '별을 눌러 골라 주세요',
+      noRating: !s.rating,
+      sendText: s.rating ? '후기 보내기' : '별점을 골라 주세요',
       pinLabel: s.pinned ? '전담 시터로 지정했어요' : '전담 시터로 지정하기',
       pin: () => this.setState({ pinned: !s.pinned, toast: s.pinned ? '' : '다음 검색부터 김하늘 시터가 항상 보여요' }),
       skip: () => this.setState({ toast: '후기는 캘린더의 지난 산책에서 언제든 쓸 수 있어요' }),
-      send: () => this.setState({ toast: '김하늘 시터에게 별점 ' + s.rating + '점과 후기를 보냈어요' }),
+      send: () => s.rating && this.setState({ toast: '김하늘 시터에게 별점 ' + s.rating + '점과 후기를 보냈어요' }),
       toast: s.toast
     });
   }
