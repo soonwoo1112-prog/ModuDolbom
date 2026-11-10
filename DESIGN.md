@@ -55,6 +55,9 @@ The owner finds the current screens unconvincing overall and wants the next pass
 ## Booking home (decided 2026-11-10)
 - The booking screen is the step flow (1R), chosen in a blind test; its 시터 찾기 button sits at the end of the flow, not pinned (second blind test, small phones).
 - Under the first question: a full-width neutral 직접 산책 나가기 button, then two blocks whose order follows the guardian. Someone who has booked before sees their dog's news first (the upcoming walk, or the last walk record) and then the neighbourhood; someone new sees only the neighbourhood (today's walked dogs and one guardian review). The blocks fold away once a dog is picked.
+- Steps (owner's notes, 2026-11-10): pick one or both dogs, then a button names them; the date step shows the month calendar in place for once and weekly; the time is an alarm-style wheel in 30-minute steps (오전/오후, hour, 00/30).
+- The sitter list repeats the chosen conditions on top and prices each sitter for them from the profile price list (60분 is 1.7 times, each extra dog half the 30분 price); 90분 is agreed in chat.
+- Sending requests ends on a completion screen whose main button is 홈으로 가기, since replies take a while; the home then shows the sent request as its first card.
 - No sitter counts before the search, no discount, points or video banners (Wayo's home was reviewed and these were left out).
 
 ## Signature (unslop pass, 2026-11-10)

@@ -978,3 +978,43 @@ main:has(+ .md-fab + .md-bottomnav) { padding-bottom: 96px !important; }
 
 main .rb-cta { box-shadow: none; padding: 8px 16px 24px; }
 @media (prefers-reduced-motion: reduce) { .rb-home--fold { animation: none; display: none; } }
+
+/* ---- 1R steps, owner's notes 2026-11-10: pick one or two dogs, the month calendar in place, an alarm-style time wheel ---- */
+.rb-dog__ph { position: relative; display: block; width: 100%; }
+.rb-dog__tick { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: var(--full); display: grid; place-items: center; background: rgb(0 0 0 / .28); box-shadow: inset 0 0 0 2px #fff; color: transparent; transition: background-color 150ms var(--ease-easing); }
+.rb-dog__tick svg { width: 16px; height: 16px; }
+.rb-dog[aria-pressed="true"] .rb-dog__tick { background: var(--bg-brand-solid); box-shadow: none; color: var(--fg-on-brand-solid); }
+.rb-hint { margin: -4px 0 0; font: 400 0.875rem/1.25rem var(--font-sans); color: var(--fg-brand); }
+
+.rb-cal { display: flex; flex-direction: column; gap: 8px; padding: 16px 12px 12px; border-radius: var(--r4); background: var(--bg-layer-basement); }
+.rb-cal__head { display: flex; align-items: baseline; justify-content: space-between; padding: 0 4px 4px; }
+.rb-cal__head b { font: 700 1.0625rem/1.4375rem var(--font-display, var(--font-sans)); }
+
+.rb-wheels { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); height: 220px; padding: 0 8px; border-radius: var(--r4); background: var(--bg-layer-basement); overflow: hidden; }
+.rb-wheels__band { position: absolute; left: 8px; right: 8px; top: 88px; height: 44px; border-radius: var(--r3); background: var(--bg-layer-default); box-shadow: 0 0 0 1px var(--stroke-neutral-subtle); pointer-events: none; }
+.rb-wheel { position: relative; height: 220px; overflow-y: auto; scroll-snap-type: y mandatory; padding: 88px 0; box-sizing: border-box; scrollbar-width: none; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 32%, #000 68%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 32%, #000 68%, transparent); }
+.rb-wheel::-webkit-scrollbar { display: none; }
+.rb-wheel:focus-visible { outline: 2px solid var(--stroke-focus-ring); outline-offset: -2px; border-radius: var(--r3); }
+.rb-wheel__item { display: block; width: 100%; height: 44px; border: 0; background: none; scroll-snap-align: center; font: 500 1.125rem/2.75rem var(--font-display, var(--font-sans)); color: var(--fg-neutral-subtle); font-variant-numeric: tabular-nums; cursor: pointer; transition: color 150ms var(--ease-easing); }
+.rb-wheel__item[aria-selected="true"] { font-weight: 700; font-size: 1.375rem; color: var(--fg-neutral); }
+.rb-wheels__init { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+/* ---- Sitter list (2): the chosen conditions on top, a big price per sitter for those conditions ---- */
+.mt-head { display: flex; flex-direction: column; gap: 8px; padding: 8px 16px 16px; }
+.mt-head .md-detail { margin: 0; }
+.mt-cond { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }
+.mt-cond > * { padding: 4px 10px; border-radius: var(--full); background: var(--bg-neutral-weak); font: 500 0.8125rem/1.125rem var(--font-sans); color: var(--fg-neutral-muted); }
+.mt-cond b { color: var(--fg-neutral); font-weight: 700; }
+.mt-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.mt-price { display: flex; align-items: baseline; gap: 8px; margin-top: 2px; }
+.mt-price b { font: 700 1.25rem/1.75rem var(--font-display, var(--font-sans)); }
+.mt-price small { font: 400 0.8125rem/1.125rem var(--font-sans); color: var(--fg-neutral-muted); }
+.mt-stats { display: flex; flex-wrap: wrap; gap: 4px 12px; font: 400 0.8125rem/1.125rem var(--font-sans); color: var(--fg-neutral-subtle); }
+.mt-star { display: inline-flex; align-items: center; gap: 3px; }
+.mt-star svg { width: 13px; height: 13px; color: var(--fg-rating); }
+.mt-body + .x-pick__tick { margin-top: 18px; width: 28px; height: 28px; }
+
+/* ---- Request sent (3): a completion screen whose main way out is home, since replies take a while ---- */
+.rd-done h2 { font-size: 1.75rem; line-height: 2.25rem; }
+.rd-summary { margin: 16px 16px 0; text-align: center; font: 400 0.8125rem/1.125rem var(--font-sans); color: var(--fg-neutral-subtle); }
+.rd-actions { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 16px 24px; }
