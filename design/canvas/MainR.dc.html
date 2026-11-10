@@ -53,20 +53,27 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 
 <sc-if value="{{isTime}}" hint-placeholder-val="{{ false }}"><div class="rb-wheels" role="group" aria-label="시작 시간, 위아래로 넘겨 골라요"><span class="rb-wheels__band" aria-hidden="true"></span>
 <sc-for list="{{wheels}}" as="w" hint-placeholder-count="3"><div class="rb-wheel" role="listbox" aria-label="{{w.label}}" data-idx="{{w.idx}}" tabindex="0" onScroll="{{w.scroll}}"><sc-for list="{{w.items}}" as="i" hint-placeholder-count="4"><button class="rb-wheel__item" type="button" role="option" aria-selected="{{i.on}}" onClick="{{i.pick}}">{{i.text}}</button></sc-for></div></sc-for>
-<img class="rb-wheels__init" alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onLoad="{{initWheels}}">
+<img class="rb-wheels__init" alt="" src="{{initSrc}}" onLoad="{{initWheels}}">
 </div>
+<sc-if value="{{canPerDay}}" hint-placeholder-val="{{ true }}"><label class="rb-noend"><span>{{perDayLabel}}</span><input class="md-check" type="checkbox" checked="{{perDay}}" onChange="{{togglePerDay}}"></label></sc-if>
+<sc-if value="{{perDay}}" hint-placeholder-val="{{ false }}"><p class="rb-hint" style="color: var(--fg-neutral-muted);">바꿀 날을 누르고 위에서 시간을 돌려요</p><div class="rb-perday" role="radiogroup" aria-label="날짜마다 시간"><sc-for list="{{perRows}}" as="r" hint-placeholder-count="3"><button class="rb-perday__row md-pressable" type="button" role="radio" aria-checked="{{r.on}}" onClick="{{r.pick}}"><span>{{r.label}}</span><b class="md-num">{{r.time}}</b></button></sc-for></div></sc-if>
 <button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{timeNext}}">{{timeLabel}}</button></sc-if>
 
 <sc-if value="{{isLen}}" hint-placeholder-val="{{ false }}"><div class="rb-rows" role="group" aria-label="산책 길이">
 <sc-for list="{{lens}}" as="l" hint-placeholder-count="3"><button class="rb-row md-pressable" type="button" aria-pressed="{{l.on}}" onClick="{{l.pick}}"><b>{{l.label}}</b><small>{{l.note}}</small><span class="rb-row__check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span></button></sc-for>
 </div></sc-if>
 
-<sc-if value="{{isAddr}}" hint-placeholder-val="{{ false }}"><div class="rb-rows" role="group" aria-label="만나는 곳">
-<sc-for list="{{addrs}}" as="a" hint-placeholder-count="2"><button class="rb-row md-pressable" type="button" aria-pressed="{{a.on}}" onClick="{{a.pick}}"><b>{{a.label}}</b><small>{{a.line}}</small><span class="rb-row__check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span></button></sc-for>
-<a class="rb-row rb-row--add md-pressable" href="BookAddressDetail.dc.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--sm"><path d="M5 12h14" /><path d="M12 5v14" /></svg><b>새 주소 추가</b></a>
-</div></sc-if>
+<sc-if value="{{isAddr}}" hint-placeholder-val="{{ false }}"><div class="rb-addrs" role="radiogroup" aria-label="만나는 곳">
+<sc-for list="{{addrs}}" as="a" hint-placeholder-count="2"><div class="rb-addr" data-on="{{a.on}}">
+<button class="rb-addr__pick md-pressable" type="button" role="radio" aria-checked="{{a.on}}" onClick="{{a.pick}}"><span class="rb-addr__dot" aria-hidden="true"></span><span class="rb-addr__text"><b>{{a.label}}</b><span>{{a.full}}</span><small>{{a.entry}}</small></span></button>
+<button class="md-btn md-btn--small rb-addr__edit md-pressable" type="button" onClick="{{a.edit}}" aria-label="{{a.label}} 주소 수정">수정</button>
+</div></sc-for>
+<button class="rb-addr__add md-pressable" type="button" onClick="{{addNew}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--sm"><path d="M5 12h14" /><path d="M12 5v14" /></svg><b>새 주소 추가</b></button>
+</div>
+<sc-if value="{{hasAddr}}" hint-placeholder-val="{{ true }}"><div class="md-field rb-pickup"><label class="md-field__label" for="rb-pickup">{{pickupLabel}} 픽업 안내</label><textarea class="md-input" id="rb-pickup" aria-describedby="rb-pickup-help" placeholder="예: 비밀번호로 들어오시면 돼요. 목줄은 현관 앞에 있어요" value="{{pickup}}" onChange="{{typePickup}}"></textarea><div class="md-field__foot"><span id="rb-pickup-help">예약이 확정된 시터에게만 보여요</span><span class="md-num">{{pickupCount}}/300</span></div></div></sc-if>
+<button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" disabled="{{noAddr}}" onClick="{{addrNext}}">{{addrLabel}}</button></sc-if>
 
-<sc-if value="{{isReady}}" hint-placeholder-val="{{ false }}"><p class="rb-note">픽업 안내: {{pickup}}</p></sc-if>
+<sc-if value="{{isReady}}" hint-placeholder-val="{{ false }}"><p class="rb-note">픽업 안내: {{readyPickup}}</p></sc-if>
 </section>
 <sc-if value="{{showHome}}" hint-placeholder-val="{{ true }}"><div class="{{homeCls}}">
 <sc-if value="{{showReq}}" hint-placeholder-val="{{ false }}"><a class="rb-card rb-card--req md-pressable" href="GuardianChatList.dc.html" style="order: 0;"><small class="rb-card__label">보낸 요청</small><span class="rb-card__row"><img class="md-photo" src="img/bori.jpg" alt=""><span class="rb-card__text"><b class="md-num">{{req.title}}</b><span>{{req.sub}}</span></span><span class="md-badge md-badge--info">답장 대기</span><svg class="rb-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a></sc-if>
@@ -85,18 +92,34 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <a class="md-tab md-pressable" href="GuardianCalendar.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /></svg>캘린더</a>
 <a class="md-tab md-pressable" href="GuardianMore.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>더보기</a>
 </nav>
+<sc-if value="{{showSheet}}" hint-placeholder-val="{{ false }}">
+<div class="md-overlay" onClick="{{closeSheet}}">
+<div class="md-sheet" role="dialog" aria-modal="true" aria-label="{{sheetTitle}}" onClick="{{stop}}">
+<span class="md-sheet__handle" aria-hidden="true"></span>
+<div class="md-sheet__head"><span></span><h2>{{sheetTitle}}</h2><button class="md-iconbtn md-pressable" type="button" aria-label="닫기" onClick="{{closeSheet}}"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button></div>
+<div class="md-field"><label class="md-field__label" for="rb-line">주소</label><div class="rb-addrline"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg><input class="md-input" id="rb-line" placeholder="도로명이나 건물 이름" value="{{draft.line}}" onChange="{{typeLine}}"></div></div>
+<div class="md-field"><label class="md-field__label" for="rb-detail">상세 주소</label><input class="md-input" id="rb-detail" placeholder="동과 호수" value="{{draft.detail}}" onChange="{{typeDetail}}"></div>
+<section style="display: flex; flex-direction: column; gap: 8px;"><span class="md-field__label">이름</span><div class="md-row" role="group" aria-label="주소 이름"><sc-for list="{{names}}" as="n" hint-placeholder-count="4"><button class="md-chip md-chip--outline md-pressable" type="button" aria-pressed="{{n.on}}" onClick="{{n.pick}}"><span>{{n.label}}</span></button></sc-for></div></section>
+<section style="display: flex; flex-direction: column; gap: 8px;"><span class="md-field__label">들어오는 방법</span><div class="md-row" role="group" aria-label="들어오는 방법"><sc-for list="{{methods}}" as="m" hint-placeholder-count="3"><button class="md-chip md-pressable" type="button" aria-pressed="{{m.on}}" onClick="{{m.pick}}"><span>{{m.label}}</span></button></sc-for></div>
+<sc-if value="{{needsCode}}" hint-placeholder-val="{{ true }}"><div class="md-field"><label class="md-field__label" for="rb-code">{{codeLabel}}</label><input class="md-input md-num" id="rb-code" value="{{draft.code}}" onChange="{{typeCode}}" aria-describedby="rb-code-help"><div class="md-field__foot"><span id="rb-code-help">예약이 확정된 시터에게만, 산책 당일에 보여요</span></div></div></sc-if></section>
+<button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" disabled="{{draftBlocked}}" onClick="{{saveDraft}}">{{saveLabel}}</button>
+</div>
+</div>
+</sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"guardian":{"editor":"enum","options":["booked","returning","new"],"default":"booked"},"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { step: 0, dogs: {}, freq: 'once', dates: {}, start: null, end: null, noEnd: false, weeks: {}, ap: '오후', h: 12, m: '30', timeSet: false, len: null, addr: null };
+    this.state = { sheet: null, draft: null, perDay: false, times: {}, editKey: null, addrs: [
+      { label: '집', line: '서울 강남구 역삼로 123', detail: '101동 1203호', method: '비밀번호', code: '#1203*', pickup: '출근하는 시간이라 비밀번호로 들어오시면 돼요. 목줄은 현관 앞에 있어요.' },
+      { label: '부모님 댁', line: '서울 서초구 반포대로 45', detail: '3동 502호', method: '호출', code: '502', pickup: '부모님이 계세요. 호출하시면 현관에서 건네 드릴 거예요.' }
+    ], step: 0, dogs: {}, freq: 'once', dates: {}, start: null, end: null, noEnd: false, weeks: {}, ap: '오후', h: 12, m: '30', timeSet: false, len: null, addr: null };
     this.DOGS = [{ name: '보리', photo: 'img/bori.jpg', focus: 'center 30%', meta: '진돗개 믹스, 21kg' }, { name: '콩이', photo: 'img/kong.jpg', focus: 'center 40%', meta: '푸들 믹스, 4kg' }];
     this.WEEK = ['월', '화', '수', '목', '금', '토', '일'];
     this.AP = ['오전', '오후']; this.HOURS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; this.MINS = ['00', '30'];
     this.LENS = [['30분', '짧게 동네 한 바퀴'], ['60분', '공원까지 다녀오기'], ['90분', '넉넉하게 오래']];
-    this.ADDRS = [{ label: '집', line: '서울 강남구 역삼로 123, 101동' }, { label: '부모님 댁', line: '서울 서초구 반포대로 45, 3동' }];
   }
   go(patch, step) { this.setState(Object.assign({}, patch, { step: step, fromHome: this.state.step === 0 })); }
   dow(d) { return ['일', '월', '화', '수', '목', '금', '토'][(d - 1) % 7]; }
@@ -124,17 +147,32 @@ class Component extends DCLogic {
     return '11월 ' + ds.join('일, ') + '일, ' + ds.length + '번';
   }
   timeText() { const s = this.state; return s.ap + ' ' + s.h + ':' + s.m; }
+  fmtT(t) { return t.ap + ' ' + t.h + ':' + t.m; }
+  dayKeys() { return this.state.freq === 'once' ? this.onceDays() : this.repeatDays(); }
+  keyLabel(k) { return typeof k === 'number' ? '11월 ' + k + '일 (' + this.dow(k) + ')' : '매주 ' + k + '요일'; }
+  timeOf(k) { const s = this.state; return s.times[k] || { ap: s.ap, h: s.h, m: s.m }; }
+  cur() { const s = this.state; return s.perDay && s.editKey != null ? this.timeOf(s.editKey) : { ap: s.ap, h: s.h, m: s.m }; }
+  timeSummary() {
+    const s = this.state;
+    if (!s.perDay) return this.timeText();
+    const all = this.dayKeys().map((k) => this.fmtT(this.timeOf(k)));
+    return all.every((t) => t === all[0]) ? all[0] : '날짜마다 달라요';
+  }
   save() {
     const s = this.state;
-    try { sessionStorage.setItem('md-booking', JSON.stringify({ dogs: this.picked().map((g) => g.name), date: this.dateChosen() ? this.dateText() : '', count: this.walkCount(), time: s.timeSet ? this.timeText() : '', len: s.len != null ? this.LENS[s.len][0] : '' })); } catch (e) { /* storage off: the next screens use their sample */ }
+    try { sessionStorage.setItem('md-booking', JSON.stringify({ dogs: this.picked().map((g) => g.name), date: this.dateChosen() ? this.dateText() : '', count: this.walkCount(), time: s.timeSet ? this.timeSummary() : '', times: s.perDay ? this.dayKeys().map((k) => this.keyLabel(k) + ' ' + this.fmtT(this.timeOf(k))) : [], len: s.len != null ? this.LENS[s.len][0] : '' })); } catch (e) { /* storage off: the next screens use their sample */ }
+  }
+  setT(key, v) {
+    const s = this.state;
+    if (s.perDay && s.editKey != null) this.setState({ times: Object.assign({}, s.times, { [s.editKey]: Object.assign({}, this.timeOf(s.editKey), { [key]: v }) }) });
+    else this.setState({ [key]: v });
   }
   wheel(key, values, label) {
-    const s = this.state;
-    const idx = Math.max(0, values.indexOf(s[key]));
+    const idx = Math.max(0, values.indexOf(this.cur()[key]));
     return {
       label: label, idx: idx,
-      items: values.map((v, i) => ({ text: String(v), on: i === idx, pick: (e) => { const col = e.currentTarget.parentNode; if (col && col.scrollTo) col.scrollTo({ top: i * 44, behavior: 'smooth' }); this.setState({ [key]: v }); } })),
-      scroll: (e) => { const i = Math.max(0, Math.min(values.length - 1, Math.round(e.currentTarget.scrollTop / 44))); if (values[i] !== this.state[key]) this.setState({ [key]: values[i] }); }
+      items: values.map((v, i) => ({ text: String(v), on: i === idx, pick: (e) => { const col = e.currentTarget.parentNode; if (col && col.scrollTo) col.scrollTo({ top: i * 44, behavior: 'smooth' }); this.setT(key, v); } })),
+      scroll: (e) => { const i = Math.max(0, Math.min(values.length - 1, Math.round(e.currentTarget.scrollTop / 44))); if (values[i] !== this.cur()[key]) this.setT(key, values[i]); }
     };
   }
   renderVals() {
@@ -150,13 +188,14 @@ class Component extends DCLogic {
     const answered = [
       this.picked().length > 0 && s.step > 0 && ['강아지', this.picked().map((g) => g.name).join(', '), 0],
       this.dateChosen() && s.step > 1 && ['날짜', this.dateText(), 1],
-      s.timeSet && ['시간', this.timeText() + '부터', 2],
+      s.timeSet && ['시간', this.timeSummary() === '날짜마다 달라요' ? '날짜마다 달라요' : this.timeSummary() + '부터', 2],
       s.len != null && ['길이', this.LENS[s.len][0], 3],
-      s.addr != null && ['만나는 곳', this.ADDRS[s.addr].label, 4]
+      s.addr != null && ['만나는 곳', s.addrs[s.addr].label, 4]
     ].filter(Boolean).filter((a) => a[2] < s.step || s.step === 5);
     const newest = answered.length ? answered[answered.length - 1][2] : -1;
     const repeatPicked = this.repeatDays().length > 0;
     this.save();
+    const entryOf = (a) => a.method === '비밀번호' ? '공동현관 비밀번호로 들어와요' : a.method === '호출' ? a.code + '호 호출해요' : '현관이 열려 있어요';
     const who = this.props.guardian || 'booked';
     const isNew = who === 'new';
     const MINE = who === 'booked'
@@ -209,11 +248,43 @@ class Component extends DCLogic {
       dateNext: () => { if (this.dateChosen()) this.go({}, 2); },
       wheels: [this.wheel('ap', this.AP, '오전 오후'), this.wheel('h', this.HOURS, '시'), this.wheel('m', this.MINS, '분')],
       initWheels: (e) => { const box = e.currentTarget.parentNode; if (!box) return; box.querySelectorAll('.rb-wheel').forEach((c) => { c.scrollTop = Number(c.getAttribute('data-idx')) * 44; }); },
-      timeLabel: this.timeText() + '부터 걷기',
+      initSrc: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7#' + (s.perDay && s.editKey != null ? s.editKey : 'all'),
+      canPerDay: this.dayKeys().length > 1, perDay: s.perDay,
+      perDayLabel: s.freq === 'once' ? '날짜마다 시간 다르게 정하기' : '요일마다 시간 다르게 정하기',
+      togglePerDay: () => this.setState({ perDay: !s.perDay, editKey: !s.perDay ? this.dayKeys()[0] : null }),
+      perRows: this.dayKeys().map((k) => ({ label: this.keyLabel(k), time: this.fmtT(this.timeOf(k)), on: s.editKey === k, pick: () => this.setState({ editKey: k }) })),
+      timeLabel: s.perDay ? (this.timeSummary() === '날짜마다 달라요' ? '날짜마다 정한 시간에 걷기' : this.timeSummary() + '부터 걷기') : this.timeText() + '부터 걷기',
       timeNext: () => this.go({ timeSet: true }, 3),
       lens: this.LENS.map((l, i) => ({ label: l[0], note: l[1], on: s.len === i, pick: () => this.go({ len: i }, 4) })),
-      addrs: this.ADDRS.map((a, i) => ({ label: a.label, line: a.line, on: s.addr === i, pick: () => this.go({ addr: i }, 5) })),
-      pickup: '출근하는 시간이라 비밀번호로 들어오시면 돼요. 목줄은 현관 앞에 있어요.',
+      addrs: s.addrs.map((a, i) => ({ label: a.label, full: a.line + (a.detail ? ', ' + a.detail : ''), entry: entryOf(a), on: s.addr === i, pick: () => this.setState({ addr: i }), edit: () => this.setState({ sheet: i, draft: Object.assign({}, a) }) })),
+      hasAddr: s.addr != null, noAddr: s.addr == null,
+      pickupLabel: s.addr != null ? s.addrs[s.addr].label : '',
+      pickup: s.addr != null ? s.addrs[s.addr].pickup : '',
+      pickupCount: s.addr != null ? s.addrs[s.addr].pickup.length : 0,
+      typePickup: (e) => { const v = e.target.value.slice(0, 300); this.setState({ addrs: s.addrs.map((a, i) => i === s.addr ? Object.assign({}, a, { pickup: v }) : a) }); },
+      addrLabel: s.addr != null ? s.addrs[s.addr].label + '에서 만나기' : '만날 곳을 골라 주세요',
+      addrNext: () => { if (s.addr != null) this.go({}, 5); },
+      readyPickup: s.addr != null ? (s.addrs[s.addr].pickup || '없어요') : '',
+      addNew: () => this.setState({ sheet: 'new', draft: { label: '집', line: '', detail: '', method: '비밀번호', code: '', pickup: '' } }),
+      showSheet: s.sheet != null && !!s.draft,
+      sheetTitle: s.sheet === 'new' ? '새 주소' : '주소 수정',
+      draft: s.draft || { line: '', detail: '', code: '' },
+      typeLine: (e) => this.setState({ draft: Object.assign({}, s.draft, { line: e.target.value }) }),
+      typeDetail: (e) => this.setState({ draft: Object.assign({}, s.draft, { detail: e.target.value }) }),
+      typeCode: (e) => this.setState({ draft: Object.assign({}, s.draft, { code: e.target.value }) }),
+      names: ['집', '회사', '부모님 댁', '기타'].map((l) => ({ label: l, on: !!s.draft && s.draft.label === l, pick: () => this.setState({ draft: Object.assign({}, s.draft, { label: l }) }) })),
+      methods: ['비밀번호', '호출', '열려 있어요'].map((l) => ({ label: l, on: !!s.draft && s.draft.method === l, pick: () => this.setState({ draft: Object.assign({}, s.draft, { method: l }) }) })),
+      needsCode: !!s.draft && s.draft.method !== '열려 있어요',
+      codeLabel: s.draft && s.draft.method === '호출' ? '호출할 호수' : '공동현관 비밀번호',
+      draftBlocked: !s.draft || !s.draft.line.trim(),
+      saveLabel: !s.draft || !s.draft.line.trim() ? '주소를 적어 주세요' : s.sheet === 'new' ? '저장하고 이 주소 쓰기' : '저장하기',
+      saveDraft: () => {
+        if (!s.draft || !s.draft.line.trim()) return;
+        const list = s.sheet === 'new' ? s.addrs.concat([s.draft]) : s.addrs.map((a, i) => i === s.sheet ? s.draft : a);
+        this.setState({ addrs: list, addr: s.sheet === 'new' ? list.length - 1 : s.sheet, sheet: null, draft: null });
+      },
+      closeSheet: () => this.setState({ sheet: null, draft: null }),
+      stop: (e) => e.stopPropagation(),
       showCta: s.step === 5,
       isRepeatNext: false,
       noWeek: !repeatPicked,
