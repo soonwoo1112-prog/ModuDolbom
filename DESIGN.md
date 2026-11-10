@@ -27,7 +27,7 @@ The locked system. Every Hallmark run reads this first and pages share it. Chang
   --button-medium: 40px; --button-large: 52px; --input-large: 52px; --top-navigation: 56px; --bottom-navigation: 56px;
 }
 ```
-38 colour tokens in two themes; every text pair holds 4.5:1 and every control border and focus ring 3:1 in both. Forest green marks only the one primary action per screen, the 같은 아파트 badge, the selected list row and the checked checkbox; everything else is neutral. Type is the platform sans in 400/500/700 on SEED's t1–t10 scale, used through semantic styles: `screen-title` t8 Bold, `section-title` t6 Bold, `list-title` t5 Medium, `body` t5, `label` t4 Medium, `detail` t3, `tag` t2, `figure` t9 Bold.
+38 colour tokens in two themes; every text pair holds 4.5:1 and every control border and focus ring 3:1 in both. Forest green marks only the one primary action per screen, the 같은 아파트 badge and the checked checkbox; a selected list row is a neutral surface step (`bg-neutral-weak`); everything else is neutral. Type is the platform sans in 400/500/700 on SEED's t1–t10 scale, used through semantic styles: `screen-title` t8 Bold (700, never 800), `section-title` t6 Bold, `list-title` t5 Medium, `body` t5, `label` t4 Medium, `detail` t3, `tag` t2, `figure` t9 Bold.
 
 ## Controls
 - Primary: `bg-brand-solid` flat fill · `r2` at Medium 40px, `r3` at Large 52px (full-width bottom CTA) · white label, Bold.
@@ -39,6 +39,7 @@ The locked system. Every Hallmark run reads this first and pages share it. Chang
 - Touch targets are at least 44px; the profile opens from a row's photo, the rest of the row selects.
 
 ## Motion
+- No overshoot springs: lenses, checks and taps settle on `--ease-out-expo` without bouncing past their size.
 - Character: brisk; colour 150ms on `--ease-easing`, press 150ms on `--ease-enter`; screen transitions only above 200ms; under reduced motion the shrink and shimmer stop.
 
 ## Feed posts (decided by blind test, 2026-11-09)
@@ -50,6 +51,9 @@ The locked system. Every Hallmark run reads this first and pages share it. Chang
 
 ## Direction under review (owner, 2026-11-09)
 The owner finds the current screens unconvincing overall and wants the next pass to follow apps that feel obvious to use: Toss (bold motion that reads as professional), KREAM, Apple's built-in apps, Karrot. Plain, intuitive structure where each screen says exactly what it is.
+
+## Signature (unslop pass, 2026-11-10)
+- The logo's smiling path is the one signature: the walk route on the booking screen's preview card is drawn with the same arc. Short captions end without a period; text at 17px and under keeps zero tracking.
 
 ## Brand (decided 2026-11-09)
 - Logo: the side-by-side mark (a neighbour, a paw, a smiling path); files and rules in `design/brand/logo/README.md`.

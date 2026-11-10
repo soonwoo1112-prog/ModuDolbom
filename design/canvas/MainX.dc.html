@@ -22,6 +22,14 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </header>
 <main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; padding: 24px 16px 24px;">
 <div style="display: flex; flex-direction: column; gap: 4px;"><h2 class="md-screen-title">오늘 산책, 누구에게 부탁할까요</h2><a class="bk-self md-pressable" href="GuardianWalk.dc.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico md-ico--sm"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /><path d="M16 17h4" /><path d="M4 13h4" /></svg>지금 직접 산책 나가요, 기록하기</a></div>
+<section class="bk-moment" aria-label="지금 고른 산책">
+<img class="md-photo bk-moment__photo" src="{{momentPhoto}}" alt="{{dogName}} 사진">
+<div class="bk-moment__body">
+<svg class="bk-moment__route" viewBox="0 0 200 52" aria-hidden="true"><path class="bk-moment__grid" d="M0 13H200M0 26H200M0 39H200M50 0V52M100 0V52M150 0V52" /><path class="bk-moment__path" pathLength="1" d="M12 10A136 136 0 0 0 188 10" /><circle class="bk-moment__start" cx="12" cy="10" r="4" /><circle class="bk-moment__end" cx="188" cy="10" r="5" /></svg>
+<b class="md-num">{{dogName}}, {{lengthLabel}} 산책</b>
+<span class="md-detail md-num">{{dateLabel}} 오후 12:30, 역삼동</span>
+</div>
+</section>
 <section style="display: flex; flex-direction: column; gap: 8px;">
 <span class="md-field__label">강아지</span>
 <div class="md-row" role="group" aria-label="강아지">
@@ -63,7 +71,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
 </button>
 </div>
-<span class="md-detail">공동현관 비밀번호는 확정된 시터에게, 산책 당일에만 보여요.</span>
+<span class="md-detail">공동현관 비밀번호는 확정된 시터에게, 산책 당일에만 보여요</span>
 </section>
 <section class="md-field">
 <label class="md-field__label" for="pickup">픽업 안내<em>선택</em></label>
@@ -73,7 +81,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <button class="md-chip md-chip--outline md-pressable" type="button" onClick="{{h.add}}" style="height: 32px;"><span>{{h.label}}</span></button>
 </sc-for>
 </div>
-<div class="md-field__foot"><span id="pickup-help">예약이 확정된 시터에게만 보여요.</span><span class="md-num">{{pickupCount}}/300</span></div>
+<div class="md-field__foot"><span id="pickup-help">예약이 확정된 시터에게만 보여요</span><span class="md-num">{{pickupCount}}/300</span></div>
 </section>
 <div class="md-callout" role="note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg><span><b>앱에서 예약한 산책만 보험으로 보장돼요</b><br>앱 밖에서 약속하면 사고가 나도 도움을 받을 수 없어요.</span></div>
 </main>
@@ -174,7 +182,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </sc-for>
 </div>
 <sc-if value="{{needsCode}}" hint-placeholder-val="{{ true }}">
-<div class="md-field"><label class="md-field__label" for="code">{{codeLabel}}</label><input class="md-input md-num" id="code" value="{{edit.code}}" aria-describedby="code-help"><div class="md-field__foot"><span id="code-help">예약이 확정된 시터에게만, 산책 당일에 보여요.</span></div></div>
+<div class="md-field"><label class="md-field__label" for="code">{{codeLabel}}</label><input class="md-input md-num" id="code" value="{{edit.code}}" aria-describedby="code-help"><div class="md-field__foot"><span id="code-help">예약이 확정된 시터에게만, 산책 당일에 보여요</span></div></div>
 </sc-if>
 </section>
 <button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{useThis}}">저장하고 이 주소 쓰기</button>
@@ -283,6 +291,7 @@ class Component extends DCLogic {
     };
 
     return {
+      dogName: s.dog, lengthLabel: s.length, momentPhoto: s.dog === '콩이' ? 'img/kong.jpg' : 'img/bori.jpg',
       dogs: this.group('dog', ['보리', '콩이']).map((d) => Object.assign(d, { photo: d.label === '보리' ? 'img/bori.jpg' : 'img/kong.jpg' })),
       lengths: this.group('length', ['30분', '60분', '90분']),
       freqs: ['한 번', '반복'].map((label) => ({ label: label, pressed: s.freq === label, pick: () => this.setState({ freq: label }) })),

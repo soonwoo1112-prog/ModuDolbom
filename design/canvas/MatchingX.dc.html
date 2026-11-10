@@ -31,7 +31,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <div class="xm-row">
 <a class="xm-av md-pressable" href="SitterProfile.dc.html" aria-label="{{item.name}} 프로필 보기"><span class="md-initial md-initial--{{item.tint}}" role="img" aria-label="{{item.name}} 사진 자리" style="width: 56px; height: 56px; font-size: 1.3125rem; border-radius: var(--full);">{{item.first}}</span></a>
 <button class="x-pick md-pressable" type="button" aria-pressed="{{item.checked}}" onClick="{{item.toggle}}" style="grid-template-columns: minmax(0, 1fr) 24px;">
-<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0;">
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
 <span class="md-item__head"><span class="md-list-title">{{item.name}}</span><sc-for list="{{item.badges}}" as="b" hint-placeholder-count="1"><span class="{{b.cls}}">{{b.label}}</span></sc-for></span>
 <span class="md-item__muted">{{item.bio}}</span>
 <span style="display: flex; align-items: baseline; gap: 8px;"><span class="x-pick__price md-num">{{item.price}}</span><span class="md-tags md-num"><span>{{item.distance}}</span><span>{{item.reviews}}</span></span></span>
