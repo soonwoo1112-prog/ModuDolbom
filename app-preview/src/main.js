@@ -40,6 +40,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = { name: fromHash(), list: false, size: this.measure(), visit: 0 };
+    // Screens visited in this preview, so a board's back button returns to where you came from.
+    this.trail = [this.state.name];
     this.groups = groups();
   }
   measure() {
@@ -48,7 +50,12 @@ class App extends Component {
     return { s, bh };
   }
   componentDidMount() {
-    this.onHash = () => this.setState({ name: fromHash(), list: false, visit: this.state.visit + 1 });
+    this.onHash = () => {
+      const name = fromHash();
+      if (this.goingBack) { this.goingBack = false; this.trail.pop(); }
+      else if (this.trail[this.trail.length - 1] !== name) this.trail.push(name);
+      this.setState({ name: name, list: false, visit: this.state.visit + 1 });
+    };
     this.onResize = () => this.setState({ size: this.measure() });
     window.addEventListener('hashchange', this.onHash);
     window.addEventListener('resize', this.onResize);
@@ -64,6 +71,8 @@ class App extends Component {
     const m = a.getAttribute('href').match(/^([A-Za-z0-9]+)\.dc\.html$/);
     if (!m) return;
     e.preventDefault();
+    // A back button goes back along the trail; its href is only the canvas default.
+    if (a.getAttribute('aria-label') === '뒤로 가기' && this.trail.length > 1) { this.goingBack = true; history.back(); return; }
     this.go(m[1]);
   };
   render(_, { name, list, size, visit }) {
