@@ -30,7 +30,7 @@ function groups() {
 
 const fromHash = () => {
   const n = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
-  return n === 'compare' || boards[n] ? n : 'Main';
+  return n === 'compare' || boards[n] ? n : 'MainR';
 };
 
 const ListIcon = () => h('svg', { class: 'md-ico md-ico--md', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true' },
