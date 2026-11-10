@@ -21,14 +21,19 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <h1 class="md-topnav__title">김하늘</h1>
 <span style="width: 48px;"></span>
 </header>
-<section class="x-summary" aria-label="예약 요약">
-<button class="md-pressable" type="button" onClick="{{openInfo}}" aria-label="예약 정보 보기" style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer;">
-<img class="md-photo" src="img/bori.jpg" alt="" style="width: 40px; height: 40px; border-radius: var(--r2); flex: none;">
-<span class="x-summary__text"><b class="md-num">보리, 11월 7일 (토) 12:30</b><span class="md-num">30분 산책, 15,000원</span></span>
-</button>
-<sc-if value="{{open}}" hint-placeholder-val="{{ true }}"><button class="md-btn md-btn--brand md-btn--small md-pressable" type="button" onClick="{{confirm}}">예약 확정</button></sc-if>
-<sc-if value="{{confirmed}}" hint-placeholder-val="{{ false }}"><span class="md-badge md-badge--brand-solid">확정됨</span></sc-if>
+<section class="cb" aria-label="예약 요약">
+<div class="cb__top">
+<a class="md-pressable cb__dog" href="DogProfile.dc.html" aria-label="보리 프로필 보기"><img class="md-photo" src="img/bori.jpg" alt=""></a>
+<span class="cb__text"><b class="md-num">보리, 11월 7일 (토) 오후 12:30</b><span class="md-num">30분 산책, 15,000원</span></span>
+<sc-if value="{{confirmed}}" hint-placeholder-val="{{ false }}"><span class="md-badge md-badge--brand">확정</span></sc-if>
 <button class="md-iconbtn md-pressable" type="button" aria-label="더보기" onClick="{{openMenu}}" style="margin-right: -8px;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg></button>
+</div>
+<div class="cb__acts">
+<sc-if value="{{open}}" hint-placeholder-val="{{ true }}"><button class="cb__btn cb__btn--brand md-pressable" type="button" onClick="{{confirm}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>예약 확정</button></sc-if>
+<sc-if value="{{confirmed}}" hint-placeholder-val="{{ false }}"><button class="cb__btn" type="button" disabled><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>확정했어요</button></sc-if>
+<a class="cb__btn md-pressable" href="ChatEdit.dc.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>수정</a>
+<button class="cb__btn md-pressable" type="button" onClick="{{openInfo}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg>정보</button>
+</div>
 </section>
 <main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding: 16px;">
 <span class="md-tagtext" style="align-self: center;">오늘</span>
@@ -82,7 +87,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <div class="md-overlay" onClick="{{close}}">
 <div class="md-sheet" role="dialog" aria-modal="true" aria-label="더보기" onClick="{{stop}}" style="gap: 0; padding-bottom: 24px;">
 <span class="md-sheet__handle" aria-hidden="true" style="margin-bottom: 8px;"></span>
-<a class="md-item md-pressable" href="ChatEdit.dc.html" style="margin: 0 -16px; grid-template-columns: 24px minmax(0, 1fr); color: inherit; text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg><span class="md-list-title">예약 조건 수정 요청</span></a>
+
 <button class="md-item md-pressable" type="button" style="border: 0; text-align: left; margin: 0 -16px; grid-template-columns: 24px minmax(0, 1fr);"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg><span style="display: flex; flex-direction: column; gap: 2px;"><span class="md-list-title">전화 걸기</span><span class="md-detail">안심번호로 연결돼요</span></span></button>
 <button class="md-item md-pressable" type="button" style="border: 0; text-align: left; margin: 0 -16px; grid-template-columns: 24px minmax(0, 1fr);"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z" /><path d="M21 16v2a4 4 0 0 1-4 4h-5" /></svg><span class="md-list-title">고객센터</span></button>
 <button class="md-item md-pressable" type="button" style="border: 0; text-align: left; margin: 0 -16px; grid-template-columns: 24px minmax(0, 1fr);"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></svg><span class="md-list-title">신고하기</span></button>

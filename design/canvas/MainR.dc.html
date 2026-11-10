@@ -76,7 +76,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <sc-if value="{{isReady}}" hint-placeholder-val="{{ false }}"><p class="rb-note">픽업 안내: {{readyPickup}}</p></sc-if>
 </section>
 <sc-if value="{{showHome}}" hint-placeholder-val="{{ true }}"><div class="{{homeCls}}">
-<sc-if value="{{showReq}}" hint-placeholder-val="{{ false }}"><a class="rb-card rb-card--req md-pressable" href="GuardianChatList.dc.html" style="order: 0;"><small class="rb-card__label">보낸 요청</small><span class="rb-card__row"><img class="md-photo" src="img/bori.jpg" alt=""><span class="rb-card__text"><b class="md-num">{{req.title}}</b><span>{{req.sub}}</span></span><span class="md-badge md-badge--info">답장 대기</span><svg class="rb-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a></sc-if>
+<sc-if value="{{showReq}}" hint-placeholder-val="{{ false }}"><a class="rb-card rb-card--req md-pressable" href="Sent.dc.html" style="order: 0;"><small class="rb-card__label">보낸 요청</small><span class="rb-card__row"><img class="md-photo" src="{{req.photo}}" alt=""><span class="rb-card__text"><b class="md-num">{{req.title}}</b><span>{{req.sub}}</span></span><span class="md-badge md-badge--info">답장 대기</span><svg class="rb-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a></sc-if>
 <sc-if value="{{showMine}}" hint-placeholder-val="{{ true }}"><a class="rb-card md-pressable" href="{{mine.href}}" style="order: {{mineOrder}};"><small class="rb-card__label">{{mine.label}}</small><span class="rb-card__row"><img class="md-photo" src="img/bori.jpg" alt=""><span class="rb-card__text"><b class="md-num">{{mine.title}}</b><span class="md-num">{{mine.sub}}</span></span><sc-if value="{{mine.badge}}" hint-placeholder-val="{{ true }}"><span class="md-badge md-badge--brand">{{mine.badge}}</span></sc-if><svg class="rb-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a></sc-if>
 <section class="rb-hood" aria-labelledby="rb-hood-t" style="order: {{hoodOrder}};"><a class="rb-hood__head md-pressable" href="SocialFeed.dc.html"><h2 id="rb-hood-t">오늘 역삼동에서 산책한 강아지</h2><svg class="rb-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></a>
 <div class="rb-hood__dogs"><sc-for list="{{hoodDogs}}" as="h" hint-placeholder-count="4"><a class="rb-hood__dog md-pressable" href="SocialFeed.dc.html"><img class="md-photo" src="{{h.photo}}" alt=""><span>{{h.name}}</span></a></sc-for></div>
@@ -204,8 +204,11 @@ class Component extends DCLogic {
     let rq = null;
     try { rq = JSON.parse(sessionStorage.getItem('md-request') || 'null'); } catch (e) { rq = null; }
     return {
-      showReq: !isNew && !!rq,
-      req: rq ? { title: rq.dogs.join(', ') + ' 산책 요청', sub: rq.date.replace(', 오늘', '') + ' ' + rq.time + ', 시터 ' + rq.sitters.length + '명' } : { title: '', sub: '' },
+      // A request sent in this preview, or the same pending sample the chat list and 요청 현황 show.
+      showReq: !isNew,
+      req: rq && rq.sitters && rq.sitters.length
+        ? { title: rq.dogs.join(', ') + ' 산책 요청', sub: rq.date.replace(', 오늘', '') + ' ' + rq.time + ', 시터 ' + rq.sitters.length + '명', photo: rq.dogs[0] === '콩이' ? 'img/kong.jpg' : 'img/bori.jpg' }
+        : { title: '보리, 콩이 산책 요청', sub: '11월 9일, 10일, 11일, 시터 2명', photo: 'img/bori.jpg' },
       noDogs: isNew, hasDogs: !isNew,
       showHome: s.step === 0 || (s.step === 1 && !!s.fromHome),
       homeCls: 'rb-home' + (s.step === 0 ? '' : ' rb-home--fold'),

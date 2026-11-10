@@ -17,72 +17,38 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </helmet>
 <div style="width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden; position: relative;">
 <header class="md-topnav">
-<a class="md-iconbtn md-pressable" href="Matching.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a>
+<a class="md-iconbtn md-pressable" href="MainR.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a>
 <h1 class="md-topnav__title">요청 현황</h1>
 <span style="width: 48px;"></span>
 </header>
 <main style="flex: 1; overflow-y: auto;">
-<section style="padding: 20px 16px 24px; display: flex; flex-direction: column; gap: 12px;">
-<div style="display: flex; align-items: center; gap: 12px;">
-<img class="md-photo" src="img/bori.jpg" alt="보리 사진" style="width: 56px; height: 56px; border-radius: var(--r3);">
-<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
-<span class="md-section-title">보리의 11월 7일 (토) 산책</span>
-<span class="md-tags"><span>오후 12:30</span><span>30분</span></span>
-</div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 12px; padding: 12px; border-radius: var(--r3); background: var(--bg-layer-basement);">
-<div style="display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px;">
-<svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--fg-neutral-subtle); margin-top: 1px;"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg>
-<span style="display: flex; flex-direction: column; gap: 2px;"><span class="md-label">집</span><span class="md-item__muted">서울 강남구 역삼로 123, 101동 1203호</span><span class="md-detail">공동현관 비밀번호로 들어와요</span></span>
-</div>
-<div style="display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px;">
-<svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--fg-neutral-subtle); margin-top: 1px;"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" /><path d="M2 6h4" /><path d="M2 10h4" /><path d="M2 14h4" /><path d="M2 18h4" /><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" /></svg>
-<span style="display: flex; flex-direction: column; gap: 2px;"><span class="md-label">픽업 안내</span><span class="md-item__muted">제가 출근하는 시간이라 비밀번호로 들어오시면 돼요. 목줄이랑 용품은 현관 앞에 뒀어요.</span><span class="md-detail">주소와 픽업 안내는 예약이 확정된 시터에게만 보여요</span></span>
-</div>
-</div>
-<p class="md-detail" style="margin: 0;">한 명과 예약을 확정하면 나머지 요청은 자동으로 닫혀요</p>
+<section class="rs-booking" aria-label="요청한 예약">
+<span class="cl-booking__ph"><sc-for list="{{photos}}" as="p" hint-placeholder-count="2"><img class="md-photo" src="{{p.src}}" alt=""></sc-for></span>
+<span class="cl-booking__text"><b class="md-num">{{title}}</b><span class="md-num">{{when}}</span><small class="md-num">{{detail}}</small></span>
+<span class="md-badge md-badge--info">답장 기다리는 중</span>
 </section>
-<div class="md-band"></div>
-<div class="md-list-header">요청한 시터 2명</div>
-<div class="md-list">
-<div class="md-item md-item--top" style="cursor: default;">
-<span class="md-initial md-initial--sand" role="img" aria-label="김하늘 사진 자리" style="width: 48px; height: 48px; font-size: 1.1875rem; border-radius: var(--full);">김</span>
-<span class="md-item__body">
-<span class="md-item__head"><span class="md-list-title">김하늘</span><span class="md-badge md-badge--brand">같은 아파트</span><span class="md-badge md-badge--info">대화중</span></span>
-<span class="md-item__muted">대화를 시작했어요. 조건을 맞춰 보세요.</span>
-<span class="md-tags md-num"><span><b>30분 15,000원</b></span><span>3분 전</span></span>
-</span>
-<a class="md-btn md-btn--small md-pressable" href="Chat.dc.html" style="margin-top: 4px; min-height: 44px;">대화창 열기</a>
-</div>
-<hr class="md-divider">
-<div class="md-item md-item--top" style="cursor: default;">
-<span class="md-initial md-initial--sand" role="img" aria-label="이도윤 사진 자리" style="width: 48px; height: 48px; font-size: 1.1875rem; border-radius: var(--full);">이</span>
-<span class="md-item__body">
-<span class="md-item__head"><span class="md-list-title">이도윤</span><span class="md-badge">새로 온 시터</span><span class="md-badge md-badge--outline">요청중</span></span>
-<span class="md-item__muted">아직 답장이 없어요. 보통 25분 안에 답장해요.</span>
-<span class="md-tags md-num"><span><b>30분 12,000원</b></span><span>3분 전</span></span>
-</span>
-<span></span>
-</div>
-</div>
-<div style="padding: 24px 16px 96px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+<p class="rs-note">주소와 픽업 안내는 예약이 확정된 시터에게만 보여요. 한 명과 확정하면 나머지 요청은 자동으로 닫혀요.</p>
+<div class="md-list-header md-num">요청한 시터 {{count}}명</div>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="2">
+<a class="md-item md-pressable rs-row" href="Chat.dc.html">
+<span class="md-initial md-initial--{{r.tint}}" role="img" aria-label="{{r.name}} 사진 자리" style="width: 48px; height: 48px; font-size: 1.1875rem; border-radius: var(--full);">{{r.first}}</span>
+<span class="md-item__body"><span class="md-item__head"><span class="md-list-title">{{r.name}}</span><span class="{{r.cls}}">{{r.state}}</span></span><span class="md-item__muted">{{r.note}}</span></span>
+<svg class="rb-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+</a>
+</sc-for>
+<div style="padding: 24px 16px 32px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
 <a class="md-btn md-btn--outline md-pressable" href="Matching.dc.html" style="width: 100%; box-sizing: border-box;">다른 시터에게도 요청하기</a>
 <button class="md-btn md-btn--ghost md-btn--small md-pressable" type="button" onClick="{{ask}}" style="min-height: 44px;">요청 모두 취소하기</button>
 </div>
 </main>
-<sc-if value="{{snack}}" hint-placeholder-val="{{ true }}">
-<div style="position: absolute; left: 8px; right: 8px; bottom: 16px;">
-<div class="md-snackbar" role="status"><span>2명에게 요청을 보냈어요</span></div>
-</div>
-</sc-if>
 <sc-if value="{{asking}}" hint-placeholder-val="{{ false }}">
 <div class="md-overlay" style="justify-content: center; padding: 24px;" onClick="{{close}}">
 <div role="alertdialog" aria-modal="true" aria-labelledby="cancel-title" onClick="{{stop}}" style="background: var(--bg-layer-floating); border-radius: var(--r4); padding: 24px 20px 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-floating);">
 <h2 id="cancel-title" class="md-section-title">요청을 모두 취소할까요</h2>
-<p style="margin: 0; color: var(--fg-neutral-muted); font-size: 0.9375rem; line-height: 1.3125rem;">김하늘, 이도윤 시터에게 보낸 요청이 닫혀요. 대화 중인 내용도 더 이어갈 수 없어요.</p>
+<p class="md-num" style="margin: 0; color: var(--fg-neutral-muted); font-size: 0.9375rem; line-height: 1.3125rem;">{{who}} 시터에게 보낸 요청이 닫혀요. 대화 중인 내용도 더 이어갈 수 없어요.</p>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 16px;">
 <button class="md-btn md-pressable" type="button" onClick="{{close}}">닫기</button>
-<a class="md-btn md-btn--critical md-pressable" href="MainR.dc.html">요청 취소하기</a>
+<a class="md-btn md-btn--critical md-pressable" href="MainR.dc.html" onClick="{{cancelAll}}">요청 취소하기</a>
 </div>
 </div>
 </div>
@@ -93,16 +59,28 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { snack: true, asking: false };
-    this.t = setTimeout(() => this.setState({ snack: false }), 4000);
+    this.state = { asking: false };
   }
   renderVals() {
-    const s = this.state;
+    const tint = (name) => ['sand', 'sky', 'moss', 'peach'][[...name].reduce((a, c) => a + c.charCodeAt(0), 0) % 4];
+    let rq = null;
+    try { rq = JSON.parse(sessionStorage.getItem('md-request') || 'null'); } catch (e) { rq = null; }
+    // The same pending sample as the home and the chat list; a request sent in this preview replaces it.
+    const req = rq && rq.sitters && rq.sitters.length
+      ? { dogs: rq.dogs, when: rq.date + ', ' + rq.time, detail: (rq.len || '') + ', 방금 요청했어요', rows: rq.sitters.map((n) => ({ name: n, state: '답장 기다리는 중', cls: 'md-badge md-badge--outline', note: '아직 답장이 없어요. 답장이 오면 알려 드려요' })) }
+      : { dogs: ['보리', '콩이'], when: '11월 9일, 10일, 11일, 3번, 오후 12:30', detail: '60분, 집에서 만나요', rows: [
+          { name: '박서연', state: '대화 중', cls: 'md-badge md-badge--info', note: '세 날 모두 괜찮다고 답장했어요' },
+          { name: '정민준', state: '답장 기다리는 중', cls: 'md-badge md-badge--outline', note: '아직 답장이 없어요. 보통 40분 안에 답장해요' }] };
     return {
-      snack: s.snack, asking: s.asking,
-      ask: () => this.setState({ asking: true, snack: false }),
+      photos: req.dogs.map((d) => ({ src: d === '콩이' ? 'img/kong.jpg' : 'img/bori.jpg' })),
+      title: req.dogs.join(', ') + ' 산책', when: req.when, detail: req.detail,
+      count: req.rows.length, who: req.rows.map((r) => r.name).join(', '),
+      rows: req.rows.map((r) => Object.assign({ first: r.name[0], tint: tint(r.name) }, r)),
+      asking: this.state.asking,
+      ask: () => this.setState({ asking: true }),
       close: () => this.setState({ asking: false }),
-      stop: (e) => e.stopPropagation()
+      stop: (e) => e.stopPropagation(),
+      cancelAll: () => { try { sessionStorage.removeItem('md-request'); } catch (e) { /* storage off */ } }
     };
   }
 }

@@ -58,6 +58,8 @@ The owner finds the current screens unconvincing overall and wants the next pass
 - Steps (owner's notes, 2026-11-10): pick one or both dogs, then a button names them; the date step shows the month calendar in place: 한 번 takes several dates at once (tap to toggle, then a button), 매주 반복 takes weekdays plus a start and an end date (or no end) and marks every walk day; the time is an alarm-style wheel in 30-minute steps (오전/오후, hour, 00/30); every chosen date shares one time by default, and a switch lists the dates (or weekdays) so each can get its own; the place step selects on a row tap, edits with 수정 on the right, adds and edits addresses in a sheet inside the flow, and keeps the chosen place's pickup note editable below the list.
 - The sitter list repeats the chosen conditions on top and prices each sitter for them from the profile price list (60분 is 1.7 times, each extra dog half the 30분 price); 90분 is agreed in chat.
 - The guardian chat list is grouped by booking, nearest date first: each booking's details (dogs, dates, time, length, status), then the chats that booking opened.
+- 요청 현황 is reachable from the home's 보낸 요청 card and from a pending booking in the chat list; each requested sitter is a plain row that opens its chat (no button per row).
+- Both chats share one booking bar: the booking in one line, then three equal 36px pills (확정 or its state, 수정, 정보) with a 44px tap area; only the confirm pill is green.
 - Sending requests ends on a completion screen whose main button is 홈으로 가기, since replies take a while; the home then shows the sent request as its first card.
 - No sitter counts before the search, no discount, points or video banners (Wayo's home was reviewed and these were left out).
 
