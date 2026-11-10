@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>산책 기록 (리서치 반영)</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:oklch(46% 0.12 152)}a:hover{color:oklch(44% 0.115 152)}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden; position: relative;">
+<header class="md-topnav">
+<a class="md-iconbtn md-pressable" href="GuardianLive.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a>
+<h1 class="md-topnav__title">산책 기록</h1>
+<span style="width: 48px;"></span>
+</header>
+<main style="flex: 1; overflow-y: auto;">
+<div class="md-slot x-arrive" data-slot="walk-photo" style="position: relative; aspect-ratio: 4 / 3;"><img class="md-photo" src="img/bori.jpg" alt="산책 중 찍은 보리 사진" style="border-radius: 0; position: absolute; inset: 0; width: 100%; height: 100%;"><span class="x-confetti" aria-hidden="true"><i style="left: 8%; background: var(--bg-brand-solid); --d: 0ms; --dx: 20px;"></i><i style="left: 18%; background: oklch(80% 0.14 85); --d: 120ms; --dx: -14px;"></i><i style="left: 29%; background: oklch(70% 0.14 30); --d: 60ms; --dx: 26px;"></i><i style="left: 41%; background: var(--bg-brand-solid); --d: 200ms; --dx: -20px;"></i><i style="left: 52%; background: oklch(75% 0.12 250); --d: 40ms; --dx: 12px;"></i><i style="left: 63%; background: oklch(80% 0.14 85); --d: 160ms; --dx: -24px;"></i><i style="left: 74%; background: oklch(70% 0.14 30); --d: 90ms; --dx: 18px;"></i><i style="left: 85%; background: var(--bg-brand-solid); --d: 220ms; --dx: -10px;"></i><i style="left: 93%; background: oklch(75% 0.12 250); --d: 140ms; --dx: 8px;"></i></span><span class="md-badge" style="position: absolute; right: 12px; bottom: 12px; background: var(--bg-neutral-solid); color: var(--fg-on-neutral-solid);">1 / 3</span></div>
+<section style="display: flex; flex-direction: column; gap: 14px; padding: 20px 16px;">
+<div role="status" style="display: flex; flex-direction: column; gap: 4px;"><p class="wk-sub" style="margin: 0;">보리가 집에 돌아왔어요</p><h2 class="x-arrive__fig md-num" style="margin: 0;">1.92km 걸었어요</h2><p class="wk-sub" style="margin: 0;">11월 7일 (토) 오후 12:30부터 1:00까지, 김하늘 시터</p></div>
+<dl class="wk-figs wk-figs--sm"><div><dt>산책 시간</dt><dd>30:12</dd></div><div><dt>거리</dt><dd>1.92<small>km</small></dd></div><div><dt>쉬 1번, 응가 1번</dt><dd>2<small>번</small></dd></div></dl>
+<div class="wk-note" style="margin-top: 6px;"><span class="md-initial md-initial--sand" role="img" aria-label="김하늘 사진 자리" style="width: 36px; height: 36px; font-size: 14px; border-radius: var(--full);">김</span>
+<div style="display: flex; flex-direction: column; gap: 4px;"><span class="md-item__head"><span class="md-label">김하늘 시터</span><span class="md-badge">컨디션 좋았어요</span></span><p class="wk-note__bubble" style="margin: 0;">다른 강아지를 보고 한 번 짖었지만 금방 진정했어요. 물도 잘 마셨어요.</p></div></div>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;">
+<div style="display: flex; flex-direction: column; gap: 2px;"><h2 class="md-section-title" style="margin: 0;">김하늘 시터는 어땠나요</h2><p class="wk-sub" style="margin: 0;">별을 누르면 바로 보내져요. 글은 남기지 않아도 돼요.</p></div>
+<div class="rv-stars" role="radiogroup" aria-label="별점">
+<sc-for list="{{stars}}" as="st" hint-placeholder-count="5"><button class="md-pressable" type="button" role="radio" aria-checked="{{st.checked}}" aria-label="{{st.n}}점" data-on="{{st.on}}" onClick="{{st.pick}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" /></svg></button></sc-for>
+</div>
+<p class="rv-word">{{word}}</p>
+<textarea class="md-input" id="review" aria-label="후기" placeholder="한마디 남기기 (선택)"></textarea>
+<button class="md-btn md-btn--outline md-pressable" type="button" onClick="{{pin}}" style="width: 100%;">{{pinLabel}}</button>
+<label class="wk-switchrow md-pressable" style="margin-top: 8px;">
+<span style="display: flex; flex-direction: column; gap: 2px;"><span class="md-list-title">소셜 공유 허용</span><span class="md-detail">시터가 이 기록을 동네 피드에 올릴 수 있어요. 경로 지도는 올라가지 않아요.</span></span>
+<input class="md-check" type="checkbox" checked="{{share}}" onChange="{{toggleShare}}" aria-label="소셜 공유 허용">
+</label>
+</section>
+<div class="md-band"></div>
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 20px 16px;">
+<div style="display: flex; flex-direction: column; gap: 2px;"><h2 class="md-section-title" style="margin: 0;">산책 소식</h2><p class="wk-sub">소식을 누르면 지도에서 그곳을 보여 줘요</p></div>
+<div class="{{mapCls}}" style="height: 180px; border-radius: var(--r3);"><svg viewBox="0 0 390 180" role="img" aria-label="보리가 걸은 산책 경로와 쉬, 응가한 곳"><path class="lm-grid" d="M0 45.0H390M0 90.0H390M0 135.0H390M98 0V180M195 0V180M292 0V180" /><path class="lm-ghost" d="{{ghostD}}" /><path class="lm-route" d="{{routeD}}" /></svg><sc-for list="{{pins}}" as="p" hint-placeholder-count="3"><span class="{{p.cls}}" style="{{p.style}}" aria-hidden="true"><span class="lm-pin__b"><sc-if value="{{p.is_pee}}" hint-placeholder-val="{{ true }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" /></svg></sc-if><sc-if value="{{p.is_poop}}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20h14a2.5 2.5 0 0 0 0-5H5a2.5 2.5 0 0 0 0 5z" /><path d="M7 15a2.5 2.5 0 0 1 0-5h10a2.5 2.5 0 0 1 0 5" /><path d="M9 10a2 2 0 0 1 1-3.7C10.5 5 11.6 4 13 4a3 3 0 0 1 2 6" /><path d="M10 17.5h.01" /><path d="M14 17.5h.01" /></svg></sc-if><sc-if value="{{p.is_photo}}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /><circle cx="12" cy="13" r="3" /></svg></sc-if></span></span></sc-for><sc-if value="{{showDog}}" hint-placeholder-val="{{ true }}"><span class="lm-dog" style="{{dogStyle}}" aria-hidden="true"></span></sc-if><sc-if value="{{playing}}" hint-placeholder-val="{{ false }}"><span class="md-badge lm-chip" style="position: absolute; left: 10px; top: 10px;">{{playClock}}</span></sc-if><button class="lm-play md-pressable" type="button" onClick="{{replay}}" aria-label="{{playAria}}"><sc-if value="{{notPlaying}}" hint-placeholder-val="{{ true }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg></sc-if><sc-if value="{{playing}}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" /></svg></sc-if>{{playLabel}}</button></div>
+<ol class="wk-tl wk-tl--pick" aria-label="산책 소식, 누르면 지도에 위치가 보여요"><sc-for list="{{events}}" as="ev" hint-placeholder-count="4"><li class="{{ev.cls}}"><button class="wk-tl__hit" type="button" aria-pressed="{{ev.on}}" aria-label="{{ev.label}}" onClick="{{ev.pick}}"></button><time>{{ev.time}}</time><span class="wk-tl__node"></span><span class="wk-tl__text"><span><sc-if value="{{ev.is_start}}" hint-placeholder-val="{{ true }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /><path d="M16 17h4" /><path d="M4 13h4" /></svg></sc-if><sc-if value="{{ev.is_pee}}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" /></svg></sc-if><sc-if value="{{ev.is_poop}}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20h14a2.5 2.5 0 0 0 0-5H5a2.5 2.5 0 0 0 0 5z" /><path d="M7 15a2.5 2.5 0 0 1 0-5h10a2.5 2.5 0 0 1 0 5" /><path d="M9 10a2 2 0 0 1 1-3.7C10.5 5 11.6 4 13 4a3 3 0 0 1 2 6" /><path d="M10 17.5h.01" /><path d="M14 17.5h.01" /></svg></sc-if><sc-if value="{{ev.is_photo}}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /><circle cx="12" cy="13" r="3" /></svg></sc-if><sc-if value="{{ev.is_end}}" hint-placeholder-val="{{ false }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></svg></sc-if>{{ev.text}}</span></span></li></sc-for></ol>
+</section>
+<div class="md-band"></div>
+
+</main>
+<div style="padding: 12px 16px 16px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle);">
+<sc-if value="{{notRated}}" hint-placeholder-val="{{ true }}"><button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{send}}" style="width: 100%;">별점 {{rating}}점 보내기</button></sc-if><sc-if value="{{rated}}" hint-placeholder-val="{{ false }}"><a class="md-btn md-btn--brand md-btn--large md-pressable" href="MainX.dc.html" style="box-sizing: border-box;">홈으로</a></sc-if>
+</div>
+<sc-if value="{{toast}}" hint-placeholder-val="{{ false }}"><div style="position: absolute; left: 8px; right: 8px; bottom: 88px;"><div class="md-snackbar" role="status"><span>{{toast}}</span></div></div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+
+  constructor(props) {
+    super(props);
+    this.lmSetup();
+    this.state = { rated: false, share: true, rating: 5, pinned: false, toast: '', k: this.RK, playing: false, sel: null };
+    this.evs = [
+      { id: 4, at: 1800, time: '오후 1:00', kind: 'end', text: '산책을 마쳤어요' },
+      { id: 3, at: 1140, time: '오후 12:49', kind: 'poop', text: '응가했어요' },
+      { id: 2, at: 660, time: '오후 12:41', kind: 'pee', text: '쉬했어요' },
+      { id: 1, at: 60, time: '오후 12:31', kind: 'start', text: '산책을 시작했어요' }
+    ];
+  }
+  renderVals() {
+    const s = this.state;
+    return Object.assign(this.mapVals(180), {
+      share: s.share,
+      toggleShare: () => this.setState({ share: !s.share }),
+      stars: [1, 2, 3, 4, 5].map((n) => ({ n: n, on: n <= s.rating, checked: n === s.rating, pick: () => this.setState({ rating: n, rated: true, toast: '별점 ' + n + '점을 보냈어요. 글은 나중에 더해도 돼요' }) })),
+      rated: s.rated, notRated: !s.rated, rating: s.rating,
+      word: ['', '아쉬웠어요', '조금 아쉬웠어요', '괜찮았어요', '좋았어요', '최고였어요, 또 맡길래요'][s.rating] + ' (' + s.rating + '점)',
+      pinLabel: s.pinned ? '전담 시터로 지정했어요' : '전담 시터로 지정하기',
+      pin: () => this.setState({ pinned: !s.pinned, toast: s.pinned ? '' : '다음 검색부터 김하늘 시터가 항상 보여요' }),
+      skip: () => this.setState({ toast: '후기는 캘린더의 지난 산책에서 언제든 쓸 수 있어요' }),
+      send: () => s.rated ? null : this.setState({ rated: true, toast: '김하늘 시터에게 별점 ' + s.rating + '점을 보냈어요' }),
+      toast: s.toast
+    });
+  }
+
+  kAt(sec) { return Math.round(Math.min(sec, 1800) / 1800 * this.RK); }
+  clockAt(k) { const m = 30 + Math.round(k / this.RK * 30); return '오후 ' + (12 + Math.floor(m / 60)) + ':' + String(m % 60).padStart(2, '0'); }
+  replay() {
+    if (this.timer) { clearInterval(this.timer); this.timer = null; this.setState({ k: this.RK, playing: false }); return; }
+    if (this.rm) { this.setState({ k: this.RK, playing: false, sel: null }); return; }
+    this.setState({ k: 0, playing: true, sel: null });
+    this.timer = setInterval(() => {
+      const k = this.state.k + 1;
+      if (k >= this.RK) { clearInterval(this.timer); this.timer = null; this.setState({ k: this.RK, playing: false }); }
+      else this.setState({ k: k });
+    }, 70);
+  }
+  mapVals(H) {
+    const s = this.state;
+    const evs = this.evs.map((e) => Object.assign({ i: this.kAt(e.at) }, e));
+    return {
+      mapCls: 'lm' + (s.playing ? ' lm--play' : '') + (s.sel ? ' lm--focus' : ''),
+      routeD: this.lmD(s.k, H),
+      ghostD: this.lmD(this.RK, H),
+      pins: this.lmPins(evs, H, s.k, s.sel),
+      showDog: s.playing,
+      dogStyle: this.lmAt(this.lmPt(s.k, H), 32),
+      playing: s.playing,
+      playLabel: s.playing ? '멈추기' : '다시 보기',
+      playAria: s.playing ? '산책 다시 보기 멈추기' : '산책을 처음부터 다시 보기',
+      notPlaying: !s.playing,
+      playClock: this.clockAt(s.k),
+      replay: () => this.replay(),
+      events: this.lmTl(evs, s.sel)
+    };
+  }
+
+
+  lmSetup() {
+    this.RT = [[70.0,229.6],[73.1,224.2],[76.4,219.0],[80.1,214.1],[84.1,209.3],[88.4,204.8],[92.9,200.6],[97.6,196.6],[102.5,192.7],[107.4,188.9],[112.3,185.2],[117.3,181.5],[122.2,177.7],[127.1,173.8],[131.8,169.8],[136.3,165.6],[140.6,161.1],[144.5,156.3],[148.1,151.3],[151.3,146.0],[154.3,140.6],[157.1,135.0],[159.8,129.4],[162.4,123.8],[165.1,118.2],[167.9,112.7],[171.0,107.4],[174.5,102.2],[178.4,97.4],[182.8,93.0],[187.6,89.2],[192.8,85.9],[198.4,83.1],[204.2,80.9],[210.1,79.0],[216.1,77.7],[222.2,76.6],[228.4,75.8],[234.5,75.3],[240.7,74.9],[246.9,74.8],[253.1,74.8],[259.3,75.1],[265.5,75.7],[271.6,76.7],[277.6,78.0],[283.5,79.9],[289.2,82.4],[294.5,85.5],[299.4,89.4],[303.6,93.9],[307.1,99.0],[309.7,104.6],[311.6,110.5],[312.7,116.5],[313.2,122.7],[313.1,128.9],[312.6,135.1],[311.7,141.2],[310.5,147.3],[308.7,153.2],[306.6,159.0],[304.0,164.6],[300.7,169.9],[297.0,174.8],[292.8,179.4],[288.2,183.5],[283.1,187.2],[277.7,190.2],[272.1,192.8],[266.3,194.9],[260.4,196.6],[254.3,197.8],[248.1,198.6],[242.0,199.1],[235.8,199.3],[229.6,199.1],[223.4,198.7],[217.2,198.0],[211.1,197.1],[205.0,196.0]];
+    this.RK = this.RT.length - 1;
+    this.rm = typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
+  }
+  lmPt(i, h) { const p = this.RT[Math.max(0, Math.min(this.RK, Math.round(i)))]; return [p[0], p[1] * h / 280]; }
+  lmD(k, h) { let d = ''; for (let i = 0; i <= Math.min(k, this.RK); i++) { const p = this.lmPt(i, h); d += (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); } return d; }
+  lmAt(p, size) { const r = size / 2; return 'transform: translate(' + (p[0] - r).toFixed(1) + 'px, ' + (p[1] - r).toFixed(1) + 'px);'; }
+  lmKinds(e) { return { is_start: e.kind === 'start', is_pee: e.kind === 'pee', is_poop: e.kind === 'poop', is_photo: e.kind === 'photo', is_end: e.kind === 'end' }; }
+  lmPins(evs, h, k, sel) {
+    return evs.slice().reverse().filter((e) => e.i <= k).map((e) => {
+      const dot = e.kind === 'start' || e.kind === 'end';
+      const p = this.lmPt(e.i, h);
+      const style = dot ? this.lmAt(p, 14) : 'transform: translate(' + (p[0] - 13).toFixed(1) + 'px, ' + (p[1] - 32).toFixed(1) + 'px);';
+      return Object.assign({ cls: 'lm-pin lm-pin--' + e.kind + (sel === e.id ? ' lm-pin--on' : ''), style: style }, this.lmKinds(e));
+    });
+  }
+  lmTl(evs, sel, fresh) {
+    return evs.map((e) => Object.assign({ time: e.time, text: e.text, on: sel === e.id, cls: (sel === e.id ? 'is-on' : '') + (fresh === e.id ? ' wk-new' + (e.id % 2 ? 'a' : 'b') : ''), label: e.time + ' ' + e.text + (sel === e.id ? ', 지도에서 보는 중' : ', 지도에서 보기'),
+      pick: () => this.setState({ sel: this.state.sel === e.id ? null : e.id }) }, this.lmKinds(e)));
+  }
+}
+</script>
+</body>
+</html>
