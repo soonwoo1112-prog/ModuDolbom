@@ -24,12 +24,12 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <main style="flex: 1; overflow-y: auto;">
 <div style="padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 6px;">
 <h2 class="md-screen-title" style="margin: 0;">누구에게 요청할까요</h2>
-<span class="md-tags" style="font-size: 14px; line-height: 19px; color: var(--fg-neutral-muted);"><span><b>보리</b></span><span>11월 7일 (토) 오후 12:30</span><span>30분</span></span>
+<span class="md-tags" style="font-size: 0.875rem; line-height: 1.1875rem; color: var(--fg-neutral-muted);"><span><b>보리</b></span><span>11월 7일 (토) 오후 12:30</span><span>30분</span></span>
 </div>
 <div role="group" aria-label="역삼동 시터 5명, 눌러서 고르기">
 <sc-for list="{{sitters}}" as="item" hint-placeholder-count="5">
 <div class="xm-row">
-<a class="xm-av md-pressable" href="SitterProfile.dc.html" aria-label="{{item.name}} 프로필 보기"><span class="md-initial md-initial--{{item.tint}}" role="img" aria-label="{{item.name}} 사진 자리" style="width: 56px; height: 56px; font-size: 21px; border-radius: var(--full);">{{item.first}}</span></a>
+<a class="xm-av md-pressable" href="SitterProfile.dc.html" aria-label="{{item.name}} 프로필 보기"><span class="md-initial md-initial--{{item.tint}}" role="img" aria-label="{{item.name}} 사진 자리" style="width: 56px; height: 56px; font-size: 1.3125rem; border-radius: var(--full);">{{item.first}}</span></a>
 <button class="x-pick md-pressable" type="button" aria-pressed="{{item.checked}}" onClick="{{item.toggle}}" style="grid-template-columns: minmax(0, 1fr) 24px;">
 <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0;">
 <span class="md-item__head"><span class="md-list-title">{{item.name}}</span><sc-for list="{{item.badges}}" as="b" hint-placeholder-count="1"><span class="{{b.cls}}">{{b.label}}</span></sc-for></span>

@@ -32,7 +32,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <span class="md-dogchip md-num"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3" /><path d="M6.5 8a2 2 0 0 0-1.905 1.46L2.1 18.5A2 2 0 0 0 4 21h16a2 2 0 0 0 1.925-2.54L19.4 9.5A2 2 0 0 0 17.48 8Z" /></svg>21kg</span>
 <span class="md-dogchip"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>중성화</span>
 </div>
-<p style="margin: 0; color: var(--fg-neutral-muted); font-size: 15px; line-height: 22px;">산책을 아주 좋아해요. 사람한테는 순하지만 다른 강아지를 보면 조금 짖어요.</p>
+<p style="margin: 0; color: var(--fg-neutral-muted); font-size: 0.9375rem; line-height: 1.375rem;">산책을 아주 좋아해요. 사람한테는 순하지만 다른 강아지를 보면 조금 짖어요.</p>
 </section>
 <div class="pf-tabs" role="tablist" aria-label="강아지 프로필">
 <button type="button" role="tab" aria-selected="{{tInfo}}" onClick="{{showInfo}}">정보</button>
@@ -44,12 +44,12 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <div class="md-list-header">성격</div>
 <div class="md-row" style="padding: 0 16px 8px;"><span class="md-badge md-badge--brand">사람을 좋아해요</span><span class="md-badge">다른 강아지를 보면 짖어요</span><span class="md-badge">줄을 조금 당겨요</span></div>
 <div class="md-list-header">산책할 때 알아 두세요</div>
-<ul style="margin: 0; padding: 0 16px 8px 34px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 21px;">
+<ul style="margin: 0; padding: 0 16px 8px 34px; display: flex; flex-direction: column; gap: 6px; font-size: 0.9375rem; line-height: 1.3125rem;">
 <li>길에 떨어진 음식을 주워 먹으려고 해요.</li>
 <li>큰 오토바이 소리에 놀라요.</li>
 </ul>
 <div class="md-list-header">건강</div>
-<dl style="margin: 0; padding: 0 16px 20px; display: grid; grid-template-columns: 88px minmax(0, 1fr); row-gap: 8px; font-size: 15px; line-height: 21px;">
+<dl style="margin: 0; padding: 0 16px 20px; display: grid; grid-template-columns: 88px minmax(0, 1fr); row-gap: 8px; font-size: 0.9375rem; line-height: 1.3125rem;">
 <dt class="md-label" style="color: var(--fg-neutral-subtle);">예방접종</dt><dd style="margin: 0;">종합백신, 광견병 접종 완료</dd>
 <dt class="md-label" style="color: var(--fg-neutral-subtle);">알레르기</dt><dd style="margin: 0;">닭고기</dd>
 <dt class="md-label" style="color: var(--fg-neutral-subtle);">동물병원</dt><dd style="margin: 0;">역삼 24시 동물병원</dd>
@@ -59,10 +59,10 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <div class="md-list">
 <sc-for list="{{feedback}}" as="f" hint-placeholder-val='{{ [{"name":"김하늘","when":"11월 1일 산책","text":"공원 길에서 다른 강아지를 보고 두 번 짖었지만 이름을 부르니 금방 진정했어요. 물도 잘 마셨어요."}] }}'>
 <div class="md-item md-item--top" style="cursor: default;">
-<span class="md-initial md-initial--{{f.tint}}" role="img" aria-label="{{f.name}} 시터 사진 자리" style="width: 36px; height: 36px; font-size: 14px; border-radius: var(--full);">{{f.first}}</span>
+<span class="md-initial md-initial--{{f.tint}}" role="img" aria-label="{{f.name}} 시터 사진 자리" style="width: 36px; height: 36px; font-size: 0.875rem; border-radius: var(--full);">{{f.first}}</span>
 <span class="md-item__body" style="gap: 4px;">
 <span class="md-item__head"><span class="md-list-title">{{f.name}} 시터</span><span class="md-tagtext">{{f.when}}</span></span>
-<span style="font-size: 15px; line-height: 21px; color: var(--fg-neutral);">{{f.text}}</span>
+<span style="font-size: 0.9375rem; line-height: 1.3125rem; color: var(--fg-neutral);">{{f.text}}</span>
 </span>
 <span></span>
 </div>

@@ -22,20 +22,22 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <span style="width: 48px;"></span>
 </header>
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 16px 12px; box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle);">
-<div class="md-tags" style="font-size: 14px; line-height: 19px; color: var(--fg-neutral-muted);"><span><b>보리</b></span><span>11월 7일 (토) 오후 12:30</span><span>30분</span></div>
+<div class="md-tags" style="font-size: 0.875rem; line-height: 1.1875rem; color: var(--fg-neutral-muted);"><span><b>보리</b></span><span>11월 7일 (토) 오후 12:30</span><span>30분</span></div>
 <a class="md-btn md-btn--ghost md-btn--small md-pressable" href="Main.dc.html">조건 바꾸기</a>
 </div>
 <main style="flex: 1; overflow-y: auto;">
 <div style="padding: 20px 16px 8px; display: flex; flex-direction: column; gap: 2px;">
 <span class="md-section-title">조건에 맞는 시터 5명</span>
-<span class="md-detail">여러 명을 골라 한 번에 요청할 수 있어요</span>
+<span class="md-detail">줄을 눌러 고르고, 사진을 누르면 프로필이 열려요. 가격은 30분 기준이에요</span>
 </div>
 <div class="md-list">
 <sc-for list="{{sitters}}" as="item" hint-placeholder-count="5">
+<div class="xm-row">
+<a class="xm-av md-pressable" href="SitterProfile.dc.html" aria-label="{{item.name}} 프로필 보기" style="top: 12px;"><span class="md-initial md-initial--{{item.tint}}" role="img" aria-label="{{item.name}} 사진 자리" style="width: 48px; height: 48px; font-size: 1.1875rem; border-radius: var(--full);">{{item.first}}</span></a>
 <label class="md-item md-item--top md-pressable">
-<span class="md-initial md-initial--{{item.tint}}" role="img" aria-label="{{item.name}} 사진 자리" style="width: 48px; height: 48px; font-size: 19px; border-radius: var(--full);">{{item.first}}</span>
+<span aria-hidden="true" style="width: 48px; height: 48px;"></span>
 <span class="md-item__body">
-<span class="md-item__head"><a class="md-list-title" href="SitterProfile.dc.html" style="color: inherit; text-decoration: underline; text-decoration-color: var(--stroke-neutral-weak); text-underline-offset: 3px;">{{item.name}}</a><sc-for list="{{item.badges}}" as="b" hint-placeholder-count="1"><span class="{{b.cls}}">{{b.label}}</span></sc-for></span>
+<span class="md-item__head"><span class="md-list-title">{{item.name}}</span><sc-for list="{{item.badges}}" as="b" hint-placeholder-count="1"><span class="{{b.cls}}">{{b.label}}</span></sc-for></span>
 <span class="md-item__muted">{{item.bio}}</span>
 <span class="md-tags md-num"><span><b>{{item.price}}</b></span><span>{{item.distance}}</span></span>
 <span class="md-stat-row md-num">
@@ -46,6 +48,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </span>
 <input class="md-check" type="checkbox" checked="{{item.checked}}" onChange="{{item.toggle}}" aria-label="{{item.name}} 시터 선택" style="margin-top: 12px;">
 </label>
+</div>
 </sc-for>
 </div>
 </main>
@@ -68,11 +71,11 @@ class Component extends DCLogic {
   }
   renderVals() {
     const list = [
-      { id: 'haneul', name: '김하늘', badges: ['같은 아파트'], bio: '점심시간에 산책할 수 있어요', price: '30분 15,000원', distance: '120m', reviews: '리뷰 48', repeat: '반복고객 12명', reply: '답장 10분' },
-      { id: 'doyun', name: '이도윤', badges: ['새로 온 시터'], bio: '수업 없는 화요일과 목요일에 산책해요', price: '30분 12,000원', distance: '450m', reviews: '리뷰 아직 없음', repeat: '', reply: '답장 25분' },
-      { id: 'seoyeon', name: '박서연', badges: [], bio: '대형견 산책 경험이 많아요', price: '30분 18,000원', distance: '800m', reviews: '리뷰 112', repeat: '반복고객 31명', reply: '답장 5분' },
-      { id: 'minjun', name: '정민준', badges: ['같은 아파트'], bio: '아침과 점심에 산책할 수 있어요', price: '30분 13,000원', distance: '200m', reviews: '리뷰 9', repeat: '', reply: '답장 40분' },
-      { id: 'yuna', name: '최유나', badges: [], bio: '천천히 걷는 산책을 좋아해요', price: '30분 14,000원', distance: '600m', reviews: '리뷰 23', repeat: '반복고객 4명', reply: '답장 15분' }
+      { id: 'haneul', name: '김하늘', badges: ['같은 아파트'], bio: '점심시간에 산책할 수 있어요', price: '15,000원', distance: '120m', reviews: '리뷰 48', repeat: '반복고객 12명', reply: '답장 10분' },
+      { id: 'doyun', name: '이도윤', badges: ['새로 온 시터'], bio: '수업 없는 화요일과 목요일에 산책해요', price: '12,000원', distance: '450m', reviews: '리뷰 아직 없음', repeat: '', reply: '답장 25분' },
+      { id: 'seoyeon', name: '박서연', badges: [], bio: '대형견 산책 경험이 많아요', price: '18,000원', distance: '800m', reviews: '리뷰 112', repeat: '반복고객 31명', reply: '답장 5분' },
+      { id: 'minjun', name: '정민준', badges: ['같은 아파트'], bio: '아침과 점심에 산책할 수 있어요', price: '13,000원', distance: '200m', reviews: '리뷰 9', repeat: '', reply: '답장 40분' },
+      { id: 'yuna', name: '최유나', badges: [], bio: '천천히 걷는 산책을 좋아해요', price: '14,000원', distance: '600m', reviews: '리뷰 23', repeat: '반복고객 4명', reply: '답장 15분' }
     ];
     const picked = this.state.picked;
     const sitters = list.map((s) => ({

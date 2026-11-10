@@ -35,6 +35,8 @@ The locked system. Every Hallmark run reads this first and pages share it. Chang
 - Pressed: the pressed colour token plus a 2px shrink on basis max(height, width/4, 24); neighbours never move.
 - Selected state: `bg-neutral-solid` fill or bold `fg-neutral`, never colour alone; checkbox is the one brand-filled control.
 - Every data region draws loading (Skeleton), empty and error (Result Section) and full.
+- Type sizes and line heights are written in rem (16px = 1rem), never px, so the system text size setting scales them; the app build maps them to Dynamic Type and Android font scale.
+- Touch targets are at least 44px; the profile opens from a row's photo, the rest of the row selects.
 
 ## Motion
 - Character: brisk; colour 150ms on `--ease-easing`, press 150ms on `--ease-enter`; screen transitions only above 200ms; under reduced motion the shrink and shimmer stop.

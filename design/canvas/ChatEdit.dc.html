@@ -83,7 +83,7 @@ class Component extends DCLogic {
         text: v === undefined ? '' : String(v),
         selected: on,
         pick: v === undefined ? null : () => this.setState({ [key]: v }),
-        style: 'height: 44px; border: 0; background: transparent; cursor: pointer; font: ' + (on ? '700 18px/24px' : '400 16px/22px') + ' var(--font-sans); color: ' + (on ? 'var(--fg-neutral)' : (Math.abs(k) === 1 ? 'var(--fg-neutral-subtle)' : 'var(--fg-disabled)')) + '; position: relative;'
+        style: 'height: 44px; border: 0; background: transparent; cursor: pointer; font: ' + (on ? '700 1.125rem/1.5rem' : '400 1rem/1.375rem') + ' var(--font-sans); color: ' + (on ? 'var(--fg-neutral)' : (Math.abs(k) === 1 ? 'var(--fg-neutral-subtle)' : 'var(--fg-disabled)')) + '; position: relative;'
       });
     }
     return { label: label, items: items };
