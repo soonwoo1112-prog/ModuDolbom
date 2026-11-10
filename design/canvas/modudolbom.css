@@ -731,3 +731,12 @@ main:has(+ .md-bottomnav) { padding-bottom: 96px !important; }
   :root .md-tab::before, :root .md-tab .md-ico { transition: none; animation: none; }
   :root .md-tab:active::before { transform: none; }
 }
+
+/* ---- Brand type: SUIT (OFL) for headings, numbers and the wordmark; body stays the platform sans ---- */
+@font-face { font-family: "SUIT"; src: url("fonts/SUIT-Variable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+:root { --font-display: "SUIT", var(--font-sans); }
+:root .md-screen-title, :root .md-section-title, :root .md-topnav__title, :root .st-group__title, :root .rb-title, :root .tt-sentence, :root .pf-head__name, :root .sp-head__name, :root .md-doghead__name, :root .cl-month__title, :root .tt-who h2 { font-family: var(--font-display); }
+:root .wk-figs dd, :root .pf-stats dd, :root .rb-day b, :root .rb-time b, :root .tt-cta b, :root .tt-walk__facts b, :root .ch-head b, :root .st-stepper output, :root .md-btn--large { font-family: var(--font-display); }
+:root .md-screen-title { font-weight: 800; letter-spacing: -0.5px; }
+:root .md-section-title { font-weight: 800; letter-spacing: -0.3px; }
+:root .wk-figs dd { font-weight: 800; letter-spacing: -0.8px; }
