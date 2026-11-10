@@ -39,15 +39,16 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <div class="md-seg" role="group" aria-label="한 번 또는 반복"><sc-for list="{{freqs}}" as="f" hint-placeholder-count="2"><button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
 <sc-if value="{{isRepeat}}" hint-placeholder-val="{{ false }}"><div class="rb-weeks" role="group" aria-label="산책하는 요일">
 <sc-for list="{{weeks}}" as="w" hint-placeholder-count="7"><button class="rb-wk md-pressable" type="button" aria-pressed="{{w.on}}" onClick="{{w.pick}}">{{w.label}}</button></sc-for>
-</div></sc-if>
+</div>
+<label class="rb-noend"><span>끝나는 날 없이 계속</span><input class="md-check" type="checkbox" checked="{{noEnd}}" onChange="{{toggleNoEnd}}"></label></sc-if>
 <div class="rb-cal">
 <div class="rb-cal__head"><b class="md-num">2026년 11월</b><span class="md-detail">{{calHint}}</span></div>
 <div class="md-cal" aria-hidden="true"><span class="md-cal__dow" style="color: var(--fg-critical);">일</span><span class="md-cal__dow">월</span><span class="md-cal__dow">화</span><span class="md-cal__dow">수</span><span class="md-cal__dow">목</span><span class="md-cal__dow">금</span><span class="md-cal__dow" style="color: var(--fg-informative);">토</span></div>
 <div class="md-cal" role="grid" aria-label="2026년 11월">
-<sc-for list="{{cells}}" as="c" hint-placeholder-count="30"><button class="md-cal__cell" type="button" disabled="{{c.disabled}}" onClick="{{c.pick}}" aria-pressed="{{c.picked}}" aria-label="{{c.aria}}"><span class="md-cal__num" style="{{c.num}}">{{c.day}}</span><sc-if value="{{c.walk}}" hint-placeholder-val="{{ false }}"><span class="md-cal__dot"></span></sc-if></button></sc-for>
+<sc-for list="{{cells}}" as="c" hint-placeholder-count="30"><button class="md-cal__cell" type="button" disabled="{{c.disabled}}" onClick="{{c.pick}}" aria-pressed="{{c.picked}}" aria-label="{{c.aria}}" style="{{c.band}}"><span class="md-cal__num" style="{{c.num}}">{{c.day}}</span><sc-if value="{{c.walk}}" hint-placeholder-val="{{ false }}"><span class="md-cal__dot"></span></sc-if></button></sc-for>
 </div>
 </div>
-<sc-if value="{{isRepeat}}" hint-placeholder-val="{{ false }}"><button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" disabled="{{noWeek}}" onClick="{{repeatNext}}">{{repeatLabel}}</button></sc-if>
+<button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" disabled="{{dateBlocked}}" onClick="{{dateNext}}">{{dateLabel}}</button>
 </sc-if>
 
 <sc-if value="{{isTime}}" hint-placeholder-val="{{ false }}"><div class="rb-wheels" role="group" aria-label="시작 시간, 위아래로 넘겨 골라요"><span class="rb-wheels__band" aria-hidden="true"></span>
@@ -90,7 +91,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { step: 0, dogs: {}, freq: 'once', once: null, start: 9, weeks: {}, ap: '오후', h: 12, m: '30', timeSet: false, len: null, addr: null };
+    this.state = { step: 0, dogs: {}, freq: 'once', dates: {}, start: null, end: null, noEnd: false, weeks: {}, ap: '오후', h: 12, m: '30', timeSet: false, len: null, addr: null };
     this.DOGS = [{ name: '보리', photo: 'img/bori.jpg', focus: 'center 30%', meta: '진돗개 믹스, 21kg' }, { name: '콩이', photo: 'img/kong.jpg', focus: 'center 40%', meta: '푸들 믹스, 4kg' }];
     this.WEEK = ['월', '화', '수', '목', '금', '토', '일'];
     this.AP = ['오전', '오후']; this.HOURS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; this.MINS = ['00', '30'];
@@ -101,15 +102,31 @@ class Component extends DCLogic {
   dow(d) { return ['일', '월', '화', '수', '목', '금', '토'][(d - 1) % 7]; }
   picked() { return this.DOGS.filter((g, i) => this.state.dogs[i]); }
   repeatDays() { return this.WEEK.filter((d) => this.state.weeks[d]); }
+  onceDays() { return Object.keys(this.state.dates).map(Number).filter((d) => this.state.dates[d]).sort((x, y) => x - y); }
+  repeatDates() {
+    const s = this.state;
+    if (s.start == null) return [];
+    const out = [];
+    for (let d = s.start; d <= (s.noEnd || s.end == null ? 30 : s.end); d++) if (s.weeks[this.dow(d)]) out.push(d);
+    return out;
+  }
+  dateChosen() {
+    const s = this.state;
+    if (s.freq === 'once') return this.onceDays().length > 0;
+    return this.repeatDays().length > 0 && s.start != null && (s.noEnd || s.end != null) && this.repeatDates().length > 0;
+  }
+  walkCount() { return this.state.freq === 'once' ? this.onceDays().length : this.state.noEnd ? 0 : this.repeatDates().length; }
   dateText() {
     const s = this.state;
-    if (s.freq === 'repeat') return '매주 ' + this.repeatDays().join(', ') + ', 11월 ' + s.start + '일부터';
-    return '11월 ' + s.once + '일 (' + this.dow(s.once) + ')' + (s.once === 7 ? ', 오늘' : '');
+    if (s.freq === 'repeat') return '매주 ' + this.repeatDays().join(', ') + ', 11월 ' + s.start + '일' + (s.noEnd ? '부터 계속' : '~' + s.end + '일, ' + this.repeatDates().length + '번');
+    const ds = this.onceDays();
+    if (ds.length === 1) return '11월 ' + ds[0] + '일 (' + this.dow(ds[0]) + ')' + (ds[0] === 7 ? ', 오늘' : '');
+    return '11월 ' + ds.join('일, ') + '일, ' + ds.length + '번';
   }
   timeText() { const s = this.state; return s.ap + ' ' + s.h + ':' + s.m; }
   save() {
     const s = this.state;
-    try { sessionStorage.setItem('md-booking', JSON.stringify({ dogs: this.picked().map((g) => g.name), date: s.once != null || s.freq === 'repeat' ? this.dateText() : '', time: s.timeSet ? this.timeText() : '', len: s.len != null ? this.LENS[s.len][0] : '' })); } catch (e) { /* storage off: the next screens use their sample */ }
+    try { sessionStorage.setItem('md-booking', JSON.stringify({ dogs: this.picked().map((g) => g.name), date: this.dateChosen() ? this.dateText() : '', count: this.walkCount(), time: s.timeSet ? this.timeText() : '', len: s.len != null ? this.LENS[s.len][0] : '' })); } catch (e) { /* storage off: the next screens use their sample */ }
   }
   wheel(key, values, label) {
     const s = this.state;
@@ -132,7 +149,7 @@ class Component extends DCLogic {
     ];
     const answered = [
       this.picked().length > 0 && s.step > 0 && ['강아지', this.picked().map((g) => g.name).join(', '), 0],
-      (s.once != null || (s.freq === 'repeat' && this.repeatDays().length)) && s.step > 1 && ['날짜', this.dateText(), 1],
+      this.dateChosen() && s.step > 1 && ['날짜', this.dateText(), 1],
       s.timeSet && ['시간', this.timeText() + '부터', 2],
       s.len != null && ['길이', this.LENS[s.len][0], 3],
       s.addr != null && ['만나는 곳', this.ADDRS[s.addr].label, 4]
@@ -169,17 +186,27 @@ class Component extends DCLogic {
       freqs: [['once', '한 번'], ['repeat', '매주 반복']].map(([k, label]) => ({ label: label, on: s.freq === k, pick: () => this.setState({ freq: k }) })),
       isOnce: s.freq === 'once', isRepeat: s.freq === 'repeat',
       weeks: this.WEEK.map((d) => ({ label: d, on: !!s.weeks[d], pick: () => this.setState({ weeks: Object.assign({}, s.weeks, { [d]: !s.weeks[d] }) }) })),
-      calHint: s.freq === 'repeat' ? '시작하는 날을 눌러요' : '산책할 날을 눌러요',
+      noEnd: s.noEnd, toggleNoEnd: () => this.setState({ noEnd: !s.noEnd, end: null }),
+      calHint: s.freq === 'once' ? (this.onceDays().length ? this.onceDays().length + '번 골랐어요' : '산책할 날을 모두 눌러요') : s.start == null ? '시작하는 날을 눌러요' : (!s.noEnd && s.end == null) ? '끝나는 날을 눌러요' : (s.noEnd ? '끝나는 날 없이 계속해요' : '모두 ' + this.repeatDates().length + '번 걸어요'),
       cells: Array.from({ length: 30 }, (_, k) => {
         const d = k + 1, past = d < 7, rep = s.freq === 'repeat';
-        const on = rep ? d === s.start : d === s.once;
-        const walk = rep && !on && d > s.start && !!s.weeks[this.dow(d)];
-        return { day: d, disabled: past, picked: on, walk: walk, aria: '11월 ' + d + '일 ' + this.dow(d) + '요일' + (walk ? ', 산책하는 날' : ''),
+        const ends = rep && (d === s.start || d === s.end);
+        const on = rep ? ends : !!s.dates[d];
+        const walk = rep && !ends && this.repeatDates().indexOf(d) >= 0;
+        let band = '';
+        if (rep && s.start != null && s.end != null && s.end > s.start) band = d === s.start ? 'background: linear-gradient(to right, transparent 50%, var(--bg-brand-weak) 50%) center / 100% 36px no-repeat;' : d === s.end ? 'background: linear-gradient(to left, transparent 50%, var(--bg-brand-weak) 50%) center / 100% 36px no-repeat;' : (d > s.start && d < s.end) ? 'background: linear-gradient(var(--bg-brand-weak), var(--bg-brand-weak)) center / 100% 36px no-repeat;' : '';
+        return { day: d, disabled: past, picked: on, walk: walk, band: band, aria: '11월 ' + d + '일 ' + this.dow(d) + '요일' + (walk ? ', 산책하는 날' : ''),
           num: on ? 'background: var(--bg-brand-solid); color: var(--fg-on-brand-solid); font-weight: 700;' : walk ? 'color: var(--fg-brand); font-weight: 700;' : d === 7 ? 'box-shadow: inset 0 0 0 1.5px var(--stroke-neutral-contrast); font-weight: 700;' : '',
-          pick: () => rep ? this.setState({ start: d }) : this.go({ once: d }, 2) };
+          pick: () => {
+            if (!rep) return this.setState({ dates: Object.assign({}, s.dates, { [d]: !s.dates[d] }) });
+            if (s.noEnd || s.start == null || s.end != null || d <= s.start) return this.setState({ start: d, end: null });
+            this.setState({ end: d });
+          } };
       }),
-      repeatLabel: repeatPicked ? '매주 ' + this.repeatDays().join(', ') + ', 11월 ' + s.start + '일부터 걷기' : '산책하는 요일을 골라 주세요',
-      repeatNext: () => { if (this.repeatDays().length) this.go({}, 2); },
+      dateBlocked: !this.dateChosen(),
+      dateLabel: this.dateChosen() ? (s.freq === 'once' ? (this.onceDays().length === 1 ? this.dateText() + '에 걷기' : this.onceDays().length + '번 걷기') : '매주 ' + this.repeatDays().join(', ') + (s.noEnd ? ', 계속 걷기' : ', ' + this.repeatDates().length + '번 걷기'))
+        : s.freq === 'once' ? '산책할 날을 골라 주세요' : !this.repeatDays().length ? '산책하는 요일을 골라 주세요' : s.start == null ? '시작하는 날을 골라 주세요' : '끝나는 날을 골라 주세요',
+      dateNext: () => { if (this.dateChosen()) this.go({}, 2); },
       wheels: [this.wheel('ap', this.AP, '오전 오후'), this.wheel('h', this.HOURS, '시'), this.wheel('m', this.MINS, '분')],
       initWheels: (e) => { const box = e.currentTarget.parentNode; if (!box) return; box.querySelectorAll('.rb-wheel').forEach((c) => { c.scrollTop = Number(c.getAttribute('data-idx')) * 44; }); },
       timeLabel: this.timeText() + '부터 걷기',
