@@ -939,3 +939,42 @@ main:has(+ .md-bottomnav) { padding-bottom: 96px !important; }
 /* ---- Content scrolling under the floating tab bar fades out before the screen edge instead of showing a cut line ---- */
 :has(> main + .md-bottomnav)::after, :has(> main + .md-fab + .md-bottomnav)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 104px; z-index: 14; pointer-events: none; background: linear-gradient(to bottom, transparent, var(--bg-layer-default) 72%); }
 main:has(+ .md-fab + .md-bottomnav) { padding-bottom: 96px !important; }
+
+/* ---- 1R home: what fills the space under the first question (design/ux-research.md, owner's pick "다") ----
+   A big self-walk button, then two blocks whose order follows the guardian: my dog's news first for someone
+   who has booked before, the neighbourhood first (and alone) for someone new. They fold away once a dog is picked. */
+.rb-dog--add { align-items: center; justify-content: center; aspect-ratio: 1; padding: 16px; border-radius: var(--r4); background: var(--bg-neutral-weak); text-decoration: none; text-align: center; }
+.rb-dog--add svg { width: 28px; height: 28px; margin-bottom: 8px; color: var(--fg-neutral-muted); }
+.rb-selfbtn { --press: 0.98; display: grid; grid-template-columns: 44px minmax(0, 1fr) 20px; align-items: center; gap: 12px; min-height: 72px; padding: 12px 16px; border-radius: var(--r4); background: var(--bg-neutral-weak); color: var(--fg-neutral); text-decoration: none; }
+.rb-selfbtn:active { background: var(--bg-neutral-weak-pressed); }
+.rb-selfbtn__ico { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--full); background: var(--bg-layer-default); color: var(--fg-brand); }
+.rb-selfbtn__ico svg { width: 22px; height: 22px; }
+.rb-selfbtn__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rb-selfbtn__text b { font: 700 1.0625rem/1.4375rem var(--font-display, var(--font-sans)); }
+.rb-selfbtn__text small { font: 400 0.8125rem/1.125rem var(--font-sans); color: var(--fg-neutral-muted); }
+.rb-chev { width: 20px; height: 20px; color: var(--fg-neutral-subtle); flex: none; }
+
+.rb-home { display: flex; flex-direction: column; gap: 24px; padding: 4px 16px 24px; max-height: 960px; }
+.rb-home--fold { overflow: hidden; animation: rb-fold-away 320ms var(--ease-out-expo) forwards; pointer-events: none; }
+@keyframes rb-fold-away { to { opacity: 0; transform: translateY(12px); max-height: 0; padding-top: 0; padding-bottom: 0; } }
+
+.rb-card { --press: 0.98; display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: var(--r4); background: var(--bg-layer-basement); color: var(--fg-neutral); text-decoration: none; }
+.rb-card__label { font: 500 0.8125rem/1.125rem var(--font-sans); color: var(--fg-neutral-muted); }
+.rb-card__row { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto 20px; align-items: center; gap: 12px; }
+.rb-card__row img { width: 56px; height: 56px; border-radius: var(--r3); }
+.rb-card__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rb-card__text b { font: 700 1.0625rem/1.4375rem var(--font-display, var(--font-sans)); }
+.rb-card__text span { font: 400 0.875rem/1.1875rem var(--font-sans); color: var(--fg-neutral-muted); }
+
+.rb-hood { display: flex; flex-direction: column; gap: 12px; }
+.rb-hood__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: inherit; text-decoration: none; }
+.rb-hood__head h2 { margin: 0; font: 700 1.0625rem/1.4375rem var(--font-display, var(--font-sans)); }
+.rb-hood__dogs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.rb-hood__dog { --press: 0.96; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--fg-neutral); text-decoration: none; font: 500 0.8125rem/1.125rem var(--font-sans); }
+.rb-hood__dog img { width: 64px; height: 64px; border-radius: var(--full); }
+.rb-hood__review { margin: 4px 0 0; padding: 16px; border-radius: var(--r4); background: var(--bg-layer-basement); display: flex; flex-direction: column; gap: 8px; }
+.rb-hood__review blockquote { margin: 0; font: 400 0.9375rem/1.375rem var(--font-sans); }
+.rb-hood__review figcaption { font: 400 0.8125rem/1.125rem var(--font-sans); color: var(--fg-neutral-muted); }
+
+main .rb-cta { box-shadow: none; padding: 8px 16px 24px; }
+@media (prefers-reduced-motion: reduce) { .rb-home--fold { animation: none; display: none; } }

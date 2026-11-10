@@ -52,6 +52,11 @@ The locked system. Every Hallmark run reads this first and pages share it. Chang
 ## Direction under review (owner, 2026-11-09)
 The owner finds the current screens unconvincing overall and wants the next pass to follow apps that feel obvious to use: Toss (bold motion that reads as professional), KREAM, Apple's built-in apps, Karrot. Plain, intuitive structure where each screen says exactly what it is.
 
+## Booking home (decided 2026-11-10)
+- The booking screen is the step flow (1R), chosen in a blind test; its 시터 찾기 button sits at the end of the flow, not pinned (second blind test, small phones).
+- Under the first question: a full-width neutral 직접 산책 나가기 button, then two blocks whose order follows the guardian. Someone who has booked before sees their dog's news first (the upcoming walk, or the last walk record) and then the neighbourhood; someone new sees only the neighbourhood (today's walked dogs and one guardian review). The blocks fold away once a dog is picked.
+- No sitter counts before the search, no discount, points or video banners (Wayo's home was reviewed and these were left out).
+
 ## Signature (unslop pass, 2026-11-10)
 - The logo's smiling path is the one signature: the walk route on the booking screen's preview card is drawn with the same arc. Short captions end without a period; text at 17px and under keeps zero tracking.
 

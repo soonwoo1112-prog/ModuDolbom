@@ -17,7 +17,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </helmet>
 <div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
 <header class="md-topnav md-topnav--root">
-<h1 style="margin: 0;"><button class="md-topnav__location md-pressable" type="button" aria-label="동네 바꾸기, 지금 역삼동">역삼동<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></h1>
+<h1 style="margin: 0; display: flex; align-items: center; gap: 8px;"><img class="md-logo" src="img/logo/mark.svg" alt="모두돌봄" style="height: 24px; width: auto; display: block;"><button class="md-topnav__location md-pressable" type="button" aria-label="동네 바꾸기, 지금 역삼동">역삼동<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></h1>
 <a class="md-iconbtn md-pressable" href="Notifications.dc.html" aria-label="알림"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></svg></a>
 </header>
 <main style="flex: 1; overflow-y: auto;">
@@ -29,9 +29,10 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <sc-if value="{{sub}}" hint-placeholder-val="{{ false }}"><p class="rb-sub">{{sub}}</p></sc-if>
 
 <sc-if value="{{isDog}}" hint-placeholder-val="{{ true }}"><div class="rb-dogs">
+<sc-if value="{{noDogs}}" hint-placeholder-val="{{ false }}"><a class="rb-dog rb-dog--add md-pressable" href="DogEdit.dc.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg><b>강아지 등록하기</b><small>이름과 사진이면 충분해요</small></a></sc-if>
 <sc-for list="{{dogs}}" as="g" hint-placeholder-count="2"><button class="rb-dog md-pressable" type="button" aria-pressed="{{g.on}}" onClick="{{g.pick}}"><img class="md-photo" src="{{g.photo}}" alt="" style="object-position: {{g.focus}};"><b>{{g.name}}</b><small>{{g.meta}}</small></button></sc-for>
 </div>
-<a class="rb-self" href="GuardianWalk.dc.html">오늘은 내가 걸어요, 내 산책 기록하기</a></sc-if>
+<sc-if value="{{hasDogs}}" hint-placeholder-val="{{ true }}"><a class="rb-selfbtn md-pressable" href="GuardianWalk.dc.html"><span class="rb-selfbtn__ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /><path d="M16 17h4" /><path d="M4 13h4" /></svg></span><span class="rb-selfbtn__text"><b>직접 산책 나가기</b><small>내가 걸으면서 기록해요</small></span><svg class="rb-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></a></sc-if></sc-if>
 
 <sc-if value="{{isDate}}" hint-placeholder-val="{{ false }}">
 <div class="md-seg" role="group" aria-label="한 번 또는 반복"><sc-for list="{{freqs}}" as="f" hint-placeholder-count="2"><button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
@@ -58,8 +59,15 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 
 <sc-if value="{{isReady}}" hint-placeholder-val="{{ false }}"><p class="rb-note">픽업 안내: {{pickup}}</p></sc-if>
 </section>
-</main>
+<sc-if value="{{showHome}}" hint-placeholder-val="{{ true }}"><div class="{{homeCls}}">
+<sc-if value="{{showMine}}" hint-placeholder-val="{{ true }}"><a class="rb-card md-pressable" href="{{mine.href}}" style="order: {{mineOrder}};"><small class="rb-card__label">{{mine.label}}</small><span class="rb-card__row"><img class="md-photo" src="img/bori.jpg" alt=""><span class="rb-card__text"><b class="md-num">{{mine.title}}</b><span class="md-num">{{mine.sub}}</span></span><sc-if value="{{mine.badge}}" hint-placeholder-val="{{ true }}"><span class="md-badge md-badge--brand">{{mine.badge}}</span></sc-if><svg class="rb-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a></sc-if>
+<section class="rb-hood" aria-labelledby="rb-hood-t" style="order: {{hoodOrder}};"><a class="rb-hood__head md-pressable" href="SocialFeed.dc.html"><h2 id="rb-hood-t">오늘 역삼동에서 산책한 강아지</h2><svg class="rb-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></a>
+<div class="rb-hood__dogs"><sc-for list="{{hoodDogs}}" as="h" hint-placeholder-count="4"><a class="rb-hood__dog md-pressable" href="SocialFeed.dc.html"><img class="md-photo" src="{{h.photo}}" alt=""><span>{{h.name}}</span></a></sc-for></div>
+<sc-if value="{{showReview}}" hint-placeholder-val="{{ false }}"><figure class="rb-hood__review"><blockquote>산책 소식이 시간마다 와서 회사에서도 마음이 놓였어요. 다른 강아지를 보면 짖는 걸 알고 일부러 조용한 길로 돌아 주셨대요.</blockquote><figcaption>보리네 보호자, 김하늘 시터 후기, 11월 3일</figcaption></figure></sc-if>
+</section>
+</div></sc-if>
 <sc-if value="{{showCta}}" hint-placeholder-val="{{ false }}"><div class="rb-cta"><sc-if value="{{isReady}}" hint-placeholder-val="{{ true }}"><a class="md-btn md-btn--brand md-btn--large md-pressable" href="Matching.dc.html" style="box-sizing: border-box;">시터 찾기</a></sc-if><sc-if value="{{isRepeatNext}}" hint-placeholder-val="{{ false }}"><button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{next}}" disabled="{{noWeek}}">다음</button></sc-if></div></sc-if>
+</main>
 <nav class="md-bottomnav" aria-label="보호자 메뉴">
 <a class="md-tab md-pressable" href="MainR.dc.html" aria-current="page" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="4" r="2" /><circle cx="18" cy="8" r="2" /><circle cx="20" cy="16" r="2" /><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" /></svg>예약</a>
 <a class="md-tab md-pressable" href="GuardianChatList.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>채팅</a>
@@ -69,7 +77,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </nav>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+<script type="text/x-dc" data-dc-script data-props='{"guardian":{"editor":"enum","options":["booked","returning","new"],"default":"booked"},"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
@@ -81,7 +89,7 @@ class Component extends DCLogic {
     this.LENS = [['30분', '짧게 동네 한 바퀴'], ['60분', '공원까지 다녀오기'], ['90분', '넉넉하게 오래']];
     this.ADDRS = [{ label: '집', line: '서울 강남구 역삼로 123, 101동' }, { label: '부모님 댁', line: '서울 서초구 반포대로 45, 3동' }];
   }
-  go(patch, step) { this.setState(Object.assign({}, patch, { step: step })); }
+  go(patch, step) { this.setState(Object.assign({}, patch, { step: step, fromHome: this.state.step === 0 })); }
   dateText() {
     const s = this.state;
     if (s.freq === 'repeat') { const w = this.WEEK.filter((d) => s.weeks[d]); return '매주 ' + w.join(', '); }
@@ -107,13 +115,25 @@ class Component extends DCLogic {
     ].filter(Boolean).filter((a) => a[2] < s.step || s.step === 5);
     const newest = answered.length ? answered[answered.length - 1][2] : -1;
     const repeatPicked = this.WEEK.some((d) => s.weeks[d]);
+    const who = this.props.guardian || 'booked';
+    const isNew = who === 'new';
+    const MINE = who === 'booked'
+      ? { href: 'Chat.dc.html', label: '다가오는 산책', title: '보리, 오늘 오후 12:30', sub: '김하늘 시터, 30분', badge: '확정' }
+      : { href: 'GuardianLog.dc.html', label: '지난 산책', title: '보리, 11월 3일 점심 산책', sub: '30분, 1.92km, 김하늘 시터', badge: '' };
     return {
+      noDogs: isNew, hasDogs: !isNew,
+      showHome: s.step === 0 || (s.step === 1 && !!s.fromHome),
+      homeCls: 'rb-home' + (s.step === 0 ? '' : ' rb-home--fold'),
+      showMine: !isNew, mine: MINE,
+      mineOrder: isNew ? 2 : 1, hoodOrder: isNew ? 1 : 2,
+      showReview: isNew,
+      hoodDogs: [['구름', 'img/gureum.jpg'], ['두부', 'img/dubu.jpg'], ['보리', 'img/bori.jpg'], ['콩이', 'img/kong.jpg']].map(([name, photo]) => ({ name: name, photo: photo })),
       hasDone: answered.length > 0,
       done: answered.map((a) => ({ label: a[0], value: a[1], cls: a[2] === newest && s.step !== 5 ? 'rb-new' + (s.step % 2 ? 'a' : 'b') : '', edit: () => this.setState({ step: a[2] }) })),
       qCls: 'rb-q rb-q' + (s.step % 2 ? 'a' : 'b'),
       title: Q[s.step][0], sub: Q[s.step][1],
       isDog: s.step === 0, isDate: s.step === 1, isTime: s.step === 2, isLen: s.step === 3, isAddr: s.step === 4, isReady: s.step === 5,
-      dogs: this.DOGS.map((g, i) => ({ name: g.name, photo: g.photo, focus: g.focus, meta: g.meta, on: s.dog === i, pick: () => this.go({ dog: i }, 1) })),
+      dogs: (isNew ? [] : this.DOGS).map((g, i) => ({ name: g.name, photo: g.photo, focus: g.focus, meta: g.meta, on: s.dog === i, pick: () => this.go({ dog: i }, 1) })),
       freqs: [['once', '한 번'], ['repeat', '매주 반복']].map(([k, label]) => ({ label: label, on: s.freq === k, pick: () => this.setState({ freq: k }) })),
       isOnce: s.freq === 'once', isRepeat: s.freq === 'repeat',
       days: this.DAYS.map((d, i) => ({ week: i === 0 ? '오늘' : d[0], num: d[1], aria: '11월 ' + d[1] + '일 ' + d[0] + '요일', on: s.day === i, pick: () => this.go({ day: i }, 2) })),
