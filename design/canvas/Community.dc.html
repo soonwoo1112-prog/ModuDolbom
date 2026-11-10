@@ -29,7 +29,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <button class="md-chip md-pressable" type="button" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}" style="flex: none;"><span>{{c.label}}</span></button>
 </sc-for>
 </div>
-<main style="flex: 1; overflow-y: auto;">
+<main style="flex: 1; overflow-y: auto;" onScroll="{{onFeedScroll}}">
 <div class="md-list">
 <sc-for list="{{posts}}" as="p" hint-placeholder-count="4">
 <a class="md-item md-item--top md-pressable" href="Community.dc.html" style="grid-template-columns: minmax(0, 1fr) auto; box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle);">
@@ -49,7 +49,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <section class="md-result"><h3 class="md-section-title">아직 올라온 이야기가 없어요</h3><p>역삼동 이웃에게 처음으로 이야기를 남겨 보세요.</p></section>
 </sc-if>
 </main>
-<button class="md-btn md-btn--brand md-pressable" type="button" style="position: absolute; right: 16px; bottom: 72px; border-radius: var(--full); min-height: 48px; padding: 0 16px; box-shadow: var(--shadow-floating);"><svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>글쓰기</button>
+<a class="md-btn md-btn--brand md-pressable md-fab" href="Compose.dc.html" data-compact="{{fabCompact}}" aria-label="글쓰기" style="text-decoration: none; position: absolute; right: 16px; bottom: 72px;"><svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg><span class="md-fab__label">글쓰기</span></a>
 <nav class="md-bottomnav" aria-label="보호자 메뉴">
 <a class="md-tab md-pressable" href="Main.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="4" r="2" /><circle cx="18" cy="8" r="2" /><circle cx="20" cy="16" r="2" /><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z" /></svg>예약</a>
 <a class="md-tab md-pressable" href="GuardianChatList.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>채팅</a>
@@ -66,6 +66,12 @@ class Component extends DCLogic {
     this.state = { cat: '전체' };
   }
   renderVals() {
+    return Object.assign(this.feedVals(), {
+      fabCompact: !!this.state.compact,
+      onFeedScroll: (e) => { const c = e.currentTarget.scrollTop > 8; if (c !== !!this.state.compact) this.setState({ compact: c }); }
+    });
+  }
+  feedVals() {
     const all = [
       { cat: '잃어버렸어요', title: '하얀 말티즈를 찾고 있어요', body: '오늘 오전 9시쯤 역삼공원 정문 근처에서 잃어버렸어요. 빨간 목줄을 하고 있어요. 보신 분은 댓글 남겨 주세요.', place: '역삼동', time: '20분 전', comments: 6, hasPhoto: true },
       { cat: '추천', title: '강아지와 들어갈 수 있는 카페 있나요', body: '테라스 말고 실내에도 함께 들어갈 수 있는 곳을 찾고 있어요.', place: '역삼동', time: '1시간 전', comments: 4, hasPhoto: false },

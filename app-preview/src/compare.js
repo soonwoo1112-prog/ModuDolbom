@@ -5,8 +5,9 @@ import { Board } from './player.js';
 
 export const PAIRS = [
   { id: 'booking', label: '예약 첫 화면', a: 'Main', b: 'MainR' },
+  { id: 'booking-cta', label: '예약 첫 화면 버튼 위치 (작은 폰)', a: 'Main', b: 'MainS' },
 ];
-const KEY = 'modudolbom-compare-v3';
+const KEY = 'modudolbom-compare-v4';
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } };
 const save = (v) => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { /* private mode: keep in memory */ } };
 const fresh = () => ({ order: PAIRS.map(() => Math.random() < 0.5), step: 0, answers: {} });

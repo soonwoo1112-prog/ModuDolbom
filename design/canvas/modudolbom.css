@@ -928,3 +928,14 @@ main:has(+ .md-bottomnav) { padding-bottom: 96px !important; }
 .bk-moment__end { fill: var(--fg-brand); }
 @keyframes bk-route { to { stroke-dashoffset: 0; } }
 @media (prefers-reduced-motion: reduce) { .bk-moment__path { animation: none; stroke-dashoffset: 0; } }
+
+/* ---- Write button: a labelled pill at rest; once the feed scrolls it folds to a 48px circle so it covers less of the photos (Karrot's extended FAB) ---- */
+.md-fab { z-index: 15; min-height: 48px; padding: 0 16px; gap: 0; border-radius: var(--full); box-shadow: var(--shadow-floating); overflow: hidden; transition: padding 220ms var(--ease-out-expo), background-color 150ms var(--ease-easing); }
+.md-fab .md-fab__label { display: inline-block; max-width: 4.5em; margin-left: 6px; white-space: nowrap; transition: max-width 220ms var(--ease-out-expo), opacity 160ms var(--ease-easing), margin 220ms var(--ease-out-expo); }
+.md-fab[data-compact="true"] { padding: 0 15px; }
+.md-fab[data-compact="true"] .md-fab__label { max-width: 0; margin-left: 0; opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .md-fab, .md-fab .md-fab__label { transition: none; } }
+
+/* ---- Content scrolling under the floating tab bar fades out before the screen edge instead of showing a cut line ---- */
+:has(> main + .md-bottomnav)::after, :has(> main + .md-fab + .md-bottomnav)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 104px; z-index: 14; pointer-events: none; background: linear-gradient(to bottom, transparent, var(--bg-layer-default) 72%); }
+main:has(+ .md-fab + .md-bottomnav) { padding-bottom: 96px !important; }

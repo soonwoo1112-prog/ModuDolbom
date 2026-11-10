@@ -449,6 +449,14 @@
       "w": 390,
       "x": 2820,
       "y": 6220
+    },
+    "MainS.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1S. 예약 (작은 폰 비교: 버튼을 스크롤 끝에)",
+      "w": 390,
+      "x": 470,
+      "y": 9952
     }
   },
   "createdOnFiles": {
@@ -612,6 +620,7 @@
     "SitterProfileT.dc.html",
     "SocialFeedT.dc.html",
     "MainR.dc.html",
+    "MainS.dc.html",
     "MainX.dc.html",
     "MatchingX.dc.html",
     "SentX.dc.html",
