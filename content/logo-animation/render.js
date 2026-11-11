@@ -11,7 +11,8 @@ const fs = require('fs');
 
 const FPS = 60;
 const DURATION = 3800; // ms
-const FONT_DIR = process.env.FONT_DIR || path.join(__dirname, 'fonts');
+// 디자인 시스템 project/fonts/SUIT-Variable.woff2 (OFL). setContent 페이지는 file:// 서체를 막으므로 data URL로 넣는다.
+const SUIT = 'data:font/woff2;base64,' + fs.readFileSync(path.join(__dirname, 'SUIT-Variable.woff2')).toString('base64');
 const INK = '#141a16'; // 디자인 시스템 워드마크 색
 
 const VARIANTS = {
@@ -36,7 +37,7 @@ function html(v, layer, alpha) {
   const markH = v.symbol * 1590 / 2000;
   const wordW = v.word * 3406 / 879 * 0.82; // 워드마크 높이를 글자 크기에 맞춤
   return `<!doctype html><html><head><meta charset="utf-8"><style>
-@font-face{font-family:P;font-weight:500;src:url(file://${FONT_DIR}/Pretendard-Medium.otf)}
+@font-face{font-family:S;font-weight:100 900;src:url(${SUIT}) format('woff2')}
 html,body{margin:0;width:${v.w}px;height:${v.h}px;background:${alpha ? 'transparent' : v.bg};overflow:hidden}
 .stage{position:absolute;left:0;right:0;top:${v.h * v.cy}px;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center}
 svg.mark{width:${v.symbol}px;height:${markH}px;overflow:visible;visibility:${showMark ? 'visible' : 'hidden'}}
@@ -68,7 +69,7 @@ svg.mark{width:${v.symbol}px;height:${markH}px;overflow:visible;visibility:${sho
 @keyframes nod{0%{transform:none}30%{transform:translateY(-18px) scale(1.035,.965)}62%{transform:translateY(4px) scale(.99,1.01)}100%{transform:none}}
 .word{margin-top:${v.word * 0.55}px;width:${wordW}px;animation:rise 620ms ${outE} 2380ms both;visibility:${showText ? 'visible' : 'hidden'}}
 .word svg{display:block;width:100%;height:auto}
-.tag{font-family:P;font-weight:500;color:${v.sub};font-size:${v.tag}px;line-height:1.3;letter-spacing:-0.01em;margin-top:${v.tag * 0.5}px;white-space:nowrap;animation:rise 620ms ${outE} 2540ms both;visibility:${showText ? 'visible' : 'hidden'}}
+.tag{font-family:S;font-weight:500;color:${v.sub};font-size:${v.tag}px;line-height:1.3;letter-spacing:-0.01em;margin-top:${v.tag * 0.5}px;white-space:nowrap;animation:rise 620ms ${outE} 2540ms both;visibility:${showText ? 'visible' : 'hidden'}}
 @keyframes rise{0%{opacity:0;transform:translateY(36px)}100%{opacity:1;transform:none}}
 </style></head><body><div class="stage">
 <svg class="mark" viewBox="0 0 2000 1590"><g id="mark" fill="${v.mark}">
@@ -97,6 +98,8 @@ svg.mark{width:${v.symbol}px;height:${markH}px;overflow:visible;visibility:${sho
   const p = await b.newPage({ viewport: { width: v.w, height: v.h }, deviceScaleFactor: 1 });
   await p.setContent(html(v, layer, alpha));
   await p.evaluate(() => document.fonts.ready);
+  const ok = await p.evaluate(() => [...document.fonts].every((f) => f.status === 'loaded'));
+  if (!ok && layer !== 'mark') throw new Error('SUIT 서체를 불러오지 못했어요');
   const n = Math.round(DURATION / 1000 * FPS);
   const frames = still ? [n - 1] : [...Array(n).keys()];
   for (const i of frames) {

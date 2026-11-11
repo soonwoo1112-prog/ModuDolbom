@@ -1,6 +1,5 @@
 #!/bin/bash
 # Higgsfield(Seedance 2.0 Mini) 로고 영상 + 정확한 벡터 로고와 워드마크 합성.
-# 필요: ../render.js 와 ../fonts (../build.sh 를 한 번 돌리면 준비됨)
 set -e
 R=$(cd "$(dirname "$0")" && pwd); cd "$R"
 XF=4.45     # AI 마크 → 벡터 마크 크로스페이드 시작(초)

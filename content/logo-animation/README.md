@@ -44,7 +44,7 @@
 ```
 
 - `render.js`: Playwright로 HTML/SVG 애니메이션을 프레임마다 멈춰 PNG로 렌더합니다. 타이밍과 색, 크기는 이 파일에서 바꿉니다.
-- `build.sh`: Pretendard Medium을 npm에서 받아오고, 네 가지 버전을 렌더한 뒤 ffmpeg로 mp4를 만듭니다.
+- `build.sh`: 네 가지 버전을 렌더한 뒤 ffmpeg로 mp4를 만듭니다.
 - 색: 마크 `#00733a`, 워드마크 `#141a16`(디자인 시스템 에셋 그대로), 태그라인 `fg-neutral-muted`.
-- 워드마크는 디자인 시스템의 SUIT 워드마크 SVG 패스를 그대로 씁니다. 태그라인만 Pretendard Medium입니다.
+- 워드마크는 디자인 시스템의 SUIT 워드마크 SVG 패스를 그대로 씁니다. 태그라인은 디자인 시스템 서체 SUIT(`SUIT-Variable.woff2`, OFL) Medium 500입니다.
 - 디자인 시스템은 앱 화면에 "튀어 오르는 스프링은 쓰지 않습니다"라고 정했지만, 이 로고 모션은 광고·릴스용이라 일부러 과장된 탄성을 썼습니다.
