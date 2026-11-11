@@ -1,5 +1,6 @@
 // 모두돌봄 로고 팝업 모션 (젤리 없음): 프레임을 PNG로 렌더한다.
-// node render.js <reel|square> <outDir> [--scale=2] [--still]
+// node render.js <reel|square> <outDir> [--scale=2] [--still] [--overlay]
+//   --overlay: 투명 바탕. 마크는 아래 장면 위에 바로 그려지고, 1.50~2.05초에 흰 바탕이 아래에서 올라온 뒤 글자가 나온다.
 //   reel: 1080×1920, square: 1080×1080 (CSS px). --scale=2 이면 2160×3840 / 2160×2160.
 // 최종 레이아웃은 lockup-tagline-1280.png(1280×1280)와 픽셀 단위로 같다.
 const { chromium } = require('playwright');
@@ -25,14 +26,15 @@ const BOX = {
 
 const CANVAS = { reel: { w: 1080, h: 1920 }, square: { w: 1080, h: 1080 } };
 
-function html(c) {
+function html(c, overlay) {
   const s = c.w / 1280;                 // 1280 정사각 원본 → 캔버스 폭
   const oy = (c.h - 1280 * s) / 2;      // 정사각 원본을 세로 가운데에
   const markH = BOX.mark.w * 1590 / 2000;
   const wScale = BOX.word.w / 3348;
   return `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:S;font-weight:100 900;src:url(${SUIT}) format('woff2')}
-html,body{margin:0;width:${c.w}px;height:${c.h}px;background:#fff;overflow:hidden}
+html,body{margin:0;width:${c.w}px;height:${c.h}px;background:${overlay ? 'transparent' : '#fff'};overflow:hidden}
+#bg{position:absolute;inset:0;background:#fff;display:${overlay ? 'block' : 'none'}}
 #sq{position:absolute;left:0;top:${oy}px;width:1280px;height:1280px;transform-origin:0 0;transform:scale(${s})}
 #markWrap{position:absolute;left:${BOX.mark.x}px;top:${BOX.mark.y}px;width:${BOX.mark.w}px;height:${markH}px;transform-origin:50% 50%}
 #markWrap svg{display:block;width:100%;height:100%;overflow:visible}
@@ -40,7 +42,7 @@ html,body{margin:0;width:${c.w}px;height:${c.h}px;background:#fff;overflow:hidde
 #word{position:absolute;left:${BOX.word.x - 30 * wScale}px;top:${BOX.word.y}px;width:${3406 * wScale}px}
 #word svg{display:block;width:100%;height:auto;transform-origin:0 0;transform:scaleY(0.968)} /* 원본 이미지의 워드마크 세로 비율 */
 #tag{position:absolute;left:0;top:0;width:1280px;height:1280px;overflow:visible}
-</style></head><body><div id="sq">
+</style></head><body><div id="bg"></div><div id="sq">
 <div id="markWrap"><svg viewBox="0 0 2000 1590"><g fill="${GREEN}">
 <circle id="person" class="p" cx="476.5" cy="476.5" r="476.5"/>
 <circle id="pad" class="p" cx="1514.5" cy="668" r="327"/>
@@ -74,8 +76,11 @@ function pop(id,start,dur){
     [{transform:'scale(0)',opacity:0,offset:0},{opacity:1,offset:.12},{transform:'scale(1)',opacity:1}],
     {duration:dur,delay:start,easing:POP,fill:'both'});
 }
-function build(){
+function build(overlay){
   fitTag();
+  if (overlay) document.getElementById('bg').animate(
+    [{transform:'translateY(100%)'},{transform:'none'}],
+    {duration:550,delay:1500,easing:'cubic-bezier(.65,0,.35,1)',fill:'both'});
   // 시작: 마크만 화면 가운데에 1.3배. 1.6초부터 최종 자리로 이동
   const s=${s}, oy=${oy}, ch=${c.h};
   const mcx=${BOX.mark.x + BOX.mark.w / 2}, mcy=${BOX.mark.y + markH / 2};
@@ -107,22 +112,23 @@ function build(){
   const [name, out] = args.filter((a) => !a.startsWith('--'));
   const scale = Number((args.find((a) => a.startsWith('--scale=')) || '--scale=1').split('=')[1]);
   const still = args.includes('--still');
+  const overlay = args.includes('--overlay');
   const c = CANVAS[name];
   if (!c || !out) throw new Error('usage: node render.js <reel|square> <outDir> [--scale=2] [--still]');
   fs.mkdirSync(out, { recursive: true });
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: c.w, height: c.h }, deviceScaleFactor: scale });
-  await p.setContent(html(c));
+  await p.setContent(html(c, overlay));
   await p.evaluate(() => document.fonts.load('700 40px S'));
   const ok = await p.evaluate(() => document.fonts.check('700 40px S', '이웃과 나란히 걷는 산책'));
   if (!ok) throw new Error('SUIT 서체를 불러오지 못했어요');
-  await p.evaluate(() => build());
+  await p.evaluate((o) => build(o), overlay);
   const n = Math.round(DURATION / 1000 * FPS);
   const frames = still ? [n - 1] : [...Array(n).keys()];
   for (const i of frames) {
     const t = i * 1000 / FPS;
     await p.evaluate((t) => document.getAnimations().forEach((a) => { a.pause(); a.currentTime = t; }), t);
-    await p.screenshot({ path: path.join(out, String(i).padStart(4, '0') + '.png') });
+    await p.screenshot({ path: path.join(out, String(i).padStart(4, '0') + '.png'), omitBackground: overlay });
   }
   await b.close();
 })();
