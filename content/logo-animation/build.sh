@@ -4,7 +4,7 @@ set -e
 R=$(cd "$(dirname "$0")" && pwd); cd "$R"
 if [ ! -f fonts/Pretendard-Bold.otf ]; then
   mkdir -p fonts .tmp && (cd .tmp && npm pack pretendard@1.3.9 --silent >/dev/null && tar xzf pretendard-1.3.9.tgz)
-  cp .tmp/package/dist/public/static/Pretendard-{Bold,Medium}.otf fonts/
+  cp .tmp/package/dist/public/static/Pretendard-Medium.otf fonts/
 fi
 mkdir -p out
 for v in reel-light reel-brand square-light square-brand; do
