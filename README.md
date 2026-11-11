@@ -37,6 +37,7 @@
 |---|---|
 | [서비스 컨셉](docs/concept.md) | 배경, 기존 대안의 한계, 동네 기반 아이디어, 경쟁사와의 차이 |
 | **제품** | |
+| [첫 출시 범위](docs/product/mvp-scope.md) | v1에 넣을 기능, 놓치기 쉬운 화면, 로그인·결제·GPS 등 기술 과제 |
 | [앱 화면 구성](docs/product/app-structure.md) | 보호자·시터 화면의 탭별 구성 |
 | [매칭](docs/product/matching.md) | 예약 흐름, 후보 선정 기준, 시터 분석 페이지 |
 | [동네 소셜](docs/product/social.md) | 산책 로그 피드, 커뮤니티, 게시 권한 |
