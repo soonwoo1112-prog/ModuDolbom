@@ -20,16 +20,23 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <h1 class="md-topnav__title">채팅</h1>
 <span></span>
 </header>
-<div class="chip-scroll" role="group" aria-label="대화 나눠 보기"><sc-for list="{{filters}}" as="c" hint-placeholder-count="7"><button class="md-chip md-pressable" type="button" aria-pressed="{{c.on}}" onClick="{{c.pick}}"><span>{{c.label}}<b>{{c.count}}</b></span></button></sc-for></div>
 <main style="flex: 1; overflow-y: auto;">
-<sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
-<a class="md-item md-pressable" href="SitterChat.dc.html" style="box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle);">
-<sc-if value="{{r.f}}" hint-placeholder-val="{{ true }}"><img class="md-photo" src="{{r.src}}" alt="" style="width: 52px; height: 52px; border-radius: var(--full);"></sc-if><sc-if value="{{r.noPhoto}}" hint-placeholder-val="{{ false }}"><span class="md-initial md-initial--peach" style="width: 52px; height: 52px; font-size: 1.3125rem; border-radius: var(--full);">몽</span></sc-if>
-<span class="md-item__body"><span class="md-item__head"><span class="md-list-title">{{r.name}}</span><span class="{{r.cls}}">{{r.status}}</span></span><span class="md-item__muted" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{r.last}}</span></span>
-<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;"><span class="md-tagtext">{{r.when}}</span><sc-if value="{{r.unread}}" hint-placeholder-val="{{ false }}"><span class="md-nbadge">{{r.unread}}</span></sc-if></span>
+<p class="cl-intro">예약마다 그 예약의 대화를 모았어요. 가까운 산책부터 보여요.</p>
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+<section class="cl-group" aria-label="{{g.aria}}">
+<sc-if value="{{g.heading}}" hint-placeholder-val="{{ false }}"><div class="md-list-header">{{g.heading}}</div></sc-if>
+<a class="cl-booking md-pressable" href="{{g.href}}">
+<span class="cl-booking__ph"><img class="md-photo" src="{{g.photo}}" alt=""></span>
+<span class="cl-booking__text"><b class="md-num">{{g.title}}</b><span class="md-num">{{g.when}}</span><small class="md-num">{{g.detail}}</small></span>
+<span class="{{g.badgeCls}}">{{g.status}}</span>
 </a>
+<a class="md-item md-pressable cl-chat" href="SitterChat.dc.html" data-closed="{{g.past}}">
+<span class="md-initial md-initial--{{g.tint}}" role="img" aria-label="{{g.who}} 사진 자리" style="width: 48px; height: 48px; font-size: 1.1875rem; border-radius: var(--full);">{{g.first}}</span>
+<span class="md-item__body"><span class="md-list-title">{{g.who}}</span><span class="md-item__muted" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{g.last}}</span></span>
+<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;"><span class="md-tagtext">{{g.at}}</span><sc-if value="{{g.unread}}" hint-placeholder-val="{{ false }}"><span class="md-nbadge">{{g.unread}}</span></sc-if></span>
+</a>
+</section>
 </sc-for>
-<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><section class="md-result"><p>{{emptyText}}</p></section></sc-if>
 </main>
 <nav class="md-bottomnav" aria-label="시터 메뉴">
 <a class="md-tab md-pressable" href="SitterToday.dc.html" style="text-decoration: none;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg>오늘</a>
@@ -42,19 +49,20 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
-  constructor(props) {
-    super(props);
-    this.state = { filter: 'all' };
-  }
   renderVals() {
-    const all = [{ key: 'wait', unread: 1, html: true, f: "bori", name: '보리네 보호자', last: "새 요청이에요. 11월 7일 (토) 오후 12:30, 30분", when: '방금', status: '대기 중', cls: 'md-badge md-badge--info' }, { key: 'confirmed', unread: 0, html: true, f: "kong", name: '콩이네 보호자', last: "오늘도 잘 부탁드려요.", when: '오전 10:12', status: '확정', cls: 'md-badge md-badge--brand-solid' }, { key: 'active', unread: 2, html: true, f: "dubu", name: '두부네 보호자', last: "그늘 많은 길로 부탁드려요!", when: '어제', status: '진행 중', cls: 'md-badge md-badge--outline' }, { key: 'past', unread: 0, html: true, f: "gureum", name: '구름이네 보호자', last: "오늘도 감사했어요. 다음 주에 또 부탁드려요.", when: '11월 1일', status: '지난 대화', cls: 'md-badge' }, { key: 'archived', unread: 0, html: true, f: null, name: '몽이네 보호자', last: "일정이 안 맞아 다음에 연락드릴게요.", when: '10월 20일', status: '보관함', cls: 'md-badge' }];
-    const F = [['all', '전체'], ['unread', '안 읽음'], ['wait', '대기 중'], ['active', '진행 중'], ['confirmed', '확정'], ['past', '지난 대화'], ['archived', '보관함']];
-    const match = (r, k) => k === 'all' ? r.key !== 'archived' : k === 'unread' ? r.unread > 0 : r.key === k;
-    const rows = all.filter((r) => match(r, this.state.filter)).map((r) => Object.assign({}, r, { src: r.f ? 'img/' + r.f + '.jpg' : '', noPhoto: !r.f }));
-    return {
-      filters: F.map(([k, l]) => ({ label: l, count: all.filter((r) => match(r, k)).length, on: this.state.filter === k, pick: () => this.setState({ filter: k }) })),
-      rows: rows, empty: rows.length === 0, emptyText: '이 보기에 해당하는 대화가 없어요.'
-    };
+    const tint = (name) => ['sand', 'sky', 'moss', 'peach'][[...name].reduce((a, c) => a + c.charCodeAt(0), 0) % 4];
+    // Today's walks nearest first (the same walks as the 오늘 tab), then finished ones.
+    const B = [
+      { dog: '보리', photo: 'img/bori.jpg', when: '오늘 오후 12:30', detail: '30분, 역삼로 123, 15,000원', status: '새 요청', badgeCls: 'md-badge md-badge--info', href: 'SitterRequest.dc.html', who: '보리네 보호자', last: '새 요청이에요. 확정 전에 궁금한 걸 물어보세요', at: '방금', unread: 1 },
+      { dog: '콩이', photo: 'img/kong.jpg', when: '오늘 오후 2:00', detail: '30분, 역삼로 123 103동', status: '확정', badgeCls: 'md-badge md-badge--brand', href: 'SitterChat.dc.html', who: '콩이네 보호자', last: '오늘도 잘 부탁드려요.', at: '오전 10:12', unread: 0 },
+      { dog: '두부', photo: 'img/dubu.jpg', when: '오늘 오후 6:30', detail: '60분, 역삼로 123 101동', status: '확정', badgeCls: 'md-badge md-badge--brand', href: 'SitterChat.dc.html', who: '두부네 보호자', last: '그늘 많은 길로 부탁드려요!', at: '어제', unread: 2 },
+      { dog: '구름', photo: 'img/gureum.jpg', when: '오늘 오전 10:00', detail: '30분, 1.9km, 기록 보냄', status: '끝남', badgeCls: 'md-badge', href: 'SitterChat.dc.html', who: '구름이네 보호자', last: '오늘도 감사했어요. 다음 주에 또 부탁드려요.', at: '오전 10:40', unread: 0, past: true }
+    ];
+    return { groups: B.map((b, i) => Object.assign({}, b, {
+      title: b.dog + ' 산책', first: b.who[0], tint: tint(b.who), past: !!b.past,
+      heading: b.past && (i === 0 || !B[i - 1].past) ? '끝난 산책' : '',
+      aria: b.dog + ', ' + b.when + ', ' + b.status
+    })) };
   }
 }
 </script>

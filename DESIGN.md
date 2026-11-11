@@ -59,6 +59,7 @@ The owner finds the current screens unconvincing overall and wants the next pass
 - The sitter list repeats the chosen conditions on top and prices each sitter for them from the profile price list (60분 is 1.7 times, each extra dog half the 30분 price); 90분 is agreed in chat.
 - The guardian chat list is grouped by booking, nearest date first: each booking's details (dogs, dates, time, length, status), then the chats that booking opened.
 - 요청 현황 is reachable from the home's 보낸 요청 card and from a pending booking in the chat list; each requested sitter is a plain row that opens its chat (no button per row).
+- The sitter side follows the same patterns: the 오늘 tab's request uses the small 대화하기 and 거절 pills, the request detail has one 대화하기 button with a quiet 거절 text button, and the sitter chat list is grouped by walk, nearest first, with finished walks last.
 - Both chats share one booking bar: the booking in one line, then three equal 36px pills (확정 or its state, 수정, 정보) with a 44px tap area; only the confirm pill is green.
 - Sending requests ends on a completion screen whose main button is 홈으로 가기, since replies take a while; the home then shows the sent request as its first card.
 - No sitter counts before the search, no discount, points or video banners (Wayo's home was reviewed and these were left out).
