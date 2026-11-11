@@ -473,6 +473,14 @@
       "w": 390,
       "x": 1410,
       "y": 9952
+    },
+    "LogoStack.dc.html": {
+      "h": 640,
+      "is_interactive": false,
+      "title": "로고: 세로형 (마크, 이름, 슬로건). Tweaks에서 크기·간격·색 조절",
+      "w": 640,
+      "x": 0,
+      "y": 12440
     }
   },
   "createdOnFiles": {
@@ -501,7 +509,8 @@
     "compose",
     "taste",
     "direction",
-    "research"
+    "research",
+    "brand"
   ],
   "notes": {
     "flow": {
@@ -583,6 +592,14 @@
       "w": 240,
       "x": 0,
       "y": 10896
+    },
+    "brand": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "브랜드: 세로형 로고",
+      "w": 240,
+      "x": 0,
+      "y": 12140
     }
   },
   "order": [
@@ -644,7 +661,8 @@
     "SentX.dc.html",
     "ChatX.dc.html",
     "WalkingX.dc.html",
-    "GuardianLogX.dc.html"
+    "GuardianLogX.dc.html",
+    "LogoStack.dc.html"
   ],
   "pages": [],
   "title": "모두돌봄 예약 흐름"

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>세로형 로고</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 640px; height: 640px; display: flex; align-items: center; justify-content: center; background: {{bg}};">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+<svg viewBox="0 0 2000 1590" role="img" aria-label="모두돌봄 로고 마크" style="display: block; width: {{markWidth}}px; height: auto;"><g fill="{{markColor}}"><circle cx="476.5" cy="476.5" r="476.5" /><circle cx="1514.5" cy="668" r="327" /><circle cx="1194" cy="268" r="124.5" /><circle cx="1524" cy="124.5" r="124.5" /><circle cx="1851" cy="268" r="124.5" /></g><path d="M120 1140A1300 1300 0 0 0 1880 1140" fill="none" stroke="{{markColor}}" stroke-width="224" stroke-linecap="round" /></svg>
+<h1 style="margin: {{gapMarkName}}px 0 0; font-family: var(--font-display); font-weight: {{nameWeight}}; font-size: {{nameSize}}px; line-height: 1.1; letter-spacing: {{nameTracking}}px; color: {{nameColor}};">모두돌봄</h1>
+<p style="margin: {{gapNameSlogan}}px 0 0; font-family: var(--font-display); font-weight: 500; font-size: {{sloganSize}}px; line-height: 1.4; letter-spacing: {{sloganTracking}}px; color: {{sloganColor}};">이웃과 나란히 걷는 산책</p>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tone":{"editor":"enum","options":["초록 마크, 검은 글자","모두 초록","흰색, 초록 바탕","다크 바탕"],"default":"초록 마크, 검은 글자","section":"색"},"markWidth":{"editor":"range","min":80,"max":400,"step":4,"unit":"px","default":200,"section":"크기"},"nameSize":{"editor":"range","min":24,"max":140,"step":2,"unit":"px","default":64,"section":"크기"},"sloganSize":{"editor":"range","min":10,"max":44,"step":1,"unit":"px","default":18,"section":"크기"},"gapMarkName":{"editor":"range","min":0,"max":120,"step":2,"unit":"px","default":24,"section":"간격"},"gapNameSlogan":{"editor":"range","min":0,"max":80,"step":1,"unit":"px","default":12,"section":"간격"},"nameWeight":{"editor":"enum","options":["700","800"],"default":"800","section":"글자"},"nameTracking":{"editor":"range","min":-6,"max":6,"step":0.5,"unit":"px","default":-1,"section":"글자"},"sloganTracking":{"editor":"range","min":-2,"max":4,"step":0.25,"unit":"px","default":0,"section":"글자"},"$preview":{"width":640,"height":640}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    // Colors from the logo files (design/brand/logo): forest #00733a, ink #141a16.
+    const TONES = {
+      '초록 마크, 검은 글자': { bg: '#ffffff', mark: '#00733a', name: '#141a16', slogan: '#5b625d' },
+      '모두 초록': { bg: '#ffffff', mark: '#00733a', name: '#00733a', slogan: '#3f7a57' },
+      '흰색, 초록 바탕': { bg: '#00733a', mark: '#ffffff', name: '#ffffff', slogan: 'rgba(255, 255, 255, 0.82)' },
+      '다크 바탕': { bg: '#141a16', mark: '#3fbf73', name: '#f2f5f3', slogan: '#a9b2ac' }
+    };
+    const t = TONES[p.tone] || TONES['초록 마크, 검은 글자'];
+    return {
+      bg: t.bg, markColor: t.mark, nameColor: t.name, sloganColor: t.slogan,
+      markWidth: p.markWidth ?? 200,
+      nameSize: p.nameSize ?? 64,
+      sloganSize: p.sloganSize ?? 18,
+      gapMarkName: p.gapMarkName ?? 24,
+      gapNameSlogan: p.gapNameSlogan ?? 12,
+      nameWeight: p.nameWeight ?? '800',
+      nameTracking: p.nameTracking ?? -1,
+      sloganTracking: p.sloganTracking ?? 0
+    };
+  }
+}
+</script>
+</body>
+</html>
