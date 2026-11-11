@@ -82,3 +82,46 @@ Exaggerated squash and stretch, snappy timing, natural physical easing, crisp ed
 - AI는 매번 결과가 다릅니다. 같은 프롬프트로도 시작의 철퍽 부분이 덜하거나 더할 수 있습니다.
 - 끝 프레임을 넣어도 마지막 몇 프레임의 모양이 조금 어긋날 수 있어, `build.sh`에서 4.45초부터 벡터 마크로 크로스페이드합니다.
 - 같은 날 뽑은 다른 결과(B)는 1.6~2.0초에 길이 일자 막대로 깨졌습니다. 길이 그려지는 구간은 꼭 프레임 단위로 확인하세요.
+
+---
+
+# 버전 2: 제자리 팝업 (낙하 없음)
+
+떨어지는 대신 빈 공간에서 제자리로 팝업합니다. 순서: 큰 원 → 작은 원 → 길 스와이프 → 쉼 → 발가락 셋 팝업 → 마지막 점프. 질감(젤리 같은 탄성)과 리듬은 버전 1을 따릅니다.
+
+## 타임라인
+
+| 시간 | 동작 |
+|---|---|
+| 0.00–0.25s | 빈 흰 화면 |
+| 0.25–0.85s | 큰 원: 제자리 중심의 점에서 팝업. 0.45s에 1.25배까지 넘쳤다가 0.9배 → 1.05배 → 1배로 젤리처럼 출렁이며 자리 잡음 |
+| 0.55–1.05s | 작은 원: 같은 방식으로 더 빠르게 팝업(1.3배 넘침). 터질 때 큰 원이 살짝 따라 출렁임 |
+| 1.05–1.45s | 길: 왼쪽 둥근 끝에서 시작해 호를 따라 오른쪽으로 한 번에 스와이프(약 0.35초, 빠르게 출발해 부드럽게 멈춤). 앞끝이 살짝 부풀고, 끝에서 조금 넘쳤다가 탄성 있게 돌아옴 |
+| 1.45–2.25s | 쉼(약 0.8초). 아주 미세한 숨쉬기만 |
+| 2.25 / 2.40 / 2.55s | 발가락 셋: 왼쪽 → 위 → 오른쪽 순서로 점에서 톡 팝업(1.4배 넘침 후 약 0.2초 만에 정착). 하나 터질 때마다 발바닥이 살짝 눌렸다 돌아옴 |
+| 2.85–3.60s | 완성된 로고 정지 |
+| 3.60–4.15s | 마지막 점프(선택): 다 같이 웅크렸다가 세로로 약 1.3배 늘어나고, 한 번 출렁인 뒤 정렬 |
+| 4.15–5.00s | 최종 로고로 고정 |
+
+## 붙여 넣는 프롬프트 (영문)
+
+```
+2D logo reveal motion graphic, 9:16, static locked-off camera, pure white seamless background, flat solid forest-green (#00733a) shapes, no text, no shadows, no extra objects, no particles. Nothing falls or enters from outside the frame: every shape pops into existence in place, growing out of a tiny point at its own center, like a soft elastic jelly balloon inflating with real weight and springiness.
+
+0.0–0.25s: empty white frame, completely still.
+0.25–0.85s: the BIG circle on the left pops out of a pinpoint at its center, overshoots to about 125% size at 0.45s, then wobbles like jelly (shrinks to 90%, swells to 105%) and settles to exact size.
+0.55–1.05s: the MEDIUM circle on the right pops out the same way but snappier, overshooting to about 130%; as it pops, the big circle gives a small sympathetic jiggle.
+1.05–1.45s: the thick SMILING PATH under both circles appears from its rounded left end and SWIPES along the curved arc to the right in one fast confident stroke (fast start, smooth stop), its leading tip slightly swollen; it overshoots a little past the right end and springs back. Both circles bounce slightly in reaction.
+1.45–2.25s: a clear pause, the mark almost still with only a barely visible breathing wobble.
+2.25–2.8s: the three small TOE dots above the medium circle POP up one by one, left at 2.25s, top at 2.40s, right at 2.55s; each one grows from a pinpoint, overshoots to about 140% and snaps to size within 0.2s, and each pop makes the medium circle squash slightly and bounce back. Now it reads as a dog paw beside a person, with a smile underneath.
+2.85–3.6s: the complete logo holds perfectly still.
+3.6–4.15s: one happy bounce: the whole mark squashes down wide, stretches up about 1.3x taller (the smile deepens), then settles with one small jiggle.
+4.15–5.0s: settles exactly into the final logo from the end frame and holds completely still.
+
+Exaggerated squash and stretch, snappy pop timing, natural elastic easing, crisp edges, exact final shapes, positions and colors.
+```
+
+## 넣는 재료
+
+- start_image: 빈 흰 화면, end_image: 마크만 있는 정지 프레임(버전 1과 같음)
+- video_references: 지금 코드 버전은 "위에서 떨어지는" 움직임이라 넣지 않거나, 팝업 버전으로 바꾼 참고 영상을 넣습니다. 떨어지는 참고 영상을 넣으면 낙하 동작이 섞여 나올 수 있습니다.
