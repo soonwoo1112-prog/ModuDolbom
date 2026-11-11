@@ -2,7 +2,8 @@
 
 An original fictional Korean man in his early 30s, an ordinary neighbor in a Seoul apartment complex who walks his dog after work.
 
-- `reference-sheet.png`: 2688×1520. Top row: front, three-quarter, side, back. Bottom row: neutral, gentle smile, laughing, surprised, concerned.
+- `reference-sheet-clean.png`: **이걸 쓰세요.** 운동화의 Nike 로고를 지운 버전(운동화 부분만 고쳐 원본에 다시 붙임, 나머지는 원본과 같음).
+- `reference-sheet.png`: 원본 2688×1520. Top row: front, three-quarter, side, back. Bottom row: neutral, gentle smile, laughing, surprised, concerned.
 - Made on Higgsfield with GPT Image 2.6, quality high, 2K, 16:9, text only. 2.75 credits.
 
 ## What came out (describe him like this in later prompts)
@@ -11,7 +12,7 @@ Slightly broad face with soft cheeks, single eyelids, small mole on his left che
 
 ## Known issues
 
-- **The sneakers show a Nike swoosh.** Do not use this sheet as is in ads. Edit it out, or add "plain unbranded sneakers with no logos or swoosh" when using it as a reference.
+- **원본(`reference-sheet.png`)의 운동화에 Nike 로고가 있습니다.** `reference-sheet-clean.png`를 쓰고, 프롬프트에도 "plain white-and-grey sneakers with no logos"를 넣으세요.
 - Side view: the watch shows on the near (right) wrist, which does not match the other views.
 - Close-ups are cut off at the chest with no bottom margin.
 
