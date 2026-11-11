@@ -42,6 +42,13 @@
   --bg-overlay: #00000080;
   --bg-transparent-pressed: #0000000f;
   --shadow-floating: 0 2px 10px rgba(0, 0, 0, 0.08);
+  /* added 2026-11-11: person stand-in tints, rating star, display face (design/system/tokens.json) */
+  --bg-tint-sand: oklch(94% 0.03 80); --fg-tint-sand: oklch(42% 0.07 70);
+  --bg-tint-sky: oklch(94% 0.03 240); --fg-tint-sky: oklch(42% 0.08 245);
+  --bg-tint-moss: oklch(94% 0.035 140); --fg-tint-moss: oklch(40% 0.08 145);
+  --bg-tint-peach: oklch(94% 0.035 40); --fg-tint-peach: oklch(45% 0.09 40);
+  --fg-rating: oklch(76% 0.15 78);
+  --font-display: "SUIT", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, "Noto Sans KR", "Malgun Gothic", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -85,6 +92,11 @@
     --bg-overlay: #000000a6;
     --bg-transparent-pressed: #ffffff14;
     --shadow-floating: 0 2px 10px rgba(0, 0, 0, 0.5);
+    --bg-tint-sand: oklch(30% 0.04 75); --fg-tint-sand: oklch(86% 0.06 75);
+    --bg-tint-sky: oklch(30% 0.04 240); --fg-tint-sky: oklch(84% 0.07 245);
+    --bg-tint-moss: oklch(30% 0.045 140); --fg-tint-moss: oklch(85% 0.08 145);
+    --bg-tint-peach: oklch(30% 0.045 40); --fg-tint-peach: oklch(85% 0.08 40);
+    --fg-rating: oklch(80% 0.15 78);
   }
 }
 :root[data-theme="dark"] {
@@ -128,6 +140,11 @@
   --bg-overlay: #000000a6;
   --bg-transparent-pressed: #ffffff14;
   --shadow-floating: 0 2px 10px rgba(0, 0, 0, 0.5);
+  --bg-tint-sand: oklch(30% 0.04 75); --fg-tint-sand: oklch(86% 0.06 75);
+  --bg-tint-sky: oklch(30% 0.04 240); --fg-tint-sky: oklch(84% 0.07 245);
+  --bg-tint-moss: oklch(30% 0.045 140); --fg-tint-moss: oklch(85% 0.08 145);
+  --bg-tint-peach: oklch(30% 0.045 40); --fg-tint-peach: oklch(85% 0.08 40);
+  --fg-rating: oklch(80% 0.15 78);
 }
 
 :root {

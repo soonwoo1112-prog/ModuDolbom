@@ -1,19 +1,23 @@
-<!-- @dsCard group="Actions" height=230 subtitle="Brand, Neutral, Weak, Outline, Ghost / Large CTA" -->
+<!-- @dsCard group="Actions" height=290 subtitle="Large 주 버튼, 알약 버튼 줄, 보조와 고스트, 비활성" -->
 <!doctype html>
 <html lang="ko">
 <head><meta charset="utf-8"><title>ActionButton preview</title></head>
 <body>
 <div class="md-stack" style="max-width:400px">
-  <button class="md-btn md-btn--brand md-btn--large md-pressable" type="button">2명에게 요청 보내기</button>
+  <button class="md-btn md-btn--brand md-btn--large md-pressable" type="button">보리, 콩이 산책 맡기기</button>
+  <div class="cb__acts">
+    <button class="cb__btn cb__btn--brand md-pressable" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>예약 확정</button>
+    <button class="cb__btn md-pressable" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>수정</button>
+    <button class="cb__btn md-pressable" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg>정보</button>
+  </div>
   <div class="md-row">
-    <button class="md-btn md-btn--neutral md-pressable" type="button">대화창 열기</button>
     <button class="md-btn md-pressable" type="button">거절</button>
-    <button class="md-btn md-btn--outline md-pressable" type="button"><svg class="md-ico md-ico--sm" aria-hidden="true"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"fill="none"stroke="currentColor"stroke-width="2"stroke-linecap="round"stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg>경로 보기</button>
+    <button class="md-btn md-btn--outline md-pressable" type="button">다른 시터에게도 요청하기</button>
     <button class="md-btn md-btn--ghost md-pressable" type="button">조건 바꾸기</button>
   </div>
   <div class="md-row">
     <button class="md-btn md-btn--brand md-pressable" type="button" aria-busy="true"><span class="md-spinner" aria-hidden="true"></span>보내는 중</button>
-    <button class="md-btn md-pressable" type="button" disabled>요청 마감</button>
+    <button class="md-btn md-btn--large" type="button" disabled style="width:auto">산책할 강아지를 골라 주세요</button>
   </div>
 </div>
 </body>

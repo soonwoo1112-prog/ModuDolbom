@@ -78,4 +78,4 @@ The owner finds the current screens unconvincing overall and wants the next pass
 - Lucide icons (ISC) in the bottom navigation, buttons and placeholders.
 
 ## Exports
-`design/tokens.css` and `design/base.css` in this project; `design/system/` is a copy of the Design System artifact's files (tokens.json, README.md brand book, 11 component previews and guidelines, cover).
+`design/tokens.css` and `design/base.css` in this project; `design/system/` is a copy of the Design System artifact's files (tokens.json, README.md brand book, bundle.css, SUIT font, 16 component previews and guidelines, cover), last synced 2026-11-11 with every decision above.
