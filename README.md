@@ -39,6 +39,8 @@
 | **제품** | |
 | [첫 출시 범위](docs/product/mvp-scope.md) | v1에 넣을 기능, 놓치기 쉬운 화면, 로그인·결제·GPS 등 기술 과제 |
 | [앱 화면 구성](docs/product/app-structure.md) | 보호자·시터 화면의 탭별 구성 |
+| [예약·산책 흐름](docs/product/booking-flow.md) | 보호자·시터의 예약부터 후기까지 단계별 흐름 |
+| [알림](docs/product/notifications.md) | 누가, 언제, 어떤 알림을 받는지 |
 | [매칭](docs/product/matching.md) | 예약 흐름, 후보 선정 기준, 시터 분석 페이지 |
 | [동네 소셜](docs/product/social.md) | 산책 로그 피드, 커뮤니티, 게시 권한 |
 | [산책 기능](docs/product/walk.md) | GPS, AI 추천 경로, 산책 로그 |
