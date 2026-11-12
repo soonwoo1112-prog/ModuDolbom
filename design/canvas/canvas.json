@@ -8,7 +8,8 @@
       "title": "1-3. 주소 목록",
       "w": 390,
       "x": 1410,
-      "y": 0
+      "y": 18680,
+      "page": "p3"
     },
     "BookAddressDetail.dc.html": {
       "h": 844,
@@ -16,7 +17,8 @@
       "title": "1-4. 주소 자세히",
       "w": 390,
       "x": 1880,
-      "y": 0
+      "y": 18680,
+      "page": "p3"
     },
     "BookDateOnce.dc.html": {
       "h": 844,
@@ -24,7 +26,8 @@
       "title": "1-1. 날짜 고르기 (한 번)",
       "w": 390,
       "x": 470,
-      "y": 0
+      "y": 18680,
+      "page": "p3"
     },
     "BookDateRepeat.dc.html": {
       "h": 844,
@@ -32,111 +35,125 @@
       "title": "1-2. 날짜 고르기 (반복)",
       "w": 390,
       "x": 940,
-      "y": 0
+      "y": 18680,
+      "page": "p3"
     },
     "Chat.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "4. 채팅과 예약 확정",
       "w": 390,
-      "x": 3290,
-      "y": 0
+      "x": 2200,
+      "y": 2508,
+      "page": "p3"
     },
     "ChatEdit.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "4-1. 예약 수정 요청",
       "w": 390,
-      "x": 3760,
-      "y": 0
+      "x": 2750,
+      "y": 2508,
+      "page": "p3"
     },
     "ChatInfo.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "4-2. 예약 정보",
       "w": 390,
-      "x": 4230,
-      "y": 0
+      "x": 940,
+      "y": 16152,
+      "page": "p3"
     },
     "ChatMenu.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "4-3. 채팅 더보기",
       "w": 390,
-      "x": 4700,
-      "y": 0
+      "x": 1410,
+      "y": 16152,
+      "page": "p3"
     },
     "Community.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "12. 동네 이야기",
       "w": 390,
-      "x": 470,
-      "y": 3732
+      "x": 1100,
+      "y": 7524,
+      "page": "p3"
     },
     "Compose.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "11-3. 기록 없이 직접 쓰기",
       "w": 390,
-      "x": 940,
-      "y": 7464
+      "x": 1650,
+      "y": 8628,
+      "page": "p3"
     },
     "ComposePick.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "11-1. 글쓰기: 산책 고르기",
       "w": 390,
-      "x": 0,
-      "y": 7464
+      "x": 550,
+      "y": 8628,
+      "page": "p3"
     },
     "ComposeWalk.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "11-2. 산책으로 글쓰기",
       "w": 390,
-      "x": 470,
-      "y": 7464
+      "x": 1100,
+      "y": 8628,
+      "page": "p3"
     },
     "DogEdit.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "16-1. 강아지 프로필 수정·꾸미기",
       "w": 390,
-      "x": 470,
-      "y": 6220
+      "x": 2200,
+      "y": 4716,
+      "page": "p3"
     },
     "DogProfile.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "4-4. 강아지 프로필",
       "w": 390,
-      "x": 5170,
-      "y": 0
+      "x": 2200,
+      "y": 3612,
+      "page": "p3"
     },
     "DogProfileFeed.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "4-4a. 강아지 프로필: 산책 기록 탭",
       "w": 390,
-      "x": 5640,
-      "y": 0
+      "x": 470,
+      "y": 17136,
+      "page": "p3"
     },
     "DogProfilePhotos.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "4-4b. 강아지 프로필: 사진 탭",
       "w": 390,
-      "x": 6110,
-      "y": 0
+      "x": 940,
+      "y": 17136,
+      "page": "p3"
     },
     "GuardianCalendar.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "13. 보호자 캘린더",
       "w": 390,
-      "x": 940,
-      "y": 3732
+      "x": 1650,
+      "y": 7524,
+      "page": "p3"
     },
     "GuardianCalendarDay.dc.html": {
       "h": 844,
@@ -144,54 +161,61 @@
       "title": "13-1. 날짜를 누르면",
       "w": 390,
       "x": 1410,
-      "y": 3732
+      "y": 17136,
+      "page": "p3"
     },
     "GuardianChatList.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "16-0. 보호자 채팅 목록",
       "w": 390,
-      "x": 2820,
-      "y": 6220
+      "x": 0,
+      "y": 7524,
+      "page": "p3"
     },
     "GuardianLive.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "9. 실시간 위치 보기",
       "w": 390,
-      "x": 0,
-      "y": 2488
+      "x": 550,
+      "y": 6120,
+      "page": "p3"
     },
     "GuardianLog.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "10. 산책 기록 받기와 후기",
       "w": 390,
-      "x": 470,
-      "y": 2488
+      "x": 1100,
+      "y": 6120,
+      "page": "p3"
     },
     "GuardianMore.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "16. 보호자 더보기",
       "w": 390,
-      "x": 0,
-      "y": 6220
+      "x": 2200,
+      "y": 7524,
+      "page": "p3"
     },
     "GuardianWalk.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "18. 보호자 직접 산책 기록",
       "w": 390,
-      "x": 1410,
-      "y": 7464
+      "x": 0,
+      "y": 3612,
+      "page": "p3"
     },
     "LogoStack.dc.html": {
       "h": 640,
       "title": "로고: 세로형 (마크, 이름, 슬로건). Tweaks에서 크기·간격·색 조절",
       "w": 640,
       "x": 0,
-      "y": 12440
+      "y": 19664,
+      "page": "p3"
     },
     "Main.dc.html": {
       "h": 844,
@@ -199,7 +223,8 @@
       "title": "1. 예약 (이전 폼 버전, 1R로 바뀜)",
       "w": 390,
       "x": 0,
-      "y": 0
+      "y": 18680,
+      "page": "p3"
     },
     "MainR.dc.html": {
       "h": 844,
@@ -207,167 +232,188 @@
       "title": "1R. 예약 (채택: 한 번에 하나씩, 예약 기록이 있는 보호자)",
       "w": 390,
       "x": 0,
-      "y": 9952
+      "y": 2508,
+      "page": "p3"
     },
     "MainRNew.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "1R-새. 예약 (처음 쓰는 보호자)",
       "w": 390,
-      "x": 470,
-      "y": 9952
+      "x": 2200,
+      "y": 0,
+      "page": "p3"
     },
     "MainT.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "1T. 예약 (Taste 실험, 지금 버전 선택)",
       "w": 390,
-      "x": 0,
-      "y": 8708
+      "x": 2350,
+      "y": 18680,
+      "page": "p3"
     },
     "Matching.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "2. 시터 고르기",
       "w": 390,
-      "x": 2350,
-      "y": 0
+      "x": 550,
+      "y": 2508,
+      "page": "p3"
     },
     "Notifications.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "17. 알림",
       "w": 390,
-      "x": 940,
-      "y": 6220
+      "x": 0,
+      "y": 6120,
+      "page": "p3"
     },
     "RequestDone.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "3-0. 요청 보냄 (홈으로 가기)",
       "w": 390,
-      "x": 940,
-      "y": 9952
+      "x": 1100,
+      "y": 2508,
+      "page": "p3"
     },
     "Sent.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "3. 요청 현황",
       "w": 390,
-      "x": 2820,
-      "y": 0
+      "x": 1650,
+      "y": 2508,
+      "page": "p3"
     },
     "SitterAnalytics.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "15-3. 시터 분석",
       "w": 390,
-      "x": 1880,
-      "y": 6220
+      "x": 2750,
+      "y": 14748,
+      "page": "p3"
     },
     "SitterChat.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "6. 시터 채팅",
       "w": 390,
-      "x": 470,
-      "y": 1244
+      "x": 1100,
+      "y": 11136,
+      "page": "p3"
     },
     "SitterChatList.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "6-0. 시터 채팅 목록",
       "w": 390,
-      "x": 1410,
-      "y": 6220
+      "x": 0,
+      "y": 13644,
+      "page": "p3"
     },
     "SitterMore.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "15. 시터 더보기",
       "w": 390,
-      "x": 2350,
-      "y": 4976
+      "x": 1100,
+      "y": 13644,
+      "page": "p3"
     },
     "SitterPayout.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "15-4. 정산",
       "w": 390,
-      "x": 2350,
-      "y": 6220
+      "x": 3300,
+      "y": 14748,
+      "page": "p3"
     },
     "SitterProfile.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "2-1. 시터 프로필 (보호자가 보는)",
       "w": 390,
-      "x": 0,
-      "y": 4976
+      "x": 550,
+      "y": 3612,
+      "page": "p3"
     },
     "SitterProfileEdit.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "15-2. 프로필 꾸미기",
       "w": 390,
-      "x": 3290,
-      "y": 4976
+      "x": 1650,
+      "y": 14748,
+      "page": "p3"
     },
     "SitterProfileFeed.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "2-1a. 시터 프로필: 산책 기록 탭",
       "w": 390,
-      "x": 470,
-      "y": 4976
+      "x": 1880,
+      "y": 16152,
+      "page": "p3"
     },
     "SitterProfilePrice.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "2-1b. 시터 프로필: 가격 탭",
       "w": 390,
-      "x": 940,
-      "y": 4976
+      "x": 2350,
+      "y": 16152,
+      "page": "p3"
     },
     "SitterProfileSelf.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "2-2. 내 프로필 (시터 본인)",
       "w": 390,
-      "x": 1410,
-      "y": 4976
+      "x": 1100,
+      "y": 14748,
+      "page": "p3"
     },
     "SitterProfileT.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "2-1T. 시터 프로필 (Taste 실험, 지금 버전 선택)",
       "w": 390,
-      "x": 470,
-      "y": 8708
+      "x": 2820,
+      "y": 18680,
+      "page": "p3"
     },
     "SitterRequest.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "5-1. 새 요청 자세히",
       "w": 390,
-      "x": 1880,
-      "y": 4976
+      "x": 550,
+      "y": 11136,
+      "page": "p3"
     },
     "SitterSchedule.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "14. 시터 캘린더",
       "w": 390,
-      "x": 1880,
-      "y": 3732
+      "x": 550,
+      "y": 13644,
+      "page": "p3"
     },
     "SitterService.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "15-1. 서비스 설정",
       "w": 390,
-      "x": 2820,
-      "y": 4976
+      "x": 2200,
+      "y": 14748,
+      "page": "p3"
     },
     "SitterToday.dc.html": {
       "h": 844,
@@ -375,55 +421,62 @@
       "title": "5. 시터 오늘 탭",
       "w": 390,
       "x": 0,
-      "y": 1244
+      "y": 11136,
+      "page": "p3"
     },
     "SitterWeek.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "14-1. 날짜를 누르면 그 주",
       "w": 390,
-      "x": 2350,
-      "y": 3732
+      "x": 550,
+      "y": 14748,
+      "page": "p3"
     },
     "SitterWeekEdit.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "14-2. 이 날 일정 수정",
       "w": 390,
-      "x": 2820,
-      "y": 3732
+      "x": 1880,
+      "y": 17136,
+      "page": "p3"
     },
     "SocialFeed.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "11. 소셜 산책 피드",
       "w": 390,
-      "x": 0,
-      "y": 3732
+      "x": 550,
+      "y": 7524,
+      "page": "p3"
     },
     "SocialFeedT.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "11T. 소셜 피드 (Taste 실험, 채택해서 11에 반영)",
       "w": 390,
-      "x": 940,
-      "y": 8708
+      "x": 3290,
+      "y": 18680,
+      "page": "p3"
     },
     "WalkLogWrite.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "8. 산책 기록 보내기",
       "w": 390,
-      "x": 1410,
-      "y": 1244
+      "x": 1650,
+      "y": 12240,
+      "page": "p3"
     },
     "Walking.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "7. 산책중",
       "w": 390,
-      "x": 940,
-      "y": 1244
+      "x": 1100,
+      "y": 12240,
+      "page": "p3"
     },
     "SentNone.dc.html": {
       "h": 844,
@@ -431,7 +484,8 @@
       "title": "3-1. 요청 현황: 아무도 수락하지 않음",
       "w": 390,
       "x": 0,
-      "y": 13684
+      "y": 16152,
+      "page": "p3"
     },
     "SentCanceled.dc.html": {
       "h": 844,
@@ -439,47 +493,53 @@
       "title": "3-2. 요청 현황: 모두 취소함",
       "w": 390,
       "x": 470,
-      "y": 13684
+      "y": 16152,
+      "page": "p3"
     },
     "LocationConsent.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "19. 위치정보 이용 동의 (초안, 법무 검토 전)",
       "w": 390,
-      "x": 940,
-      "y": 13684
+      "x": 0,
+      "y": 12240,
+      "page": "p3"
     },
     "PermLocation.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "19-1. 권한 요청: 위치 (시터, 첫 산책 전)",
       "w": 390,
-      "x": 1410,
-      "y": 13684
+      "x": 550,
+      "y": 12240,
+      "page": "p3"
     },
     "PermNotify.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "19-2. 권한 요청: 알림",
       "w": 390,
-      "x": 1880,
-      "y": 13684
+      "x": 2820,
+      "y": 17136,
+      "page": "p3"
     },
     "PermPhoto.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "19-3. 권한 요청: 사진",
       "w": 390,
-      "x": 2350,
-      "y": 13684
+      "x": 3290,
+      "y": 17136,
+      "page": "p3"
     },
     "Permission.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "19-0. 권한 요청 (원본: Tweaks에서 위치·알림·사진)",
       "w": 390,
-      "x": 2820,
-      "y": 13684
+      "x": 2350,
+      "y": 17136,
+      "page": "p3"
     },
     "Login.dc.html": {
       "h": 844,
@@ -487,119 +547,134 @@
       "title": "20. 시작하기 (로그인)",
       "w": 390,
       "x": 0,
-      "y": 15228
+      "y": 0,
+      "page": "p3"
     },
     "SignupRole.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "20-1. 역할 고르기",
       "w": 390,
-      "x": 470,
-      "y": 15228
+      "x": 550,
+      "y": 0,
+      "page": "p3"
     },
     "VerifyPhone.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "20-2. 본인 인증",
       "w": 390,
-      "x": 940,
-      "y": 15228
+      "x": 1100,
+      "y": 0,
+      "page": "p3"
     },
     "VerifyHome.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "20-3. 동네·같은 아파트 인증",
       "w": 390,
-      "x": 1410,
-      "y": 15228
+      "x": 1650,
+      "y": 0,
+      "page": "p3"
     },
     "SitterAccount.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "21. 시터: 정산 계좌 인증",
       "w": 390,
-      "x": 1880,
-      "y": 15228
+      "x": 1650,
+      "y": 1104,
+      "page": "p3"
     },
     "SitterQuiz.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "21-1. 시터: 시팅 팁 퀴즈",
       "w": 390,
-      "x": 2350,
-      "y": 15228
+      "x": 2200,
+      "y": 1104,
+      "page": "p3"
     },
     "SitterPending.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "21-2. 시터: 가입 심사 중",
       "w": 390,
-      "x": 2820,
-      "y": 15228
+      "x": 2750,
+      "y": 1104,
+      "page": "p3"
     },
     "SitterApproved.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "21-3. 시터: 가입 승인",
       "w": 390,
-      "x": 3290,
-      "y": 15228
+      "x": 3300,
+      "y": 1104,
+      "page": "p3"
     },
     "PayMethods.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "22. 결제 수단",
       "w": 390,
-      "x": 0,
-      "y": 16472
+      "x": 2200,
+      "y": 8628,
+      "page": "p3"
     },
     "PayHistory.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "22-1. 결제 내역",
       "w": 390,
-      "x": 470,
-      "y": 16472
+      "x": 2750,
+      "y": 8628,
+      "page": "p3"
     },
     "CancelBooking.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "23. 예약 취소와 환불 (24시간 안, 수수료 50%)",
       "w": 390,
-      "x": 940,
-      "y": 16472
+      "x": 2750,
+      "y": 3612,
+      "page": "p3"
     },
     "CancelMid.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "23-1. 예약 취소: 24시간 전까지 (30%)",
       "w": 390,
-      "x": 1410,
-      "y": 16472
+      "x": 2820,
+      "y": 16152,
+      "page": "p3"
     },
     "CancelFree.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "23-2. 예약 취소: 무료 취소 기간",
       "w": 390,
-      "x": 1880,
-      "y": 16472
+      "x": 3290,
+      "y": 16152,
+      "page": "p3"
     },
     "NoShow.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "24. 노쇼 신고: 시터가 오지 않았을 때 (보호자)",
       "w": 390,
-      "x": 2350,
-      "y": 16472
+      "x": 3300,
+      "y": 3612,
+      "page": "p3"
     },
     "NoShowSitter.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "24-1. 노쇼 신고: 보호자가 나오지 않았을 때 (시터)",
       "w": 390,
-      "x": 2820,
-      "y": 16472
+      "x": 1650,
+      "y": 11136,
+      "page": "p3"
     },
     "MainV2.dc.html": {
       "h": 844,
@@ -615,56 +690,63 @@
       "is_interactive": true,
       "title": "25. 신고하기: 채팅 (차단 함께)",
       "w": 390,
-      "x": 0,
-      "y": 17716
+      "x": 3850,
+      "y": 3612,
+      "page": "p3"
     },
     "ReportProfile.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "25-1. 신고하기: 프로필",
       "w": 390,
-      "x": 470,
-      "y": 17716
+      "x": 1100,
+      "y": 3612,
+      "page": "p3"
     },
     "ReportPost.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "25-2. 신고하기: 게시글",
       "w": 390,
-      "x": 940,
-      "y": 17716
+      "x": 0,
+      "y": 17136,
+      "page": "p3"
     },
     "Blocked.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "25-3. 차단한 사람",
       "w": 390,
-      "x": 1410,
-      "y": 17716
+      "x": 3850,
+      "y": 9732,
+      "page": "p3"
     },
     "Settings.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "26. 설정",
       "w": 390,
-      "x": 1880,
-      "y": 17716
+      "x": 3300,
+      "y": 8628,
+      "page": "p3"
     },
     "SettingsNotify.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "26-1. 알림 설정",
       "w": 390,
-      "x": 2350,
-      "y": 17716
+      "x": 3300,
+      "y": 9732,
+      "page": "p3"
     },
     "Support.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "27. 고객센터 (카카오톡 채널)",
       "w": 390,
-      "x": 2820,
-      "y": 17716
+      "x": 3850,
+      "y": 8628,
+      "page": "p3"
     },
     "MainR-s578.dc.html": {
       "h": 844,
@@ -674,6 +756,54 @@
       "w": 390,
       "x": 418,
       "y": 0
+    },
+    "Flow-start.dc.html": {
+      "x": -120,
+      "y": -120,
+      "w": 3930,
+      "h": 2188,
+      "title": "연결선: 1. 시작: 로그인과 가입",
+      "page": "p3"
+    },
+    "Flow-book.dc.html": {
+      "x": -120,
+      "y": 2388,
+      "w": 4480,
+      "h": 3292,
+      "title": "연결선: 2. 보호자: 예약하고 확정하기",
+      "page": "p3"
+    },
+    "Flow-gwalk.dc.html": {
+      "x": -120,
+      "y": 6000,
+      "w": 1730,
+      "h": 1084,
+      "title": "연결선: 3. 보호자: 알림과 산책 확인",
+      "page": "p3"
+    },
+    "Flow-gtabs.dc.html": {
+      "x": -120,
+      "y": 7404,
+      "w": 4480,
+      "h": 3292,
+      "title": "연결선: 4. 보호자: 아래 탭과 더보기",
+      "page": "p3"
+    },
+    "Flow-sitter.dc.html": {
+      "x": -120,
+      "y": 11016,
+      "w": 2280,
+      "h": 2188,
+      "title": "연결선: 5. 시터: 요청에서 산책까지",
+      "page": "p3"
+    },
+    "Flow-stabs.dc.html": {
+      "x": -120,
+      "y": 13524,
+      "w": 3930,
+      "h": 2188,
+      "title": "연결선: 6. 시터: 아래 탭과 더보기",
+      "page": "p3"
     }
   },
   "createdOnFiles": {
@@ -690,139 +820,110 @@
     }
   ],
   "launch": {
-    "view": "canvas"
+    "view": "canvas",
+    "page": "p3"
   },
   "noteOrder": [
-    "flow",
-    "sitterflow",
-    "guardianwalk",
-    "socialcal",
-    "profiles",
-    "more",
-    "compose",
-    "taste",
-    "direction",
-    "brand",
-    "common",
-    "account",
-    "pay",
-    "safety"
+    "p3-start",
+    "p3-book",
+    "p3-gwalk",
+    "p3-gtabs",
+    "p3-sitter",
+    "p3-stabs",
+    "p3-states",
+    "p3-old",
+    "p1-moved"
   ],
   "notes": {
-    "brand": {
+    "p3-start": {
+      "kind": "title1",
+      "maxW": 3690,
+      "text": "1. 시작: 로그인과 가입",
+      "w": 240,
+      "x": 0,
+      "y": -330,
+      "page": "p3"
+    },
+    "p3-book": {
+      "kind": "title1",
+      "maxW": 4240,
+      "text": "2. 보호자: 예약하고 확정하기",
+      "w": 240,
+      "x": 0,
+      "y": 2178,
+      "page": "p3"
+    },
+    "p3-gwalk": {
       "kind": "title1",
       "maxW": 1800,
-      "text": "브랜드: 세로형 로고",
+      "text": "3. 보호자: 알림과 산책 확인",
       "w": 240,
       "x": 0,
-      "y": 12140
+      "y": 5790,
+      "page": "p3"
     },
-    "compose": {
+    "p3-gtabs": {
       "kind": "title1",
-      "maxW": 1800,
-      "text": "글쓰기와 내 산책",
+      "maxW": 4240,
+      "text": "4. 보호자: 아래 탭과 더보기",
       "w": 240,
       "x": 0,
-      "y": 7164
+      "y": 7194,
+      "page": "p3"
     },
-    "direction": {
+    "p3-sitter": {
       "kind": "title1",
-      "maxW": 1800,
-      "text": "새 방향 (토스·크림·애플·당근 원칙, design/direction.md)",
+      "maxW": 2040,
+      "text": "5. 시터: 요청에서 산책까지",
       "w": 240,
       "x": 0,
-      "y": 9652
+      "y": 10806,
+      "page": "p3"
     },
-    "flow": {
+    "p3-stabs": {
       "kind": "title1",
-      "maxW": 6500,
-      "text": "보호자 예약 흐름",
+      "maxW": 3690,
+      "text": "6. 시터: 아래 탭과 더보기",
       "w": 240,
       "x": 0,
-      "y": -300
+      "y": 13314,
+      "page": "p3"
     },
-    "guardianwalk": {
+    "p3-states": {
       "kind": "title1",
-      "maxW": 860,
-      "text": "보호자 산책 확인",
+      "maxW": 3600,
+      "text": "화면 상태: 같은 화면의 다른 모습 (연결선 없음)",
       "w": 240,
       "x": 0,
-      "y": 2188
+      "y": 15822,
+      "page": "p3"
     },
-    "more": {
+    "p3-old": {
       "kind": "title1",
-      "maxW": 3200,
-      "text": "더보기, 알림, 글쓰기",
+      "maxW": 3600,
+      "text": "이전 버전과 실험 (치워 둠)",
       "w": 240,
       "x": 0,
-      "y": 5920
+      "y": 18350,
+      "page": "p3"
     },
-    "profiles": {
-      "kind": "title1",
-      "maxW": 3680,
-      "text": "프로필과 요청",
-      "w": 240,
+    "p1-moved": {
       "x": 0,
-      "y": 4676
-    },
-    "sitterflow": {
-      "kind": "title1",
-      "maxW": 1800,
-      "text": "시터 산책 흐름",
-      "w": 240,
-      "x": 0,
-      "y": 944
-    },
-    "socialcal": {
-      "kind": "title1",
-      "maxW": 1800,
-      "text": "소셜과 캘린더",
-      "w": 240,
-      "x": 0,
-      "y": 3432
-    },
-    "taste": {
-      "kind": "title1",
-      "maxW": 1800,
-      "text": "실험 1 결과: 피드만 실험 버전 채택",
-      "w": 240,
-      "x": 0,
-      "y": 8408
-    },
-    "common": {
-      "kind": "title1",
-      "maxW": 3300,
-      "text": "공용 화면: 상태, 준비 중, 권한 (docs/product/v1-tasks.md 1-2)",
-      "w": 240,
-      "x": 0,
-      "y": 13384
-    },
-    "account": {
-      "kind": "title1",
-      "maxW": 3700,
-      "text": "계정: 가입과 인증 (docs/product/v1-tasks.md 1-3)",
-      "w": 240,
-      "x": 0,
-      "y": 14928
-    },
-    "pay": {
-      "kind": "title1",
-      "maxW": 3300,
-      "text": "결제와 취소 (docs/product/v1-tasks.md 1-4)",
-      "w": 240,
-      "x": 0,
-      "y": 16172
-    },
-    "safety": {
-      "kind": "title1",
-      "maxW": 3300,
-      "text": "안전과 설정 (docs/product/v1-tasks.md 1-5)",
-      "w": 240,
-      "x": 0,
-      "y": 17416
+      "y": 0,
+      "w": 360,
+      "size": "l",
+      "fill": "green",
+      "text": "이 페이지의 화면은 모두 페이지 3으로 옮겼어요. 흐름 순서대로 놓고 화살표로 이었어요.",
+      "page": "p1"
     }
   },
   "order": [
+    "Flow-stabs.dc.html",
+    "Flow-sitter.dc.html",
+    "Flow-gtabs.dc.html",
+    "Flow-gwalk.dc.html",
+    "Flow-book.dc.html",
+    "Flow-start.dc.html",
     "Main.dc.html",
     "BookDateOnce.dc.html",
     "BookDateRepeat.dc.html",
@@ -916,6 +1017,10 @@
     {
       "id": "p2",
       "name": "페이지 2 · 새 UI"
+    },
+    {
+      "id": "p3",
+      "name": "페이지 3 · 흐름 정리"
     }
   ],
   "title": "모두돌봄 예약 흐름"
