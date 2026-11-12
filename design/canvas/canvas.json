@@ -74,12 +74,60 @@
       "x": 470,
       "y": 3732
     },
+    "Compose.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "11-3. 기록 없이 직접 쓰기",
+      "w": 390,
+      "x": 940,
+      "y": 7464
+    },
+    "ComposePick.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "11-1. 글쓰기: 산책 고르기",
+      "w": 390,
+      "x": 0,
+      "y": 7464
+    },
+    "ComposeWalk.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "11-2. 산책으로 글쓰기",
+      "w": 390,
+      "x": 470,
+      "y": 7464
+    },
+    "DogEdit.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "16-1. 강아지 프로필 수정·꾸미기",
+      "w": 390,
+      "x": 470,
+      "y": 6220
+    },
     "DogProfile.dc.html": {
       "h": 844,
       "is_interactive": true,
       "title": "4-4. 강아지 프로필",
       "w": 390,
       "x": 5170,
+      "y": 0
+    },
+    "DogProfileFeed.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "4-4a. 강아지 프로필: 산책 기록 탭",
+      "w": 390,
+      "x": 5640,
+      "y": 0
+    },
+    "DogProfilePhotos.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "4-4b. 강아지 프로필: 사진 탭",
+      "w": 390,
+      "x": 6110,
       "y": 0
     },
     "GuardianCalendar.dc.html": {
@@ -98,6 +146,14 @@
       "x": 1410,
       "y": 3732
     },
+    "GuardianChatList.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "16-0. 보호자 채팅 목록",
+      "w": 390,
+      "x": 2820,
+      "y": 6220
+    },
     "GuardianLive.dc.html": {
       "h": 844,
       "is_interactive": true,
@@ -114,6 +170,29 @@
       "x": 470,
       "y": 2488
     },
+    "GuardianMore.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "16. 보호자 더보기",
+      "w": 390,
+      "x": 0,
+      "y": 6220
+    },
+    "GuardianWalk.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "18. 보호자 직접 산책 기록",
+      "w": 390,
+      "x": 1410,
+      "y": 7464
+    },
+    "LogoStack.dc.html": {
+      "h": 640,
+      "title": "로고: 세로형 (마크, 이름, 슬로건). Tweaks에서 크기·간격·색 조절",
+      "w": 640,
+      "x": 0,
+      "y": 12440
+    },
     "Main.dc.html": {
       "h": 844,
       "is_interactive": true,
@@ -121,6 +200,30 @@
       "w": 390,
       "x": 0,
       "y": 0
+    },
+    "MainR.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1R. 예약 (채택: 한 번에 하나씩, 예약 기록이 있는 보호자)",
+      "w": 390,
+      "x": 0,
+      "y": 9952
+    },
+    "MainRNew.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1R-새. 예약 (처음 쓰는 보호자)",
+      "w": 390,
+      "x": 470,
+      "y": 9952
+    },
+    "MainT.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "1T. 예약 (Taste 실험, 지금 버전 선택)",
+      "w": 390,
+      "x": 0,
+      "y": 8708
     },
     "Matching.dc.html": {
       "h": 844,
@@ -130,6 +233,22 @@
       "x": 2350,
       "y": 0
     },
+    "Notifications.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "17. 알림",
+      "w": 390,
+      "x": 940,
+      "y": 6220
+    },
+    "RequestDone.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "3-0. 요청 보냄 (홈으로 가기)",
+      "w": 390,
+      "x": 940,
+      "y": 9952
+    },
     "Sent.dc.html": {
       "h": 844,
       "is_interactive": true,
@@ -137,6 +256,14 @@
       "w": 390,
       "x": 2820,
       "y": 0
+    },
+    "SitterAnalytics.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "15-3. 시터 분석",
+      "w": 390,
+      "x": 1880,
+      "y": 6220
     },
     "SitterChat.dc.html": {
       "h": 844,
@@ -146,6 +273,86 @@
       "x": 470,
       "y": 1244
     },
+    "SitterChatList.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "6-0. 시터 채팅 목록",
+      "w": 390,
+      "x": 1410,
+      "y": 6220
+    },
+    "SitterMore.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "15. 시터 더보기",
+      "w": 390,
+      "x": 2350,
+      "y": 4976
+    },
+    "SitterPayout.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "15-4. 정산",
+      "w": 390,
+      "x": 2350,
+      "y": 6220
+    },
+    "SitterProfile.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "2-1. 시터 프로필 (보호자가 보는)",
+      "w": 390,
+      "x": 0,
+      "y": 4976
+    },
+    "SitterProfileEdit.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "15-2. 프로필 꾸미기",
+      "w": 390,
+      "x": 3290,
+      "y": 4976
+    },
+    "SitterProfileFeed.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "2-1a. 시터 프로필: 산책 기록 탭",
+      "w": 390,
+      "x": 470,
+      "y": 4976
+    },
+    "SitterProfilePrice.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "2-1b. 시터 프로필: 가격 탭",
+      "w": 390,
+      "x": 940,
+      "y": 4976
+    },
+    "SitterProfileSelf.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "2-2. 내 프로필 (시터 본인)",
+      "w": 390,
+      "x": 1410,
+      "y": 4976
+    },
+    "SitterProfileT.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "2-1T. 시터 프로필 (Taste 실험, 지금 버전 선택)",
+      "w": 390,
+      "x": 470,
+      "y": 8708
+    },
+    "SitterRequest.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "5-1. 새 요청 자세히",
+      "w": 390,
+      "x": 1880,
+      "y": 4976
+    },
     "SitterSchedule.dc.html": {
       "h": 844,
       "is_interactive": true,
@@ -153,6 +360,14 @@
       "w": 390,
       "x": 1880,
       "y": 3732
+    },
+    "SitterService.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "15-1. 서비스 설정",
+      "w": 390,
+      "x": 2820,
+      "y": 4976
     },
     "SitterToday.dc.html": {
       "h": 844,
@@ -186,6 +401,14 @@
       "x": 0,
       "y": 3732
     },
+    "SocialFeedT.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "11T. 소셜 피드 (Taste 실험, 채택해서 11에 반영)",
+      "w": 390,
+      "x": 940,
+      "y": 8708
+    },
     "WalkLogWrite.dc.html": {
       "h": 844,
       "is_interactive": true,
@@ -201,286 +424,6 @@
       "w": 390,
       "x": 940,
       "y": 1244
-    },
-    "SitterProfile.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "2-1. 시터 프로필 (보호자가 보는)",
-      "w": 390,
-      "x": 0,
-      "y": 4976
-    },
-    "SitterRequest.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "5-1. 새 요청 자세히",
-      "w": 390,
-      "x": 1880,
-      "y": 4976
-    },
-    "SitterProfileEdit.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "15-2. 프로필 꾸미기",
-      "w": 390,
-      "x": 3290,
-      "y": 4976
-    },
-    "SitterProfileSelf.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "2-2. 내 프로필 (시터 본인)",
-      "w": 390,
-      "x": 1410,
-      "y": 4976
-    },
-    "SitterMore.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "15. 시터 더보기",
-      "w": 390,
-      "x": 2350,
-      "y": 4976
-    },
-    "SitterService.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "15-1. 서비스 설정",
-      "w": 390,
-      "x": 2820,
-      "y": 4976
-    },
-    "SitterProfileFeed.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "w": 390,
-      "y": 4976,
-      "title": "2-1a. 시터 프로필: 산책 기록 탭",
-      "x": 470
-    },
-    "SitterProfilePrice.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "w": 390,
-      "y": 4976,
-      "title": "2-1b. 시터 프로필: 가격 탭",
-      "x": 940
-    },
-    "GuardianMore.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "16. 보호자 더보기",
-      "w": 390,
-      "x": 0,
-      "y": 6220
-    },
-    "DogEdit.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "16-1. 강아지 프로필 수정·꾸미기",
-      "w": 390,
-      "x": 470,
-      "y": 6220
-    },
-    "Notifications.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "17. 알림",
-      "w": 390,
-      "x": 940,
-      "y": 6220
-    },
-    "Compose.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "11-3. 기록 없이 직접 쓰기",
-      "w": 390,
-      "x": 940,
-      "y": 7464
-    },
-    "SitterChatList.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "6-0. 시터 채팅 목록",
-      "w": 390,
-      "x": 1410,
-      "y": 6220
-    },
-    "SitterAnalytics.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "15-3. 시터 분석",
-      "w": 390,
-      "x": 1880,
-      "y": 6220
-    },
-    "SitterPayout.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "15-4. 정산",
-      "w": 390,
-      "x": 2350,
-      "y": 6220
-    },
-    "DogProfileFeed.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "4-4a. 강아지 프로필: 산책 기록 탭",
-      "w": 390,
-      "x": 5640,
-      "y": 0
-    },
-    "DogProfilePhotos.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "4-4b. 강아지 프로필: 사진 탭",
-      "w": 390,
-      "x": 6110,
-      "y": 0
-    },
-    "ComposePick.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "11-1. 글쓰기: 산책 고르기",
-      "w": 390,
-      "x": 0,
-      "y": 7464
-    },
-    "ComposeWalk.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "11-2. 산책으로 글쓰기",
-      "w": 390,
-      "x": 470,
-      "y": 7464
-    },
-    "GuardianWalk.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "18. 보호자 직접 산책 기록",
-      "w": 390,
-      "x": 1410,
-      "y": 7464
-    },
-    "MainT.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "1T. 예약 (Taste 실험, 지금 버전 선택)",
-      "w": 390,
-      "x": 0,
-      "y": 8708
-    },
-    "SitterProfileT.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "2-1T. 시터 프로필 (Taste 실험, 지금 버전 선택)",
-      "w": 390,
-      "x": 470,
-      "y": 8708
-    },
-    "SocialFeedT.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "11T. 소셜 피드 (Taste 실험, 채택해서 11에 반영)",
-      "w": 390,
-      "x": 940,
-      "y": 8708
-    },
-    "MainR.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "1R. 예약 (채택: 한 번에 하나씩, 예약 기록이 있는 보호자)",
-      "w": 390,
-      "x": 0,
-      "y": 9952
-    },
-    "ChatX.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "4X. 채팅 (리서치 반영: 요약 한 줄과 버튼 하나, 앱 밖 거래 안내)",
-      "w": 390,
-      "x": 1410,
-      "y": 11196
-    },
-    "GuardianLogX.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "10X. 산책 기록 (리서치 반영: 도착 축하, 별점 한 번)",
-      "w": 390,
-      "x": 2350,
-      "y": 11196
-    },
-    "MainX.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "1X. 예약 (리서치 반영: 묶인 목록, 이유 한 줄, 다음을 말하는 버튼)",
-      "w": 390,
-      "x": 0,
-      "y": 11196
-    },
-    "MatchingX.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "2X. 시터 고르기 (리서치 반영: 줄 전체로 고르기, 굵은 가격)",
-      "w": 390,
-      "x": 470,
-      "y": 11196
-    },
-    "SentX.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "3X. 요청 보냄 (리서치 반영: 완료 화면과 다음에 일어날 일)",
-      "w": 390,
-      "x": 940,
-      "y": 11196
-    },
-    "WalkingX.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "7X. 산책중 (리서치 반영: 끝내기는 확인 시트로)",
-      "w": 390,
-      "x": 1880,
-      "y": 11196
-    },
-    "GuardianChatList.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "16-0. 보호자 채팅 목록",
-      "w": 390,
-      "x": 2820,
-      "y": 6220
-    },
-    "MainS.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "1S. 예약 (작은 폰 비교: 버튼을 스크롤 끝에)",
-      "w": 390,
-      "x": 940,
-      "y": 9952
-    },
-    "MainRNew.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "1R-새. 예약 (처음 쓰는 보호자)",
-      "w": 390,
-      "x": 470,
-      "y": 9952
-    },
-    "RequestDone.dc.html": {
-      "h": 844,
-      "is_interactive": true,
-      "title": "3-0. 요청 보냄 (홈으로 가기)",
-      "w": 390,
-      "x": 1410,
-      "y": 9952
-    },
-    "LogoStack.dc.html": {
-      "h": 640,
-      "is_interactive": false,
-      "title": "로고: 세로형 (마크, 이름, 슬로건). Tweaks에서 크기·간격·색 조절",
-      "w": 640,
-      "x": 0,
-      "y": 12440
     }
   },
   "createdOnFiles": {
@@ -509,10 +452,33 @@
     "compose",
     "taste",
     "direction",
-    "research",
     "brand"
   ],
   "notes": {
+    "brand": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "브랜드: 세로형 로고",
+      "w": 240,
+      "x": 0,
+      "y": 12140
+    },
+    "compose": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "글쓰기와 내 산책",
+      "w": 240,
+      "x": 0,
+      "y": 7164
+    },
+    "direction": {
+      "kind": "title1",
+      "maxW": 1800,
+      "text": "새 방향 (토스·크림·애플·당근 원칙, design/direction.md)",
+      "w": 240,
+      "x": 0,
+      "y": 9652
+    },
     "flow": {
       "kind": "title1",
       "maxW": 6500,
@@ -528,6 +494,22 @@
       "w": 240,
       "x": 0,
       "y": 2188
+    },
+    "more": {
+      "kind": "title1",
+      "maxW": 3200,
+      "text": "더보기, 알림, 글쓰기",
+      "w": 240,
+      "x": 0,
+      "y": 5920
+    },
+    "profiles": {
+      "kind": "title1",
+      "maxW": 3680,
+      "text": "프로필과 요청",
+      "w": 240,
+      "x": 0,
+      "y": 4676
     },
     "sitterflow": {
       "kind": "title1",
@@ -545,30 +527,6 @@
       "x": 0,
       "y": 3432
     },
-    "profiles": {
-      "kind": "title1",
-      "maxW": 3680,
-      "text": "프로필과 요청",
-      "w": 240,
-      "x": 0,
-      "y": 4676
-    },
-    "more": {
-      "kind": "title1",
-      "maxW": 3200,
-      "text": "더보기, 알림, 글쓰기",
-      "w": 240,
-      "x": 0,
-      "y": 5920
-    },
-    "compose": {
-      "kind": "title1",
-      "maxW": 1800,
-      "text": "글쓰기와 내 산책",
-      "w": 240,
-      "x": 0,
-      "y": 7164
-    },
     "taste": {
       "kind": "title1",
       "maxW": 1800,
@@ -576,30 +534,6 @@
       "w": 240,
       "x": 0,
       "y": 8408
-    },
-    "direction": {
-      "kind": "title1",
-      "maxW": 1800,
-      "text": "새 방향 (토스·크림·애플·당근 원칙, design/direction.md)",
-      "w": 240,
-      "x": 0,
-      "y": 9652
-    },
-    "research": {
-      "kind": "title1",
-      "maxW": 1800,
-      "text": "리서치 반영 (토스·당근·애플·크림, design/ux-research.md)",
-      "w": 240,
-      "x": 0,
-      "y": 10896
-    },
-    "brand": {
-      "kind": "title1",
-      "maxW": 1800,
-      "text": "브랜드: 세로형 로고",
-      "w": 240,
-      "x": 0,
-      "y": 12140
     }
   },
   "order": [
@@ -655,13 +589,6 @@
     "SocialFeedT.dc.html",
     "MainR.dc.html",
     "MainRNew.dc.html",
-    "MainS.dc.html",
-    "MainX.dc.html",
-    "MatchingX.dc.html",
-    "SentX.dc.html",
-    "ChatX.dc.html",
-    "WalkingX.dc.html",
-    "GuardianLogX.dc.html",
     "LogoStack.dc.html"
   ],
   "pages": [],
