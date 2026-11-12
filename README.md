@@ -48,3 +48,12 @@
 | [시장 분석](docs/business/market-analysis.md) | Rover 비교, 매출 추정, 운영 비용 검토 |
 | [운영 원칙](docs/business/operations.md) | 보험, 프리랜서 시터, 신원 인증, 규제 |
 | [마케팅](docs/business/marketing.md) | 서비스 홍보와 필요성 알리기 |
+
+## 브랜치
+
+| 브랜치 | 담는 것 |
+|---|---|
+| `main` | 기획 문서 (이 README와 `docs/`) |
+| `design` | 디자인 시스템, 브랜드·로고, 화면 시안(캔버스), 앱 미리보기 |
+| `content` | 홍보 영상, 로고 모션, 광고용 모델 이미지. `main`에 합치지 않아요. |
+| `skills` | Claude Code 스킬(gstack, Hallmark, Impeccable, Taste)의 설치 방법과 설정 파일. 독립 브랜치예요. |
