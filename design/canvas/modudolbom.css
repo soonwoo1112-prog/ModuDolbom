@@ -1081,3 +1081,15 @@ main .rb-cta { box-shadow: none; padding: 8px 16px 24px; }
 .cb__btn svg, :root .md-chatbar__btn svg { width: 15px; height: 15px; }
 .cb__btn--brand { background: var(--bg-brand-solid); box-shadow: none; color: var(--fg-on-brand-solid); font-weight: 700; }
 .cb__btn:disabled, :root .md-chatbar__btn:disabled { background: transparent; color: var(--fg-neutral-subtle); cursor: default; }
+
+/* ---- Two-sided confirm (docs/product/booking-flow.md): a notice in the chat for each state, and a confirm sheet ---- */
+.cf-note { align-self: center; display: flex; flex-direction: column; align-items: center; gap: 2px; max-width: 300px; padding: 10px 16px; border-radius: var(--r3); background: var(--bg-layer-basement); text-align: center; animation: md-lift 220ms both; }
+.cf-note b { font: 700 0.875rem/1.25rem var(--font-sans); color: var(--fg-neutral); }
+.cf-note span { font: 400 0.8125rem/1.125rem var(--font-sans); color: var(--fg-neutral-muted); }
+.cf-note--done b { color: var(--fg-positive); }
+.cf-sum { margin: 0; display: grid; grid-template-columns: 76px minmax(0, 1fr); row-gap: 12px; column-gap: 12px; font: 400 0.9375rem/1.3125rem var(--font-sans); }
+.cf-sum dt { font: 500 0.875rem/1.3125rem var(--font-sans); color: var(--fg-neutral-subtle); }
+.cf-sum dd { margin: 0; }
+.cf-sum dd b { font: 700 1.125rem/1.5rem var(--font-display, var(--font-sans)); }
+.cf-sheet-note { margin: 0; font: 400 0.8125rem/1.1875rem var(--font-sans); color: var(--fg-neutral-muted); }
+@media (prefers-reduced-motion: reduce) { .cf-note { animation: none; } }

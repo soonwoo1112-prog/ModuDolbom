@@ -21,21 +21,19 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <h1 class="md-topnav__title">보리네 보호자</h1>
 <span style="width: 48px;"></span>
 </header>
-<section style="padding: 8px 8px 10px 16px; display: flex; flex-direction: column; gap: 8px; background: var(--bg-layer-basement); box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle);">
-<div style="display: flex; align-items: center; gap: 10px;">
-<a class="md-pressable" href="DogProfile.dc.html" aria-label="보리 프로필 보기" style="display: block; flex: none; border-radius: var(--r3);"><img class="md-photo" src="img/bori.jpg" alt="보리 사진" style="width: 48px; height: 48px; border-radius: var(--r3);"></a>
-<span style="flex: 1; display: flex; align-items: center; gap: 6px; min-width: 0;"><span class="md-chatbar__name">보리</span><sc-if value="{{confirmed}}" hint-placeholder-val="{{ true }}"><span class="md-badge md-badge--brand-solid">예약확정</span></sc-if><sc-if value="{{editSent}}" hint-placeholder-val="{{ false }}"><span class="md-badge md-badge--info">수정요청중</span></sc-if></span>
-<button class="md-iconbtn md-pressable" type="button" aria-label="더보기" onClick="{{openMenu}}"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg></button>
+<section class="cb" aria-label="예약 요약">
+<div class="cb__top">
+<a class="md-pressable cb__dog" href="DogProfile.dc.html" aria-label="보리 프로필 보기"><img class="md-photo" src="img/bori.jpg" alt=""></a>
+<span class="cb__text"><b class="md-num">보리, 11월 7일 (토) 오후 12:30</b><span class="md-num">30분 산책, 받는 금액 15,000원</span></span>
+<sc-if value="{{confirmed}}" hint-placeholder-val="{{ false }}"><span class="md-badge md-badge--brand">확정</span></sc-if>
+<button class="md-iconbtn md-pressable" type="button" aria-label="더보기" onClick="{{openMenu}}" style="margin-right: -8px;"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg></button>
 </div>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding-right: 8px;">
-<sc-if value="{{open}}" hint-placeholder-val="{{ false }}">
-<button class="md-btn md-btn--xsmall md-chatbar__btn" type="button" disabled>확정 기다리는 중</button>
-</sc-if>
-<sc-if value="{{confirmed}}" hint-placeholder-val="{{ true }}">
-<button class="md-btn md-btn--xsmall md-chatbar__btn" type="button" disabled>확정됐어요</button>
-</sc-if>
-<a class="md-btn md-btn--xsmall md-chatbar__btn md-pressable" href="ChatEdit.dc.html"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>수정</a>
-<button class="md-btn md-btn--xsmall md-chatbar__btn md-pressable" type="button" onClick="{{openInfo}}"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg>정보</button>
+<div class="cb__acts">
+<sc-if value="{{canConfirm}}" hint-placeholder-val="{{ true }}"><button class="cb__btn cb__btn--brand md-pressable" type="button" onClick="{{askConfirm}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>예약 확정</button></sc-if>
+<sc-if value="{{waiting}}" hint-placeholder-val="{{ false }}"><button class="cb__btn" type="button" disabled><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>확정 대기</button></sc-if>
+<sc-if value="{{confirmed}}" hint-placeholder-val="{{ false }}"><button class="cb__btn" type="button" disabled><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>확정했어요</button></sc-if>
+<a class="cb__btn md-pressable" href="ChatEdit.dc.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg>수정</a>
+<button class="cb__btn md-pressable" type="button" onClick="{{openInfo}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg>정보</button>
 </div>
 </section>
 <main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding: 16px;">
@@ -52,14 +50,15 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <p style="margin: 0; padding: 10px 14px; border-radius: 16px 16px 4px 16px; background: var(--bg-brand-weak); font-size: 0.9375rem; line-height: 1.3125rem;">괜찮아요. 강아지가 적은 공원 길로 걸을게요. 확정해 주시면 픽업 안내대로 들어갈게요.</p>
 <span class="md-tagtext" style="flex: none;">오후 3:05</span>
 </div>
-<div role="status" style="align-self: center; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 16px; border-radius: var(--r3); background: var(--bg-layer-basement); text-align: center; max-width: 300px;">
-<span class="md-label" style="color: var(--fg-positive);">보리네 보호자가 예약을 확정했어요</span>
-<span class="md-detail">이제 주소와 픽업 안내를 볼 수 있어요. 공동현관 비밀번호는 산책 당일에 보여요.</span>
-</div>
+<sc-if value="{{otherFirst}}" hint-placeholder-val="{{ false }}"><div class="cf-note" role="status"><b>{{otherFirstTitle}}</b><span>{{otherFirstBody}}</span></div></sc-if>
+<sc-if value="{{waiting}}" hint-placeholder-val="{{ false }}"><div class="cf-note" role="status"><b>확정했어요</b><span>{{waitingBody}}</span></div></sc-if>
+<sc-if value="{{confirmed}}" hint-placeholder-val="{{ false }}"><div class="cf-note cf-note--done" role="status"><b>{{doneTitle}}</b><span>{{doneBody}}</span></div></sc-if>
+<sc-if value="{{confirmed}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; align-items: flex-end; gap: 6px; max-width: 290px;">
 <p style="margin: 0; padding: 10px 14px; border-radius: 16px 16px 16px 4px; background: var(--bg-neutral-weak); font-size: 0.9375rem; line-height: 1.3125rem;">확정했어요. 내일 잘 부탁드려요.</p>
 <span class="md-tagtext" style="flex: none;">오후 3:07</span>
 </div>
+</sc-if>
 </main>
 <form style="display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 16px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle); background: var(--bg-layer-default);">
 <label for="msg" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%);">메시지</label>
@@ -100,6 +99,22 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </div>
 </sc-if>
 
+<sc-if value="{{showConfirm}}" hint-placeholder-val="{{ false }}">
+<div class="md-overlay" onClick="{{close}}">
+<div class="md-sheet" role="dialog" aria-modal="true" aria-label="예약 확정" onClick="{{stop}}">
+<span class="md-sheet__handle" aria-hidden="true"></span>
+<div class="md-sheet__head"><span></span><h2>예약을 확정할까요</h2><button class="md-iconbtn md-pressable" type="button" aria-label="닫기" onClick="{{close}}"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button></div>
+<dl class="cf-sum">
+<dt>산책</dt><dd class="md-num">보리, 11월 7일 (토) 오후 12:30, 30분</dd>
+<dt>{{whoLabel}}</dt><dd>{{whoName}}</dd>
+<dt>{{moneyLabel}}</dt><dd class="md-num"><b>15,000원</b></dd>
+<sc-if value="{{showPayMethod}}" hint-placeholder-val="{{ true }}"><dt>결제 수단</dt><dd class="md-num">신한카드 ****1234</dd></sc-if>
+</dl>
+<p class="cf-sheet-note">{{sheetNote}}</p>
+<button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{doConfirm}}">{{confirmLabel}}</button>
+</div>
+</div>
+</sc-if>
 <sc-if value="{{showCancel}}" hint-placeholder-val="{{ false }}">
 <div class="md-overlay" style="justify-content: center; padding: 24px;" onClick="{{close}}">
 <div role="alertdialog" aria-modal="true" aria-labelledby="cancel-title" onClick="{{stop}}" style="background: var(--bg-layer-floating); border-radius: var(--r4); padding: 24px 20px 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-floating);">
@@ -114,19 +129,38 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"initialSheet":{"editor":"enum","options":["none","info","menu"],"default":"none"},"$preview":{"width":390,"height":844}}'>
+<script type="text/x-dc" data-dc-script data-props='{"initialSheet":{"editor":"enum","options":["none","info","menu"],"default":"none"},"guardianConfirmed":{"editor":"enum","options":["아직 안 함","먼저 확정함"],"default":"아직 안 함"},"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { confirmed: true, editSent: false, sheet: props.initialSheet || 'none' };
+    this.state = { mine: false, other: (props.guardianConfirmed || '아직 안 함') === '먼저 확정함', editSent: false, sheet: props.initialSheet || 'none' };
+    this.later = null;
   }
   renderVals() {
     const s = this.state;
     return {
-      confirmed: s.confirmed,
-      open: !s.confirmed,
+      // Both sides confirm; the guardian pays the moment the second one does.
+      confirmed: s.mine && s.other,
+      canConfirm: !s.mine,
+      waiting: s.mine && !s.other,
+      otherFirst: s.other && !s.mine,
+      otherFirstTitle: '보리네 보호자님이 산책을 확정했어요',
+      otherFirstBody: '확정을 누르면 예약이 완료돼요',
+      waitingBody: '보리네 보호자님이 확정하면 예약이 완료돼요',
+      doneTitle: '예약이 확정됐어요',
+      doneBody: '이제 주소와 픽업 안내를 볼 수 있어요. 공동현관 비밀번호는 산책 당일에 보여요.',
       editSent: s.editSent,
-      confirm: () => this.setState({ confirmed: true }),
+      askConfirm: () => this.setState({ sheet: 'confirm' }),
+      showConfirm: s.sheet === 'confirm',
+      whoLabel: '보호자', whoName: '보리네 보호자',
+      moneyLabel: '받는 금액',
+      showPayMethod: false,
+      sheetNote: s.other ? '보리네 보호자님도 확정해서, 확정하면 바로 예약이 완료돼요. 받는 금액은 산책이 끝나면 정산돼요.' : '보리네 보호자님이 확정하면 예약이 완료돼요. 받는 금액은 산책이 끝나면 정산돼요.',
+      confirmLabel: '확정하기',
+      doConfirm: () => {
+        this.setState({ mine: true, sheet: 'none' });
+        if (!s.other && !this.later) this.later = setTimeout(() => this.setState({ other: true }), 4000);
+      },
       showInfo: s.sheet === 'info',
       showMenu: s.sheet === 'menu',
       showCancel: s.sheet === 'cancel',
@@ -135,10 +169,10 @@ class Component extends DCLogic {
       askCancel: () => this.setState({ sheet: 'cancel' }),
       close: () => this.setState({ sheet: 'none' }),
       stop: (e) => e.stopPropagation(),
-      cancelLabel: s.confirmed ? '예약 취소하기' : '요청 거절하기',
-      cancelTitle: s.confirmed ? '예약을 취소할까요' : '요청을 거절할까요',
-      cancelBody: s.confirmed ? '취소하면 되돌릴 수 없어요. 보리네 보호자에게 바로 알리고, 보호자는 다른 시터를 찾아야 해요.' : '보리네 보호자에게 바로 알려요. 다시 하려면 보호자가 새로 요청해야 해요.',
-      doCancel: () => this.setState({ sheet: 'none', confirmed: false })
+      cancelLabel: (s.mine && s.other) ? '예약 취소하기' : '요청 거절하기',
+      cancelTitle: (s.mine && s.other) ? '예약을 취소할까요' : '요청을 거절할까요',
+      cancelBody: (s.mine && s.other) ? '취소하면 되돌릴 수 없어요. 보리네 보호자에게 바로 알리고, 보호자는 다른 시터를 찾아야 해요.' : '보리네 보호자에게 바로 알려요. 다시 하려면 보호자가 새로 요청해야 해요.',
+      doCancel: () => this.setState({ sheet: 'none', mine: false })
     };
   }
 }
