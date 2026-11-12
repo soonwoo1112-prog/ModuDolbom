@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>위치정보 이용 동의</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="SitterToday.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title">위치정보 이용 동의</h1><span style="width: 48px;"></span></header>
+<main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; padding: 20px 16px 24px;">
+<h2 class="md-screen-title" style="margin: 0;">산책 중 위치를 이렇게 써요</h2>
+<dl class="lc-sum">
+<dt>무엇을</dt><dd>산책하는 동안 시터 휴대폰의 위치와 걸은 경로</dd>
+<dt>언제</dt><dd>산책 시작을 누른 때부터 끝을 누를 때까지만</dd>
+<dt>누가 봐요</dt><dd>그 산책을 맡긴 보호자만. 소셜에 공개하는 글에는 지도를 올리지 않아요</dd>
+<dt>얼마나</dt><dd>산책 기록과 함께 보관하고, 기록을 지우거나 탈퇴하면 함께 지워요</dd>
+</dl>
+<div class="lc-checks" role="group" aria-label="필수 동의">
+<label class="lc-check"><input class="md-check" type="checkbox" checked="{{a}}" onChange="{{toggleA}}"><span><b>(필수) 개인위치정보 수집·이용 동의</b></span></label>
+<label class="lc-check"><input class="md-check" type="checkbox" checked="{{b}}" onChange="{{toggleB}}"><span><b>(필수) 위치기반서비스 이용약관 동의</b></span></label>
+</div>
+<p class="md-detail" style="margin: 0;">동의하지 않으면 산책 기록과 실시간 위치를 쓸 수 없어요. 동의는 더보기 &gt; 설정에서 언제든 철회할 수 있어요. 약관 전문은 법무 검토를 마치면 여기에 붙어요.</p>
+</main>
+<div style="padding: 12px 16px 16px; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle);">
+<sc-if value="{{ready}}" hint-placeholder-val="{{ false }}"><a class="md-btn md-btn--brand md-btn--large md-pressable" href="PermLocation.dc.html" style="box-sizing: border-box;">동의하고 계속하기</a></sc-if>
+<sc-if value="{{notReady}}" hint-placeholder-val="{{ true }}"><button class="md-btn md-btn--large" type="button" disabled style="width: 100%;">필수 항목에 동의해 주세요</button></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { a: false, b: false };
+  }
+  renderVals() {
+    const s = this.state;
+    return {
+      a: s.a, b: s.b, ready: s.a && s.b, notReady: !(s.a && s.b),
+      toggleA: () => this.setState({ a: !s.a }), toggleB: () => this.setState({ b: !s.b })
+    };
+  }
+}
+</script>
+</body>
+</html>

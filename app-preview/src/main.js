@@ -14,7 +14,7 @@ const BAR = 44;
 // The app as it is now: only the chosen screens, grouped the way the app is used.
 // Old versions and experiments stay on the canvas but are left out of this list.
 const APP = [
-  ['보호자 · 예약', [['MainR', '예약 홈'], ['MainRNew', '예약 홈 (처음 쓰는 보호자)'], ['Matching', '시터 고르기'], ['SitterProfile', '시터 프로필'], ['SitterProfileFeed', '시터 프로필: 산책 기록'], ['SitterProfilePrice', '시터 프로필: 가격'], ['RequestDone', '요청 보냄'], ['Sent', '요청 현황']]],
+  ['보호자 · 예약', [['MainR', '예약 홈'], ['MainRNew', '예약 홈 (처음 쓰는 보호자)'], ['Matching', '시터 고르기'], ['SitterProfile', '시터 프로필'], ['SitterProfileFeed', '시터 프로필: 산책 기록'], ['SitterProfilePrice', '시터 프로필: 가격'], ['RequestDone', '요청 보냄'], ['Sent', '요청 현황'], ['SentNone', '요청 현황: 아무도 수락하지 않음'], ['SentCanceled', '요청 현황: 모두 취소함']]],
   ['보호자 · 채팅', [['GuardianChatList', '채팅 목록'], ['Chat', '채팅'], ['ChatInfo', '채팅: 예약 정보'], ['ChatMenu', '채팅: 더보기 메뉴'], ['ChatEdit', '예약 수정 요청']]],
   ['보호자 · 산책', [['GuardianLive', '실시간 위치'], ['GuardianLog', '산책 기록과 후기'], ['GuardianWalk', '직접 산책 나가기']]],
   ['보호자 · 소셜', [['SocialFeed', '산책 피드'], ['Community', '동네 이야기'], ['ComposePick', '글쓰기'], ['ComposeWalk', '산책 올리기'], ['Compose', '직접 쓰기']]],
@@ -24,6 +24,7 @@ const APP = [
   ['시터 · 채팅', [['SitterChatList', '채팅 목록'], ['SitterChat', '채팅']]],
   ['시터 · 산책', [['Walking', '산책중'], ['WalkLogWrite', '산책 기록 보내기']]],
   ['시터 · 캘린더', [['SitterSchedule', '캘린더'], ['SitterWeek', '그 주'], ['SitterWeekEdit', '이 날 일정 수정']]],
+  ['공용 · 권한과 동의', [['LocationConsent', '위치정보 이용 동의'], ['PermLocation', '권한 요청: 위치'], ['PermNotify', '권한 요청: 알림'], ['PermPhoto', '권한 요청: 사진']]],
   ['시터 · 더보기', [['SitterMore', '더보기'], ['SitterProfileSelf', '내 프로필'], ['SitterProfileEdit', '프로필 꾸미기'], ['SitterService', '서비스 설정'], ['SitterAnalytics', '시터 분석'], ['SitterPayout', '정산']]]
 ];
 const LABEL = Object.fromEntries(APP.flatMap(([, items]) => items));

@@ -118,7 +118,7 @@ class Component extends DCLogic {
     ], step: 0, dogs: {}, freq: 'once', dates: {}, start: null, end: null, noEnd: false, weeks: {}, ap: '오후', h: 12, m: '30', timeSet: false, len: null, addr: null };
     this.DOGS = [{ name: '보리', photo: 'img/bori.jpg', focus: 'center 30%', meta: '진돗개 믹스, 21kg' }, { name: '콩이', photo: 'img/kong.jpg', focus: 'center 40%', meta: '푸들 믹스, 4kg' }];
     this.WEEK = ['월', '화', '수', '목', '금', '토', '일'];
-    this.AP = ['오전', '오후']; this.HOURS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; this.MINS = ['00', '30'];
+    this.AP = ['오전', '오후']; this.HOURS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; this.MINS = ['00', '15', '30', '45'];
     this.LENS = [['30분', '짧게 동네 한 바퀴'], ['60분', '공원까지 다녀오기'], ['90분', '넉넉하게 오래']];
   }
   go(patch, step) { this.setState(Object.assign({}, patch, { step: step, fromHome: this.state.step === 0 })); }
@@ -160,7 +160,7 @@ class Component extends DCLogic {
   }
   save() {
     const s = this.state;
-    try { sessionStorage.setItem('md-booking', JSON.stringify({ dogs: this.picked().map((g) => g.name), date: this.dateChosen() ? this.dateText() : '', count: this.walkCount(), time: s.timeSet ? this.timeSummary() : '', times: s.perDay ? this.dayKeys().map((k) => this.keyLabel(k) + ' ' + this.fmtT(this.timeOf(k))) : [], len: s.len != null ? this.LENS[s.len][0] : '' })); } catch (e) { /* storage off: the next screens use their sample */ }
+    try { sessionStorage.setItem('md-booking', JSON.stringify({ dogs: this.picked().map((g) => g.name), date: this.dateChosen() ? this.dateText() : '', count: this.walkCount(), repeat: s.freq === 'repeat', perWeek: this.repeatDays().length, time: s.timeSet ? this.timeSummary() : '', times: s.perDay ? this.dayKeys().map((k) => this.keyLabel(k) + ' ' + this.fmtT(this.timeOf(k))) : [], len: s.len != null ? this.LENS[s.len][0] : '' })); } catch (e) { /* storage off: the next screens use their sample */ }
   }
   setT(key, v) {
     const s = this.state;
@@ -181,7 +181,7 @@ class Component extends DCLogic {
       ['누구를 산책시킬까요?', ''],
       ['얼마나 걸을까요?', '가격은 산책 길이에 따라 달라져요. 시터마다 가격은 시터를 고를 때 보여 드려요.'],
       ['언제 맡길까요?', ''],
-      ['몇 시에 나갈까요?', '위아래로 넘겨 30분 단위로 골라요'],
+      ['몇 시에 나갈까요?', '위아래로 넘겨 15분 단위로 골라요'],
       ['어디서 만날까요?', '공동현관 비밀번호는 확정된 시터에게, 산책 당일에만 보여요.'],
       ['이 조건으로 시터를 찾을게요', '같은 동네에서 조건에 맞는 시터를 추려 드려요.']
     ];

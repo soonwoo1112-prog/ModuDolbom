@@ -47,7 +47,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <div class="st-row" style="min-height: 52px; padding: 4px 0; box-shadow: none;"><span>끝</span><span class="st-stepper"><button type="button" aria-label="끝 30분 앞당기기" onClick="{{endDown}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /></svg></button><b style="min-width: 92px;">{{endText}}</b><button type="button" aria-label="끝 30분 늦추기" onClick="{{endUp}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg></button></span></div>
 <sc-if value="{{perDay}}" hint-placeholder-val="{{ false }}"><ul class="pf-pricelist" style="margin-top: 4px;"><sc-for list="{{summary}}" as="r" hint-placeholder-count="5"><li style="padding: 10px 0;"><span>{{r.label}}요일</span><b style="font-size: 0.875rem; font-weight: 500;">{{r.text}}</b></li></sc-for></ul></sc-if>
 <span class="md-detail">특정 날짜만 쉬거나 바꾸려면 캘린더에서 그 날을 눌러요</span></div>
-<div class="st-block"><span>최소 언제까지 요청을 받을까요</span><div class="md-seg" role="group" aria-label="최소 요청 시간"><sc-for list="{{notice}}" as="n" hint-placeholder-count="3"><button type="button" aria-pressed="{{n.on}}" onClick="{{n.pick}}">{{n.label}}</button></sc-for></div></div>
+
 </div>
 <div class="md-band"></div>
 <div class="st-group"><h2 class="st-group__title">받는 강아지</h2>
@@ -57,9 +57,9 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <label class="st-row md-pressable"><span>노견 (10살 이상)<small>천천히 짧게 걸어요</small></span><input class="md-switch" type="checkbox" checked="{{senior}}" onChange="{{t_senior}}" aria-label="노견 (10살 이상)"></label>
 </div>
 <div class="md-band"></div>
-<div class="st-group"><h2 class="st-group__title">취소 정책</h2>
-<div class="st-block" style="box-shadow: none;"><span>보호자가 취소할 때<small>시터 프로필의 가격 탭에 보여요</small></span>
-<div class="st-policy"><sc-for list="{{policies}}" as="p" hint-placeholder-count="3"><button type="button" aria-pressed="{{p.on}}" onClick="{{p.pick}}"><i></i><span><b>{{p.name}}</b><span>{{p.desc}}</span></span></button></sc-for></div></div>
+<div class="st-group"><h2 class="st-group__title">예약과 취소</h2>
+<div class="st-block"><span>산책 며칠 전까지 예약받을까요<small>이보다 늦은 요청은 받지 않아요</small></span><div class="md-seg" role="group" aria-label="예약 마감"><sc-for list="{{lead}}" as="n" hint-placeholder-count="4"><button type="button" aria-pressed="{{n.on}}" onClick="{{n.pick}}">{{n.label}}</button></sc-for></div></div>
+<div class="st-block" style="box-shadow: none;"><span>며칠 전까지 무료로 취소할 수 있게 할까요<small>시터 프로필의 가격 탭에서 보호자에게 보여요</small></span><div class="md-seg" role="group" aria-label="무료 취소 기한"><sc-for list="{{free}}" as="n" hint-placeholder-count="4"><button type="button" aria-pressed="{{n.on}}" onClick="{{n.pick}}">{{n.label}}</button></sc-for></div><span class="md-detail">무료 취소 기한이 지나면 산책 24시간 전까지 30%, 24시간 안에는 50%, 산책 시작 뒤에는 100%를 수수료로 받아요. 수수료는 모두돌봄이 정해요.</span></div>
 </div>
 <div style="height: 16px;"></div>
 </main>
@@ -73,7 +73,7 @@ class Component extends DCLogic {
     super(props);
     this.state = { visible: true, newClients: true, repeat: true, puppy: false, multi: true, senior: true, price: 15000, maxWalks: 3,
       days: { 월: true, 화: true, 수: false, 목: true, 금: true, 토: true, 일: false }, perDay: false, editDay: '월', all: [690, 870],
-      hours: { 월: [690, 870], 화: [690, 870], 수: [690, 870], 목: [690, 870], 금: [690, 870], 토: [600, 1140], 일: [600, 1020] }, sizes: [true, true, false], notice: '3시간 전', policy: '보통', toast: '' };
+      hours: { 월: [690, 870], 화: [690, 870], 수: [690, 870], 목: [690, 870], 금: [690, 870], 토: [600, 1140], 일: [600, 1020] }, sizes: [true, true, false], lead: '하루 전', free: '2일 전', toast: '' };
   }
   renderVals() {
     const s = this.state;
@@ -98,12 +98,9 @@ class Component extends DCLogic {
       maxUp: () => this.setState({ maxWalks: Math.min(s.maxWalks + 1, 8) }),
       maxDown: () => this.setState({ maxWalks: Math.max(s.maxWalks - 1, 1) }),
       days: ['월', '화', '수', '목', '금', '토', '일'].map((k) => ({ label: k, on: !!s.days[k], toggle: () => this.setState({ days: Object.assign({}, s.days, { [k]: !s.days[k] }) }) })),
-      notice: ['1시간 전', '3시간 전', '하루 전'].map((k) => ({ label: k, on: s.notice === k, pick: () => this.setState({ notice: k }) })),
-      policies: [
-        { name: '유연', desc: '산책 2시간 전까지 무료로 취소해요' },
-        { name: '보통', desc: '하루 전까지 무료, 그 뒤에는 50%를 받아요' },
-        { name: '엄격', desc: '이틀 전까지 무료, 그 뒤에는 전액을 받아요' }
-      ].map((x) => Object.assign({}, x, { on: s.policy === x.name, pick: () => this.setState({ policy: x.name }) })),
+      // The sitter sets the booking deadline and the free-cancellation deadline; the fees after that are app-wide.
+      lead: ['당일', '하루 전', '2일 전', '3일 전'].map((k) => ({ label: k, on: s.lead === k, pick: () => this.setState({ lead: k }) })),
+      free: ['하루 전', '2일 전', '3일 전', '7일 전'].map((k) => ({ label: k, on: s.free === k, pick: () => this.setState({ free: k }) })),
       save: () => this.setState({ toast: '저장했어요. 다음 검색부터 반영돼요' }),
       toast: s.toast
     };
