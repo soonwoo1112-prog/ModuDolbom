@@ -83,8 +83,9 @@ class Component extends DCLogic {
       const price = mult ? fmt(s.base * mult + extra) : fmt(s.base + extra) + '부터';
       const times = Number(bk.count) || 0;
       const each = mult ? s.base * mult + extra : 0;
-      const note = !mult ? '90분은 대화에서 정해요' : (n > 1 ? n + '마리, ' : '') + bk.len + (times > 1 ? ', 한 번' : '');
-      const total = mult && times > 1 ? times + '번 모두 ' + fmt(each * times) : '';
+      const note = !mult ? '90분은 대화에서 정해요' : (n > 1 ? n + '마리, ' : '') + bk.len + (times > 1 || bk.repeat ? ', 한 번' : '');
+      // Repeat bookings are billed week by week; one-off dates are billed together when both sides confirm.
+      const total = !mult ? '' : bk.repeat ? '주 ' + (bk.perWeek || 1) + '번, 매주 ' + fmt(each * (bk.perWeek || 1)) + ' 결제' : times > 1 ? times + '번 모두 ' + fmt(each * times) : '';
       return Object.assign({}, s, {
         badges: s.badges.map((label) => ({ label: label, cls: label === '같은 아파트' ? 'md-badge md-badge--brand' : 'md-badge' })),
         first: s.name[0], price: price, priceNote: note, total: total,

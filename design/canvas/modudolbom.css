@@ -1093,3 +1093,50 @@ main .rb-cta { box-shadow: none; padding: 8px 16px 24px; }
 .cf-sum dd b { font: 700 1.125rem/1.5rem var(--font-display, var(--font-sans)); }
 .cf-sheet-note { margin: 0; font: 400 0.8125rem/1.1875rem var(--font-sans); color: var(--fg-neutral-muted); }
 @media (prefers-reduced-motion: reduce) { .cf-note { animation: none; } }
+
+/* ---- "준비 중" sheet (docs/product/mvp-scope.md §5): a calm note and one way to be told, never a dead end ---- */
+.soon { align-items: center; text-align: center; gap: 8px; padding-bottom: 20px; }
+.soon .md-btn { width: 100%; box-sizing: border-box; }
+.soon__ico { display: grid; place-items: center; width: 56px; height: 56px; margin-top: 8px; border-radius: var(--full); background: var(--bg-neutral-weak); color: var(--fg-neutral-muted); }
+.soon__ico svg { width: 26px; height: 26px; }
+.soon__title { margin: 4px 0 0; font: 700 1.25rem/1.6875rem var(--font-display, var(--font-sans)); letter-spacing: -0.3px; }
+.soon__body { margin: 0 0 12px; max-width: 30ch; font: 400 0.9375rem/1.375rem var(--font-sans); color: var(--fg-neutral-muted); }
+.soon-row { --press: 0.98; display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 52px; padding: 0 4px; border: 0; background: none; color: var(--fg-neutral); text-align: left; font: inherit; cursor: pointer; box-shadow: inset 0 1px 0 var(--stroke-neutral-subtle); }
+.soon-row > span { display: flex; flex-direction: column; gap: 2px; }
+.soon-row b { font: 500 0.9375rem/1.25rem var(--font-sans); }
+.soon-row small { font: 400 0.8125rem/1.125rem var(--font-sans); color: var(--fg-neutral-subtle); }
+/* sitter profile: the sitter's own booking and cancellation rules */
+.pf-policy { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; padding: 16px; border-radius: var(--r4); background: var(--bg-layer-basement); }
+.pf-policy h3 { margin: 0; font: 700 1.0625rem/1.4375rem var(--font-display, var(--font-sans)); }
+.pf-policy dl { margin: 0; display: grid; grid-template-columns: 72px minmax(0, 1fr); row-gap: 6px; column-gap: 12px; font: 400 0.875rem/1.25rem var(--font-sans); }
+.pf-policy dt { color: var(--fg-neutral-subtle); }
+.pf-policy dd { margin: 0; }
+.pf-policy .wk-sub { margin: 4px 0 0; }
+.rs-row[data-closed="true"] { opacity: 0.6; }
+.rs-result { gap: 12px; padding: 32px 16px 24px; }
+.rs-result .md-btn { width: 100%; margin-top: 4px; }
+
+/* ---- Permission explainers (v1-tasks 1-2): say why first, then open the phone's own window ---- */
+.pm { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px 20px; }
+.pm__ico { display: grid; place-items: center; width: 64px; height: 64px; border-radius: var(--full); background: var(--bg-brand-weak); color: var(--fg-brand); }
+.pm__ico svg { width: 30px; height: 30px; }
+.pm__title { margin: 4px 0 0; font: 700 1.625rem/2.125rem var(--font-display, var(--font-sans)); letter-spacing: -0.5px; }
+.pm__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.pm__list li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px; font: 400 1rem/1.4375rem var(--font-sans); }
+.pm__check { display: grid; place-items: center; width: 22px; height: 22px; margin-top: 1px; border-radius: var(--full); background: var(--bg-neutral-weak); color: var(--fg-brand); }
+.pm__check svg { width: 13px; height: 13px; }
+.pm__note { margin: 4px 0 0; padding: 12px 14px; border-radius: var(--r3); background: var(--bg-layer-basement); font: 400 0.875rem/1.3125rem var(--font-sans); color: var(--fg-neutral-muted); }
+.pm__ok { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 0 0 8px; font: 700 0.9375rem/1.25rem var(--font-sans); color: var(--fg-positive); }
+.pm__ok svg { width: 16px; height: 16px; }
+.pm-os__box { display: flex; flex-direction: column; width: 270px; border-radius: 14px; overflow: hidden; background: var(--bg-layer-floating); text-align: center; box-shadow: var(--shadow-floating); }
+.pm-os__box > b { padding: 18px 16px 2px; font: 600 1.0625rem/1.375rem var(--font-sans); }
+.pm-os__box > span { padding: 0 16px 16px; font: 400 0.8125rem/1.125rem var(--font-sans); color: var(--fg-neutral-muted); }
+.pm-os__box button { min-height: 44px; border: 0; border-top: 1px solid var(--stroke-neutral-subtle); background: none; color: var(--fg-informative); font: 400 1.0625rem/1.375rem var(--font-sans); cursor: pointer; }
+/* location consent */
+.lc-sum { margin: 0; display: grid; grid-template-columns: 72px minmax(0, 1fr); row-gap: 12px; column-gap: 12px; padding: 16px; border-radius: var(--r4); background: var(--bg-layer-basement); font: 400 0.9375rem/1.375rem var(--font-sans); }
+.lc-sum dt { font-weight: 500; color: var(--fg-neutral-subtle); }
+.lc-sum dd { margin: 0; }
+.lc-checks { display: flex; flex-direction: column; }
+.lc-check { display: grid; grid-template-columns: 22px minmax(0, 1fr); align-items: center; gap: 12px; min-height: 52px; box-shadow: inset 0 -1px 0 var(--stroke-neutral-subtle); cursor: pointer; }
+.lc-check b { font: 500 0.9375rem/1.25rem var(--font-sans); }
+.lc-link { font: 500 0.875rem/1.25rem var(--font-sans); color: var(--fg-neutral-subtle); text-decoration: underline; text-underline-offset: 3px; padding: 12px 0 12px 8px; }

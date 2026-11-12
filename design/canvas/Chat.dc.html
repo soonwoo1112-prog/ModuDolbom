@@ -76,7 +76,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <dt class="md-label" style="color: var(--fg-neutral-subtle);">비용</dt><dd style="margin: 0;" class="md-num"><b>15,000원</b> <span class="md-detail">30분 산책 1번</span></dd>
 <dt class="md-label" style="color: var(--fg-neutral-subtle);">주소</dt><dd style="margin: 0;">집, 서울 강남구 역삼로 123 101동 1203호</dd>
 </dl>
-<p class="md-detail" style="margin: 0;">앱에서 예약한 산책만 보험으로 보장돼요</p>
+<button class="soon-row md-pressable" type="button" onClick="{{openSoon}}"><span><b>산책 보험</b><small>준비 중이에요</small></span><svg class="rb-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></button>
 </div>
 </div>
 </sc-if>
@@ -107,6 +107,18 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 </dl>
 <p class="cf-sheet-note">{{sheetNote}}</p>
 <button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{doConfirm}}">{{confirmLabel}}</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{showSoon}}" hint-placeholder-val="{{ false }}">
+<div class="md-overlay" onClick="{{closeSoon}}">
+<div class="md-sheet soon" role="dialog" aria-modal="true" aria-labelledby="soon-title" onClick="{{stop}}">
+<span class="md-sheet__handle" aria-hidden="true"></span>
+<span class="soon__ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg></span>
+<h2 id="soon-title" class="soon__title">{{soonTitle}}</h2>
+<p class="soon__body">{{soonBody}}</p>
+<button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{notifySoon}}" disabled="{{soonAsked}}">{{soonLabel}}</button>
+<button class="md-btn md-btn--ghost md-pressable" type="button" onClick="{{closeSoon}}" style="min-height: 44px;">닫기</button>
 </div>
 </div>
 </sc-if>
@@ -141,8 +153,8 @@ class Component extends DCLogic {
       waiting: s.mine && !s.other,
       otherFirst: s.other && !s.mine,
       otherFirstTitle: '김하늘 시터님이 산책을 확정했어요',
-      otherFirstBody: '확정을 누르면 예약이 완료되고 결제돼요',
-      waitingBody: '김하늘 시터님이 확정하면 예약이 완료되고 결제돼요',
+      otherFirstBody: '확정을 누르면 예약이 완료되고 결제돼요. 오후 6:05까지 확정하지 않으면 시터님의 확정이 풀려요',
+      waitingBody: '김하늘 시터님이 3시간 안에 확정하면 예약이 완료되고 결제돼요. 그 안에 확정하지 않으면 내 확정이 풀려요',
       doneTitle: '예약이 확정되고 15,000원이 결제됐어요',
       doneBody: '이도윤 시터에게 보낸 요청은 자동으로 닫혔어요',
       editSent: s.editSent,
@@ -151,12 +163,20 @@ class Component extends DCLogic {
       whoLabel: '시터', whoName: '김하늘',
       moneyLabel: s.other ? '결제 금액' : '결제할 금액',
       showPayMethod: true,
-      sheetNote: s.other ? '김하늘 시터님도 확정해서, 확정하면 바로 결제돼요. 산책 하루 전까지는 수수료 없이 취소할 수 있어요.' : '김하늘 시터님이 확정하는 순간 결제돼요. 산책 하루 전까지는 수수료 없이 취소할 수 있어요.',
+      sheetNote: s.other ? '김하늘 시터님도 확정해서, 확정하면 바로 결제돼요. 김하늘 시터님의 규정으로 산책 2일 전까지 무료 취소, 그 뒤에는 수수료가 있어요.' : '김하늘 시터님이 3시간 안에 확정하는 순간 결제돼요. 김하늘 시터님의 규정으로 산책 2일 전까지 무료 취소, 그 뒤에는 수수료가 있어요.',
       confirmLabel: s.other ? '확정하고 15,000원 결제하기' : '확정하기',
       doConfirm: () => {
         this.setState({ mine: true, sheet: 'none' });
         if (!s.other && !this.later) this.later = setTimeout(() => this.setState({ other: true }), 4000);
       },
+      showSoon: !!this.state.soon,
+      soonTitle: '산책 보험은 준비하고 있어요',
+      soonBody: '보험사와 산책 중 사고를 보장하는 상품을 만들고 있어요. 준비되면 알림으로 알려 드릴게요.',
+      soonAsked: !!this.state.soonAsked,
+      soonLabel: this.state.soonAsked ? '준비되면 알려 드릴게요' : '알림 받기',
+      notifySoon: () => this.setState({ soonAsked: true }),
+      openSoon: () => this.setState({ soon: true, sheet: 'none' }),
+      closeSoon: () => this.setState({ soon: false }),
       showInfo: s.sheet === 'info',
       showMenu: s.sheet === 'menu',
       showCancel: s.sheet === 'cancel',
@@ -167,7 +187,7 @@ class Component extends DCLogic {
       stop: (e) => e.stopPropagation(),
       cancelLabel: (s.mine && s.other) ? '예약 취소하기' : '요청 취소하기',
       cancelTitle: (s.mine && s.other) ? '예약을 취소할까요' : '요청을 취소할까요',
-      cancelBody: (s.mine && s.other) ? '취소하면 되돌릴 수 없어요. 산책 하루 전까지는 수수료 없이 취소할 수 있어요.' : '김하늘 시터에게 보낸 요청이 닫혀요. 다시 요청하려면 처음부터 골라야 해요.',
+      cancelBody: (s.mine && s.other) ? '취소하면 되돌릴 수 없어요. 산책까지 24시간이 남지 않아 결제 금액의 50%인 7,500원이 수수료로 빠지고 7,500원을 돌려받아요.' : '김하늘 시터에게 보낸 요청이 닫혀요. 다시 요청하려면 처음부터 골라야 해요.',
       doCancel: () => this.setState({ sheet: 'none', mine: false })
     };
   }

@@ -424,6 +424,62 @@
       "w": 390,
       "x": 940,
       "y": 1244
+    },
+    "SentNone.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "3-1. 요청 현황: 아무도 수락하지 않음",
+      "w": 390,
+      "x": 0,
+      "y": 13684
+    },
+    "SentCanceled.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "3-2. 요청 현황: 모두 취소함",
+      "w": 390,
+      "x": 470,
+      "y": 13684
+    },
+    "LocationConsent.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "19. 위치정보 이용 동의 (초안, 법무 검토 전)",
+      "w": 390,
+      "x": 940,
+      "y": 13684
+    },
+    "PermLocation.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "19-1. 권한 요청: 위치 (시터, 첫 산책 전)",
+      "w": 390,
+      "x": 1410,
+      "y": 13684
+    },
+    "PermNotify.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "19-2. 권한 요청: 알림",
+      "w": 390,
+      "x": 1880,
+      "y": 13684
+    },
+    "PermPhoto.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "19-3. 권한 요청: 사진",
+      "w": 390,
+      "x": 2350,
+      "y": 13684
+    },
+    "Permission.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "19-0. 권한 요청 (원본: Tweaks에서 위치·알림·사진)",
+      "w": 390,
+      "x": 2820,
+      "y": 13684
     }
   },
   "createdOnFiles": {
@@ -452,7 +508,8 @@
     "compose",
     "taste",
     "direction",
-    "brand"
+    "brand",
+    "common"
   ],
   "notes": {
     "brand": {
@@ -534,6 +591,14 @@
       "w": 240,
       "x": 0,
       "y": 8408
+    },
+    "common": {
+      "kind": "title1",
+      "maxW": 3300,
+      "text": "공용 화면: 상태, 준비 중, 권한 (docs/product/v1-tasks.md 1-2)",
+      "w": 240,
+      "x": 0,
+      "y": 13384
     }
   },
   "order": [
@@ -589,7 +654,14 @@
     "SocialFeedT.dc.html",
     "MainR.dc.html",
     "MainRNew.dc.html",
-    "LogoStack.dc.html"
+    "LogoStack.dc.html",
+    "SentNone.dc.html",
+    "SentCanceled.dc.html",
+    "LocationConsent.dc.html",
+    "PermLocation.dc.html",
+    "PermNotify.dc.html",
+    "PermPhoto.dc.html",
+    "Permission.dc.html"
   ],
   "pages": [],
   "title": "모두돌봄 예약 흐름"

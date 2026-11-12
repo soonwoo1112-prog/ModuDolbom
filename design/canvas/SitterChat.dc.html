@@ -145,8 +145,8 @@ class Component extends DCLogic {
       waiting: s.mine && !s.other,
       otherFirst: s.other && !s.mine,
       otherFirstTitle: '보리네 보호자님이 산책을 확정했어요',
-      otherFirstBody: '확정을 누르면 예약이 완료돼요',
-      waitingBody: '보리네 보호자님이 확정하면 예약이 완료돼요',
+      otherFirstBody: '확정을 누르면 예약이 완료돼요. 오후 6:05까지 확정하지 않으면 보호자님의 확정이 풀려요',
+      waitingBody: '보리네 보호자님이 3시간 안에 확정하면 예약이 완료돼요. 그 안에 확정하지 않으면 내 확정이 풀려요',
       doneTitle: '예약이 확정됐어요',
       doneBody: '이제 주소와 픽업 안내를 볼 수 있어요. 공동현관 비밀번호는 산책 당일에 보여요.',
       editSent: s.editSent,
@@ -155,7 +155,7 @@ class Component extends DCLogic {
       whoLabel: '보호자', whoName: '보리네 보호자',
       moneyLabel: '받는 금액',
       showPayMethod: false,
-      sheetNote: s.other ? '보리네 보호자님도 확정해서, 확정하면 바로 예약이 완료돼요. 받는 금액은 산책이 끝나면 정산돼요.' : '보리네 보호자님이 확정하면 예약이 완료돼요. 받는 금액은 산책이 끝나면 정산돼요.',
+      sheetNote: s.other ? '보리네 보호자님도 확정해서, 확정하면 바로 예약이 완료돼요. 받는 금액은 산책이 끝나고 정산돼요.' : '보리네 보호자님이 3시간 안에 확정하면 예약이 완료돼요. 받는 금액은 산책이 끝나고 정산돼요.',
       confirmLabel: '확정하기',
       doConfirm: () => {
         this.setState({ mine: true, sheet: 'none' });
