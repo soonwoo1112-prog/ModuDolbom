@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>신고하기</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<sc-if value="{{asking}}" hint-placeholder-val="{{ true }}">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="{{back}}" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title">신고하기</h1><span style="width: 48px;"></span></header>
+<main class="ac-main">
+<h2 class="md-screen-title">{{headline}}</h2>
+<div class="ac-card"><span class="md-initial md-initial--{{tint}}" role="img" aria-label="{{who}} 사진 자리" style="width: 40px; height: 40px; font-size: 1rem; border-radius: var(--full);">{{first}}</span><span><b>{{who}}</b><small>{{what}}</small></span></div>
+<div class="rp-reasons" role="radiogroup" aria-label="신고하는 이유"><sc-for list="{{reasons}}" as="r" hint-placeholder-count="5"><button class="rp-reason md-pressable" type="button" role="radio" aria-checked="{{r.on}}" onClick="{{r.pick}}"><span>{{r.label}}</span><span class="rp-reason__dot" aria-hidden="true"></span></button></sc-for></div>
+<sc-if value="{{danger}}" hint-placeholder-val="{{ false }}"><p class="ac-why" role="alert"><b>지금 위험한 상황이면 112에 먼저 신고해 주세요.</b> 모두돌봄 신고는 운영팀이 확인하는 데 시간이 걸려요.</p></sc-if>
+<div class="md-field"><label class="md-field__label" for="rp-more">자세한 내용 <em class="py-opt">선택</em></label><textarea class="md-input" id="rp-more" rows="3" placeholder="언제, 무슨 일이 있었는지 적어 주세요" value="{{more}}" onChange="{{typeMore}}"></textarea><div class="md-field__foot"><span>{{evidence}}</span></div></div>
+<label class="rp-block"><span><b>{{blockLabel}}</b><small>{{blockNote}}</small></span><input class="md-switch" type="checkbox" checked="{{block}}" onChange="{{toggleBlock}}"></label>
+</main>
+<div class="ac-cta"><sc-if value="{{picked}}" hint-placeholder-val="{{ true }}"><button class="md-btn md-btn--critical md-btn--large md-pressable" type="button" onClick="{{send}}" style="width: 100%;">신고하기</button></sc-if><sc-if value="{{notPicked}}" hint-placeholder-val="{{ false }}"><button class="md-btn md-btn--large" type="button" disabled style="width: 100%;">이유를 골라 주세요</button></sc-if></div>
+</sc-if>
+<sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+<main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; padding: 24px 0;">
+<section class="x-done rd-done" role="status"><span class="x-done__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span><h2>신고를 받았어요</h2><p>{{doneBody}}</p></section>
+<ol class="x-next" aria-label="다음 일"><sc-for list="{{next}}" as="t" hint-placeholder-count="3"><li><b>{{t.n}}</b><span>{{t.label}}<small>{{t.note}}</small></span></li></sc-for></ol>
+</main>
+<div class="rd-actions"><a class="md-btn md-btn--brand md-btn--large md-pressable" href="{{home}}" style="box-sizing: border-box; width: 100%;">{{homeLabel}}</a></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"target":{"editor":"enum","options":["채팅","프로필","게시글"],"default":"채팅"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const t = props.target || '채팅';
+    this.state = { reason: null, more: '', block: t !== '게시글', done: false };
+  }
+  renderVals() {
+    const s = this.state, t = this.props.target || '채팅';
+    const T = {
+      '채팅': { back: 'Chat.dc.html', home: 'GuardianChatList.dc.html', homeLabel: '채팅 목록으로', headline: '이 대화를 신고할까요?', who: '김하늘 시터', first: '김', tint: 'sand', what: '채팅, 최근 메시지 20개를 함께 보내요',
+        reasons: ['욕설이나 불쾌한 말', '앱 밖에서 거래하자고 해요', '성적인 말이나 사진', '위협하거나 겁을 줘요', '그 밖의 이유'], evidence: '최근 메시지 20개가 신고에 함께 담겨요' },
+      '프로필': { back: 'SitterProfile.dc.html', home: 'Matching.dc.html', homeLabel: '시터 목록으로', headline: '이 프로필을 신고할까요?', who: '김하늘 시터', first: '김', tint: 'sand', what: '시터 프로필',
+        reasons: ['다른 사람인 것 같아요', '사진이나 소개가 사실과 달라요', '앱 밖에서 거래하자고 해요', '부적절한 사진이나 글', '그 밖의 이유'], evidence: '프로필 사진과 소개가 신고에 함께 담겨요' },
+      '게시글': { back: 'Community.dc.html', home: 'Community.dc.html', homeLabel: '동네 이야기로', headline: '이 글을 신고할까요?', who: '두부네 보호자', first: '두', tint: 'sky', what: '동네 이야기 글, 11월 11일',
+        reasons: ['광고나 홍보', '욕설이나 혐오 표현', '다른 사람의 개인정보', '동물 학대가 의심돼요', '그 밖의 이유'], evidence: '글과 사진이 신고에 함께 담겨요' }
+    }[t];
+    return {
+      asking: !s.done, done: s.done, back: T.back, home: T.home, homeLabel: T.homeLabel,
+      headline: T.headline, who: T.who, first: T.first, tint: T.tint, what: T.what, evidence: T.evidence,
+      reasons: T.reasons.map((r) => ({ label: r, on: s.reason === r, pick: () => this.setState({ reason: r }) })),
+      danger: s.reason === '위협하거나 겁을 줘요' || s.reason === '동물 학대가 의심돼요',
+      more: s.more, typeMore: (e) => this.setState({ more: e.target.value }),
+      blockLabel: t === '게시글' ? '이 사람의 글 숨기기' : '차단하기',
+      blockNote: t === '게시글' ? '동네 이야기와 피드에서 이 사람의 글이 안 보여요' : '서로 채팅과 요청을 보낼 수 없고, 검색에서도 안 보여요',
+      block: s.block, toggleBlock: () => this.setState({ block: !s.block }),
+      picked: !!s.reason, notPicked: !s.reason, send: () => this.setState({ done: true }),
+      doneBody: s.block ? (t === '게시글' ? '이제 이 사람의 글이 보이지 않아요. 누가 신고했는지는 알리지 않아요.' : '차단도 했어요. 누가 신고했는지는 상대에게 알리지 않아요.') : '누가 신고했는지는 상대에게 알리지 않아요.',
+      next: [
+        { n: '1', label: '운영팀 확인', note: '24시간 안에 내용을 확인해요' },
+        { n: '2', label: '조치', note: '규정에 따라 경고, 이용 정지, 글 삭제를 해요' },
+        { n: '3', label: '결과 알림', note: '조치가 끝나면 알림으로 알려 드려요' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

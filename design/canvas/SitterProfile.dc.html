@@ -19,7 +19,7 @@ a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
 <header class="md-topnav">
 <a class="md-iconbtn md-pressable" href="Matching.dc.html" aria-label="뒤로 가기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="md-ico"><path d="m15 18-6-6 6-6" /></svg></a>
 <h1 class="md-topnav__title">{{title}}</h1>
-<span style="width: 48px;"></span>
+<sc-if value="{{guardian}}" hint-placeholder-val="{{ true }}"><a class="md-iconbtn md-pressable" href="ReportProfile.dc.html" aria-label="이 시터 신고하기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></svg></a></sc-if><sc-if value="{{self}}" hint-placeholder-val="{{ false }}"><span style="width: 48px;"></span></sc-if>
 </header>
 <main style="flex: 1; overflow-y: auto;">
 <div class="pf-cover"><img src="img/gureum.jpg" alt="김하늘 시터가 산책하며 찍은 사진" style="object-position: center 68%;"><span class="pf-cover__cap">김하늘 시터가 산책하며 찍은 사진</span>

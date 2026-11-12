@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>차단한 사람</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="Settings.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title">차단한 사람</h1><span style="width: 48px;"></span></header>
+<main class="ac-main" style="gap: 0;">
+<p class="ac-sub" style="margin: 0 0 8px;">차단한 사람과는 서로 채팅과 요청을 보낼 수 없고, 검색과 피드에서도 안 보여요. 상대에게는 차단했다고 알리지 않아요.</p>
+<sc-for list="{{people}}" as="p" hint-placeholder-count="2"><div class="bl-row"><span class="md-initial md-initial--{{p.tint}}" role="img" aria-label="{{p.name}} 사진 자리" style="width: 44px; height: 44px; font-size: 1rem; border-radius: var(--full);">{{p.first}}</span><span class="py-row__text"><b>{{p.name}}</b><small>{{p.when}}</small></span><button class="md-btn md-btn--small md-pressable" type="button" onClick="{{p.toggle}}" aria-label="{{p.aria}}">{{p.action}}</button></div></sc-for>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}"><p class="py-foot" style="text-align: center; margin-top: 48px;">차단한 사람이 없어요</p></sc-if>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { off: [] };
+  }
+  renderVals() {
+    const s = this.state;
+    const P = [{ name: '박서준 시터', first: '박', tint: 'sky', when: '10월 14일에 차단' }, { name: '루이네 보호자', first: '루', tint: 'sand', when: '9월 30일에 차단' }];
+    return {
+      people: P.map((p) => { const off = s.off.indexOf(p.name) >= 0; return Object.assign({}, p, {
+        action: off ? '다시 차단' : '차단 해제', aria: p.name + (off ? ' 다시 차단' : ' 차단 해제'),
+        toggle: () => this.setState({ off: off ? s.off.filter((x) => x !== p.name) : s.off.concat([p.name]) }) }); }),
+      empty: false
+    };
+  }
+}
+</script>
+</body>
+</html>

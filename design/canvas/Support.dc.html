@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>고객센터</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="GuardianMore.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title">고객센터</h1><span style="width: 48px;"></span></header>
+<main class="ac-main">
+<a class="sp-kakao md-pressable" href="#"><span class="sp-kakao__logo" aria-hidden="true">K</span><span><b>카카오톡으로 문의하기</b><small>모두돌봄 채널, 평일 오전 10시~오후 7시</small></span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></a>
+<p class="py-foot" style="margin: -8px 0 0;">산책 중 사고나 강아지를 잃어버렸을 때는 시간과 상관없이 바로 답해요</p>
+<h2 class="ac-h3" style="margin-top: 8px;">자주 묻는 질문</h2>
+<div class="sp-faq"><sc-for list="{{faq}}" as="f" hint-placeholder-count="5"><div class="sp-faq__item"><button class="sp-faq__q md-pressable" type="button" aria-expanded="{{f.open}}" onClick="{{f.toggle}}"><span>{{f.q}}</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button><sc-if value="{{f.open}}" hint-placeholder-val="{{ false }}"><p class="sp-faq__a">{{f.a}}</p></sc-if></div></sc-for></div>
+<a class="sp-mail md-pressable" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>이메일로 문의하기</a>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: 0 };
+  }
+  renderVals() {
+    const s = this.state;
+    // Answers follow docs/product/booking-flow.md; fee rates are provisional.
+    const F = [
+      { q: '결제는 언제 되나요?', a: '보호자와 시터가 둘 다 확정한 순간에 결제돼요. 반복 예약은 매주 월요일에 그 주 산책을 결제해요.' },
+      { q: '취소하면 얼마를 돌려받나요?', a: '시터가 정한 무료 취소 기한까지는 전액을 돌려받아요. 그 뒤로는 산책 24시간 전까지 30%, 24시간 안에는 50%가 수수료로 빠지고, 산책이 시작된 뒤에는 돌려받을 수 없어요.' },
+      { q: '시터가 오지 않으면 어떻게 하나요?', a: '약속 시간에서 15분이 지나면 채팅 더보기에서 신고할 수 있어요. 결제한 금액은 전액 돌려드려요.' },
+      { q: '시터가 갑자기 취소하면요?', a: '전액을 돌려드리고, 비슷한 시간에 가능한 다른 시터를 추천해 드려요. 늦은 취소는 시터 프로필에 기록으로 남아요.' },
+      { q: '확정했는데 예약이 풀렸어요', a: '한쪽만 확정한 채로 3시간이 지나면 확정이 풀려요. 채팅에서 다시 확정하면 돼요.' }
+    ];
+    return { faq: F.map((f, i) => ({ q: f.q, a: f.a, open: s.open === i, toggle: () => this.setState({ open: s.open === i ? null : i }) })) };
+  }
+}
+</script>
+</body>
+</html>

@@ -609,6 +609,71 @@
       "x": 0,
       "y": 0,
       "page": "p2"
+    },
+    "Report.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "25. 신고하기: 채팅 (차단 함께)",
+      "w": 390,
+      "x": 0,
+      "y": 17716
+    },
+    "ReportProfile.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "25-1. 신고하기: 프로필",
+      "w": 390,
+      "x": 470,
+      "y": 17716
+    },
+    "ReportPost.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "25-2. 신고하기: 게시글",
+      "w": 390,
+      "x": 940,
+      "y": 17716
+    },
+    "Blocked.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "25-3. 차단한 사람",
+      "w": 390,
+      "x": 1410,
+      "y": 17716
+    },
+    "Settings.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "26. 설정",
+      "w": 390,
+      "x": 1880,
+      "y": 17716
+    },
+    "SettingsNotify.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "26-1. 알림 설정",
+      "w": 390,
+      "x": 2350,
+      "y": 17716
+    },
+    "Support.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "27. 고객센터 (카카오톡 채널)",
+      "w": 390,
+      "x": 2820,
+      "y": 17716
+    },
+    "MainR-s578.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "page": "p2",
+      "title": "1R. 예약 (채택: 한 번에 하나씩, 예약 기록이 있는 보호자) copy",
+      "w": 390,
+      "x": 418,
+      "y": 0
     }
   },
   "createdOnFiles": {
@@ -640,7 +705,8 @@
     "brand",
     "common",
     "account",
-    "pay"
+    "pay",
+    "safety"
   ],
   "notes": {
     "brand": {
@@ -746,6 +812,14 @@
       "w": 240,
       "x": 0,
       "y": 16172
+    },
+    "safety": {
+      "kind": "title1",
+      "maxW": 3300,
+      "text": "안전과 설정 (docs/product/v1-tasks.md 1-5)",
+      "w": 240,
+      "x": 0,
+      "y": 17416
     }
   },
   "order": [
@@ -824,7 +898,15 @@
     "CancelFree.dc.html",
     "NoShow.dc.html",
     "NoShowSitter.dc.html",
-    "MainV2.dc.html"
+    "MainV2.dc.html",
+    "Report.dc.html",
+    "ReportProfile.dc.html",
+    "ReportPost.dc.html",
+    "Blocked.dc.html",
+    "Settings.dc.html",
+    "SettingsNotify.dc.html",
+    "Support.dc.html",
+    "MainR-s578.dc.html"
   ],
   "pages": [
     {

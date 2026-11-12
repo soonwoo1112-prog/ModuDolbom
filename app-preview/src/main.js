@@ -23,6 +23,7 @@ const APP = [
   ['보호자 · 소셜', [['SocialFeed', '산책 피드'], ['Community', '동네 이야기'], ['ComposePick', '글쓰기'], ['ComposeWalk', '산책 올리기'], ['Compose', '직접 쓰기']]],
   ['보호자 · 캘린더', [['GuardianCalendar', '캘린더'], ['GuardianCalendarDay', '캘린더: 날짜 보기']]],
   ['보호자 · 더보기', [['GuardianMore', '더보기'], ['DogProfile', '강아지 프로필'], ['DogProfileFeed', '강아지 프로필: 산책 기록'], ['DogProfilePhotos', '강아지 프로필: 사진'], ['DogEdit', '강아지 프로필 수정'], ['Notifications', '알림']]],
+  ['공용 · 안전과 설정', [['Report', '신고하기: 채팅'], ['ReportProfile', '신고하기: 프로필'], ['ReportPost', '신고하기: 게시글'], ['Blocked', '차단한 사람'], ['Settings', '설정'], ['SettingsNotify', '알림 설정'], ['Support', '고객센터']]],
   ['시터 · 오늘', [['SitterToday', '오늘'], ['SitterRequest', '새 요청 자세히']]],
   ['시터 · 채팅', [['SitterChatList', '채팅 목록'], ['SitterChat', '채팅']]],
   ['시터 · 산책', [['Walking', '산책중'], ['WalkLogWrite', '산책 기록 보내기']]],

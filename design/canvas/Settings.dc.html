@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>설정</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="GuardianMore.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title">설정</h1><span style="width: 48px;"></span></header>
+<main style="flex: 1; overflow-y: auto;">
+<div class="st-group"><h2 class="st-group__title">알림</h2>
+<a class="st-row md-pressable" href="SettingsNotify.dc.html"><span>알림 설정<small>메시지, 예약·산책, 소셜, 혜택·소식</small></span><span class="st-row__value"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a>
+</div>
+<div class="md-band"></div>
+<div class="st-group"><h2 class="st-group__title">계정</h2>
+<div class="st-row" style="cursor: default;"><span>로그인<small>카카오로 가입했어요</small></span><span class="st-row__value">kakao</span></div>
+<a class="st-row md-pressable" href="Blocked.dc.html"><span>차단한 사람</span><span class="st-row__value">2명<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a>
+<button class="st-row md-pressable st-row--btn" type="button" onClick="{{askLogout}}"><span>로그아웃</span><span class="st-row__value"></span></button>
+<button class="st-row md-pressable st-row--btn" type="button" onClick="{{askLeave}}"><span>탈퇴하기</span><span class="st-row__value"></span></button>
+</div>
+<div class="md-band"></div>
+<div class="st-group"><h2 class="st-group__title">약관과 정책</h2>
+<a class="st-row md-pressable" href="#"><span>서비스 이용약관</span><span class="st-row__value"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a>
+<a class="st-row md-pressable" href="#"><span>개인정보 처리방침</span><span class="st-row__value"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a>
+<a class="st-row md-pressable" href="LocationConsent.dc.html"><span>위치정보 이용약관</span><span class="st-row__value"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a>
+<a class="st-row md-pressable" href="#"><span>오픈소스 라이선스</span><span class="st-row__value"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></span></a>
+<div class="st-row" style="cursor: default;"><span>앱 버전</span><span class="st-row__value md-num">1.0.0</span></div>
+</div>
+<div style="height: 24px;"></div>
+</main>
+<sc-if value="{{dialog}}" hint-placeholder-val="{{ false }}">
+<div class="md-overlay" style="justify-content: center; padding: 24px;" onClick="{{close}}">
+<div role="alertdialog" aria-modal="true" aria-labelledby="st-d-title" onClick="{{stop}}" style="background: var(--bg-layer-floating); border-radius: var(--r4); padding: 24px 20px 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-floating);">
+<h2 id="st-d-title" class="md-section-title">{{dTitle}}</h2>
+<p style="margin: 0; color: var(--fg-neutral-muted); font-size: 0.9375rem; line-height: 1.3125rem;">{{dBody}}</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 16px;">
+<button class="md-btn md-pressable" type="button" onClick="{{close}}">닫기</button>
+<sc-if value="{{dCan}}" hint-placeholder-val="{{ true }}"><a class="md-btn md-btn--critical md-pressable" href="Login.dc.html" style="box-sizing: border-box;">{{dAction}}</a></sc-if>
+<sc-if value="{{dBlocked}}" hint-placeholder-val="{{ false }}"><a class="md-btn md-pressable" href="GuardianCalendar.dc.html" style="box-sizing: border-box;">예약 보기</a></sc-if>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { d: null };
+  }
+  renderVals() {
+    const d = this.state.d;
+    // Leaving is blocked while a confirmed booking remains (sample: one on 11월 14일).
+    const D = {
+      logout: { t: '로그아웃할까요?', b: '다시 들어올 때 카카오로 로그인하면 돼요.', a: '로그아웃', can: true },
+      leave: { t: '아직 탈퇴할 수 없어요', b: '11월 14일 김하늘 시터와의 산책이 남아 있어요. 예약을 마치거나 취소한 뒤에 탈퇴할 수 있어요. 탈퇴하면 산책 기록과 사진은 30일 뒤에 지워져요.', a: '', can: false }
+    }[d] || { t: '', b: '', a: '', can: true };
+    return {
+      dialog: !!d, dTitle: D.t, dBody: D.b, dAction: D.a, dCan: D.can, dBlocked: !D.can,
+      askLogout: () => this.setState({ d: 'logout' }), askLeave: () => this.setState({ d: 'leave' }),
+      close: () => this.setState({ d: null }), stop: (e) => e.stopPropagation()
+    };
+  }
+}
+</script>
+</body>
+</html>
