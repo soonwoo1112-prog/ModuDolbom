@@ -2,6 +2,7 @@
 // and keeps a list of every screen one tap away.
 import { h, render, Component } from 'preact';
 import '../../design/canvas/modudolbom.css';
+import '../../design/canvas/v2.css';
 import '../../design/canvas/ds/modudolbom/components/bundle.css';
 import './shell.css';
 import { Board } from './player.js';

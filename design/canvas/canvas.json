@@ -600,6 +600,15 @@
       "w": 390,
       "x": 2820,
       "y": 16472
+    },
+    "MainV2.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "V2-1. 보호자 첫 화면 (예약 홈)",
+      "w": 390,
+      "x": 0,
+      "y": 0,
+      "page": "p2"
     }
   },
   "createdOnFiles": {
@@ -814,8 +823,18 @@
     "CancelMid.dc.html",
     "CancelFree.dc.html",
     "NoShow.dc.html",
-    "NoShowSitter.dc.html"
+    "NoShowSitter.dc.html",
+    "MainV2.dc.html"
   ],
-  "pages": [],
+  "pages": [
+    {
+      "id": "p1",
+      "name": "페이지 1"
+    },
+    {
+      "id": "p2",
+      "name": "페이지 2 · 새 UI"
+    }
+  ],
   "title": "모두돌봄 예약 흐름"
 }
