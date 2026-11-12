@@ -1,1 +1,4 @@
+# 스킬이 작업 중에 만드는 로컬 상태. 설치 방법과 설정은 skills 브랜치에 있어요.
+.hallmark/
+.impeccable/
 .taste-skill/
