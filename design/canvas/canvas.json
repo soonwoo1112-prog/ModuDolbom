@@ -544,6 +544,62 @@
       "w": 390,
       "x": 3290,
       "y": 15228
+    },
+    "PayMethods.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "22. 결제 수단",
+      "w": 390,
+      "x": 0,
+      "y": 16472
+    },
+    "PayHistory.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "22-1. 결제 내역",
+      "w": 390,
+      "x": 470,
+      "y": 16472
+    },
+    "CancelBooking.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "23. 예약 취소와 환불 (24시간 안, 수수료 50%)",
+      "w": 390,
+      "x": 940,
+      "y": 16472
+    },
+    "CancelMid.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "23-1. 예약 취소: 24시간 전까지 (30%)",
+      "w": 390,
+      "x": 1410,
+      "y": 16472
+    },
+    "CancelFree.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "23-2. 예약 취소: 무료 취소 기간",
+      "w": 390,
+      "x": 1880,
+      "y": 16472
+    },
+    "NoShow.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "24. 노쇼 신고: 시터가 오지 않았을 때 (보호자)",
+      "w": 390,
+      "x": 2350,
+      "y": 16472
+    },
+    "NoShowSitter.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "24-1. 노쇼 신고: 보호자가 나오지 않았을 때 (시터)",
+      "w": 390,
+      "x": 2820,
+      "y": 16472
     }
   },
   "createdOnFiles": {
@@ -574,7 +630,8 @@
     "direction",
     "brand",
     "common",
-    "account"
+    "account",
+    "pay"
   ],
   "notes": {
     "brand": {
@@ -672,6 +729,14 @@
       "w": 240,
       "x": 0,
       "y": 14928
+    },
+    "pay": {
+      "kind": "title1",
+      "maxW": 3300,
+      "text": "결제와 취소 (docs/product/v1-tasks.md 1-4)",
+      "w": 240,
+      "x": 0,
+      "y": 16172
     }
   },
   "order": [
@@ -742,7 +807,14 @@
     "SitterAccount.dc.html",
     "SitterQuiz.dc.html",
     "SitterPending.dc.html",
-    "SitterApproved.dc.html"
+    "SitterApproved.dc.html",
+    "PayMethods.dc.html",
+    "PayHistory.dc.html",
+    "CancelBooking.dc.html",
+    "CancelMid.dc.html",
+    "CancelFree.dc.html",
+    "NoShow.dc.html",
+    "NoShowSitter.dc.html"
   ],
   "pages": [],
   "title": "모두돌봄 예약 흐름"

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>결제 수단</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="GuardianMore.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title">결제 수단</h1><span style="width: 48px;"></span></header>
+<main class="ac-main">
+<p class="ac-sub" style="margin: 0;">예약이 확정되는 순간 기본 결제 수단으로 결제돼요. 반복 예약은 매주 결제돼요.</p>
+<div class="py-list" role="radiogroup" aria-label="기본 결제 수단">
+<sc-for list="{{methods}}" as="m" hint-placeholder-count="2"><div class="py-method"><button class="py-method__pick md-pressable" type="button" role="radio" aria-checked="{{m.on}}" onClick="{{m.pick}}"><span class="ac-card__ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2" /><path d="M2 10h20" /></svg></span><span class="py-method__text"><b>{{m.name}}</b><small>{{m.note}}</small></span></button><button class="py-method__del md-pressable" type="button" aria-label="{{m.delLabel}}" onClick="{{m.del}}">삭제</button></div></sc-for>
+</div>
+<button class="py-add md-pressable" type="button" onClick="{{openAdd}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg>결제 수단 추가</button>
+<sc-if value="{{blocked}}" hint-placeholder-val="{{ false }}"><p class="ac-why" role="status">확정된 예약이 있어서 결제 수단을 하나는 남겨 둬야 해요</p></sc-if>
+</main>
+<sc-if value="{{adding}}" hint-placeholder-val="{{ false }}">
+<div class="md-overlay" onClick="{{close}}"><div class="md-sheet" role="dialog" aria-modal="true" aria-label="결제 수단 추가" onClick="{{stop}}" style="gap: 0; padding-bottom: 24px;">
+<span class="md-sheet__handle" aria-hidden="true" style="margin-bottom: 8px;"></span>
+<sc-for list="{{options}}" as="o" hint-placeholder-count="4"><button class="md-item md-pressable" type="button" onClick="{{o.add}}" style="border: 0; text-align: left; margin: 0 -16px; grid-template-columns: 24px minmax(0, 1fr);"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2" /><path d="M2 10h20" /></svg><span style="display: flex; flex-direction: column; gap: 2px;"><span class="md-list-title">{{o.name}}</span><span class="md-detail">{{o.note}}</span></span></button></sc-for>
+</div></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { list: [{ name: '신한카드 1234', kind: '신용카드' }], def: 0, adding: false, blocked: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const add = (name, kind) => this.setState({ list: s.list.concat([{ name: name, kind: kind }]), adding: false, blocked: false });
+    return {
+      methods: s.list.map((m, i) => ({
+        name: m.name, note: i === s.def ? m.kind + ', 기본 결제 수단' : m.kind, on: i === s.def,
+        pick: () => this.setState({ def: i }), delLabel: m.name + ' 삭제',
+        del: () => { if (s.list.length < 2) { this.setState({ blocked: true }); return; } const l = s.list.filter((_, k) => k !== i); this.setState({ list: l, def: s.def === i ? 0 : (s.def > i ? s.def - 1 : s.def) }); }
+      })),
+      blocked: s.blocked, adding: s.adding,
+      openAdd: () => this.setState({ adding: true }), close: () => this.setState({ adding: false }), stop: (e) => e.stopPropagation(),
+      options: [
+        { name: '신용·체크카드', note: '카드 번호를 적어 등록해요', add: () => add('국민카드 5678', '체크카드') },
+        { name: '카카오페이', note: '카카오톡에서 연결해요', add: () => add('카카오페이', '간편결제') },
+        { name: '네이버페이', note: '네이버에서 연결해요', add: () => add('네이버페이', '간편결제') },
+        { name: '토스페이', note: '토스에서 연결해요', add: () => add('토스페이', '간편결제') }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

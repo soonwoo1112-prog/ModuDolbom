@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>예약 취소</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<sc-if value="{{asking}}" hint-placeholder-val="{{ true }}">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="Chat.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title">예약 취소</h1><span style="width: 48px;"></span></header>
+<main class="ac-main">
+<h2 class="md-screen-title">{{headline}}</h2>
+<div class="ac-card"><span class="md-initial md-initial--sand" role="img" aria-label="김하늘 사진 자리" style="width: 40px; height: 40px; font-size: 1rem; border-radius: var(--full);">김</span><span><b>김하늘 시터, 30분 산책</b><small>{{when}}, 보리</small></span></div>
+<dl class="py-lines py-lines--box"><div data-total="false"><dt>결제한 금액</dt><dd class="md-num">15,000원</dd></div><div data-total="false"><dt>{{feeLabel}}</dt><dd class="md-num">{{fee}}</dd></div><div data-total="true"><dt>돌려받는 금액</dt><dd class="md-num">{{refund}}</dd></div></dl>
+<p class="wk-sub" style="margin: 0;">{{rule}}</p>
+<div class="md-field"><span class="md-field__label">취소하는 이유 <em class="py-opt">선택</em></span><div class="md-row" role="group" aria-label="취소하는 이유"><sc-for list="{{reasons}}" as="r" hint-placeholder-count="4"><button class="md-chip md-pressable" type="button" aria-pressed="{{r.on}}" onClick="{{r.pick}}"><span>{{r.label}}</span></button></sc-for></div></div>
+</main>
+<div class="ac-cta"><button class="md-btn md-btn--critical md-btn--large md-pressable" type="button" onClick="{{cancel}}" style="width: 100%;">{{cta}}</button><a class="md-btn md-btn--ghost md-pressable" href="Chat.dc.html" style="min-height: 44px;">예약 그대로 두기</a></div>
+</sc-if>
+<sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+<main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; padding: 24px 0;">
+<section class="x-done rd-done" role="status"><span class="x-done__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span><h2>예약을 취소했어요</h2><p>{{doneBody}}</p></section>
+</main>
+<div class="rd-actions"><a class="md-btn md-btn--brand md-btn--large md-pressable" href="Matching.dc.html" style="box-sizing: border-box; width: 100%;">다른 시터 찾기</a><a class="md-btn md-btn--ghost md-pressable" href="MainR.dc.html" style="min-height: 44px;">홈으로</a></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"timing":{"editor":"enum","options":["무료 취소 기간","24시간 전까지","24시간 안"],"default":"24시간 안"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { done: false, reason: null };
+  }
+  renderVals() {
+    const s = this.state, t = this.props.timing || '24시간 안';
+    // Fees after the sitter's free-cancel deadline are provisional: 30% until 24h before, 50% within 24h.
+    const T = {
+      '무료 취소 기간': { when: '11월 18일 화요일 오후 12:30', label: '취소 수수료', fee: '0원', refund: '15,000원', head: '지금 취소하면 전액을 돌려받아요', rule: '김하늘 시터는 산책 2일 전까지 무료로 취소할 수 있어요. 지금은 5일 전이에요.' },
+      '24시간 전까지': { when: '11월 14일 금요일 오후 12:30', label: '취소 수수료 30%', fee: '-4,500원', refund: '10,500원', head: '지금 취소하면 10,500원을 돌려받아요', rule: '무료 취소 기한(산책 2일 전)이 지났어요. 산책 24시간 전까지는 수수료가 30%예요.' },
+      '24시간 안': { when: '11월 13일 목요일 오후 12:30', label: '취소 수수료 50%', fee: '-7,500원', refund: '7,500원', head: '지금 취소하면 7,500원을 돌려받아요', rule: '산책까지 24시간이 남지 않아 수수료가 50%예요. 수수료는 시간을 비워 둔 시터에게 가요.' }
+    }[t];
+    return {
+      asking: !s.done, done: s.done,
+      headline: T.head, when: T.when, feeLabel: T.label, fee: T.fee, refund: T.refund, rule: T.rule,
+      reasons: ['일정이 바뀌었어요', '강아지가 아파요', '다른 시터를 찾았어요', '그 밖의 이유'].map((r) => ({ label: r, on: s.reason === r, pick: () => this.setState({ reason: s.reason === r ? null : r }) })),
+      cta: T.refund + ' 돌려받고 취소하기',
+      cancel: () => this.setState({ done: true }),
+      doneBody: T.refund + '은 3~5영업일 안에 신한카드 1234로 돌아와요. 김하늘 시터에게도 알렸어요.'
+    };
+  }
+}
+</script>
+</body>
+</html>

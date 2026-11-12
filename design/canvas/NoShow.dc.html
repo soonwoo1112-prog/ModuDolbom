@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>노쇼 신고</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<sc-if value="{{asking}}" hint-placeholder-val="{{ true }}">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="{{back}}" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title">{{navTitle}}</h1><span style="width: 48px;"></span></header>
+<main class="ac-main">
+<h2 class="md-screen-title">{{headline}}</h2>
+<p class="ac-sub">{{sub}}</p>
+<div class="ns-time"><span>약속 시간<b class="md-num">오후 12:30</b></span><span>지금<b class="md-num">오후 12:47</b></span><span>지난 시간<b class="md-num">17분</b></span></div>
+<h3 class="ac-h3">먼저 연락해 보셨나요?</h3>
+<div class="ns-contact"><a class="md-btn md-pressable" href="{{chat}}" style="box-sizing: border-box;"><svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>채팅 보내기</a><button class="md-btn md-pressable" type="button" onClick="{{call}}"><svg class="md-ico md-ico--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg>{{callLabel}}</button></div>
+<ul class="ns-checks"><sc-for list="{{checks}}" as="c" hint-placeholder-count="3"><li data-ok="{{c.ok}}"><span class="ns-checks__mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span><span>{{c.label}}<small>{{c.note}}</small></span></li></sc-for></ul>
+<p class="wk-sub" style="margin: 0;">{{rule}}</p>
+</main>
+<div class="ac-cta"><sc-if value="{{can}}" hint-placeholder-val="{{ true }}"><button class="md-btn md-btn--critical md-btn--large md-pressable" type="button" onClick="{{report}}" style="width: 100%;">{{cta}}</button></sc-if><sc-if value="{{cannot}}" hint-placeholder-val="{{ false }}"><button class="md-btn md-btn--large" type="button" disabled style="width: 100%;">전화를 먼저 걸어 주세요</button></sc-if></div>
+</sc-if>
+<sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+<main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; padding: 24px 0;">
+<section class="x-done rd-done" role="status"><span class="x-done__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span><h2>신고를 받았어요</h2><p>{{doneBody}}</p></section>
+<ol class="x-next" aria-label="다음 일"><sc-for list="{{next}}" as="t" hint-placeholder-count="3"><li><b>{{t.n}}</b><span>{{t.label}}<small>{{t.note}}</small></span></li></sc-for></ol>
+<sc-if value="{{guardian}}" hint-placeholder-val="{{ true }}"><section class="ns-keep"><h3 class="ac-h3">김하늘 시터와 남은 예약 3번은 어떻게 할까요?</h3><div class="md-row" role="radiogroup" aria-label="남은 예약"><sc-for list="{{keeps}}" as="k" hint-placeholder-count="2"><button class="md-chip md-pressable" type="button" role="radio" aria-checked="{{k.on}}" aria-pressed="{{k.on}}" onClick="{{k.pick}}"><span>{{k.label}}</span></button></sc-for></div><p class="wk-sub" style="margin: 0;">{{keepNote}}</p></section></sc-if>
+</main>
+<div class="rd-actions"><a class="md-btn md-btn--brand md-btn--large md-pressable" href="{{doneHref}}" style="box-sizing: border-box; width: 100%;">{{doneCta}}</a><a class="md-btn md-btn--ghost md-pressable" href="{{home}}" style="min-height: 44px;">홈으로</a></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"who":{"editor":"enum","options":["보호자","시터"],"default":"보호자"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { called: false, done: false, keep: '그대로 둘게요' };
+  }
+  renderVals() {
+    const s = this.state, g = (this.props.who || '보호자') === '보호자';
+    // The 15-minute wait is provisional (not yet decided by the founder).
+    return {
+      asking: !s.done, done: s.done, guardian: g && s.done,
+      back: g ? 'Chat.dc.html' : 'SitterChat.dc.html', chat: g ? 'Chat.dc.html' : 'SitterChat.dc.html', home: g ? 'MainR.dc.html' : 'SitterToday.dc.html',
+      navTitle: g ? '시터가 오지 않았어요' : '보호자가 나오지 않았어요',
+      headline: g ? '김하늘 시터가 아직 오지 않았나요?' : '보리네 보호자와 연락이 안 되나요?',
+      sub: g ? '약속 시간에서 15분이 지나면 신고할 수 있어요' : '만나는 곳에서 15분을 기다린 뒤에 신고할 수 있어요',
+      call: () => this.setState({ called: true }), callLabel: s.called ? '전화했어요' : '안심번호로 전화',
+      checks: g ? [
+        { ok: true, label: '약속 시간에서 15분이 지났어요', note: '17분 지났어요' },
+        { ok: true, label: '시터가 산책을 시작하지 않았어요', note: '산책 시작 기록이 없어요' },
+        { ok: s.called, label: '전화를 걸어 봤어요', note: s.called ? '오후 12:47에 걸었어요' : '아직 걸지 않았어요' }
+      ] : [
+        { ok: true, label: '만나는 곳에 도착했어요', note: '오후 12:28, 위치로 확인됐어요' },
+        { ok: true, label: '15분을 기다렸어요', note: '17분 지났어요' },
+        { ok: s.called, label: '전화를 걸어 봤어요', note: s.called ? '오후 12:47에 걸었어요' : '아직 걸지 않았어요' }
+      ],
+      rule: g ? '신고하면 결제한 15,000원 전액을 돌려드려요. 운영팀이 기록을 확인하고 시터에게 규정대로 조치해요.' : '신고하면 운영팀이 기록을 확인하고, 산책비 15,000원은 그대로 정산돼요.',
+      can: s.called, cannot: !s.called,
+      cta: g ? '시터가 오지 않았어요' : '보호자가 나오지 않았어요',
+      report: () => this.setState({ done: true }),
+      doneBody: g ? '기다리게 해서 죄송해요. 15,000원 전액을 돌려드려요.' : '기다려 주셔서 고마워요. 산책비 15,000원은 그대로 받아요.',
+      next: g ? [
+        { n: '1', label: '전액 환불', note: '3~5영업일 안에 신한카드 1234로 돌아와요' },
+        { n: '2', label: '운영팀 확인', note: '기록을 확인하고 결과를 알림으로 알려 드려요' },
+        { n: '3', label: '시터 조치', note: '첫 번째면 경고와 7일 동안 검색 순위가 내려가요' }
+      ] : [
+        { n: '1', label: '운영팀 확인', note: '도착 기록과 연락 기록을 확인해요' },
+        { n: '2', label: '산책비 정산', note: '확인이 끝나면 24시간 뒤에 정산돼요' },
+        { n: '3', label: '보호자에게 알림', note: '보호자에게는 100% 결제된다고 알려요' }
+      ],
+      keeps: ['그대로 둘게요', '모두 무료로 취소할게요'].map((k) => ({ label: k, on: s.keep === k, pick: () => this.setState({ keep: k }) })),
+      keepNote: s.keep === '그대로 둘게요' ? '남은 예약은 그대로예요. 나중에 채팅에서 취소할 수도 있어요.' : '남은 3번을 수수료 없이 취소하고, 결제한 금액은 모두 돌려드려요.',
+      doneHref: g ? 'Matching.dc.html' : 'SitterToday.dc.html', doneCta: g ? '지금 가능한 다른 시터 찾기' : '오늘 일정으로 돌아가기'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -17,6 +17,7 @@ const APP = [
   ['계정 · 가입과 인증', [['Login', '시작하기'], ['SignupRole', '역할 고르기'], ['VerifyPhone', '본인 인증'], ['VerifyHome', '동네 인증'], ['SitterAccount', '시터: 정산 계좌'], ['SitterQuiz', '시터: 시팅 팁 퀴즈'], ['SitterPending', '시터: 가입 심사 중'], ['SitterApproved', '시터: 가입 승인']]],
   ['보호자 · 예약', [['MainR', '예약 홈'], ['MainRNew', '예약 홈 (처음 쓰는 보호자)'], ['Matching', '시터 고르기'], ['SitterProfile', '시터 프로필'], ['SitterProfileFeed', '시터 프로필: 산책 기록'], ['SitterProfilePrice', '시터 프로필: 가격'], ['RequestDone', '요청 보냄'], ['Sent', '요청 현황'], ['SentNone', '요청 현황: 아무도 수락하지 않음'], ['SentCanceled', '요청 현황: 모두 취소함']]],
   ['보호자 · 채팅', [['GuardianChatList', '채팅 목록'], ['Chat', '채팅'], ['ChatInfo', '채팅: 예약 정보'], ['ChatMenu', '채팅: 더보기 메뉴'], ['ChatEdit', '예약 수정 요청']]],
+  ['보호자 · 결제와 취소', [['PayMethods', '결제 수단'], ['PayHistory', '결제 내역'], ['CancelBooking', '예약 취소: 24시간 안'], ['CancelMid', '예약 취소: 24시간 전까지'], ['CancelFree', '예약 취소: 무료 기간'], ['NoShow', '노쇼 신고: 시터가 오지 않음'], ['NoShowSitter', '노쇼 신고: 보호자가 나오지 않음 (시터)']]],
   ['보호자 · 산책', [['GuardianLive', '실시간 위치'], ['GuardianLog', '산책 기록과 후기'], ['GuardianWalk', '직접 산책 나가기']]],
   ['보호자 · 소셜', [['SocialFeed', '산책 피드'], ['Community', '동네 이야기'], ['ComposePick', '글쓰기'], ['ComposeWalk', '산책 올리기'], ['Compose', '직접 쓰기']]],
   ['보호자 · 캘린더', [['GuardianCalendar', '캘린더'], ['GuardianCalendarDay', '캘린더: 날짜 보기']]],

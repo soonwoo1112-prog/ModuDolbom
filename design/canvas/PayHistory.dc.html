@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>결제 내역</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="GuardianMore.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title">결제 내역</h1><span style="width: 48px;"></span></header>
+<main class="ac-main" style="gap: 0; padding-top: 0;">
+<section class="py-sum"><span>11월에 결제한 금액</span><b class="md-num">45,000원</b><small>산책 3번, 다음 주간 결제는 11월 17일 월요일</small></section>
+<sc-for list="{{months}}" as="mo" hint-placeholder-count="2">
+<h2 class="py-month">{{mo.label}}</h2>
+<sc-for list="{{mo.rows}}" as="r" hint-placeholder-count="2"><button class="py-row md-pressable" type="button" onClick="{{r.open}}"><span class="py-row__text"><b>{{r.title}}</b><small>{{r.sub}}</small></span><span class="py-row__amt md-num" data-kind="{{r.kind}}">{{r.amount}}<small>{{r.status}}</small></span></button></sc-for>
+</sc-for>
+<p class="py-foot">영수증과 현금영수증은 각 결제를 눌러 받을 수 있어요</p>
+</main>
+<sc-if value="{{showDetail}}" hint-placeholder-val="{{ false }}">
+<div class="md-overlay" onClick="{{close}}"><div class="md-sheet" role="dialog" aria-modal="true" aria-labelledby="pd-title" onClick="{{stop}}" style="padding-bottom: 24px;">
+<span class="md-sheet__handle" aria-hidden="true"></span>
+<h2 id="pd-title" class="md-section-title" style="margin: 0;">{{d.title}}</h2>
+<dl class="py-lines"><sc-for list="{{d.lines}}" as="l" hint-placeholder-count="3"><div data-total="{{l.total}}"><dt>{{l.k}}</dt><dd class="md-num">{{l.v}}</dd></div></sc-for></dl>
+<p class="wk-sub" style="margin: 0;">{{d.note}}</p>
+<button class="md-btn md-pressable" type="button" onClick="{{close}}">영수증 받기</button>
+</div></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: null };
+    // Sample data. The October 20 refund matches the late cancel shown on the sitter profile.
+    this.ROWS = [
+      { m: '11월', title: '김하늘 시터, 30분 산책', sub: '11월 12일, 보리', amount: '15,000원', status: '결제', kind: 'pay',
+        lines: [['30분 산책', '15,000원'], ['결제 수단', '신한카드 1234'], ['결제한 금액', '15,000원', true]], note: '둘 다 확정한 11월 11일 오후 2:10에 결제됐어요.' },
+      { m: '11월', title: '김하늘 시터, 매주 결제', sub: '11월 10일, 화·목 주 2번', amount: '30,000원', status: '주간 결제', kind: 'pay',
+        lines: [['30분 산책 2번', '30,000원'], ['결제 수단', '신한카드 1234'], ['결제한 금액', '30,000원', true]], note: '반복 예약은 매주 월요일에 그 주 산책을 결제해요.' },
+      { m: '10월', title: '김하늘 시터, 30분 산책', sub: '10월 27일, 보리', amount: '15,000원', status: '결제', kind: 'pay',
+        lines: [['30분 산책', '15,000원'], ['결제 수단', '신한카드 1234'], ['결제한 금액', '15,000원', true]], note: '둘 다 확정한 10월 25일에 결제됐어요.' },
+      { m: '10월', title: '김하늘 시터, 30분 산책', sub: '10월 20일, 시터가 취소', amount: '+15,000원', status: '전액 환불', kind: 'refund',
+        lines: [['결제한 금액', '15,000원'], ['취소 수수료', '0원'], ['돌려받은 금액', '15,000원', true]], note: '시터가 취소해서 전액을 돌려드렸어요. 10월 22일에 신한카드로 환불됐어요.' },
+      { m: '10월', title: '박서준 시터, 30분 산책', sub: '10월 14일, 내가 취소', amount: '+7,500원', status: '일부 환불', kind: 'refund',
+        lines: [['결제한 금액', '15,000원'], ['취소 수수료 50%', '-7,500원'], ['돌려받은 금액', '7,500원', true]], note: '산책까지 24시간이 남지 않았을 때 취소해서 수수료 50%가 빠졌어요.' }
+    ];
+  }
+  renderVals() {
+    const s = this.state, R = this.ROWS;
+    const months = ['11월', '10월'].map((m) => ({ label: m, rows: R.map((r, i) => Object.assign({ i: i }, r)).filter((r) => r.m === m).map((r) => ({ title: r.title, sub: r.sub, amount: r.amount, status: r.status, kind: r.kind, open: () => this.setState({ open: r.i }) })) }));
+    const d = s.open == null ? null : R[s.open];
+    return {
+      months: months, showDetail: !!d,
+      d: d ? { title: d.title, note: d.note, lines: d.lines.map((l) => ({ k: l[0], v: l[1], total: !!l[2] })) } : { title: '', note: '', lines: [] },
+      close: () => this.setState({ open: null }), stop: (e) => e.stopPropagation()
+    };
+  }
+}
+</script>
+</body>
+</html>
