@@ -480,6 +480,70 @@
       "w": 390,
       "x": 2820,
       "y": 13684
+    },
+    "Login.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "20. 시작하기 (로그인)",
+      "w": 390,
+      "x": 0,
+      "y": 15228
+    },
+    "SignupRole.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "20-1. 역할 고르기",
+      "w": 390,
+      "x": 470,
+      "y": 15228
+    },
+    "VerifyPhone.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "20-2. 본인 인증",
+      "w": 390,
+      "x": 940,
+      "y": 15228
+    },
+    "VerifyHome.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "20-3. 동네·같은 아파트 인증",
+      "w": 390,
+      "x": 1410,
+      "y": 15228
+    },
+    "SitterAccount.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "21. 시터: 정산 계좌 인증",
+      "w": 390,
+      "x": 1880,
+      "y": 15228
+    },
+    "SitterQuiz.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "21-1. 시터: 시팅 팁 퀴즈",
+      "w": 390,
+      "x": 2350,
+      "y": 15228
+    },
+    "SitterPending.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "21-2. 시터: 가입 심사 중",
+      "w": 390,
+      "x": 2820,
+      "y": 15228
+    },
+    "SitterApproved.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "21-3. 시터: 가입 승인",
+      "w": 390,
+      "x": 3290,
+      "y": 15228
     }
   },
   "createdOnFiles": {
@@ -509,7 +573,8 @@
     "taste",
     "direction",
     "brand",
-    "common"
+    "common",
+    "account"
   ],
   "notes": {
     "brand": {
@@ -599,6 +664,14 @@
       "w": 240,
       "x": 0,
       "y": 13384
+    },
+    "account": {
+      "kind": "title1",
+      "maxW": 3700,
+      "text": "계정: 가입과 인증 (docs/product/v1-tasks.md 1-3)",
+      "w": 240,
+      "x": 0,
+      "y": 14928
     }
   },
   "order": [
@@ -661,7 +734,15 @@
     "PermLocation.dc.html",
     "PermNotify.dc.html",
     "PermPhoto.dc.html",
-    "Permission.dc.html"
+    "Permission.dc.html",
+    "Login.dc.html",
+    "SignupRole.dc.html",
+    "VerifyPhone.dc.html",
+    "VerifyHome.dc.html",
+    "SitterAccount.dc.html",
+    "SitterQuiz.dc.html",
+    "SitterPending.dc.html",
+    "SitterApproved.dc.html"
   ],
   "pages": [],
   "title": "모두돌봄 예약 흐름"

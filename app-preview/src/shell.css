@@ -8,6 +8,7 @@ html, body { margin: 0; height: 100%; background: var(--bg-layer-basement); }
 .pv-stage { flex: none; position: relative; overflow: hidden; background: var(--bg-layer-default); }
 .pv-board { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
 .pv-board > div { width: 100% !important; height: 100% !important; }
+.pv-board > div > div[style*="height: 844px"]:only-child, .pv-board > div > div > div:only-child { height: 100% !important; }
 @media (min-width: 500px) {
   .pv-stage { margin-top: 16px; border-radius: 28px; box-shadow: 0 0 0 1px var(--stroke-neutral-subtle), var(--shadow-floating); }
 }

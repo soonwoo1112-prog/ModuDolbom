@@ -14,6 +14,7 @@ const BAR = 44;
 // The app as it is now: only the chosen screens, grouped the way the app is used.
 // Old versions and experiments stay on the canvas but are left out of this list.
 const APP = [
+  ['계정 · 가입과 인증', [['Login', '시작하기'], ['SignupRole', '역할 고르기'], ['VerifyPhone', '본인 인증'], ['VerifyHome', '동네 인증'], ['SitterAccount', '시터: 정산 계좌'], ['SitterQuiz', '시터: 시팅 팁 퀴즈'], ['SitterPending', '시터: 가입 심사 중'], ['SitterApproved', '시터: 가입 승인']]],
   ['보호자 · 예약', [['MainR', '예약 홈'], ['MainRNew', '예약 홈 (처음 쓰는 보호자)'], ['Matching', '시터 고르기'], ['SitterProfile', '시터 프로필'], ['SitterProfileFeed', '시터 프로필: 산책 기록'], ['SitterProfilePrice', '시터 프로필: 가격'], ['RequestDone', '요청 보냄'], ['Sent', '요청 현황'], ['SentNone', '요청 현황: 아무도 수락하지 않음'], ['SentCanceled', '요청 현황: 모두 취소함']]],
   ['보호자 · 채팅', [['GuardianChatList', '채팅 목록'], ['Chat', '채팅'], ['ChatInfo', '채팅: 예약 정보'], ['ChatMenu', '채팅: 더보기 메뉴'], ['ChatEdit', '예약 수정 요청']]],
   ['보호자 · 산책', [['GuardianLive', '실시간 위치'], ['GuardianLog', '산책 기록과 후기'], ['GuardianWalk', '직접 산책 나가기']]],

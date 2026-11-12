@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>본인 인증</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="SignupRole.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title"></h1><span class="ac-step md-num">2/3</span></header>
+<main class="ac-main">
+<h2 class="md-screen-title">휴대폰으로 본인 인증을 해 주세요</h2>
+<p class="ac-sub">이웃끼리 강아지를 맡기는 앱이라, 모든 사람이 실명으로 인증해요. 이름과 전화번호는 상대에게 보이지 않아요.</p>
+<sc-if value="{{notDone}}" hint-placeholder-val="{{ true }}"><div class="ac-card"><span class="ac-card__ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /><path d="M12 18h.01" /></svg></span><span><b>휴대폰 본인 인증</b><small>통신사 인증 창이 열려요. 1분 정도 걸려요</small></span></div></sc-if>
+<sc-if value="{{done}}" hint-placeholder-val="{{ false }}"><div class="ac-card ac-card--done" role="status"><span class="ac-card__ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span><span><b>본인 인증을 마쳤어요</b><small class="md-num">김하늘, 010-****-1234</small></span></div></sc-if>
+</main>
+<div class="ac-cta"><sc-if value="{{notDone}}" hint-placeholder-val="{{ true }}"><button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{verify}}">본인 인증하기</button></sc-if><sc-if value="{{done}}" hint-placeholder-val="{{ false }}"><a class="md-btn md-btn--brand md-btn--large md-pressable" href="VerifyHome.dc.html" style="box-sizing: border-box;">다음</a></sc-if></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { done: false };
+  }
+  renderVals() {
+    // The real check runs in the identity provider's window (PASS through a provider such as PortOne); here it completes at once.
+    return { done: this.state.done, notDone: !this.state.done, verify: () => this.setState({ done: true }) };
+  }
+}
+</script>
+</body>
+</html>

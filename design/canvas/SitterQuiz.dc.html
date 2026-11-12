@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>시팅 팁 퀴즈</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<header class="md-topnav"><a class="md-iconbtn md-pressable" href="SitterAccount.dc.html" aria-label="뒤로 가기"><svg class="md-ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></a><h1 class="md-topnav__title">시팅 팁 퀴즈</h1><span class="ac-step md-num">2/3</span></header>
+<main class="ac-main">
+<div class="ac-prog" role="progressbar" aria-valuemin="1" aria-valuemax="{{total}}" aria-valuenow="{{n}}"><span style="width: {{pct}}%;"></span></div>
+<p class="ac-sub md-num" style="margin: 0;">{{n}} / {{total}}</p>
+<h2 class="md-screen-title">{{q}}</h2>
+<div class="ac-opts" role="radiogroup" aria-label="보기"><sc-for list="{{opts}}" as="o" hint-placeholder-count="3"><button class="ac-opt md-pressable" type="button" role="radio" aria-checked="{{o.on}}" data-state="{{o.state}}" onClick="{{o.pick}}">{{o.text}}</button></sc-for></div>
+<sc-if value="{{answered}}" hint-placeholder-val="{{ false }}"><p class="ac-why" role="status"><b>{{verdict}}</b> {{why}}</p></sc-if>
+</main>
+<div class="ac-cta">
+<sc-if value="{{answered}}" hint-placeholder-val="{{ false }}"><sc-if value="{{more}}" hint-placeholder-val="{{ true }}"><button class="md-btn md-btn--brand md-btn--large md-pressable" type="button" onClick="{{next}}">다음 문제</button></sc-if><sc-if value="{{last}}" hint-placeholder-val="{{ false }}"><a class="md-btn md-btn--brand md-btn--large md-pressable" href="SitterPending.dc.html" style="box-sizing: border-box;">가입 신청하기</a></sc-if></sc-if>
+<sc-if value="{{notAnswered}}" hint-placeholder-val="{{ true }}"><button class="md-btn md-btn--large" type="button" disabled style="width: 100%;">답을 골라 주세요</button></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { i: 0, pick: null };
+    // Common walking-safety advice; the final question set is reviewed with a trainer or vet before launch.
+    this.Q = [
+      { q: '산책 중 다른 강아지가 다가와요. 먼저 할 일은?', opts: ['목줄을 짧게 잡고 상대 보호자에게 인사해도 되는지 물어요', '반가우니 바로 인사하게 둬요', '안아 올려요'], a: 0, why: '맡은 강아지가 다른 강아지를 좋아하는지 모를 수 있어요. 먼저 묻고, 목줄은 짧게 잡아요.' },
+      { q: '한여름 낮, 아스팔트가 뜨거운지 어떻게 알까요?', opts: ['손등을 바닥에 대고 5초 버티기 어려우면 너무 뜨거워요', '강아지가 잘 걸으면 괜찮아요', '그늘이 없으면 빨리 걸어요'], a: 0, why: '사람 손등이 뜨거우면 강아지 발바닥도 데요. 시간을 바꾸거나 그늘 길로 걸어요.' },
+      { q: '강아지가 목줄에서 빠져 달아났어요.', opts: ['쫓아가지 말고 이름을 부르며 반대쪽으로 천천히 움직여요', '큰 소리로 혼내요', '전속력으로 쫓아가요'], a: 0, why: '쫓으면 더 멀리 달아나요. 바로 보호자에게 알리고, 앱의 신고하기로도 알려요.' },
+      { q: '산책 중 강아지에게 주면 안 되는 것은?', opts: ['포도', '물', '보호자가 준 간식'], a: 0, why: '포도와 건포도, 초콜릿, 양파는 강아지에게 위험해요. 보호자가 주지 않은 간식은 주지 않아요.' }
+    ];
+  }
+  renderVals() {
+    const s = this.state, Q = this.Q[s.i], answered = s.pick != null;
+    return {
+      n: s.i + 1, total: this.Q.length, pct: Math.round((s.i + 1) / this.Q.length * 100), q: Q.q,
+      opts: Q.opts.map((t, k) => ({ text: t, on: s.pick === k, state: !answered ? '' : k === Q.a ? 'right' : (s.pick === k ? 'wrong' : ''), pick: () => { if (!answered) this.setState({ pick: k }); } })),
+      answered: answered, notAnswered: !answered,
+      verdict: answered && s.pick === Q.a ? '맞아요.' : '이렇게 해요.', why: Q.why,
+      more: s.i < this.Q.length - 1, last: s.i === this.Q.length - 1,
+      next: () => this.setState({ i: s.i + 1, pick: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

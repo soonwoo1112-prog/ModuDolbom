@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>가입 심사</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="modudolbom.css">
+<link rel="stylesheet" href="ds/modudolbom/components/bundle.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:var(--fg-brand)}a:hover{color:var(--fg-brand)}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; display: flex; flex-direction: column; background: var(--bg-layer-default); color: var(--fg-neutral); font-family: var(--font-sans); overflow: hidden;">
+<main style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; padding: 24px 0;">
+<section class="x-done rd-done" role="status">
+<sc-if value="{{approved}}" hint-placeholder-val="{{ false }}"><span class="x-done__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></sc-if>
+<sc-if value="{{pending}}" hint-placeholder-val="{{ true }}"><span class="soon__ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg></span></sc-if>
+<h2>{{title}}</h2>
+<p>{{body}}</p>
+</section>
+<ol class="x-next" aria-label="가입 단계"><sc-for list="{{steps}}" as="t" hint-placeholder-count="4"><li><b>{{t.mark}}</b><span>{{t.label}}<small>{{t.note}}</small></span></li></sc-for></ol>
+</main>
+<div class="rd-actions"><a class="md-btn md-btn--brand md-btn--large md-pressable" href="{{href}}" style="box-sizing: border-box;">{{cta}}</a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"state":{"editor":"enum","options":["심사 중","승인됨"],"default":"심사 중"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const ok = (this.props.state || '심사 중') === '승인됨';
+    return {
+      approved: ok, pending: !ok,
+      title: ok ? '시터 가입이 승인됐어요' : '가입 심사 중이에요',
+      body: ok ? '이제 역삼동 이웃의 산책 요청을 받을 수 있어요' : '운영팀이 확인하고 있어요. 결과는 알림과 문자로 알려 드려요',
+      steps: [
+        { mark: '✓', label: '본인 인증', note: '마쳤어요' },
+        { mark: '✓', label: '정산 계좌', note: '1원 확인을 마쳤어요' },
+        { mark: '✓', label: '시팅 팁 퀴즈', note: '4문제를 풀었어요' },
+        { mark: ok ? '✓' : '4', label: '운영팀 확인', note: ok ? '승인됐어요' : '확인하고 있어요' }
+      ],
+      href: ok ? 'SitterService.dc.html' : 'SitterProfileEdit.dc.html',
+      cta: ok ? '산책 받을 시간 정하기' : '기다리는 동안 프로필 꾸미기'
+    };
+  }
+}
+</script>
+</body>
+</html>
